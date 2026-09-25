@@ -1,4 +1,4 @@
-# HSE 763 — Notes
+# HSE 763: Capstone Preparation — Notes
 
 Original study notes and references will be indexed here as they are added.
 
