@@ -1,5 +1,7 @@
 # HSE 713: Ethics of AI in Health Data Science
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |
