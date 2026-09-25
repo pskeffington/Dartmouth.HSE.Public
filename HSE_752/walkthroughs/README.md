@@ -1,4 +1,4 @@
-# HSE 752 — Walkthroughs
+# HSE 752: Statistical Learning for Big Data — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 

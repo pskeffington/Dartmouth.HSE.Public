@@ -1,4 +1,4 @@
-# HSE 752 — Notes
+# HSE 752: Statistical Learning for Big Data — Notes
 
 Original study notes and references will be indexed here as they are added.
 
