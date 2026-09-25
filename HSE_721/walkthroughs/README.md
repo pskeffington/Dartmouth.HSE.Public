@@ -1,4 +1,4 @@
-# HSE 721 — Walkthroughs
+# HSE 721: Data Wrangling — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
