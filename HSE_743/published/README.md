@@ -1,4 +1,4 @@
-# HSE 743 — Published pieces
+# HSE 743: Capstone Preparation — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 

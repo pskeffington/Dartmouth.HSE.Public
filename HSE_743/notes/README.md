@@ -1,4 +1,4 @@
-# HSE 743 — Notes
+# HSE 743: Capstone Preparation — Notes
 
 Original study notes and references will be indexed here as they are added.
 

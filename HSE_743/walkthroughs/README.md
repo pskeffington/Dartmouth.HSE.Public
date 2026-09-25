@@ -1,4 +1,4 @@
-# HSE 743 — Walkthroughs
+# HSE 743: Capstone Preparation — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
