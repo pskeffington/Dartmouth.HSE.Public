@@ -1,4 +1,4 @@
-# HSE 713 — Published pieces
+# HSE 713: Ethics of AI in Health Data Science — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 
