@@ -1,4 +1,4 @@
-# HSE 732 — Notes
+# HSE 732: Advanced Regression for Health Data Science — Notes
 
 Original study notes and references will be indexed here as they are added.
 

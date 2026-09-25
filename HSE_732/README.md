@@ -1,5 +1,7 @@
 # HSE 732: Advanced Regression for Health Data Science
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |
