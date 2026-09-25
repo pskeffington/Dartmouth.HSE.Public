@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
