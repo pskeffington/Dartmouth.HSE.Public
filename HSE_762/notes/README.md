@@ -1,4 +1,4 @@
-# HSE 762 — Notes
+# HSE 762: Applied AI — Notes
 
 Original study notes and references will be indexed here as they are added.
 

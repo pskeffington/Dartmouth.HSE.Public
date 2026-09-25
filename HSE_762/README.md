@@ -1,5 +1,7 @@
 # HSE 762: Applied AI
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |
