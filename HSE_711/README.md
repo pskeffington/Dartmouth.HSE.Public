@@ -44,7 +44,7 @@ These are proposed materials for this repository, not official assignments or cl
 - [Walkthroughs](walkthroughs/) — step-by-step explanations and reproducible examples.
 - [Published pieces](published/) — completed pieces shared for review.
 
-This folder is scaffolded; no course work has been published yet.
+The [Week 1 group-work walkthrough](notes/Week_1_Group_Work_Narrative_Walkthrough.Rmd) is available as public study commentary; course source materials remain in Drive.
 
 ## References
 
