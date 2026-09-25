@@ -1,4 +1,4 @@
-# HSE 711 — Published pieces
+# HSE 711: Foundations in Data Science — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 

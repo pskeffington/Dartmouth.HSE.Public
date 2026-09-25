@@ -1,4 +1,4 @@
-# HSE 711 — Walkthroughs
+# HSE 711: Foundations in Data Science — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
