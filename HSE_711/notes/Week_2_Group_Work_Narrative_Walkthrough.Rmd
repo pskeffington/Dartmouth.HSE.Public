@@ -1,0 +1,242 @@
+---
+title: "HSE 711 — Week 2 Group Work: Data Wrangling and Visualization"
+author: "Paul Skeffington"
+output: html_document
+---
+
+This narrative follows all five Week 2 in-class exercises in order. The code uses Lecture 2's progression: inspect and filter a data frame, build base and ggplot figures, test a two-group comparison, generate reproducible `random_data`, summarize it, and reshape it with `pivot_longer()`. Run chunks from top to bottom in a fresh R session.
+
+The source CSV is held with the course material and is **not included in this public repository**. Put `In_Class_Exercises_Arsenic.csv` (or the downloaded `In_Class_Exercises_Arsenic(1)(1).csv`) beside this Rmd before knitting. The supplied CSV does not specify arsenic measurement units, so figures say "recorded units" until the course documentation confirms a unit. Install `ggplot2`, `tidyr`, `knitr`, and `rmarkdown` locally before knitting; this file does not install packages during a run. HTML output avoids a LaTeX dependency.
+
+## Exercise 1 — Import, inspect, and make a base R box plot
+
+Lecture 2 creates a data frame, inspects it, and uses base plotting functions before moving to ggplot. We apply that sequence to the supplied CSV. The column map makes the original `Arsenic_Total`, `Gender`, and `Marital_Status` labels explicit. Gender and marital values are categories, not numerical measurements. We exclude missing arsenic or gender only for this first plot; a missing marital value should not discard an otherwise eligible participant.
+
+```{r week2-setup, include=TRUE}
+# Lecture chunks 01, 06, 11–14, 20–21, 26, 42.
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+                      fig.width = 7, fig.height = 5)
+for (package in c("ggplot2", "tidyr")) {
+  if (!requireNamespace(package, quietly = TRUE)) {
+    stop("Install ", package, " in the Console before knitting.")
+  }
+}
+library(ggplot2)
+
+csv_candidates <- c("In_Class_Exercises_Arsenic.csv",
+                    "In_Class_Exercises_Arsenic(1)(1).csv")
+csv_path <- csv_candidates[file.exists(csv_candidates)][1]
+if (is.na(csv_path)) stop("Place the supplied arsenic CSV beside this Rmd.")
+nhanes_raw <- read.csv(csv_path, stringsAsFactors = FALSE,
+                       check.names = FALSE, na.strings = c("", "NA"))
+column_map <- c(arsenic = "Arsenic_Total", gender = "Gender",
+                marital = "Marital_Status")
+if (!all(column_map %in% names(nhanes_raw))) {
+  stop("Inspect names(nhanes_raw) and update column_map for this CSV.")
+}
+names(nhanes_raw)
+str(nhanes_raw)
+table(nhanes_raw[[column_map["gender"]]], useNA = "ifany")
+table(nhanes_raw[[column_map["marital"]]], useNA = "ifany")
+
+# Map documented category labels and codes without silently inventing groups.
+gender_key <- c("1" = "Male", "2" = "Female",
+                "male" = "Male", "female" = "Female",
+                "m" = "Male", "f" = "Female")
+marital_key <- c("1" = "Married", "2" = "Widowed",
+                 "3" = "Divorced", "4" = "Separated",
+                 "5" = "Never Married", "6" = "Living with Partner",
+                 "77" = NA, "99" = NA,
+                 "married" = "Married", "widowed" = "Widowed",
+                 "divorced" = "Divorced", "separated" = "Separated",
+                 "never married" = "Never Married",
+                 "living with partner" = "Living with Partner",
+                 "living with a partner" = "Living with Partner",
+                 "refused" = NA, "don't know" = NA)
+recode_checked <- function(x, key, field) {
+  x <- tolower(trimws(as.character(x)))
+  x[x == ""] <- NA_character_
+  unknown <- setdiff(unique(x[!is.na(x)]), names(key))
+  if (length(unknown)) stop("Inspect unknown ", field, ": ",
+                            paste(unknown, collapse = ", "))
+  unname(key[x])
+}
+arsenic_text <- trimws(as.character(nhanes_raw[[column_map["arsenic"]]]))
+arsenic <- suppressWarnings(as.numeric(arsenic_text))
+if (any(!is.na(arsenic_text) & is.na(arsenic)) ||
+    any(!is.finite(arsenic[!is.na(arsenic)])) ||
+    any(arsenic < 0, na.rm = TRUE)) {
+  stop("Inspect invalid total-arsenic entries before plotting.")
+}
+nhanes_data <- data.frame(
+  Total_Arsenic = arsenic,
+  Gender = factor(recode_checked(nhanes_raw[[column_map["gender"]]],
+                                 gender_key, "gender"),
+                  levels = c("Male", "Female")),
+  Marital_Status = factor(recode_checked(nhanes_raw[[column_map["marital"]]],
+                                         marital_key, "marital status"),
+                          levels = c("Married", "Never Married", "Widowed",
+                                     "Divorced", "Separated",
+                                     "Living with Partner"))
+)
+arsenic_label <- "Total urinary arsenic (recorded units)"
+box_data <- droplevels(nhanes_data[complete.cases(
+  nhanes_data[c("Total_Arsenic", "Gender")]), ])
+if (nrow(box_data) == 0) stop("No complete arsenic/gender observations.")
+cat("Box-plot rows:", nrow(box_data), "of", nrow(nhanes_data), "\n")
+
+draw_base_boxplot <- function() {
+  boxplot(Total_Arsenic ~ Gender, data = box_data,
+          main = "Total Urinary Arsenic by Gender", xlab = "Gender",
+          ylab = arsenic_label, col = c("#73B3D8", "#E7AF75"))
+}
+draw_base_boxplot()
+
+# Keep the PNG and the knitted figure generated by the same plot function.
+dir.create("figures", showWarnings = FALSE, recursive = TRUE)
+save_base_png <- function() {
+  png("figures/arsenic_by_gender_base.png", width = 7, height = 5,
+      units = "in", res = 300)
+  on.exit(dev.off(), add = TRUE)
+  draw_base_boxplot()
+}
+save_base_png()
+```
+
+The box summarizes the middle half of observed values around a median; whisker-outside points merit inspection, not automatic deletion. The 7-by-5-inch PNG lands in `figures/`. This is a classroom visualization of a truncated file, not an estimate for the whole US population.
+
+## Exercise 2 — Grouped horizontal box plots with jitter
+
+Lecture chunks 31–32 map one variable to an axis and another to `fill`, then add individual observations. We keep complete rows for the three plotted fields, dodge the boxes by marital status, and use the same dodge width for jittered points. `coord_flip()` puts gender on the displayed y-axis as requested. Suppressing the boxplot's own outlier glyph avoids drawing observations twice; it does not drop them.
+
+```{r week2-grouped-boxplots, fig.height=6}
+# Lecture chunks 31–32.
+group_data <- droplevels(nhanes_data[complete.cases(nhanes_data), ])
+if (nrow(group_data) == 0) stop("No complete rows for the grouped plot.")
+cat("Grouped-plot rows:", nrow(group_data), "\n")
+
+gender_plot <- ggplot(group_data,
+                      aes(x = Gender, y = Total_Arsenic,
+                          fill = Marital_Status)) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               width = 0.65, outlier.shape = NA) +
+  geom_point(position = position_jitterdodge(
+    jitter.width = 0.15, dodge.width = 0.8, seed = 711),
+    shape = 21, size = 1.4, alpha = 0.45) +
+  coord_flip() +
+  labs(title = "Urinary Arsenic by Gender and Marital Status",
+       x = "Gender", y = arsenic_label, fill = "Marital status") +
+  theme_minimal() + theme(legend.position = "bottom")
+gender_plot
+```
+
+## Exercise 3 — Violin plot and two-group Wilcoxon test
+
+A violin summarizes distribution shape; the narrow box and jitter supply complementary views. The independent Wilcoxon rank-sum comparison concerns **Married versus Never Married only**, even though the violin displays all available marital groups. Following the lecture's test-on-plot idea, we compute the test explicitly, then use its p-value in the subtitle. This avoids guessing a number or testing an unintended collection of groups. Ties are handled with the approximate test (`exact = FALSE`).
+
+```{r week2-violin-wilcoxon, fig.height=6}
+# Lecture chunks 31–32, 39–40, 44.
+violin_data <- droplevels(nhanes_data[complete.cases(
+  nhanes_data[c("Total_Arsenic", "Marital_Status")]), ])
+comparison_data <- droplevels(subset(
+  violin_data, Marital_Status %in% c("Married", "Never Married")))
+comparison_counts <- table(comparison_data$Marital_Status)
+print(comparison_counts)
+if (length(comparison_counts) != 2 || any(comparison_counts < 2)) {
+  stop("The comparison requires at least two observations per group.")
+}
+arsenic_test <- wilcox.test(Total_Arsenic ~ Marital_Status,
+                            data = comparison_data, alternative = "two.sided",
+                            exact = FALSE)
+print(arsenic_test)
+p_text <- format.pval(arsenic_test$p.value, digits = 3, eps = 0.001)
+p_label <- if (startsWith(p_text, "<")) paste("p", p_text)
+           else paste("p =", p_text)
+
+violin_plot <- ggplot(violin_data,
+                     aes(x = Marital_Status, y = Total_Arsenic,
+                         fill = Marital_Status)) +
+  geom_violin(trim = TRUE, alpha = 0.65) +
+  geom_boxplot(width = 0.13, fill = "white", outlier.shape = NA) +
+  geom_jitter(width = 0.08, height = 0, alpha = 0.25, size = 1) +
+  labs(title = "Urinary Arsenic by Marital Status",
+       subtitle = paste("Married vs Never Married: Wilcoxon", p_label),
+       x = "Marital status", y = arsenic_label) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 30, hjust = 1))
+violin_plot
+```
+
+The computed result is **`r p_label`**. A p-value does not quantify the size or cause of a difference. A median interpretation also needs attention to the shapes of the two distributions. This exercise does not use NHANES survey weights, strata, or clusters, so do not generalize its inferential result to the US population.
+
+## Exercise 4 — Generate and summarize 200 synthetic participants
+
+Lecture chunks 2–7 demonstrate seeded random data in `random_data`, while chunk 15 summarizes by group. We reuse that lecture name and the assignment's exact six column labels. Cases receive a lower expected ferritin level by construction; this is a simulation choice, not a clinical estimate. BMI is generated near 25 and bounded to plausible teaching values; age is sampled from adults 18–99. The ferritin ranges in the prompt are context, not diagnostic rules.
+
+```{r week2-synthetic-participants}
+# Lecture chunks 02–07, 15, 44.
+set.seed(711)
+n <- 200
+random_data <- data.frame(
+  Participant_ID = sprintf("P%03d", seq_len(n)),
+  Age = sample(18:99, n, replace = TRUE),
+  Sex = factor(sample(c("Male", "Female"), n, replace = TRUE)),
+  BMI = NA_real_,
+  Ferritin_Level = NA_real_,
+  Disease_Status = factor(sample(rep(c("Cases", "Controls"), each = n / 2)),
+                          levels = c("Controls", "Cases"))
+)
+
+# Redraw extreme simulated BMI values rather than accumulating at a cap.
+bmi <- rnorm(n, mean = 25, sd = 4)
+outside <- bmi < 16 | bmi > 45
+while (any(outside)) {
+  bmi[outside] <- rnorm(sum(outside), mean = 25, sd = 4)
+  outside <- bmi < 16 | bmi > 45
+}
+random_data$BMI <- round(bmi, 1)
+
+# Positive, right-skewed simulated ferritin with overlapping groups.
+control_median <- ifelse(random_data$Sex == "Male", 120, 70)
+ferritin_median <- control_median *
+  ifelse(random_data$Disease_Status == "Cases", 0.35, 1)
+random_data$Ferritin_Level <- round(
+  rlnorm(n, meanlog = log(ferritin_median), sdlog = 0.4), 1)
+
+stopifnot(nrow(random_data) == 200,
+          !anyDuplicated(random_data$Participant_ID),
+          all(random_data$Age >= 18 & random_data$Age <= 99),
+          all(random_data$BMI >= 16 & random_data$BMI <= 45),
+          all(random_data$Ferritin_Level > 0))
+head(random_data)
+summary(random_data$Ferritin_Level)
+by(random_data$Ferritin_Level, random_data$Disease_Status, summary)
+tapply(random_data$Ferritin_Level, random_data$Disease_Status, sd)
+```
+
+The summary is calculated from the generated sample, not asserted in advance. We inspect both pooled and disease-specific results because the overall summary alone conceals the case/control contrast. Overlap is expected, and nothing here measures true patient ferritin.
+
+## Exercise 5 — Remove Sex and pivot Age/Ferritin_Level long
+
+In wide form, each participant has one row with separate Age and Ferritin_Level columns. Following lecture chunk 18's `pivot_longer()` example, we remove `Sex` from a **new** object and pivot those two measurements into a `Measurement` and `Value` pair. Each of 200 participants should then have two rows; the original `random_data` remains unchanged.
+
+```{r week2-pivot-longer}
+# Lecture chunks 11, 18–19.
+random_data_nosex <- random_data[, names(random_data) != "Sex",
+                                 drop = FALSE]
+random_data_long <- tidyr::pivot_longer(
+  random_data_nosex, cols = c(Age, Ferritin_Level),
+  names_to = "Measurement", values_to = "Value"
+)
+stopifnot(nrow(random_data_long) == 2 * n,
+          !"Sex" %in% names(random_data_long),
+          all(table(random_data_long$Participant_ID) == 2))
+head(random_data_long)
+```
+
+The repeated IDs represent two measurements per person, not 400 people. `Value` contains years for Age and ng/mL for Ferritin_Level, so keep `Measurement` in any later summary or plot; mixing those units into one estimate would be meaningless.
+
+## Carry forward
+
+This week links data hygiene to inference: inspect types and categories, filter only the missingness relevant to a plot or test, document the comparison, seed simulations, and validate reshaping by ID. Group figures are exploratory; the unweighted classroom arsenic test is not a survey-weighted NHANES analysis. The lecture's generated `random_data` naming and wide-to-long pattern are retained so a reader can move between examples without learning an unrelated object vocabulary.
