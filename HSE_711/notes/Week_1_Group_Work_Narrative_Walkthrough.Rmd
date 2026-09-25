@@ -34,21 +34,21 @@ class(c)  # numeric
 
 ## Exercise 2: Build a list of different vector types
 
-Next, we use a list because its components can have different types. Each component remains a vector with one type. We retain jacks_list and give the components descriptive names so their roles are visible when we inspect them.
+Next, we use a list because its components can have different types. Each component remains a vector with one type. We use the lecture's `students <- list(...)` object name and give this exercise's components descriptive type names. Here the object illustrates list structure; the entries are not actual student records.
 
 ```{r group-work-02}
 # Lecture chunk references: 5, 15–16.
-jacks_list <- list(
+students <- list(
   integers = as.integer(c(1, 2, 3)),
   floats = c(1.01, 2.02, 3.03),
   characters = c("aaa", "bbbb", "ccc")
 )
-str(jacks_list)
+str(students)
 ```
 
 ## Exercise 3: Convert floating-point values
 
-We convert the supplied values with as.integer(). This truncates toward zero rather than rounding: 8.88 becomes 8. We use my_integers because the exercise explicitly requests that output name; this corrects the working draft’s jacks_integers name.
+We convert the supplied values with as.integer(). This truncates toward zero rather than rounding: 8.88 becomes 8. We use my_integers because the exercise explicitly requests that output name; this uses the output name required by the exercise.
 
 ```{r group-work-03}
 # Lecture chunk references: 8.
@@ -116,13 +116,13 @@ sum((five_count_vector == 5) | (five_count_vector > 5555))  # 13
 
 ## Exercise 9: Select three vector entries
 
-We preserve the working draft’s jacks_vector name and select positions 1, 3, and 5. R uses one-based indexing. Saving the result gives us a reusable subset while leaving the original five-element vector intact.
+We use the lecture's `char_vector` name for the five-item character vector and select positions 1, 3, and 5. R uses one-based indexing. Saving the result gives us a reusable subset while leaving the original five-element vector intact.
 
 ```{r group-work-09}
 # Lecture chunk references: 5, 11.
-jacks_vector <- c("tacos", "burritos", "enchalada", "chalupa", "arroz")
-jacks_subset <- jacks_vector[c(1, 3, 5)]
-jacks_subset
+char_vector <- c("tacos", "burritos", "enchalada", "chalupa", "arroz")
+char_subset <- char_vector[c(1, 3, 5)]
+char_subset
 ```
 
 ## Exercise 10: Inspect factor levels
@@ -240,7 +240,7 @@ str(count.df)
 
 ## Exercise 19: Create participant metadata
 
-Now we create a separate table with one participant per row. The working draft called it jack.df; participant.df describes its role and follows the lecture's count.df data-frame pattern. Its three columns map to Participant ID, Age, and Disease Status, but use lowercase snake_case so column access does not require backticks. The IDs are character identifiers, not quantities to calculate with.
+Now we create a separate table with one participant per row. The name participant.df describes the table's role and follows the lecture's count.df data-frame pattern. Its three columns map to Participant ID, Age, and Disease Status, but use lowercase snake_case so column access does not require backticks. The IDs are character identifiers, not quantities to calculate with.
 
 ```{r group-work-19}
 # Lecture chunk references: 27.
