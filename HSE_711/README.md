@@ -44,7 +44,7 @@ These are proposed materials for this repository, not official assignments or cl
 - [Walkthroughs](walkthroughs/) — step-by-step explanations and reproducible examples.
 - [Published pieces](published/) — completed pieces shared for review.
 
-The [Week 1 group-work walkthrough](notes/Week_1_Group_Work_Narrative_Walkthrough.Rmd) is available as public study commentary; course source materials remain in Drive.
+Week 1's [group-work walkthrough](notes/Week_1_Group_Work_Narrative_Walkthrough.Rmd) and Week 2's [lecture notes](notes/Week_2_Learning_Objective_Notes.R) and [group-work walkthrough](notes/Week_2_Group_Work_Narrative_Walkthrough.Rmd) are available as public study commentary. Course source materials and the Week 2 data file remain in Drive.
 
 ## References
 
