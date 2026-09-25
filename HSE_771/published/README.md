@@ -1,4 +1,4 @@
-# HSE 771 — Published pieces
+# HSE 771: Capstone — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 

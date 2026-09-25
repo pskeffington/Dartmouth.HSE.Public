@@ -1,4 +1,4 @@
-# HSE 771 — Notes
+# HSE 771: Capstone — Notes
 
 Original study notes and references will be indexed here as they are added.
 
