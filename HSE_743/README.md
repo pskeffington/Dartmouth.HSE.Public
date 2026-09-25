@@ -11,6 +11,31 @@
 
 Instructor information reflects the cited public catalog, not confirmation of a specific cohort's teaching assignment. Consult the current syllabus or [Courses@Dartmouth](https://courses.dartmouth.edu/) for term-specific staff, office hours, contact information, and meeting times.
 
+## Course description
+
+Part of the recurring capstone preparation series, this course develops the planning and communication skills used to carry out a health data science project. Dartmouth publishes a shared description for the four preparation courses rather than a separate milestone schedule for each.
+
+Summary paraphrased from the [course catalog](https://dartmouth.smartcatalogiq.com/en/current/orc/departments-programs-graduate/masters-of-health-science-education/master-of-science-in-health-data-science-online/health-data-science-online/hse-743); checked September 25, 2026.
+
+## Key topics
+
+- Justifying a research problem
+- Reviewing relevant evidence
+- Developing a conceptual framework
+- Planning analytical workflows and communicating findings
+
+## Place in the program
+
+Continues the preparation sequence leading to HSE 771. Suggested repository focus for this stage: Translate the developing question into a documented analysis plan and workflow.
+
+Program connections above are a repository interpretation, not additional enrollment requirements.
+
+## Suggested public work
+
+An analysis-plan draft and a reproducibility checklist tailored to the project.
+
+These are proposed materials for this repository, not official assignments or claims of completed work. The stage-specific focus is a suggested organizational plan; Dartmouth's published description is shared across the preparation series.
+
 ## Materials for review
 
 - [Notes](notes/) — original study notes and references.
