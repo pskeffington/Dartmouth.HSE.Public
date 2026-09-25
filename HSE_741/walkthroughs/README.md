@@ -1,4 +1,4 @@
-# HSE 741 — Walkthroughs
+# HSE 741: Research Design for Health Data Science — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
