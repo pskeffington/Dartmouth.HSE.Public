@@ -1,5 +1,7 @@
 # HSE 722: Data Visualization
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |

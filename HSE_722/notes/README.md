@@ -1,4 +1,4 @@
-# HSE 722 — Notes
+# HSE 722: Data Visualization — Notes
 
 Original study notes and references will be indexed here as they are added.
 

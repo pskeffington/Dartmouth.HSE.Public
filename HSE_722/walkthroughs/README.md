@@ -1,4 +1,4 @@
-# HSE 722 — Walkthroughs
+# HSE 722: Data Visualization — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 

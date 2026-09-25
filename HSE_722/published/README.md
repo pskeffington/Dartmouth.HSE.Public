@@ -1,4 +1,4 @@
-# HSE 722 — Published pieces
+# HSE 722: Data Visualization — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 
