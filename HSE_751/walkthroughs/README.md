@@ -1,4 +1,4 @@
-# HSE 751 — Walkthroughs
+# HSE 751: Programming for Health Data Science — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
