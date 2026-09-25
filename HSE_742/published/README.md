@@ -1,4 +1,4 @@
-# HSE 742 — Published pieces
+# HSE 742: Systems Thinking for Health Data Science — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 
