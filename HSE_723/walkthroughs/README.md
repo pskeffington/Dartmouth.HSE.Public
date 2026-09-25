@@ -1,4 +1,4 @@
-# HSE 723 — Walkthroughs
+# HSE 723: Capstone Preparation — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
