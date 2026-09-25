@@ -12,7 +12,6 @@ Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(
 
 - Lecture: `Lecture_1_Introduction_to_R(1).Rmd`.
 - Group work: `Introduction_to_R_Class_Exercises(WORKING).Rmd`.
-- Companion: [Week 1 Learning Objective Notes](Week_1_Learning_Objective_Notes.R) in the repository.
 - Exercise 4 adapts the word-selection task from the working file; the source exercise attributes its longer passage to [a Science Advances article](https://www.science.org/doi/10.1126/sciadv.abd2688). The public example uses a short illustrative vector.
 
 The explanations are a study walkthrough, not a reproduction of the instructor's prompts. The original working file remains unchanged.
