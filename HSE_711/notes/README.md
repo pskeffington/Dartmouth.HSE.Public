@@ -1,4 +1,4 @@
-# HSE 711 — Notes
+# HSE 711: Foundations in Data Science — Notes
 
 Original study notes and references will be indexed here as they are added.
 
