@@ -11,6 +11,31 @@
 
 Instructor information reflects the cited public catalog, not confirmation of a specific cohort's teaching assignment. Consult the current syllabus or [Courses@Dartmouth](https://courses.dartmouth.edu/) for term-specific staff, office hours, contact information, and meeting times.
 
+## Course description
+
+Extends regression to outcomes and data structures that require more flexible models. The catalog covers generalized linear models, random-effects approaches for clustered or repeated observations, and regularization, with additional exploration of neural networks. Analyses use R.
+
+Summary paraphrased from the [course catalog](https://dartmouth.smartcatalogiq.com/en/current/orc/departments-programs-graduate/masters-of-health-science-education/master-of-science-in-health-data-science-online/health-data-science-online/hse-732); checked September 25, 2026. The program curriculum additionally names time-to-event models; the catalog instead mentions neural networks among additional topics. The syllabus determines the term's coverage.
+
+## Key topics
+
+- Generalized linear modeling
+- Clustered and longitudinal observations
+- Random effects
+- Penalized regression and additional modeling approaches
+
+## Place in the program
+
+Extends HSE 731 and supports analysis of more complex health datasets.
+
+Program connections above are a repository interpretation, not additional enrollment requirements.
+
+## Suggested public work
+
+A comparison of a simple model and a model accounting for repeated measurements, explaining why their assumptions differ.
+
+These are proposed materials for this repository, not official assignments or claims of completed work.
+
 ## Materials for review
 
 - [Notes](notes/) — original study notes and references.
