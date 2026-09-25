@@ -6,7 +6,7 @@ output: html_document
 
 This walkthrough follows the 21 exercises in the provided Week 1 working file. We move from inspecting individual values to selecting data, building tables, and combining a function with a loop. Each section explains the reasoning before showing commented base R code. Run the chunks from top to bottom in a fresh R session.
 
-Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over personal naming choices. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
+Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over stylistic choices. For direct comparison with Lecture 1, the count-data pipeline keeps its `num.vector`, `count.vector`, `count.matrix`, and `count.df` names. Other added objects use descriptive `snake_case` names; the separate participant metadata table uses `participant.df` to match the lecture's data-frame suffix. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
 
 ## Source and scope
 
@@ -104,12 +104,14 @@ sum(letter_vector == "a")  # 3
 
 ## Exercise 8: Combine two inclusion conditions
 
-We want values equal to 5 OR greater than 5555. Parentheses make each condition clear, while | combines them element by element. Values exactly equal to 5555 do not meet the second condition.
+We give this exercise its own five_count_vector rather than overwriting the threshold vector from Exercise 6. We want values equal to 5 OR greater than 5555. Parentheses make each condition clear, while | combines them element by element. Values exactly equal to 5555 do not meet the second condition.
 
 ```{r group-work-08}
 # Lecture chunk references: 3–4.
-number_vector <- c(5,5,55,555555,555,55555,5,5,555555555,55,55,555,5,5,55555555,5,55,5,5555,5,555,5555)
-sum((number_vector == 5) | (number_vector > 5555))  # 13
+five_count_vector <- c(5, 5, 55, 555555, 555, 55555, 5, 5, 555555555,
+                       55, 55, 555, 5, 5, 55555555, 5, 55, 5, 5555,
+                       5, 555, 5555)
+sum((five_count_vector == 5) | (five_count_vector > 5555))  # 13
 ```
 
 ## Exercise 9: Select three vector entries
@@ -188,12 +190,13 @@ count.matrix["IL6", "Participant 108"]
 
 ## Exercise 15: Append a numeric participant column
 
-We append five values because the matrix has five gene rows. Backticks allow the object name to contain a space. cbind() combines by position, so the new values must already follow the existing gene order.
+We append five values because the matrix has five gene rows. The snake_case object name participant_111 describes the new vector; the displayed column label retains the exercise's "Participant 111" spelling. As in the lecture's new_col example, cbind() combines by position, so the values must already follow gene order.
 
 ```{r group-work-15}
 # Lecture chunk references: 24.
-`Participant 111` <- c(1, 2, 3, 4, 5)
-count.matrix <- cbind(count.matrix, `Participant 111`)
+participant_111 <- c(1, 2, 3, 4, 5)
+count.matrix <- cbind(count.matrix, participant_111)
+colnames(count.matrix)[ncol(count.matrix)] <- "Participant 111"
 dim(count.matrix)  # 5 rows, 6 columns
 ```
 
@@ -203,8 +206,9 @@ A matrix has one underlying data type. Adding letters forces the numeric values 
 
 ```{r group-work-16}
 # Lecture chunk references: 6, 8, 19, 24.
-`Participant 112` <- c("a", "b", "c", "d", "e")
-count.matrix <- cbind(count.matrix, `Participant 112`)
+participant_112 <- c("a", "b", "c", "d", "e")
+count.matrix <- cbind(count.matrix, participant_112)
+colnames(count.matrix)[ncol(count.matrix)] <- "Participant 112"
 class(count.matrix)
 storage.mode(count.matrix)  # character
 ```
@@ -236,47 +240,46 @@ str(count.df)
 
 ## Exercise 19: Create participant metadata
 
-Now we create a separate table with one participant per row. We keep jack.df and the working draft’s column labels, including spaces. check.names = FALSE preserves those labels; backticks are then needed when accessing a spaced name with $. The IDs are character identifiers, not quantities to calculate with.
+Now we create a separate table with one participant per row. The working draft called it jack.df; participant.df describes its role and follows the lecture's count.df data-frame pattern. Its three columns map to Participant ID, Age, and Disease Status, but use lowercase snake_case so column access does not require backticks. The IDs are character identifiers, not quantities to calculate with.
 
 ```{r group-work-19}
 # Lecture chunk references: 27.
-jack.df <- data.frame(
-  `Participant ID` = c("106", "107", "109"),
-  Age = c(45, 23, 99),
-  `Disease Status` = c("Case", "Control", "Case"),
-  check.names = FALSE
+participant.df <- data.frame(
+  participant_id = c("106", "107", "109"),
+  age = c(45, 23, 99),
+  disease_status = c("Case", "Control", "Case")
 )
-jack.df
+participant.df
 ```
 
 ## Exercise 20: Extract the age column
 
-The dollar operator returns the named column as a vector. That is the appropriate structure for a later numerical summary. It differs from jack.df["Age"], which retains a one-column data frame.
+The dollar operator returns the named column as a vector. That is the appropriate structure for a later numerical summary. It differs from participant.df["age"], which retains a one-column data frame.
 
 ```{r group-work-20}
 # Lecture chunk references: 28.
-jack.df$Age  # 45 23 99
+participant.df$age  # 45 23 99
 ```
 
 ## Exercise 21: Combine a function, loop, and conditional
 
-Finally, we wrap the repeated operation in my_first_function(). At each row we inspect Disease Status: a case prints its Participant ID, and a control prints its Age. seq_len(nrow(df)) is a small refinement of the lecture’s index loop because it also handles zero rows. The explicit else-if avoids treating every non-case label as a control. This teaching example assumes complete Case/Control labels; imported data should be checked first.
+Finally, we wrap the repeated operation in my_first_function(). At each row we inspect disease_status: a case prints its participant_id, and a control prints its age. seq_len(nrow(df)) is a small refinement of the lecture’s index loop because it also handles zero rows. The explicit else-if avoids treating every non-case label as a control. This teaching example assumes complete Case/Control labels; imported data should be checked first.
 
 ```{r group-work-21}
 # Lecture chunk references: 30–33, 36–39.
 my_first_function <- function(df) {
   # Loop through rows and use the same row index for every column.
   for (i in seq_len(nrow(df))) {
-    if (df$`Disease Status`[i] == "Case") {
-      print(df$`Participant ID`[i])
-    } else if (df$`Disease Status`[i] == "Control") {
-      print(df$Age[i])
+    if (df$disease_status[i] == "Case") {
+      print(df$participant_id[i])
+    } else if (df$disease_status[i] == "Control") {
+      print(df$age[i])
     }
   }
 }
 
 # Call the function without copying the Console prompt (>).
-my_first_function(jack.df)
+my_first_function(participant.df)
 # Prints "106", then 23, then "109".
 ```
 
