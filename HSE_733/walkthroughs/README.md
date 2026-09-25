@@ -1,4 +1,4 @@
-# HSE 733 — Walkthroughs
+# HSE 733: Capstone Preparation — Walkthroughs
 
 Step-by-step explanations and reproducible examples will be indexed here as they are added.
 
