@@ -1,5 +1,7 @@
 # HSE 742: Systems Thinking for Health Data Science
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |

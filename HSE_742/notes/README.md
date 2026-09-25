@@ -1,4 +1,4 @@
-# HSE 742 — Notes
+# HSE 742: Systems Thinking for Health Data Science — Notes
 
 Original study notes and references will be indexed here as they are added.
 
