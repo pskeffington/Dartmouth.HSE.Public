@@ -1,4 +1,4 @@
-# HSE 741 — Notes
+# HSE 741: Research Design for Health Data Science — Notes
 
 Original study notes and references will be indexed here as they are added.
 
