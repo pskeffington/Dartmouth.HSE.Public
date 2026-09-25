@@ -1,4 +1,4 @@
-# HSE 723 — Notes
+# HSE 723: Capstone Preparation — Notes
 
 Original study notes and references will be indexed here as they are added.
 
