@@ -1,4 +1,4 @@
-# HSE 753 — Published pieces
+# HSE 753: Genomic Data Science — Published pieces
 
 Completed pieces shared for review will be indexed here as they are added.
 

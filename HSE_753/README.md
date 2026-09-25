@@ -1,5 +1,7 @@
 # HSE 753: Genomic Data Science
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |
