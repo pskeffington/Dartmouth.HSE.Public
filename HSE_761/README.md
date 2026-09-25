@@ -1,5 +1,7 @@
 # HSE 761: Foundations of Machine Learning
 
+## Course information
+
 | Course detail | Information |
 | --- | --- |
 | Program | MS in Health Data Science — Online |

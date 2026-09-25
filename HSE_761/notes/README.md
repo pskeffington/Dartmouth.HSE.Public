@@ -1,4 +1,4 @@
-# HSE 761 — Notes
+# HSE 761: Foundations of Machine Learning — Notes
 
 Original study notes and references will be indexed here as they are added.
 
