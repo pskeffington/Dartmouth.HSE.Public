@@ -32,8 +32,8 @@ Maintained by Paul Skeffington for coursework in Dartmouth's online MS in Health
 
 Every course folder contains an overview with instructor information, units, prerequisites, and source links, plus:
 
-- `notes/`: original study notes and references.
-- `walkthroughs/`: explanations, code, and reproducible examples.
+- `notes/`: original study notes and references. HSE 711 also keeps its group-work walkthroughs here.
+- `walkthroughs/`: explanations, code, and reproducible examples for courses that use a separate folder.
 - `published/`: completed pieces available for review.
 
 Use descriptive filenames and relative paths. Walkthroughs should identify their data sources, dependencies, execution steps, and expected results; lecture-based explanations can reference the relevant lecture chunk numbers.
