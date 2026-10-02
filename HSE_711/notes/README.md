@@ -10,4 +10,6 @@ Original study notes and exercise walkthroughs for public review.
 - [Week 3 learning objectives: Data Visualization and Analytics](Week_3_Learning_Objective_Notes.R) — fully commented notes for all 21 lecture chunks, with learning objectives, application cues, and interpretation notes.
 - [Week 3 group work: Data Visualization and Analytics](Week_3_Group_Work_Narrative_Walkthrough.Rmd) — five narrative exercises preserving the supplied prompts; covers simulation, lists, functions, saved histograms, and colored CRP plots. Run chunks in order from a working directory containing `data/`. Questions 1–4 need ggplot2; Question 5 needs the course CSVs in `data/In-Class-Exercises/` and is skipped if none are present. Knit with rmarkdown and knitr. Runtime results have not been verified.
 
+- [Week 3 reusable functions](Week_3_Reusable_Functions.R) — load once with `source()` to use `summary_cov()`, `plt_hist()`, `plt_box()`, and `plt_scatter()`. Requires ggplot2; runtime execution remains unverified.
+
 [Return to course overview](../README.md)
