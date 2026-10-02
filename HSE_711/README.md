@@ -40,11 +40,12 @@ These are proposed materials for this repository, not official assignments or cl
 
 ## Materials for review
 
-- [Notes](notes/) — original study notes and references.
-- [Walkthroughs](walkthroughs/) — step-by-step explanations and reproducible examples.
+- [Notes and group-work walkthroughs](notes/) — study notes, step-by-step explanations, and reproducible examples.
 - [Published pieces](published/) — completed pieces shared for review.
 
 Week 1's [group-work walkthrough](notes/Week_1_Group_Work_Narrative_Walkthrough.Rmd) and Week 2's [lecture notes](notes/Week_2_Learning_Objective_Notes.R) and [group-work walkthrough](notes/Week_2_Group_Work_Narrative_Walkthrough.Rmd) are available as public study commentary. Course source materials and the Week 2 data file remain in Drive.
+
+Week 3's [lecture notes](notes/Week_3_Learning_Objective_Notes.R) cover all 21 lecture chunks. The [group-work walkthrough](notes/Week_3_Group_Work_Narrative_Walkthrough.Rmd) explains all five exercises, including functions, iteration, saved histograms, and CSV visualization. Questions 1–4 use simulation; Question 5 requires the course CSVs in `data/In-Class-Exercises/`. R execution and knitting have not been verified.
 
 ## References
 
