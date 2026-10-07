@@ -47,3 +47,14 @@ This is a personal student repository. Only materials suitable for public distri
 ## License
 
 See [LICENSE](LICENSE).
+
+## Valuation tracking
+
+Current internal valuation status (2026-10-07 reviewed carry-forward):
+
+- repository current range: **$10K-$30K**
+- conditional forward range: **$40K-$120K**
+- maturity: **active**
+- evidence grade: **B-**
+
+The range is limited to original reusable notes, code examples, and independently authored educational tooling. Third-party course content, curriculum ownership, institutional branding, and credential value are excluded.
