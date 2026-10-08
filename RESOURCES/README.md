@@ -12,6 +12,10 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ### R programming
 
+- [One-call statistical graphics](ONE_CALL_PLOTS.md) — ready-made regression, Pearson/Spearman, Wilcoxon, Kruskal-Wallis and gene-expression plots, with annotated p-values.
+- [One-call plotting functions](R/hse_one_call_plots.R) — reusable implementation and test-result attributes.
+- [Statistical plotting smoke tests](tests/test_hse_one_call_plots.R) — synthetic-data validation script.
+
 - [R/hse_stats_plots.R](R/hse_stats_plots.R) — descriptive statistics, Wilcoxon tests, correlation, basic plots, CPM and gene-panel preparation.
 - [R/hse_gene_visuals.R](R/hse_gene_visuals.R) — selected-gene heatmaps, PCA, mean–variance plots, and model-derived volcano plots.
 - [R/Week_3_Reusable_Functions.R](R/Week_3_Reusable_Functions.R) — original annotated Week 3 classroom functions.
