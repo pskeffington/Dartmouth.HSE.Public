@@ -11,3 +11,9 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Local classroom and research inputs: never commit to public GitHub.
+/data/
+# Local Week 4 generated outputs and disposable workspaces.
+/week4_practice/
+/Group Work/Week_4_Bash_Lab/data/
