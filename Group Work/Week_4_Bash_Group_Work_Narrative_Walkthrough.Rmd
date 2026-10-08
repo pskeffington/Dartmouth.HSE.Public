@@ -11,6 +11,18 @@ This walkthrough follows the supplied five-part exercise for `pseudo_metadata.cs
 
 The exercise refers to both `only_female.txt` (Question 2) and `females_metadata.csv` (Question 3). They are not the same filename. To preserve that distinction while creating a coherent workflow, the example produces `only_female.txt` as requested and explicitly copies it to `females_metadata.csv` before Question 3. This is an **implementation bridge**, not a claimed correction to the original prompt.
 
+## Verified classroom file and runnable companion
+
+The subsequently supplied `pseudo_metadata.csv` has **11 lines** (one header, ten synthetic participant records). Its actual header is `"","sampleID","condition","age","sex","batch"`, with `sex` in **column 5** and categories **F/M**. Six records are labeled F, and the original columns 3 and 4 are **condition** and **age**. These values were checked against the supplied file; do not use the earlier illustrative `Sex == Female` command on this dataset.
+
+For a ready-to-run implementation of all five exercises, use [Week 4 Bash Lab](Week_4_Bash_Lab/README.md). The staged command is:
+
+```bash
+bash "Group Work/Week_4_Bash_Lab/run_week4.sh" /path/to/pseudo_metadata.csv ./week4_practice
+```
+
+The initial commands below remain as a teaching example of header-based selection, not the verified runnable implementation; the exercise-specific script uses the observed F/M schema and includes guardrails against deleting an unrelated folder.
+
 ## Setup: identify the study file
 
 ```bash
