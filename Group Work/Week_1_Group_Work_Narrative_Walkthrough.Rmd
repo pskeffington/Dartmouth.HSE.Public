@@ -18,6 +18,9 @@ The explanations are a study walkthrough, not a reproduction of the instructor's
 
 ## Exercise 1: Identify the data types
 
+**Methodological context.** Statistical programming begins with the distinction between a value's appearance and its computational representation. This initial inspection is not merely syntactic: type assumptions determine which mathematical operations, comparisons, and missing-value rules are valid. Students should interpret the printed class as an observation about R's stored object, rather than a statement about the biological or clinical meaning of a variable.
+
+
 We begin by assigning the three objects and asking R to report their classes. A whole-looking number such as 3 is still stored as numeric by default; an integer requires an explicit conversion or an L suffix. This check helps us choose valid operations before analyzing a variable.
 
 ```{r group-work-01}
@@ -58,6 +61,9 @@ my_integers  # 1 1 2 8 6 1048
 ```
 
 ## Exercise 4: Find a word while handling missing values
+
+**Interpretive note.** Missingness and substantive nonmatches represent different states. A character value that does not equal the target is observed evidence of a nonmatch; an `NA` supplies no observed value at all. The filtering condition therefore makes the analysis population explicit before any count or selection is reported.
+
 
 The supplied arthritis vector contains both words and missing values. A comparison alone leaves NA entries in the selection mask. We first exclude missing entries, then select the exact word. This pattern also applies to selecting a category from an imported dataset. The short vector below adapts the selection task for a public walkthrough; it preserves four missing entries without reproducing the source passage. It is used for indexing practice, not to draw medical conclusions.
 
@@ -155,6 +161,9 @@ class(grocery_list[[2]])  # character
 
 ## Exercise 12: Generate a synthetic count matrix
 
+**Research application.** Gene-by-sample matrices are a foundational structure in transcriptomic analysis. Their orientation and dimension labels are part of the scientific data contract: a numerical entry has meaning only when the corresponding feature and specimen can be identified. The values generated here are synthetic teaching data and must not be interpreted as measured RNA-seq counts or expression estimates.
+
+
 A five-by-five matrix needs 25 values. We sample from 0 through 20 with replacement, then fill the matrix row by row. A seed makes repeated runs reproducible under the same R random-number settings. These are teaching data, not observed patient or gene measurements.
 
 ```{r group-work-12}
@@ -228,7 +237,10 @@ colnames(count.matrix) <- paste("Participant", 106:110)
 count.matrix
 ```
 
-## Exercise 18: Convert the matrix to a data frame
+## Exercise 18:
+
+**Interpretive note.** Moving between matrices and data frames changes which kinds of variables may coexist. At each conversion, verify both column types and dimensions rather than assuming that a successful command has preserved the intended data structure.
+ Convert the matrix to a data frame
 
 We use as.data.frame() to change the container while retaining the gene rows and participant columns. Conversion does not transpose the data or turn it into participant metadata. The frame can subsequently hold columns of different types.
 
@@ -288,3 +300,10 @@ my_first_function(participant.df)
 The recurring pattern is to identify the structure, inspect the values, and then choose the operation. Comparisons create logical vectors; those vectors can select observations or count matches. Lists preserve different component types, matrices support one-type rectangular data, and data frames support mixed columns. Functions make a process reusable, while loops and conditionals control how it operates on each observation.
 
 The walkthrough corrects the working file's comment syntax, misplaced code, duplicate chunk labels, `count.matric` spelling, unnecessary Console prompt, missing-value selection, and matrix-size mismatch. It omits the decorative closing text so the document stays focused on the exercises.
+
+
+## Scholarly reporting and reproducibility
+
+A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
+
+The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
