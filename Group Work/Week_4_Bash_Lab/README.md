@@ -4,10 +4,10 @@
 
 ## Run from the repository root
 
-Copy the course-supplied `pseudo_metadata.csv` to your local machine. Do not upload confidential or real patient records.
+Clone the repository locally, create the **root-level `data/` folder**, and place the course-supplied `pseudo_metadata.csv` inside it. `/data/` and `/week4_practice/` are Git-ignored; do not force-add them or upload confidential records.
 
 ```sh
-bash "Group Work/Week_4_Bash_Lab/run_week4.sh" /path/to/pseudo_metadata.csv ./week4_practice
+bash "Group Work/Week_4_Bash_Lab/run_week4.sh" ./data/pseudo_metadata.csv ./week4_practice
 ```
 
 The script implements all five questions and leaves `only_female.txt` and `females_metadata.csv` in the practice workspace. The nested `new_dir` is created, populated, inspected, and deleted in the fifth exercise. Run with a **new, disposable workspace**; the script refuses to remove a preexisting `new_dir`.
