@@ -26,32 +26,107 @@ hse_numeric <- function(x, label = "x") {
   invisible(TRUE)
 }
 
-# Count nonmissing observations and report robust descriptive statistics.
-# Use a data frame rather than a formatted string so results are exportable.
-hse_describe <- function(data, value, group = NULL) {
-  cols <- c(value, group)
-  hse_check_cols(data, cols)
+# Comprehensive numerical summary. One row per group, including explicit
+# missingness and robust quantiles. SD and variance are *sample* statistics.
+# IQR is Q3 - Q1 using the same type=7 quantile convention as base R.
+# CV and skewness are intentionally omitted: they require additional
+# assumptions and can mislead on values near zero or signed scales.
+hse_describe <- function(data, value, group = NULL, digits = 3L) {
+  hse_check_cols(data, c(value, group))
   hse_numeric(data[[value]], value)
-  g <- if (is.null(group)) factor(rep("All", nrow(data))) else
-    factor(as.character(data[[group]]), exclude = NULL)
-  parts <- split(data[[value]], g, drop = TRUE)
-  out <- lapply(names(parts), function(nm) {
-    x <- parts[[nm]]
-    x <- x[!is.na(x)]
-    data.frame(group = nm, n = length(x),
-               mean = if (length(x)) mean(x) else NA_real_,
-               sd = if (length(x) > 1L) stats::sd(x) else NA_real_,
-               median = if (length(x)) stats::median(x) else NA_real_,
-               q1 = if (length(x)) as.numeric(stats::quantile(x, .25)) else NA_real_,
-               q3 = if (length(x)) as.numeric(stats::quantile(x, .75)) else NA_real_,
-               min = if (length(x)) min(x) else NA_real_,
-               max = if (length(x)) max(x) else NA_real_)
+  if (length(digits) != 1L || is.na(digits) || digits < 0 ||
+      digits != as.integer(digits)) stop("digits must be a nonnegative integer")
+  if (!is.null(group) && identical(group, value))
+    stop("group and value must be different columns")
+  # Missing grouping labels remain visible as their own category.
+  groups <- if (is.null(group)) rep("All", nrow(data)) else {
+    g <- as.character(data[[group]])
+    g[is.na(g)] <- "(Missing group)"
+    g
+  }
+  levels <- unique(groups)
+  # Return stable column types even for completely empty data.
+  schema <- data.frame(group=character(), n_total=integer(), n=integer(),
+    n_missing=integer(), pct_missing=numeric(), mean=numeric(),
+    sd=numeric(), variance=numeric(), se=numeric(),
+    median=numeric(), q1=numeric(), q3=numeric(), iqr=numeric(),
+    min=numeric(), max=numeric(), range=numeric(),
+    p05=numeric(), p95=numeric(), stringsAsFactors=FALSE)
+  if (!length(levels)) return(schema)
+  output <- lapply(levels, function(level) {
+    raw <- data[[value]][groups == level]
+    x <- raw[!is.na(raw)]
+    n <- length(x); total <- length(raw)
+    quant <- function(prob) if (n) as.numeric(stats::quantile(
+      x, probs=prob, names=FALSE, type=7)) else NA_real_
+    mu <- if (n) mean(x) else NA_real_
+    sd <- if (n > 1L) stats::sd(x) else NA_real_
+    q1 <- quant(.25); q3 <- quant(.75)
+    data.frame(group=level, n_total=total, n=n, n_missing=total-n,
+      pct_missing=if (total) 100*(total-n)/total else NA_real_,
+      mean=mu, sd=sd, variance=if(n>1L) sd^2 else NA_real_,
+      se=if(n>1L) sd/sqrt(n) else NA_real_,
+      median=if(n) stats::median(x) else NA_real_,
+      q1=q1, q3=q3, iqr=q3-q1,
+      min=if(n) min(x) else NA_real_,
+      max=if(n) max(x) else NA_real_,
+      range=if(n) diff(range(x)) else NA_real_,
+      p05=quant(.05), p95=quant(.95),
+      stringsAsFactors=FALSE)
   })
-  if (!length(out)) return(data.frame(group = character(), n = integer(),
-                                    mean = numeric(), sd = numeric(),
-                                    median = numeric(), q1 = numeric(),
-                                    q3 = numeric(), min = numeric(), max = numeric()))
-  do.call(rbind, out)
+  out <- do.call(rbind, output)
+  rownames(out) <- NULL
+  # Keep exact counts; round display-level measurements only.
+  metric <- setdiff(names(out), c("group", "n_total", "n", "n_missing"))
+  out[metric] <- lapply(out[metric], round, digits=digits)
+  out
+}
+
+# Plain-language statistical summary for a reader. Describes the observed
+# sample only; does not invent a statistical test or imply causation.
+hse_describe_narrative <- function(summary, value, unit = NULL, digits = 2L) {
+  needed <- c("group","n_total","n","n_missing","mean","sd",
+              "median","q1","q3","iqr","min","max")
+  hse_check_cols(summary, needed)
+  if (!is.character(value) || length(value)!=1L || !nzchar(value))
+    stop("value must identify the measured variable")
+  fmt <- function(x) if(is.na(x)) "unavailable" else
+    format(round(x,digits), trim=TRUE, scientific=FALSE)
+  unit_label <- if (is.null(unit)) "" else paste0(" ",unit)
+  vapply(seq_len(nrow(summary)), function(i) {
+    s <- summary[i,,drop=FALSE]
+    prefix <- paste0(value, " [", s$group, "]: ")
+    if (s$n == 0L) return(paste0(prefix,"no observed measurements (",
+      s$n_missing," of ",s$n_total," missing)."))
+    spread <- paste0("Median ",fmt(s$median),unit_label,
+      " (Q1 ",fmt(s$q1),", Q3 ",fmt(s$q3),
+      "; IQR ",fmt(s$iqr),unit_label,"). ")
+    average <- if (s$n > 1L) paste0("Mean ",fmt(s$mean),unit_label,
+      " (SD ",fmt(s$sd),unit_label,"). ") else
+      paste0("Mean ",fmt(s$mean),unit_label,"; SD unavailable (n=1). ")
+    paste0(prefix,s$n," observed of ",s$n_total," (",
+      s$n_missing," missing). ",average,spread,
+      "Observed range ",fmt(s$min),"–",fmt(s$max),unit_label,
+      ". Descriptive statistics only.")
+  }, character(1))
+}
+
+# Single-call reader-facing report with numeric table + generated narrative.
+# Return a list to preserve programmatic access to the exact summary.
+hse_summary_report <- function(data, value, group = NULL, unit = NULL,
+                               digits = 3L) {
+  tab <- hse_describe(data,value,group,digits=digits)
+  narrative <- hse_describe_narrative(tab,value,unit)
+  list(statistics=tab, narrative=narrative)
+}
+
+# Print a report in a compact form suitable for a course worksheet.
+hse_print_summary <- function(report) {
+  if (!is.list(report) || is.null(report$statistics) ||
+      is.null(report$narrative)) stop("Expected hse_summary_report output")
+  print(report$statistics, row.names=FALSE)
+  cat("\\nReader summary:\\n",paste(report$narrative,collapse="\\n"),"\\n",sep="")
+  invisible(report)
 }
 
 # Two-group Wilcoxon rank-sum test for independent samples.
