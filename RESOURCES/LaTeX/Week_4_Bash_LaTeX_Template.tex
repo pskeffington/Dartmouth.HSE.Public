@@ -1,0 +1,239 @@
+\documentclass[11pt,letterpaper]{article}
+% HSE 711 Week 4 — student-editable LaTeX learning and lab template
+% Compile: pdflatex -interaction=nonstopmode Week_4_Bash_LaTeX_Template.tex
+% Compile twice for stable references. Requires standard TeX packages below.
+% Never place participant-level sensitive data in a public report.
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue}
+\definecolor{codebg}{RGB}{247,248,250}
+\lstdefinestyle{hsebash}{
+  language=bash,basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},frame=single,
+  breaklines=true,showstringspaces=false,
+  columns=fullflexible,keepspaces=true,
+  commentstyle=\color{gray}
+}
+\lstset{style=hsebash}
+\newcommand{\student}{[Student name]}
+\newcommand{\course}{HSE 711: Foundations in Data Science}
+\newcommand{\reportdate}{[Submission date]}
+\newcommand{\fillin}[1]{\textbf{[Insert #1]}}
+\title{Week 4: Introduction to Bash\\\large Guided Learning Notes and Reproducible Metadata Lab}
+\author{\student\\\course}
+\date{\reportdate}
+\begin{document}
+\maketitle
+\begin{abstract}
+This student-editable report follows the Week 4 lecture on the Unix shell and
+Bash, then walks through five exercises using the synthetic
+\texttt{pseudo\_metadata.csv} file. It separates commands, expected behavior,
+observed results, and methodological interpretation. Replace all bracketed
+placeholders only after running commands on your own copy of the data.
+\end{abstract}
+\tableofcontents
+\newpage
+
+\section{Learning objectives}
+By the end of this exercise, the student should be able to:
+\begin{enumerate}
+\item Explain the purpose of a shell and the role of Bash in reproducible data processing.
+\item Navigate the filesystem and inspect text data without opening an entire large file.
+\item Use quoting, variables, conditionals, and pipelines safely.
+\item Subset synthetic metadata and document the transformation.
+\item Explain why a file line count is not necessarily a participant count.
+\item Distinguish simple delimiter processing from full CSV parsing.
+\item Preserve a record of commands, assumptions, outputs, and cleanup operations.
+\end{enumerate}
+
+\section{Lecture context and conceptual foundation}
+A shell interprets commands and interacts with the operating system. The Week 4
+lecture introduces Bash as an interactive and scriptable shell and situates it
+historically in the lineage of the Bourne, C, and Korn shells. Its scientific
+purpose is to orchestrate file operations and reproducible workflows, including
+launching R analyses and computational jobs. Bash does not replace a validated
+statistical model in R.
+
+\subsection{Command map}
+\begin{longtable}{p{.18\linewidth}p{.35\linewidth}p{.35\linewidth}}
+\toprule
+Command & Function & Scientific use\\ \midrule
+\endhead
+\texttt{pwd}, \texttt{cd} & Identify or change working directory & Prevent path confusion\\
+\texttt{ls -lah} & List files and metadata & Inspect source/output directories\\
+\texttt{head}, \texttt{tail}, \texttt{less} & Preview file contents & Assess structure without full import\\
+\texttt{wc -l} & Count newline characters & Initial record-count check\\
+\texttt{mkdir}, \texttt{cp}, \texttt{mv} & Organize files & Maintain clear provenance\\
+\texttt{awk}, \texttt{cut} & Select rows or fields & Inspect simple tabular data\\
+\texttt{grep} & Match text patterns & Search sample or gene labels\\
+\texttt{Rscript} & Launch R code & Separate orchestration from statistics\\
+\bottomrule
+\end{longtable}
+
+\section{Environment and source-data assumptions}
+\textbf{Required input:} the course-provided \texttt{pseudo\_metadata.csv},
+described as synthetic metadata for ten participants. Its exact column headers,
+values, and category coding must be verified before filtering. The original
+exercise refers to both \texttt{only\_female.txt} and
+\texttt{females\_metadata.csv}; this template explicitly creates the latter
+from the former.
+
+\noindent\textbf{Important limitation:} the AWK and CUT demonstrations below
+assume simple comma-separated rows without quoted commas or embedded newlines.
+A CSV-aware parser should be used if the actual file does not meet that
+assumption.
+
+\begin{lstlisting}
+bash --version
+pwd
+ls -lah
+head -n 3 pseudo_metadata.csv
+\end{lstlisting}
+\noindent\fillin{operating system, Bash version, and file header}
+
+\section{Exercise 1: Count lines}
+The operation \texttt{wc -l} counts line endings. For a standard CSV with one
+header and ten one-line participant records, eleven lines would be expected,
+but that is not a measured result until the command is run.
+\begin{lstlisting}
+wc -l pseudo_metadata.csv
+\end{lstlisting}
+\noindent\textbf{Observed command output:} \fillin{line count}\\
+\textbf{Interpretation:} \fillin{number of data rows and header treatment}
+
+\section{Exercise 2: Subset female participants}
+This example locates a column titled \texttt{Sex}, compares labels
+case-insensitively, and retains the header. Confirm the actual header first.
+\begin{lstlisting}
+awk -F ',' '
+ NR == 1 {
+   for (i=1; i<=NF; i++) {
+     h=$i; gsub(/\r/, "", h)
+     if (tolower(h)=="sex") sex_col=i
+   }
+   if (!sex_col) { print "Sex column missing" > "/dev/stderr"; exit 2 }
+   print; next
+ }
+ {
+   value=$sex_col; gsub(/\r/, "", value)
+   if (tolower(value)=="female") print
+ }
+' pseudo_metadata.csv > only_female.txt
+head only_female.txt
+wc -l only_female.txt
+\end{lstlisting}
+\noindent\textbf{Observed selected rows:} \fillin{female participants}\\
+\textbf{Validation:} \fillin{header, category labels, missingness}\\
+\textbf{Interpretation:} A filtered file is a selection of records, not a
+change in the original participants.
+
+\section{Exercise 3: Create a documented working directory}
+\begin{lstlisting}
+cp only_female.txt females_metadata.csv
+mkdir -p new_dir
+cp females_metadata.csv new_dir/
+cat > new_dir/notes.txt <<'NOTES'
+Source: pseudo_metadata.csv, Week 4 synthetic exercise
+Filter: Sex == Female (case-insensitive)
+Output: females_metadata.csv
+Review: verify header, total rows, and missing categories
+NOTES
+\end{lstlisting}
+\noindent\textbf{Notes review:} \fillin{provenance and filtering assumptions}
+
+\section{Exercise 4: Extract the third and fourth columns}
+Column positions have no inherent scientific meaning. Verify their names.
+\begin{lstlisting}
+cd new_dir
+head -n 1 females_metadata.csv
+cut -d ',' -f 3,4 females_metadata.csv > females_metadata_sub.csv
+head -n 5 females_metadata_sub.csv
+\end{lstlisting}
+\noindent\textbf{Column names:} \fillin{third and fourth header fields}\\
+\textbf{Interpretation:} \fillin{meaning of extracted columns}
+
+\section{Exercise 5: Inspect and safely clean up}
+\begin{lstlisting}
+ls -lah
+cd ..
+pwd
+ls -lah new_dir
+# Deliberately interactive; review each deletion:
+rm -ri new_dir
+\end{lstlisting}
+\noindent\textbf{Cleanup record:} \fillin{which files were removed and retained}\\
+\textbf{Safety discussion:} Relative paths and recursive deletions can
+destroy unrelated files when the working directory is misunderstood.
+
+\section{Bash as an R workflow launcher}
+\begin{lstlisting}
+Rscript --vanilla analysis.R input.csv output.csv 10
+\end{lstlisting}
+A downstream R script can read command-line arguments using
+\texttt{commandArgs(trailingOnly = TRUE)}. In this learning exercise, that
+command is illustrative: do not claim that an analysis ran unless the R file
+and its input are actually available.
+
+\section{Results and evidence table}
+\begin{tabular}{p{.23\linewidth}p{.37\linewidth}p{.30\linewidth}}
+\toprule
+Task & Recorded result & Interpretation / concern\\ \midrule
+1: Count & \fillin{lines} & \fillin{header and records}\\
+2: Subset & \fillin{selected rows} & \fillin{selection validation}\\
+3: Copy & \fillin{files created} & \fillin{provenance}\\
+4: Columns & \fillin{field names} & \fillin{meaning and limits}\\
+5: Cleanup & \fillin{remaining files} & \fillin{safety}\\
+\bottomrule
+\end{tabular}
+
+\section{Short scholarly narrative}
+\noindent\textit{Ready-to-complete paragraph:}
+
+\begin{quote}
+The Week 4 exercise used a synthetic participant metadata table to demonstrate
+a reproducible command-line workflow. Initial inspection identified
+\fillin{verified file structure}. Filtering selected \fillin{count} records
+matching the documented female category, with \fillin{missingness findings}.
+The resulting subset was copied to a working directory, documented, and reduced
+to the third and fourth source columns, identified as \fillin{field names}.
+The exercise illustrates why record selection, field provenance, and deliberate
+cleanup are necessary even in a small study. Because these data were synthetic,
+no empirical clinical or population-level inference is warranted.
+\end{quote}
+
+\section{Reproducibility and submission checklist}
+\begin{itemize}[label=$\square$]
+\item Input file and true headers verified; no sensitive records published.
+\item Bash version, working directory, and commands recorded.
+\item Header retained; row counts and selection values inspected.
+\item Output names reconcile the two filenames in the exercise prompt.
+\item Column positions validated against actual field names.
+\item Cleanup performed only after verifying the disposable target directory.
+\item All numeric results above reflect actual execution, not expectations.
+\item PDF inspected for code clipping, page overflow, and legible tables.
+\end{itemize}
+
+\section{References and further study}
+\begin{enumerate}
+\item HSE 711, Week 4 lecture: \emph{Introduction to Bash Scripting}
+(supplied course material).
+\item HSE 711, Week 4: \emph{Bash Programming In Class Exercises}
+(supplied course material).
+\item GNU Project. \emph{Bash Reference Manual}.
+\url{https://www.gnu.org/software/bash/manual/bash.html}
+\item Software Carpentry. \emph{The Unix Shell}.
+\url{https://swcarpentry.github.io/shell-novice/}
+\end{enumerate}
+
+\end{document}
