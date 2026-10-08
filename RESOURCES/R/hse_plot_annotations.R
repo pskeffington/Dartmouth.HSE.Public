@@ -134,3 +134,122 @@ if (exists("hse_plot_wilcox", mode = "function") &&
     p
   }
 }
+
+
+# Extend consistent annotations to the remaining teaching plot factories.
+if (exists("hse_plot_multigroup",mode="function") &&
+    !exists(".hse_original_plot_multigroup",inherits=FALSE)) {
+  .hse_original_plot_multigroup <- hse_plot_multigroup
+  hse_plot_multigroup <- function(data,value,group,p_adjust="BH",pairwise=TRUE) {
+    p <- .hse_original_plot_multigroup(data,value,group,p_adjust,pairwise)
+    test <- attr(p,"hse_test"); posthoc <- attr(p,"hse_posthoc")
+    n <- sum(stats::complete.cases(data[c(value,group)]))
+    p <- hse_annotation(p,title=paste(value,"by",group),x=group,y=value,
+      method="Kruskal-Wallis",n=n,p=test$p.value,
+      adjustment=if(pairwise) paste("pairwise Wilcoxon:",p_adjust) else NULL,
+      design="independent groups",note="Global p shown; pairwise table in hse_posthoc")
+    attr(p,"hse_test") <- test
+    attr(p,"hse_posthoc") <- posthoc
+    p
+  }
+}
+
+if (exists("hse_plot_gene_wilcox",mode="function") &&
+    !exists(".hse_original_plot_gene_wilcox",inherits=FALSE)) {
+  .hse_original_plot_gene_wilcox <- hse_plot_gene_wilcox
+  hse_plot_gene_wilcox <- function(long_data,gene,group,value="Expression",
+                                   paired=FALSE,id=NULL,scale="log2 CPM") {
+    p <- .hse_original_plot_gene_wilcox(long_data,gene,group,value,paired,id,scale)
+    test <- attr(p,"hse_test")
+    # The upstream wrapper may already have added annotation; replace it
+    # with an explicitly named assay scale and gene identity.
+    prior <- hse_plot_annotation(p)
+    p <- hse_annotation(p,title=paste("Expression:",gene),x=group,y=scale,
+      method=if(paired) "Wilcoxon signed rank" else "Wilcoxon rank sum",
+      n=if(is.null(prior$n)) NA_integer_ else prior$n,
+      p=test$p.value,scale=scale,
+      design=if(paired) "matched gene-expression observations" else
+        "independent gene-expression observations",
+      note="Exploratory; not edgeR differential-expression inference")
+    attr(p,"hse_test") <- test
+    p
+  }
+}
+
+if (exists("hse_plot_panel_wilcox",mode="function") &&
+    !exists(".hse_original_panel_wilcox",inherits=FALSE)) {
+  .hse_original_panel_wilcox <- hse_plot_panel_wilcox
+  hse_plot_panel_wilcox <- function(data,value,group,facet,p_adjust="BH",ncol=3L) {
+    p <- .hse_original_panel_wilcox(data,value,group,facet,p_adjust,ncol)
+    tab <- attr(p,"hse_tests")
+    p <- hse_annotation(p,title="Facet-wise Wilcoxon comparisons",
+      x=group,y=value,method="Independent Wilcoxon within each facet",
+      n=sum(tab$n),adjustment=p_adjust,design=paste("faceted by",facet),
+      note="Each facet title gives its n and adjusted p-value")
+    attr(p,"hse_tests") <- tab
+    p
+  }
+}
+
+if (exists("hse_plot_forest",mode="function") &&
+    !exists(".hse_original_plot_forest",inherits=FALSE)) {
+  .hse_original_plot_forest <- hse_plot_forest
+  hse_plot_forest <- function(data,label,estimate,lower,upper,
+                              reference=0,x_label="Estimated effect") {
+    p <- .hse_original_plot_forest(data,label,estimate,lower,upper,
+                                   reference,x_label)
+    hse_annotation(p,title="Effect estimates and intervals",x=x_label,
+      y="Model term",method="Supplied model estimates",
+      n=nrow(data),note=paste("Reference line:",reference,
+       "| Intervals supplied by caller; inference not recomputed"))
+  }
+}
+
+if (exists("hse_plot_roc",mode="function") &&
+    !exists(".hse_original_plot_roc",inherits=FALSE)) {
+  .hse_original_plot_roc <- hse_plot_roc
+  hse_plot_roc <- function(data,outcome,score,positive) {
+    p <- .hse_original_plot_roc(data,outcome,score,positive)
+    fit <- attr(p,"hse_roc")
+    p <- hse_annotation(p,title="Receiver operating characteristic",
+      x="1 - specificity",y="Sensitivity",method="ROC / AUC",
+      n=sum(stats::complete.cases(data[c(outcome,score)])),
+      design=paste("Positive class:",positive),
+      note=sprintf("AUC = %.3f; apparent performance unless held-out data provided",
+                   as.numeric(pROC::auc(fit))))
+    attr(p,"hse_roc") <- fit
+    p
+  }
+}
+
+if (exists("hse_plot_survival",mode="function") &&
+    !exists(".hse_original_plot_survival",inherits=FALSE)) {
+  .hse_original_plot_survival <- hse_plot_survival
+  hse_plot_survival <- function(data,time,event,group) {
+    p <- .hse_original_plot_survival(data,time,event,group)
+    fit <- attr(p,"hse_fit")
+    p <- hse_annotation(p,title="Kaplan-Meier survival estimate",x=time,
+      y="Survival probability",method="Kaplan-Meier",
+      n=sum(stats::complete.cases(data[c(time,event,group)])),
+      design=paste("Stratified by",group),
+      note="Censor marks displayed; no log-rank p or hazard ratio claimed")
+    attr(p,"hse_fit") <- fit
+    p
+  }
+}
+
+if (exists("hse_plot_mean_ci",mode="function") &&
+    !exists(".hse_original_plot_mean_ci",inherits=FALSE)) {
+  .hse_original_plot_mean_ci <- hse_plot_mean_ci
+  hse_plot_mean_ci <- function(data,time,value,group=NULL,conf_level=.95) {
+    p <- .hse_original_plot_mean_ci(data,time,value,group,conf_level)
+    tab <- attr(p,"hse_summary")
+    p <- hse_annotation(p,title="Group means with pointwise intervals",
+      x=time,y=paste("Mean",value),method="t confidence interval",
+      n=sum(tab$n),design="descriptive time-by-group cells",
+      note=sprintf("%.0f%% pointwise intervals; not a longitudinal model CI",
+                   100*conf_level))
+    attr(p,"hse_summary") <- tab
+    p
+  }
+}
