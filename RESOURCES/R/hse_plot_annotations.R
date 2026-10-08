@@ -33,8 +33,11 @@ hse_annotation <- function(plot, title = NULL, subtitle = NULL,
                      if (!is.null(design)) paste("Design:", design),
                      if (!is.null(source)) paste("Source:", source),
                      if (!is.null(note)) note), collapse = " | ")
-  plot <- plot + ggplot2::labs(title = title, subtitle = annotation_subtitle,
-             x = x, y = y, caption = if (nzchar(caption)) caption else NULL)
+  plot <- plot + ggplot2::labs(title = if (is.null(title)) prior$title else title,
+             subtitle = annotation_subtitle,
+             x = if (is.null(x)) prior$x else x,
+             y = if (is.null(y)) prior$y else y,
+             caption = if (nzchar(caption)) caption else prior$caption)
   attr(plot, "hse_annotation") <- list(title = title, subtitle = annotation_subtitle,
        x = x, y = y, method = method, n = n, p = p,
        adjustment = adjustment, scale = scale,
@@ -166,7 +169,7 @@ if (exists("hse_plot_gene_wilcox",mode="function") &&
     prior <- hse_plot_annotation(p)
     p <- hse_annotation(p,title=paste("Expression:",gene),x=group,y=scale,
       method=if(paired) "Wilcoxon signed rank" else "Wilcoxon rank sum",
-      n=if(is.null(prior$n)) NA_integer_ else prior$n,
+      n=if (!is.null(prior$n)) prior$n else sum(stats::complete.cases(\n        long_data[as.character(long_data$Gene)==gene,c(value,group)])),
       p=test$p.value,scale=scale,
       design=if(paired) "matched gene-expression observations" else
         "independent gene-expression observations",
