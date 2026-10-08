@@ -4,6 +4,12 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ## Files
 
+### LaTeX study templates
+
+- [Week 4 Bash LaTeX template](LaTeX/Week_4_Bash_LaTeX_Template.tex) — editable learning document and five-exercise lab report.
+- [Template instructions](LaTeX/README.md) — compilation steps and source-data boundaries.
+
+
 ### Bash programming
 
 - [Bash literature review](Bash/BASH_LITERATURE_REVIEW.md) — annotated sources on Bash syntax, shell safety, text processing, portability and bioinformatics workflows.
