@@ -12,6 +12,10 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ### R programming
 
+- [Biostatistics plot panels](BIOSTAT_PLOT_PANELS.md) — one-call ggplot facets, Wilcoxon panels, longitudinal and confidence-interval plots, forest, ROC, survival and model diagnostics.
+- [Biostatistics panel R functions](R/hse_biostat_panels.R) — thoroughly commented source code.
+- [Biostatistics plot tests](tests/test_hse_biostat_panels.R) — synthetic examples and optional-dependency checks.
+
 - [One-call statistical graphics](ONE_CALL_PLOTS.md) — ready-made regression, Pearson/Spearman, Wilcoxon, Kruskal-Wallis and gene-expression plots, with annotated p-values.
 - [One-call plotting functions](R/hse_one_call_plots.R) — reusable implementation and test-result attributes.
 - [Statistical plotting smoke tests](tests/test_hse_one_call_plots.R) — synthetic-data validation script.
