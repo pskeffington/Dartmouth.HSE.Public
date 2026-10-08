@@ -42,6 +42,7 @@ These are proposed materials for this repository, not official assignments or cl
 
 - [Notes and group-work walkthroughs](notes/) — study notes, step-by-step explanations, and reproducible examples.
 - [Published pieces](published/) — completed pieces shared for review.
+- [Reusable R statistics and plotting library](library/) — extensively commented functions for summaries, hypothesis tests, charts, TMM-normalized CPM, gene-panel visualizations and smoke tests.
 
 Week 1's [group-work walkthrough](notes/Week_1_Group_Work_Narrative_Walkthrough.Rmd) and Week 2's [lecture notes](notes/Week_2_Learning_Objective_Notes.R) and [group-work walkthrough](notes/Week_2_Group_Work_Narrative_Walkthrough.Rmd) are available as public study commentary. Course source materials and the Week 2 data file remain in Drive.
 
