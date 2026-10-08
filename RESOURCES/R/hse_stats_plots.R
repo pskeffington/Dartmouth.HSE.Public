@@ -125,7 +125,7 @@ hse_print_summary <- function(report) {
   if (!is.list(report) || is.null(report$statistics) ||
       is.null(report$narrative)) stop("Expected hse_summary_report output")
   print(report$statistics, row.names=FALSE)
-  cat("\\nReader summary:\\n",paste(report$narrative,collapse="\\n"),"\\n",sep="")
+  cat("\nReader summary:\n",paste(report$narrative,collapse="\n"),"\n",sep="")
   invisible(report)
 }
 
