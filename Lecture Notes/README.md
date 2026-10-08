@@ -1,5 +1,8 @@
 # Lecture Notes
 
+- [Week 4 — Introduction to Bash](Week_4_Introduction_to_Bash_Narrative_Walkthrough.Rmd): scholarly companion to the supplied 12-page lecture, covering shell commands, file inspection, scripting, pipelines, loops and R integration.
+
+
 Annotated course lecture notes organized by week. These are independent study materials rather than official course handouts.
 
 ## Using the descriptive-statistics library
