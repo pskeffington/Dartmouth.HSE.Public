@@ -33,3 +33,7 @@ Rscript -e 'rmarkdown::render("Group Work/Week_1_Group_Work_Narrative_Walkthroug
 ```
 
 Other walkthroughs can be rendered by changing the file name, after supplying their documented data dependencies. Rendering is not claimed as completed in this documentation.
+
+## Week 4 formal write-up
+
+Use the [student LaTeX lab-report template](../RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex) to document the five Bash metadata exercises, preserving observed outputs and a reproducibility checklist.
