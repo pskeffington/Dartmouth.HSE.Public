@@ -17,6 +17,9 @@ csv_ready <- length(filenames) > 0L
 
 
 ## Question 1
+
+**Learning objective and rationale.** This exercise integrates controlled simulation with the visual description of a continuous biomarker. Before interpreting the boxplots, a reader should verify the sampling rule, numerical bounds, rounding, and units. The sex categories are used to demonstrate grouping; because measurements are simulated, the resulting patterns do not establish sex-related biological differences.
+
 Create a data frame of random data containing the following columns:
 
 - Sex: Sex should have two levels: "Male" and "Female". /varible with two factors
@@ -90,6 +93,9 @@ print(box_plot)
 ```
 
 ## Question 2
+
+**Why replicate a simulated cohort?** Repetition permits the reader to distinguish a generating distribution from its individual realizations. Across twenty simulated data frames, the age summaries provide a first demonstration of sampling variability. The `lapply()` pattern also illustrates how a single analytical operation can be applied consistently without manually maintaining twenty nearly identical code blocks.
+
 Use the code above to generate 20 data frames with the same specifications, then summarize `Age` in each. (Hint: `lapply()`.)
 
 Next we retain 20 simulated cohorts in `data_list`, instead of overwriting one data frame each time. `lapply()` runs the same generator once per index and returns a list; this is an exercise extension of the iteration taught in Lecture 3, chunks 14–15. We set the seed once before the iteration so that successive cohorts use successive random draws. Setting it inside the function would repeat the same cohort.
@@ -132,6 +138,9 @@ print(age_summary)
 ```
 
 ## Question 3
+
+**From repetition to abstraction.** A reusable summary function makes its inputs and expected outputs explicit. That matters for scholarly reproducibility: another analyst should be able to apply the same rule to a second cohort without editing the function body. For a fuller descriptive review, the companion resources provide mean, SD, quartiles, median, IQR, range, missingness, and a generated narrative, while the original exercise code remains intact.
+
 A reusable summary function: Using the code you generated above, generate a function that takes a continuous covariate as input and applies it to the function you used above to summarize the spread of the age variable. Apply it to `Platelet_Count`.
 
 We now separate the summary operation from the particular variable. `summary_cov(cov)` accepts a numeric vector and returns `summary(cov)`. This follows the reusable-function pattern in Lecture 3, chunk 10, with the summary operation from chunk 15. Passing `random_data$Platelet_Count` applies the same logic to a new continuous covariate without rewriting the function.
@@ -156,6 +165,9 @@ print(platelet_summary)
 ```
 
 ## Question 4
+
+**Graphical interpretation.** Histograms represent the distribution of observations within specified bins. Their shape is sensitive to bin width, and repeated plots should use comparable choices when the purpose is between-cohort comparison. A figure should report variable units and the provenance of its simulated data rather than imply that a smooth-looking histogram establishes normality.
+
 Add histograms, saved to separate files: Extend the function so it also draws a histogram of the chosen covariate for each data frame and saves each plot to its own file.
 
 We extend `summary_cov` with a file path and a readable label. The function computes the summary, opens a PNG graphics device, draws a histogram, and returns the summary. `on.exit(dev.off(), add = TRUE)` closes the device even if plotting fails. This function-and-iteration structure follows Lecture 3, chunks 10 and 16; saving with a PNG device is an exercise extension.
@@ -205,6 +217,9 @@ print(platelet_summary)
 ```
 
 ## Question 5
+
+**Source-data boundary.** Unlike the preceding simulation tasks, this exercise depends on supplied CSV files. The conclusions therefore remain conditional until the actual records and field definitions are available and the code is executed. An informative results paragraph should describe row counts after import, eligibility and missingness, observed group sizes, measurement units, and what the figures show; no numerical finding should be invented in their absence.
+
 Suppose your working directory contains a folder called data/In-Class-Exercises/ with several CSV files. Each file has the same columns:
 - Participant_ID: Unique patient identifier
 - Sex: 2 levels - Male and Female
@@ -356,3 +371,10 @@ print(scatter_plot)
 If Question 5 is skipped, add the assignment CSVs to `data/In-Class-Exercises/` and knit again. Questions 1–4 do not require those CSVs.
 
 For review, explain why named lists retain all cohorts, why row binding differs from joining, how a function parameter selects the measurement being summarized, and how mapped aesthetics differ from a fixed color outside `aes()`. Do not claim observed results for the CSV task until the data have been run.
+
+
+## Scholarly reporting and reproducibility
+
+A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
+
+The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
