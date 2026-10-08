@@ -4,6 +4,14 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ## Files
 
+### Bash programming
+
+- [Bash literature review](Bash/BASH_LITERATURE_REVIEW.md) — annotated sources on Bash syntax, shell safety, text processing, portability and bioinformatics workflows.
+- [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) — beginner-to-intermediate command reference and worked metadata exercises.
+- [Reusable Bash functions](Bash/bash_functions.sh) — sourceable helpers for file validation, TSV inspection, SHA-256 and Rscript orchestration.
+
+### R programming
+
 - [R/hse_stats_plots.R](R/hse_stats_plots.R) — descriptive statistics, Wilcoxon tests, correlation, basic plots, CPM and gene-panel preparation.
 - [R/hse_gene_visuals.R](R/hse_gene_visuals.R) — selected-gene heatmaps, PCA, mean–variance plots, and model-derived volcano plots.
 - [R/Week_3_Reusable_Functions.R](R/Week_3_Reusable_Functions.R) — original annotated Week 3 classroom functions.
