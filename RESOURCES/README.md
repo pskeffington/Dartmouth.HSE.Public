@@ -12,6 +12,9 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ### R programming
 
+- [Complete summary statistics + narrative](SUMMARY_STATISTICS.md) — IQR, quartiles, spread, sample sizes, missingness, and automatically generated reader summaries.
+- [Summary statistics tests](tests/test_hse_summary_report.R) — small deterministic example and boundary checks.
+
 - [Automatic figure annotations](PLOT_ANNOTATIONS.md) — method, sample counts, p-values, units, statistical cautions, provenance, figure audits and export manifests.
 - [Annotation functions](R/hse_plot_annotations.R) — source after other plotting modules to annotate downstream one-call plots.
 - [Annotation tests](tests/test_hse_plot_annotations.R) — synthetic regression, Wilcoxon, panels and export audits.
