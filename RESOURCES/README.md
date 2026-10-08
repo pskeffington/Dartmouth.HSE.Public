@@ -12,6 +12,10 @@ This is the entry point for students and collaborators. All examples are **educa
 
 ### R programming
 
+- [Automatic figure annotations](PLOT_ANNOTATIONS.md) — method, sample counts, p-values, units, statistical cautions, provenance, figure audits and export manifests.
+- [Annotation functions](R/hse_plot_annotations.R) — source after other plotting modules to annotate downstream one-call plots.
+- [Annotation tests](tests/test_hse_plot_annotations.R) — synthetic regression, Wilcoxon, panels and export audits.
+
 - [Biostatistics plot panels](BIOSTAT_PLOT_PANELS.md) — one-call ggplot facets, Wilcoxon panels, longitudinal and confidence-interval plots, forest, ROC, survival and model diagnostics.
 - [Biostatistics panel R functions](R/hse_biostat_panels.R) — thoroughly commented source code.
 - [Biostatistics plot tests](tests/test_hse_biostat_panels.R) — synthetic examples and optional-dependency checks.
