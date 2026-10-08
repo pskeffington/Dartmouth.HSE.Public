@@ -69,3 +69,38 @@ Tests exercise group statistics, independent and paired nonparametric tests, mis
 - Wickham, [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/).
 - Wickham, [Advanced R](https://adv-r.hadley.nz/).
 - Wilke, [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/).
+
+
+## Genomics visualization module
+
+Source both files, in this order:
+
+```r
+source("HSE_711/library/hse_stats_plots.R")
+source("HSE_711/library/hse_gene_visuals.R")
+# logcpm <- hse_cpm(counts)  # counts: integer genes x samples
+# meta <- data.frame(Sample=colnames(logcpm), Subtype=...)
+genes <- hse_gene_top_var(logcpm, n = 40)
+p1 <- hse_gene_heatmap(logcpm, genes)           # selected genes only
+p2 <- hse_gene_pca(logcpm, meta, "Subtype")     # top-500 variable genes
+p3 <- hse_gene_mean_variance(logcpm)            # all genes, no long pivot
+# DE model results only (not CPM):
+# p4 <- hse_gene_volcano(de_table, logfc="logFC", fdr="FDR")
+hse_save_plot(p1, "figures/gene_heatmap.pdf", width = 12, height = 8)
+```
+
+| Function | Purpose | Optimization |
+|---|---|---|
+| `hse_gene_validate` | Check matrix names/values | Lightweight sanity check |
+| `hse_gene_meta` | Align sample metadata | One ID match |
+| `hse_gene_top_var` | Top variable genes | Direct row variance, optional matrixStats |
+| `hse_gene_heatmap` | Selected gene heatmap | Subset before reshaping; optional row z-score |
+| `hse_gene_pca` | Sample PCA by metadata group | PCA over chosen top-variable genes |
+| `hse_gene_mean_variance` | Mean versus variance | Row-wise summaries, no pivot |
+| `hse_gene_volcano` | Model-derived differential expression | No fitting; finite display floor for adjusted p-values |
+
+Heatmaps with `center_rows=TRUE` display within-gene *z-scores*, not abundance. Uncentered heatmaps assume the supplied matrix is **log2 CPM**. PCA is unsupervised descriptive analysis; its first two components are not inferential tests. Volcano plots require independently estimated model log-fold changes and adjusted p-values. Gene selection and plot parameters must be documented for any manuscript figure.
+
+Performance guidance: benchmark representative samples, avoid dense conversions of sparse matrices, prefer selected panels for heatmaps, and keep model inference separate from display. `ggplot2` is required for visualization; `matrixStats` is optional for faster gene-wise variance calculations.
+
+Run the additional tests with `Rscript --vanilla HSE_711/library/tests/test_hse_gene_visuals.R`.
