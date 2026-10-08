@@ -1,0 +1,113 @@
+---
+title: "HSE 711 Week 4 — Bash Group Work Narrative Walkthrough"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Group work: reproducible operations on study metadata
+
+This walkthrough follows the supplied five-part exercise for `pseudo_metadata.csv`, described as synthetic metadata for ten participants. The educational objective is to move from basic inspection to selection, documented file creation, column extraction and safe cleanup. The working dataset is not included here; the commands are therefore **instructions, not observed results**.
+
+The exercise refers to both `only_female.txt` (Question 2) and `females_metadata.csv` (Question 3). They are not the same filename. To preserve that distinction while creating a coherent workflow, the example produces `only_female.txt` as requested and explicitly copies it to `females_metadata.csv` before Question 3. This is an **implementation bridge**, not a claimed correction to the original prompt.
+
+## Setup: identify the study file
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+input="pseudo_metadata.csv"
+[[ -f "$input" ]] || { printf 'Missing %s\n' "$input" >&2; exit 1; }
+pwd
+head -n 3 "$input"     # Inspect the true header and delimiter
+```
+
+Before filtering, the actual sex/gender column name, category labels, and CSV structure must be confirmed. The example below assumes a simple CSV whose sex field is named `Sex` and whose cells do not contain quoted commas. If those assumptions are false, inspect the source data and use a CSV-aware parser.
+
+## Question 1: count the file lines
+
+```bash
+wc -l "$input"
+```
+
+`wc -l` counts newline characters and does not by itself distinguish the header from participant records. For a well-formed file containing one header plus ten one-line records, one would expect eleven lines; this is a **conditional expectation**, not an observed count.
+
+## Question 2: retain female participant records
+
+The filter must preserve the original header to document column meanings in the output. The following AWK command discovers the sex field from the header and compares its values without regard to letter case.
+
+```bash
+awk -F ',' '
+  NR == 1 {
+    for (i=1; i<=NF; i++) {
+      h=$i; gsub(/\r/, "", h)
+      if (tolower(h) == "sex") sex_col=i
+    }
+    if (!sex_col) { print "Sex column missing" > "/dev/stderr"; exit 2 }
+    print
+    next
+  }
+  {
+    value=$sex_col
+    gsub(/\r/, "", value)
+    if (tolower(value) == "female") print
+  }
+' "$input" > only_female.txt
+```
+
+Because this output is line-oriented, inspect it using `head` and `wc -l`; verify the header, count, and selected categories before treating it as a validated subset. The `.txt` extension does not change its comma-separated structure.
+
+## Question 3: create a workspace and document the subset
+
+```bash
+cp only_female.txt females_metadata.csv
+mkdir -p new_dir
+cp females_metadata.csv new_dir/
+cat > new_dir/notes.txt <<'NOTES'
+Source: synthetic pseudo_metadata.csv supplied for HSE 711 Week 4.
+Selection: records whose Sex field equals Female, case-insensitive.
+Structure: one header plus selected participant records.
+Limitations: CSV parsing assumes simple comma-separated cells.
+Review: inspect IDs, row counts, and any missing sex categories.
+NOTES
+```
+
+These notes document a transformation rather than claim that any particular number of female participants was observed. In a reproducible workflow, the notes file is part of the evidence trail.
+
+## Question 4: extract the third and fourth columns
+
+```bash
+cd new_dir
+cut -d ',' -f 3,4 females_metadata.csv > females_metadata_sub.csv
+head -n 3 females_metadata_sub.csv
+```
+
+The resulting file retains the header and extracts positional columns **3 and 4**. Their scientific meaning cannot be asserted until the header is inspected. As in Question 2, `cut` assumes that comma characters do not occur within quoted values.
+
+## Question 5: inspect and clean up the exercise folder
+
+```bash
+ls -lah
+cd ..
+# Review target before deleting:
+pwd
+ls -lah new_dir
+# Execute only if this is the intended disposable directory:
+rm -ri new_dir
+```
+
+Using interactive recursive removal provides a chance to confirm each deletion. A script should not casually execute `rm -rf` against dynamically assembled paths, particularly in shared project directories. This operation removes `new_dir`, while `only_female.txt` and `females_metadata.csv` remain in the parent directory.
+
+## Interpretation and academic discussion
+
+The five tasks illustrate a complete miniature processing pipeline: validate a source path, inspect file size, apply an explicit eligibility criterion, preserve metadata through file movement, select columns, and perform deliberate cleanup. The scientific concern is not merely whether commands complete, but whether the selected participants and extracted fields retain the intended meanings. Documenting that lineage makes a small classroom workflow reproducible.
+
+## Practical review questions
+
+1. Why does `wc -l` not necessarily equal the number of participants?
+2. What distinguishes an omitted participant from a participant whose sex value is missing?
+3. What is lost if a CSV subset is written without its header?
+4. Why can `cut -d ','` produce incorrect results on a CSV with quoted commas?
+5. What should an analyst verify before running a recursive removal command?
+
+For a broader treatment, see the [Bash literature review](../RESOURCES/Bash/BASH_LITERATURE_REVIEW.md), [operation sheet](../RESOURCES/Bash/BASH_OPERATION_SHEET.md), and [reusable Bash functions](../RESOURCES/Bash/bash_functions.sh).
