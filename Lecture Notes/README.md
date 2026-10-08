@@ -14,3 +14,7 @@ source("RESOURCES/R/hse_stats_plots.R")
 data(mtcars)
 hse_print_summary(hse_summary_report(mtcars, "mpg", unit="miles per gallon"))
 ```
+
+## Week 4 LaTeX report
+
+The [ready-to-edit Week 4 Bash LaTeX learning template](../RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex) provides a full command reference, code blocks, results placeholders, and scholarly synthesis structured around the supplied lecture.
