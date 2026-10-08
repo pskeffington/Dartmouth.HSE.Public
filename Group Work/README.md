@@ -2,6 +2,10 @@
 
 This collection presents the public HSE 711 exercises as readable academic teaching narratives. Each walkthrough connects the question under study to its R implementation, the meaning of the resulting output, and the limitations of the evidence. These independent teaching notes are not official Dartmouth course instructions.
 
+## Week 4 deployment
+
+- [Runnable Bash lab](Week_4_Bash_Lab/README.md) — staged exercises, source schema, verified counts, and local smoke-test instructions.
+
 ## Week 4 update
 
 [Week 4 — Bash metadata exercise](Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) covers all five provided tasks with annotated command examples, a filename mismatch note, source-data limitations, and safe cleanup instructions.
