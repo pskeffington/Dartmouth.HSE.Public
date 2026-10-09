@@ -5,7 +5,6 @@
 % Ready to build: Example_References.bib is connected below.
 % Run ./compile_manuscript.sh or PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX.
 % This file configures a standard article class explicitly for student papers.
-% It is not a journal-specific template or a completed empirical study.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx} % 12-point Times-family text; PDFLaTeX-compatible.
@@ -17,7 +16,7 @@
 \usepackage{booktabs,array}
 \usepackage{graphicx,float}
 \usepackage{listings}
-% The example bibliography is already connected; no switch or pasted block needed.
+% APA 7 bibliography and example reference file.
 \usepackage[american]{babel}
 \usepackage{csquotes}
 \usepackage[backend=biber,style=apa]{biblatex}
@@ -26,7 +25,7 @@
 \usepackage[hidelinks]{hyperref}
 \urlstyle{same}
 
-% Student papers have a page number, without a default running head.
+% Student-paper header: page number at upper right.
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[R]{\thepage}
@@ -37,7 +36,7 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0pt}
 \setcounter{secnumdepth}{0}
-% APA heading levels 1--3. Do not skip heading levels.
+% APA heading levels 1--3.
 \titleformat{\section}{\normalfont\normalsize\bfseries\filcenter}{}{0pt}{}
 \titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}
 \titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{}{0pt}{}
@@ -52,7 +51,7 @@
   showstringspaces=false,frame=none,aboveskip=0.5\baselineskip,
   belowskip=0.5\baselineskip}
 
-% -------- Edit this block first --------
+% Student and course details.
 \newcommand{\papertitle}{Example APA 7 Manuscript}
 \newcommand{\studentname}{[Student Name]}
 \newcommand{\affiliation}{[Department or Program], Dartmouth College}
@@ -87,14 +86,14 @@ by the instructor. Replace this instruction only after verifying the results.]
 \newpage
 \fi
 
-% The repeated paper title introduces the text; do not add "Introduction".
+% Begin the text under the repeated paper title.
 \section*{\papertitle}
-This example shows how a student can organize a short manuscript around a
-reproducible data-processing exercise. Its citation demonstrations use
-books by \textcite{seuss1957cat}. These literary sources demonstrate citation
-formatting; they do not support claims about the metadata-processing method. Replace the instructional prose and bracketed
-fields with your own account of the work. The example uses synthetic classroom
-metadata; it contains no observed research findings.
+This template organizes a student manuscript around a reproducible
+classroom exercise using synthetic metadata. Replace the bracketed prompts
+with your question, methods, verified results, and interpretation. The
+Dr. Seuss references illustrate narrative citation, \textcite{seuss1957cat},
+and parenthetical citation \parencite{seuss1971lorax}. Use sources relevant
+to your study when preparing your manuscript.
 
 [Introduce the problem, explain why it matters, and summarize relevant prior
 work with citations. End this opening section with the research question or
@@ -204,17 +203,13 @@ and distinguish a descriptive pattern from inferential evidence.]
 [Explain limitations of the design, input quality, missing data, assumptions,
 and generalizability. For this example, synthetic records cannot establish
 population findings, and simple delimiter tools do not implement general CSV
-parsing. Do not frame successful file creation as proof of scientific validity.]
+parsing. Explain how these constraints affect the interpretation.]
 
 \subsection{Implications and Conclusion}
 [Explain the practical or methodological implication and the next justified
 step. Close with a concise answer to the objective; avoid introducing new
 results or making claims beyond the study design.]
 
-A second citation example refers to a different book by the same author
-\parencite{seuss1971lorax}. This sentence demonstrates author--date citation
-syntax, not evidence for this exercise. Replace these examples with sources
-relevant to your research question.
 % References: new page, bold centered heading, alphabetical entries,
 % double spacing and 0.5-inch hanging indents. Cite every retained entry.
 \newpage
@@ -226,9 +221,8 @@ relevant to your research question.
 \section*{Appendix}
 \section*{Reproducible Command Example}
 This example is run from the repository root with the course file in the
-ignored \texttt{data/} directory. The fixture test creates its own synthetic
-input. The lab's temporary directory is disposable; verify that the subset
-outputs remain after the lab finishes.
+ignored \texttt{data/} directory. The fixture test supplies synthetic
+input. Inspect the retained subset files after completing the lab.
 
 \begin{singlespace}
 \begin{lstlisting}
@@ -246,7 +240,7 @@ wc -l week4_practice/only_female.txt
 \end{singlespace}
 
 [Record the operating system, Bash version, source-file checksum, execution
-date, and actual validation outcomes. Remove this appendix if supplementary
-commands are not needed for the assignment.]
+date, and validation outcomes. Include this appendix when the assignment
+requires supplementary commands.]
 
 \end{document}

@@ -6,7 +6,7 @@
 
 [Editable LaTeX manuscript](Example_APA_7_Manuscript.tex) · [Compiled example PDF](Example_APA_7_Manuscript.pdf) · [Example bibliography](Example_References.bib) · [Full source-type guide](Bibliography_Guide.md) · [Practice entry catalogue](Example_Entry_Types.bib)
 
-This template turns the Week 4 metadata exercise into a student manuscript example. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures contain explicit placeholders; no numerical findings are supplied.
+This template turns the Week 4 metadata exercise into a student manuscript example. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures provide layouts for your verified results.
 
 ## Formatting included
 
@@ -24,7 +24,7 @@ This template turns the Week 4 metadata exercise into a student manuscript examp
 | Abstract | Off by default; enable if the instructor requests it |
 | Appendix | Commands after the references; compact code spacing for readability |
 
-The Times-family font is a portable TeX substitute, rather than a bundled proprietary Times New Roman font. Use your institution's required font if it specifies one. The title page has no running head by default. No table of contents is included.
+The template uses a portable Times-family font. Follow your instructor's font requirements. Student-paper headers display the page number; the template omits a running head and table of contents.
 
 ## Personalize and compile
 
@@ -36,7 +36,7 @@ The Times-family font is a portable TeX substitute, rather than a bundled propri
 
 ### Ready-linked APA 7 build
 
-The supplied template is ready to use: it loads `Example_References.bib`, cites two real Dr. Seuss books and prints the cited records under References. No mode switch, package block or manual reference list needs to be added.
+The template loads `Example_References.bib`, demonstrates citations to two Dr. Seuss books and prints the cited entries under References.
 
 Use a TeX installation containing `biblatex`, `biblatex-apa`, `csquotes` and `babel`, plus the **Biber** executable. The [APA citation package](https://ctan.org/pkg/biblatex-apa) uses Biber. Use your TeX distribution's package manager to install missing packages and keep Biber compatible with `biblatex`.
 
@@ -58,7 +58,7 @@ The template already contains these settings:
 \addbibresource{Example_References.bib}
 ```
 
-**Do not paste a second copy of this block into the supplied template.** It is shown to explain the existing connection. This template uses `biblatex`; do not add `natbib` or a manual `thebibliography` list.
+This block is already included in the preamble. Maintain the existing `biblatex` configuration when adding references.
 
 Run all four commands from the directory containing the `.tex` and `.bib` files:
 
@@ -71,7 +71,7 @@ pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
 
 The first pass creates the `.bcf` control file. Biber reads that file and the `.bib` entries, then writes bibliography data to `.bbl`. The final LaTeX passes resolve citations, references and cross-references. Give Biber the document basename **without `.tex`**. Run Biber again after changing the bibliography or which works you cite.
 
-On Overleaf, upload the `.tex` and `.bib` together, set the manuscript as the main document, recompile using pdfLaTeX. Its build system normally runs the bibliography backend selected in the source. Inspect the compilation log if references do not appear.
+On Overleaf, upload the `.tex` and `.bib` together, set the manuscript as the main document and recompile using pdfLaTeX. Its build system normally runs the bibliography backend selected in the source. Inspect the compilation log if references do not appear.
 
 ## Create and connect your own bibliography
 
@@ -109,7 +109,7 @@ For a page-specific citation:
 \parencite[p. 3]{seuss1957cat}
 ```
 
-Use that form only when page 3 actually supports your statement. A bibliography record does not verify the claim being cited.
+Replace the example page number with the location of the cited passage in your edition.
 
 The References section is already wired to print cited entries:
 
@@ -133,9 +133,9 @@ The uncited `seuss1960eggs` book in the example `.bib` is excluded until you cit
 | DOI | Identifier only, such as `10.1093/nar/gkaf018`; the APA style formats its link |
 | URL | Full source URL; check that it identifies the cited work |
 
-Verify exported metadata against the original work. Different entry types require different fields. Preserve commas between fields and matching braces. The package formats supplied metadata; it cannot correct a wrong author, year, DOI or title.
+Verify exported metadata against the original work. Different entry types require different fields. Preserve commas between fields and matching braces. Check author, date, title and identifiers against the source before compiling.
 
-## Troubleshooting and verified scope
+## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
@@ -145,9 +145,9 @@ Verify exported metadata against the original work. Different entry types requir
 | Bibliography file not found | Match `\addbibresource` to the exact filename and location, including capitalization. |
 | Citation key undefined | Check that the cited key exists; run the full four-command sequence. |
 | New `.bib` entries do not affect the PDF | Check the resource filename, cite the new key and run the full build again. |
-| Old manual-mode auxiliary files cause errors | Use a clean build, then run the full four-command sequence. |
+| Auxiliary-file errors after changing bibliography settings | Use a clean build, then run the full four-command sequence. |
 
-The ready-linked manuscript has been built successfully with PDFLaTeX, Biber 2.21, `biblatex` 3.21 and `biblatex-apa` 9.20. The final build resolves the citation keys and prints the references from `Example_References.bib`; its PDF has been visually checked. The header's compilation note applies to this connected configuration. See the package's [official documentation](https://ctan.org/pkg/biblatex-apa) for automatic APA 7 reference formatting.
+Compatible build: PDFLaTeX, Biber 2.21, `biblatex` 3.21 and `biblatex-apa` 9.20. See the [package documentation](https://ctan.org/pkg/biblatex-apa) for APA 7 reference formatting.
 
 For the complete fictional practice catalogue, run:
 
