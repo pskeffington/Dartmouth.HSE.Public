@@ -7,9 +7,11 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[2]
+MARKDOWN_EXTENSIONS = {'.md', '.Rmd'}
 
 
-def prose(path):
+def prose(path: Path) -> str:
+    """Return text outside fenced code blocks, checking for unclosed fences."""
     output = []
     fence = None
     for line in path.read_text().splitlines():
@@ -26,7 +28,8 @@ def prose(path):
     return '\n'.join(output)
 
 
-def fragments(path):
+def fragments(path: Path) -> set[str]:
+    """Collect heading anchors, including suffixes for duplicate headings."""
     ids = set()
     counts = collections.Counter()
     for line in prose(path).splitlines():
@@ -42,7 +45,8 @@ def fragments(path):
     return ids
 
 
-def main():
+def main() -> int:
+    """Check local links without making network requests or modifying files."""
     errors = []
     checked = 0
     externals = set()
@@ -63,11 +67,29 @@ def main():
                 destination = destination / 'README.md'
             if not destination.is_file():
                 errors.append(f'{source.relative_to(ROOT)}: missing target: {target}')
-            elif url.fragment and destination.suffix in ('.md', '.Rmd'):
+            elif url.fragment and destination.suffix in MARKDOWN_EXTENSIONS:
                 if unquote(url.fragment) not in fragments(destination):
                     errors.append(f'{source.relative_to(ROOT)}: missing fragment: {target}')
         if source.suffix == '.Rmd':
-            match = re.search(r'^\s+css:\s*(.+)$', source.read_text().split('---', 2)[1], re.M)
+            sections = source.read_text(encoding='utf-8').split('---', 2)
+            if len(sections) != 3 or sections[0].strip():
+                errors.append(f'{source.relative_to(ROOT)}: missing YAML front matter')
+                continue
+            match = re.search(r'^\s+css:\s*(.+)
+            if match and not (source.parent / match[1].strip()).is_file():
+                errors.append(f'{source.relative_to(ROOT)}: missing HTML stylesheet')
+    print(f'Checked {checked} local links across {len(documents)} documents.')
+    print(f'Found {len(externals)} distinct external Markdown destinations; network access is not checked here.')
+    if errors:
+        print('\n'.join(errors))
+        return 1
+    print('PASS: local paths, directory landing pages, fragments and HTML stylesheet paths.')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+, sections[1], re.M)
             if match and not (source.parent / match[1].strip()).is_file():
                 errors.append(f'{source.relative_to(ROOT)}: missing HTML stylesheet')
     print(f'Checked {checked} local links across {len(documents)} documents.')
