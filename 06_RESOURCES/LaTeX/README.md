@@ -6,7 +6,7 @@
 
 [Editable LaTeX manuscript](Example_APA_7_Manuscript.tex) · [Compiled example PDF](Example_APA_7_Manuscript.pdf) · [Example bibliography](Example_References.bib) · [Full source-type guide](Bibliography_Guide.md) · [Practice entry catalogue](Example_Entry_Types.bib)
 
-This template turns the Week 4 metadata exercise into a student manuscript example. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures provide layouts for your verified results.
+This independently authored template demonstrates general APA-style student manuscript preparation. It does not contain a Geisel assignment, submission, or course-data workflow. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures provide layouts for your verified results.
 
 ## Formatting included
 
