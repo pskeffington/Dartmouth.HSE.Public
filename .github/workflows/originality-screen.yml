@@ -48,6 +48,18 @@ jobs:
                   out.write(f"- **{item['level'].upper()}** `{item['path']}`: {item['reason']}\n")
           PY
           exit "$result"
+      - name: Verify public reading editions are current
+        shell: bash
+        run: |
+          python3 06_RESOURCES/Presentation/build_reading_editions.py --check
+      - name: Verify internal documentation navigation
+        shell: bash
+        run: |
+          python3 06_RESOURCES/Presentation/check_navigation.py
+      - name: Compile Python validation and publication scripts
+        shell: bash
+        run: |
+          python3 -m py_compile scripts/check_public_originality.py 06_RESOURCES/Presentation/*.py
       - name: Save screening report
         if: always()
         uses: actions/upload-artifact@v4
