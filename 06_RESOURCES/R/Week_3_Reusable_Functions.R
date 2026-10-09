@@ -1,18 +1,17 @@
-# HSE 711 | Week 3 | Reusable summary and graph functions
+# Independently authored general-purpose R summary and graph functions
 # Load once: source("06_RESOURCES/R/Week_3_Reusable_Functions.R")
 # Requires ggplot2. Loading this file defines functions; it reads no data.
-# Keep data_df, random_data, and data_list as in the lecture/exercises.
-# Pass column names as strings: plt_hist(data_df, "Age").
-# .data[[variable]] selects the column named by a string inside aes().
-# This is an exercise extension of Lecture 3, chunk 10's !!sym(variable).
+# Use only datasets you have permission to analyze; no course files are distributed.
+# Pass column names as strings: plt_hist(my_data, "measurement").
+# .data[[variable]] selects a named column inside ggplot2 mappings.
 
-# Lecture 3, chunks 10 and 15: functions and numerical summaries.
+# Generic numerical summary for a numeric vector.
 summary_cov <- function(cov) {
   if (!is.numeric(cov)) stop("cov must be a numeric vector.")
   summary(cov)
 }
 
-# Lecture 3, chunks 4 and 16: histograms.
+# Generic histogram builder with user-defined bins.
 plt_hist <- function(data, variable, bins = 10, fill_color = "darkgreen",
                      label = variable, title = paste("Distribution of", label)) {
   ggplot2::ggplot(data, ggplot2::aes(x = .data[[variable]])) +
@@ -22,7 +21,7 @@ plt_hist <- function(data, variable, bins = 10, fill_color = "darkgreen",
     ggplot2::theme_minimal()
 }
 
-# Lecture 3, chunk 17: box plots; jitter is the Question 5 extension.
+# Generic grouped box plot with optional jittered observations.
 plt_box <- function(data, group, variable, fill_colors = NULL,
                     jitter = TRUE, label = variable,
                     title = paste(label, "by", group)) {
@@ -45,8 +44,7 @@ plt_box <- function(data, group, variable, fill_colors = NULL,
   box_plot
 }
 
-# Lecture 3, chunks 8–9: scatter plots and optional linear fit.
-# Question 5 extension: optional categorical color and shape mappings.
+# Generic scatter plot with optional fitted trend and grouping aesthetics.
 plt_scatter <- function(data, x_var, y_var, color_var = NULL,
                         shape_var = NULL, color_values = NULL,
                         shape_values = NULL, fit = FALSE,
