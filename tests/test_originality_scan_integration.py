@@ -63,6 +63,20 @@ class ScanIntegrationTests(unittest.TestCase):
         self.tracked("tests/test_unreviewed.py", "All rights reserved")
         self.assertEqual(screen.scan(self.root)["status"], "BLOCK")
 
+    def test_tracked_csv_needs_provenance_review(self) -> None:
+        self.tracked("06_RESOURCES/example.csv", "id,value\\n1,4\\n")
+        report = screen.scan(self.root)
+        self.assertEqual(report["status"], "REVIEW")
+        self.assertTrue(any("redistribution review" in item["reason"]
+                            for item in report["findings"]))
+
+    def test_data_binary_report_is_not_duplicated(self) -> None:
+        self.tracked("06_RESOURCES/example.rds", "placeholder")
+        report = screen.scan(self.root)
+        matches = [item for item in report["findings"]
+                   if item["path"] == "06_RESOURCES/example.rds"]
+        self.assertEqual(len(matches), 1)
+
     def test_non_course_mapping_not_auto_restricted(self) -> None:
         self.tracked("06_RESOURCES/methods.md", "Lecture 3 chunks 10-15")
         self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
