@@ -83,18 +83,18 @@ while IFS=$'\t' read -r sample subtype; do
 done < simple_two_column.tsv
 ```
 
-## 5. Research operations: genomics metadata
+## 5. Independent data-processing examples
 
-For a **simple** comma-delimited table with no quoted commas, this demonstrates the earlier course exercise:
+For a **synthetic, simple** comma-delimited table without quoted commas, the following illustrates filtering by a categorical field. It is not an assigned exercise or a solution to one:
 
 ```bash
 awk -F ',' '
   NR == 1 { print; next }
-  tolower($2) == "female" { print }
-' pseudo_metadata.csv > only_female.csv
+  tolower($2) == "group_a" { print }
+' example_people.csv > selected_group.csv
 ```
 
-**Verify the column number first.** The above assumes participant sex is exactly column 2 and no values contain quoted commas. If either assumption is false, use R's `read.csv()` or a CSV-aware tool instead. To exclude a malformed row, audit the file rather than silently guessing its meaning.
+**Verify the column number first.** The above assumes the example category is in column 2 and no values contain quoted commas. If either assumption is false, use R's `read.csv()` or a CSV-aware tool instead. To exclude a malformed row, audit the file rather than silently guessing its meaning.
 
 ```bash
 # Efficient exploratory summary for a simple TSV with gene in column 1.
