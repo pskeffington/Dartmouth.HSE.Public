@@ -60,7 +60,7 @@ hse_run_r() {
 }
 
 # To try these operations:
-# source RESOURCES/Bash/bash_functions.sh
+# source 06_06_RESOURCES/Bash/bash_functions.sh
 # hse_require_command awk
 # hse_tsv_columns simple_metadata.tsv
 # hse_tsv_records simple_metadata.tsv
