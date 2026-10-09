@@ -27,6 +27,7 @@ jobs:
           persist-credentials: false
       - name: Run public originality screening
         id: screen
+        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -72,3 +73,13 @@ jobs:
           path: originality-report.json
           if-no-files-found: warn
           retention-days: 30
+      - name: Enforce originality release decision
+        if: always()
+        shell: bash
+        env:
+          SCREEN_OUTCOME: ${{ steps.screen.outcome }}
+        run: |
+          if [ "$SCREEN_OUTCOME" != "success" ]; then
+            echo "Originality screening has unresolved findings or failed to execute."
+            exit 1
+          fi
