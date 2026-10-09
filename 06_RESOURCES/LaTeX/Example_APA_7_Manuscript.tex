@@ -226,16 +226,11 @@ input. Inspect the retained subset files after completing the lab.
 
 \begin{singlespace}
 \begin{lstlisting}
-# Validate the lab using its self-contained fixture.
-bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
-
-# Run after placing the course CSV in data/.
-bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
-  data/example_table.csv ./practice_area
-
-# Inspect retained output; line counts include a header.
-head -n 5 practice_area/selected_records.txt
-wc -l practice_area/selected_records.txt
+# Independently prepared example commands (adapt locally).
+# The CSV is a user-supplied, permitted input outside this repository.
+head -n 5 data/example_table.csv
+wc -l data/example_table.csv
+# Document any filtering or validation separately in your private workspace.
 \end{lstlisting}
 \end{singlespace}
 
