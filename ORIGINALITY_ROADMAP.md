@@ -16,10 +16,10 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 32 total regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 46 total regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 87 paths have per-file intake records; rights provenance and human decisions pending |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 90 paths have per-file intake records; rights provenance and human decisions pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | 257 commits / 729 trees / 497 blobs enumerated; historical exposure and remediation decision remain open |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
@@ -121,6 +121,29 @@ The public repository may explain general methods using independently written co
 
 **Next:** inspect current Actions artifacts, review the resulting resource-level flags against legitimate examples, then finish binary provenance and private institutional-source comparison. Do not use broad suppressions to turn CI green.
 
+## Pass 13 — actionable review queue from executed findings (2026-10-09)
+
+- Inspected the existing local audit summary in [ORIGINALITY_STATUS.md](ORIGINALITY_STATUS.md): 32 tests previously reported passing, seven reading editions current, and the baseline strict scanner recorded 12 REVIEW findings with zero BLOCK indicators. The bounded current-tree comparison found no 20-token overlap against the user's local Week 1–3 corpus, but 30 historical blobs had overlaps. Historical rights review is **not closed**.
+- Confirmed the documented baseline GitHub Actions run `37985520307` has a completed **failure** conclusion via the GitHub connector. This verifies the historical run, not the newest push-triggered run.
+- Re-inspected a focused sample of the current policy/notes files. The flags include original cautionary wording and references to authorized instructor files, which require adjudication rather than removal of warnings just to obtain a green badge.
+- Added `scripts/build_originality_triage.py` to transform the scanner's machine-readable findings into a file-specific human-review queue. Every entry has an explicit **HOLD** disposition and fields for reviewer, original-authorship/permission evidence, current-version verification, and required action. No restricted source excerpt is reproduced.
+- Added synthetic tests in `tests/test_originality_triage.py` for pending reviews, block counts, zero-indicator caveats, and invalid inputs; CI discovers these with the existing `test_originality*.py` pattern.
+- GitHub Actions now generates `originality-triage.md`, uploads it with the screening and provenance artifacts, and treats failure to generate the queue as another required gate failure.
+- No actual latest Actions result or private institutional rights attestation was available in this pass. The baseline 12 findings remain unresolved until reviewed; neither zero text overlap nor matching hashes establishes a license.
+
+**Next action:** download and read the current Actions artifacts; review all flagged paths against original source materials and contributor/rights evidence, recording decisions at exact file versions. Complete the historical-remediation authorization decision before considering O11 clearance. Do not force-push automatically.
+
+## Pass 14 — disposition of the 12 baseline findings (2026-10-09)
+
+- Inspected the 10 text files flagged for their protective course-use notices. They instructed readers not to reproduce restricted source materials or to obtain course inputs privately. These are not affirmative statements that instructor content was republished.
+- Replaced broad source-reference and no-reproduction regexes with narrower **affirmative reuse** patterns; added unit and Git-fixture regression checks distinguishing a caution from a declaration of included/copied source code.
+- Created [file-specific findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md) covering all 12 baseline paths. **No original-author rights approval was inferred** from an indicator's disappearance.
+- The other two findings concern compiled LaTeX PDFs. They remain **HOLD** until the binary/source hashes, build lineages, embedded assets, source rights, and reviewer decisions are verified. No blanket binary exception was introduced.
+- The prior 30 historical blob overlaps remain unresolved. No history rewrite or deletion was performed.
+- New CI and scanner execution after these changes remain unverified; the original 12-finding report is a dated baseline, not an updated scan result.
+
+**Next:** execute the new scanner and test suite, confirm whether the ten protective-text indicators disappear without hiding affirmative reuse, and finish the two PDF provenance records plus the historical rights decision.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
@@ -128,6 +151,7 @@ Run in the local checkout after syncing main:
 ```bash
 python3 scripts/check_public_originality.py --json --fail-on-review
 python3 -m unittest discover -s tests -p 'test_originality*.py' -v
+python3 scripts/build_originality_triage.py originality-report.json --output originality-triage.md
 python3 -m unittest discover -s tests -p 'test_reading_source_manifest.py' -v
 python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
@@ -177,3 +201,5 @@ Latest integration: preserved public resource/TeX heuristic screening from main 
 ## Local audit — prevent reference-source uploads (2026-10-09)
 
 Every file in the user-designated private source folders is protected from public upload. Added a fail-closed local pre-push guard, a safe installer, and repository agent instructions requiring guarded publication. The hook inspects proposed committed trees and intermediate new commits, including renamed byte-identical sources and PDF text. Corpus configuration and indexes remain outside tracked Git files. Eight real-push synthetic scenarios pass, bringing the suite to 40 tests. Refresh the installed executable copies after changing guard code. Other clones and API/UI routes are not protected by a local hook; the repository instructions prohibit bypass routes. Historic exposure and rights clearance remain separate open gates.
+
+Upload-guard integration verification: 46 tests pass; strict screening has two PDF provenance reviews and zero BLOCK findings. The local upload guard remains independent of scanner triage and does not grant rights clearance.
