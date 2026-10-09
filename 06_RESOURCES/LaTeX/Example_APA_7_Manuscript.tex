@@ -54,7 +54,7 @@
 % Student and course details.
 \newcommand{\papertitle}{Example APA 7 Manuscript}
 \newcommand{\studentname}{[Student Name]}
-\newcommand{\affiliation}{[Department or Program], Dartmouth College}
+\newcommand{\affiliation}{[Department or Program], [Institution]}
 \newcommand{\coursename}{HSE 711: Foundations in Data Science}
 \newcommand{\instructorname}{[Instructor Name]}
 \newcommand{\duedate}{[Month Day, Year]}
@@ -97,7 +97,7 @@ to your study when preparing your manuscript.
 
 [Introduce the problem, explain why it matters, and summarize relevant prior
 work with citations. End this opening section with the research question or
-objective. For the Week 4 example, the objective is to inspect a metadata file,
+objective. For this independent example, the objective is to inspect a permitted sample table,
 select records using a documented rule, and verify the resulting files.]
 
 \section{Method}
@@ -231,11 +231,11 @@ bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
 
 # Run after placing the course CSV in data/.
 bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
-  data/pseudo_metadata.csv ./week4_practice
+  data/example_table.csv ./practice_area
 
 # Inspect retained output; line counts include a header.
-head -n 5 week4_practice/only_female.txt
-wc -l week4_practice/only_female.txt
+head -n 5 practice_area/selected_records.txt
+wc -l practice_area/selected_records.txt
 \end{lstlisting}
 \end{singlespace}
 
