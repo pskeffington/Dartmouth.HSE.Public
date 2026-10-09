@@ -17,7 +17,7 @@ The public repository may explain general methods using independently written co
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Full independent diagnostic checks; tracked dataset and missing-input guards added; CI results unverified |
-| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
+| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Public resource and TeX files now receive course-content heuristic review; manual audit and media approvals pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Exact seven-file source manifest enforced; omission/substitution regression tests committed; execution unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
@@ -110,6 +110,16 @@ The public repository may explain general methods using independently written co
 - No CI execution outcome or institutional source-comparison evidence was available through the connector. These commits update controls; they do **not** close O7 or certify originality.
 
 **Next:** inspect the actual push-triggered Actions artifact and run logs; adjudicate media/data source provenance; conduct authorized source similarity and historic exposure review. Do not rewrite repository history without a documented authorization decision.
+
+## Pass 12 — cross-directory instructional-source screening (2026-10-09)
+
+- Reviewed the public scanner and identified a detection gap: lecture-chunk, verbatim-prompt, and assignment-item heuristics applied only to `02_Lecture_Notes/`, `03_Group_Work/`, and `05_Assignments/`. Course-derived passages could therefore evade this specific check if moved to the public `06_RESOURCES/` examples.
+- Expanded course-content heuristic screening to `06_RESOURCES/` and to `.tex` files. This **flags** suspected reuse for manual review; it does not automatically assert infringement. Generic resources without indicators remain eligible for `SCREEN_CLEAR` in this heuristic category.
+- Updated the Git-fixture integration tests to expect a resource lecture mapping to trigger `REVIEW`, to flag copied-prompt indicators in LaTeX, and to retain a negative test for generic independent resources.
+- Clarified the scanner report's first-megabyte inspection limitation. Oversized text already generates a review finding and therefore cannot silently clear under the strict gate.
+- Commits were made through the connected GitHub repository; actual CI execution and comparison with authorized Geisel instructional files remain unverified. Historical Git exposures remain unresolved.
+
+**Next:** inspect current Actions artifacts, review the resulting resource-level flags against legitimate examples, then finish binary provenance and private institutional-source comparison. Do not use broad suppressions to turn CI green.
 
 ## Required acceptance commands
 
