@@ -1,6 +1,6 @@
 # Originality and public-release roadmap
 
-**Status:** Source-boundary revisions committed; clearance pending source comparison, workflow execution, and history review.  
+**Status:** Runtime checks executed; per-file intake established; clearance pending provenance evidence, source comparison, media review, and history adjudication. See [total repository status](ORIGINALITY_STATUS.md).
 **Updated:** 2026-10-09  
 **Scope:** All tracked files in Dartmouth.HSE.Public, generated reading editions, research tools, and Git history.
 
@@ -16,11 +16,11 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Full independent diagnostic checks; tracked dataset and missing-input guards added; CI results unverified |
-| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Public resource and TeX files now receive course-content heuristic review; manual audit and media approvals pending |
-| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Exact seven-file source manifest enforced; omission/substitution regression tests committed; execution unverified |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
-| O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 32 total regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
+| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
+| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 83 paths have per-file intake records; rights provenance and human decisions pending |
+| O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | 257 commits / 729 trees / 497 blobs enumerated; historical exposure and remediation decision remain open |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
 
@@ -149,3 +149,27 @@ If generated editions are stale, rebuild them and inspect diffs before committin
 - Respect the current Geisel academic-integrity, AI-use, sharing, and collaboration policy.
 
 **Decision rule:** Do not mark the repo copyright-cleared until O6–O11 are satisfied and human review confirms provenance and permissions.
+
+## Local audit — executed validation and total repository status (2026-10-09)
+
+This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91edf`; earlier unverified-runtime statements above are historical snapshots.
+
+- Executed 20 originality/provenance regression tests, reading-edition freshness, navigation, and Python compilation successfully. Strict screening still returns REVIEW: 12 findings, zero BLOCK findings. No findings were suppressed.
+- Verified baseline Actions run 37985520307 and job logs: SCREEN failed, diagnostic checks passed, and the final release gate stayed closed.
+- Rebuilt the stale manuscript PDF from current TeX/BibLaTeX sources. Removed course-specific schema and lab commands; extracted text and visually reviewed all six pages.
+- Fixed the Bash quick sheet's output/read paths and executed its independent practice block. Removed a remaining course-specific field list from the R quick sheet.
+- Added [per-file intake records](PROVENANCE_RECORDS.json), changed-content detection, and [total repo status](ORIGINALITY_STATUS.md) with a finite closure queue. Snapshot matches establish content identity, never rights.
+- Enumerated local reachable history and confirmed remote heads and no releases. Historical rights adjudication remains open; no history rewrite occurred.
+- The user reports an existing review record and will provide its location. Incorporate it only after inspecting scope, reviewer, authorizations, and artifact versions.
+
+**Next:** reconcile the existing record against every public path, finish resource/media and authorized course-source comparisons, adjudicate history, and close O11 only with actual evidence. Merge each validated maintenance batch into main while preserving the closed clearance gate.
+
+## Local audit — source comparison scanner (2026-10-09)
+
+The user supplied Week 1–3 local source folders, which were read solely for comparison. No originals, matched excerpts, source paths, source hashes, or private reports were committed. Added a local-only byte/text comparison scanner and six synthetic regression scenarios; all 26 tests pass.
+
+The current public tree has zero identical-byte or shared-20-token findings against the 108-file corpus. Historical comparison found 30 overlapping text blobs among 508 reachable blobs. Historical remediation is now supported by direct source comparison but remains undecided. O10 has bounded automated comparison evidence; required human comparison/rights sign-off remains separate. O9 and O11 stay open. See [total status](ORIGINALITY_STATUS.md) for scope, exclusions, and the proposed remediation decision.
+
+Integration follow-up: preserved the concurrent exact reading-source manifest gate and its four tests from public main `36ccdc4`. All 30 tests pass after integration; current provenance intake covers 83 tracked paths.
+
+Latest integration: preserved public resource/TeX heuristic screening from main `8ac9b0f`; all 32 tests pass.

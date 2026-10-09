@@ -38,3 +38,13 @@ Object inventory paths and logs should remain private until reviewed. `git rev-l
 ## Release decision
 
 **O9 remains OPEN.** Current-tree changes do not resolve the two confirmed historic source exposures. Authoritative comparison, a complete reachable-object inventory, and a documented remediation decision are required before closing O9.
+
+## Local enumeration follow-up — 2026-10-09
+
+At baseline public main `4f91edfea8b76d9ec7632eea948ba609c2630de0`, after fetching origin, `git rev-list --objects --all` and `git cat-file --batch-check` enumerated 257 commits, 729 trees, and 497 blobs across local branches and remote-tracking refs. No tags were present. GitHub API confirmed four remote heads and no releases. The counts cover objects reachable from these local refs; they do not establish absence of other PR refs, caches, attachments, forks, or external copies. No exhaustive similarity or rights adjudication is claimed. O9 remains open.
+
+## Restricted-source comparison — 2026-10-09
+
+A local-only comparison against 108 authorized Week 1–3 source files found no identical source files or shared 20-token windows in the current public tree. Comparing 508 locally reachable historical blobs found 30 text-overlap blobs in earlier group-work guides and Week 3 lecture references. No whole-file byte matches were found. This confirms historical source-text overlap rather than a conclusion of infringement; details and originals remain outside Git.
+
+A current-tree merge cannot close O9. Proposed next action: preserve a private recovery snapshot, prepare cleaned replacements for every affected published branch, obtain explicit history-rewrite authorization, update affected refs with verified leases, and request GitHub review of retained PR refs/caches. Confirm the affected ref/object set immediately before any rewrite. Do not force-push automatically. External copies and platform retention require separate handling.
