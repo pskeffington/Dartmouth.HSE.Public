@@ -54,6 +54,15 @@ class ScanIntegrationTests(unittest.TestCase):
         self.tracked("illustration.png", "PNG placeholder")
         self.assertEqual(screen.scan(self.root)["status"], "REVIEW")
 
+    def test_test_fixture_literals_do_not_block_ci(self) -> None:
+        self.tracked("tests/test_originality_screen.py",
+                     'self.assertIn("All rights reserved", example)')
+        self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
+
+    def test_unlisted_test_file_still_scanned(self) -> None:
+        self.tracked("tests/test_unreviewed.py", "All rights reserved")
+        self.assertEqual(screen.scan(self.root)["status"], "BLOCK")
+
     def test_non_course_mapping_not_auto_restricted(self) -> None:
         self.tracked("06_RESOURCES/methods.md", "Lecture 3 chunks 10-15")
         self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
