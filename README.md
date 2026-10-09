@@ -18,6 +18,10 @@ Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusa
 | Study Bash, scripting, and data processing | [Bash Resources](06_RESOURCES/#bash-programming) |
 | Prepare an APA 7 student manuscript | [LaTeX Template](06_RESOURCES/LaTeX/) |
 
+## How I learned Bash
+
+My introduction to Bash came through playing [Terminus](https://terminus-global.vercel.app/), a command-line adventure game. Exploring its world by typing commands made the terminal approachable and helped me learn through experimentation. That early experience grew into using Bash for file navigation, scripting, and reproducible data workflows.
+
 ## Course materials
 
 Each group walkthrough opens with session checkpoints. Use them to pause, check output and explain the method to a partner. For figures, keep the [plot-reading guide](06_RESOURCES/READING_PLOTS.md) beside the code.
