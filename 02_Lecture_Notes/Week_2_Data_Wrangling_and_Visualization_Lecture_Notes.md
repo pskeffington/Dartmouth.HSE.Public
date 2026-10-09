@@ -2,7 +2,13 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
+> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
+
+## Purpose and learning objectives
+
+These independent notes explain simulation, tabular transformation, missing-data checks, and visualization principles. They are not keyed to the instructor's numbered code chunks or assignment items. Consult the authorized Geisel lecture, assessment instructions, and locally obtained data for course-specific application.
+
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## On this page
 
@@ -13,20 +19,8 @@
 - [4. Build a plot by mapping data to axes](#4-build-a-plot-by-mapping-data-to-axes)
 - [5. Inspect paired measurements with scatter plots](#5-inspect-paired-measurements-with-scatter-plots)
 - [6. Summarize, audit missingness, and check visualization](#6-summarize-audit-missingness-and-check-visualization)
-- [7. Explain the method used for each assignment task](#7-explain-the-method-used-for-each-assignment-task)
+- [7. Explain each method in your own words](#7-explain-each-method-in-your-own-words)
 - [8. Final self-check: what Week 2 mastery requires](#8-final-self-check-what-week-2-mastery-requires)
-
-## Purpose and learning objectives
-
-The Week 2 lecture introduces simulation, data-frame construction, categorical variables, tidyverse operations, long and wide representations, descriptive statistics, and plots. These notes connect those **lecture methods** to the skills needed for the data-wrangling assignment without publishing the assignment or its solutions. The original [chunk-by-chunk Week 2 notes](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) remain the detailed lecture reference.
-
-| Assignment skill | Lecture topics | Evidence you can produce |
-| --- | --- | --- |
-| Construct reproducible simulated records | Chunks 2–10: `rnorm()`, `rbinom()`, `set.seed()`, `data.frame()` | Same code and seed produce the same example values |
-| Set categories and conditional labels | Chunks 6, 13–15: factors and `case_when()` | Each derived label follows its stated rule |
-| Reshape wide data to long | Chunks 18–19: `pivot_longer()`, `pivot_wider()` | Row counts and identifiers behave as expected |
-| Make grouped and layered graphs | Chunks 20–34: histograms, scatter, box, jitter | Axes, grouping, labels, and interpretation agree |
-| Check conclusions and export | Chunks 27–30, 40–44: Anscombe, plots, summaries | Explain what graphs show and what they cannot establish |
 
 ## 1. Make random data reproducible
 
@@ -154,7 +148,7 @@ aggregate(score ~ group, data = practice_df, FUN = mean)
 
 **Mastery checkpoint:** Describe the denominator for a missingness rate, then state one limitation of the displayed plot.
 
-## 7. Explain the method used for each assignment task
+## 7. Explain each method in your own words
 
 For every analysis, identify its input, operation, output, validation, and interpretation. Do not merely state that the command ran. The assigned thresholds and required fields belong in your own submission: rehearse the **logic** with these independent practice variables first.
 
