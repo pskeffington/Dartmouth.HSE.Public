@@ -63,6 +63,25 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 | [Assignments](05_Assignments/) | Assignment-related teaching materials when appropriate to share |
 | [RESOURCES](06_RESOURCES/) | R functions, statistical plots, Bash utilities, LaTeX templates and literature |
 
+## Originality and public-release screening
+
+This repository is an **independent student-authored learning resource**, not an official Dartmouth publication. The intent is to publish original explanations, original example code, and appropriately credited references—not to redistribute restricted instructional materials.
+
+A reproducible, standard-library-only [originality screening tool](scripts/check_public_originality.py) checks Git-tracked files for potentially restricted document formats, course-material filename patterns, publication-restriction language, course-platform exports, and binary/media assets requiring manual rights review.
+
+```bash
+python3 scripts/check_public_originality.py
+python3 scripts/check_public_originality.py --json
+```
+
+| Result | Interpretation | Action |
+| --- | --- | --- |
+| `SCREEN_CLEAR` | No configured indicators were detected | Still verify authorship, licensing, and source attribution |
+| `REVIEW` | File(s) need a provenance/permissions check | Inspect each flagged file before public release |
+| `BLOCK` | Potentially restricted material detected | Remove, replace, or document redistribution authorization |
+
+**This validator is a screening gate, not proof of originality or legal clearance.** It does not compare text with Dartmouth source materials, inspect historical Git commits or untracked files, or verify third-party permissions. Flagged content must be reviewed by a person. See the [originality and rights policy](ORIGINALITY_POLICY.md) for the publication standard and manual review requirements.
+
 ## Private execution boundary
 
 Continued analysis, lab execution scripts, local datasets and generated outputs are maintained exclusively in the private repository.
