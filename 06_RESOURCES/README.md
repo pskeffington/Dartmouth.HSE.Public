@@ -61,9 +61,16 @@ Start with the [operation reference](Bash/BASH_OPERATION_SHEET.md), then the [an
 
 The [APA 7 student manuscript template](LaTeX/) contains a student title page, manuscript sections, author–date citations, references, table/figure placeholders and a reproducibility appendix. TeX compilation requires a separate LaTeX installation.
 
-## Navigation checks
+## Publishing and navigation checks
 
-Run the [navigation checker](Presentation/check_navigation.py) after changing paths or headings. The [link audit](Presentation/LINK_AUDIT.md) records the external destinations that could and could not be retrieved.
+The [document publishing tools](Presentation/README.md) produce browser-friendly reading editions from editable coursework files. After changing headings, links, or source content, verify the generated editions and local navigation from the repository root:
+
+```bash
+python3 06_RESOURCES/Presentation/build_reading_editions.py --check
+python3 06_RESOURCES/Presentation/check_navigation.py
+```
+
+The [dated link audit](Presentation/LINK_AUDIT.md) distinguishes retrieved external references from destinations that could not be verified; an unavailable response is not automatically a broken link.
 
 ## Tests and scientific boundaries
 
@@ -71,9 +78,9 @@ Smoke tests are in [tests](tests/), including descriptive statistics, gene plots
 
 Report sample sizes, missingness, measures, units and statistical assumptions. Distinguish descriptive log-CPM analysis from count-based models for RNA-seq inference. The literature matrix is methodological background, not confirmation of project-specific clinical results.
 
-## Presentation formats
+## Reading and output formats
 
-Weekly reading editions are generated from their editable sources. See [reading editions and HTML styling](Presentation/README.md) for updating the pages and knitting a readable companion.
+Editable course sources live in the lecture and group-work folders. Weekly Markdown reading editions are generated from those sources; HTML knitting uses a shared stylesheet. See the [publishing guide](Presentation/README.md) for build and rendering instructions. This tooling does not run analyses or validate scientific conclusions.
 
 ## Local-only inputs
 
