@@ -16,8 +16,8 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | CI enhanced with reading-edition and link gates; workflow result unverified |
-| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: R/Bash plus LaTeX manuscript and README spot review; Week 4 appendix dependency removed; full audit pending |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Repaired pattern escaping; regression test added to CI; execution unverified |
+| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Initial provisional register created; individual file verification and approvals pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
@@ -44,6 +44,17 @@ The public repository may explain general methods using independently written co
 - This was a targeted connector audit, **not** a complete Git-object, binary-media, authorship, or third-party-license audit. No copyright clearance, source-originality certification, or historical remediation approval is claimed.
 
 **Next gates:** finish individual provenance records, enumerate all reachable historic objects, inspect media and bibliography rights, execute CI and document checks, and compare against authorized Geisel files before granting release clearance.
+
+## Pass 6 — residual course-data details and scanner reliability (2026-10-09)
+
+- Removed the remaining classroom metadata schema, sex-field selection rules, and course-specific narrative from `06_RESOURCES/LaTeX/Example_APA_7_Manuscript.tex`; made course name a neutral placeholder.
+- Generalized the quick Bash demonstration and helper examples in `06_RESOURCES/Bash/EASY_COMMAND_SHEET.md`, replacing classroom-specific metadata naming with independent categorical records.
+- Clarified `06_RESOURCES/Presentation/README.md` so its instructions refer to original public study notes rather than executable Geisel lab work.
+- Corrected incorrectly double-escaped regular expressions in `scripts/check_public_originality.py` that had prevented intended lecture-chunk and prompt indicators from matching.
+- Added `tests/test_originality_screen.py` and configured GitHub Actions to run its regression checks. The tests verify detection logic; they do **not** establish originality.
+- Attempted a fresh local clone for validation; the runtime could not resolve `github.com`. Consequently the test suite, source freshness checker, navigation scan, and GitHub Actions outcome are **not verified by execution here**.
+
+**Priority next:** run CI and inspect results; expand provenance checks to all remaining resources/binaries; inspect full reachable Git history with an authorized clone; conduct the private Geisel-source comparison.
 
 ## Required acceptance commands
 
