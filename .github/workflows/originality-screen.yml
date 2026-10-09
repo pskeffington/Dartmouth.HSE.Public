@@ -106,11 +106,12 @@ jobs:
           INVENTORY_OUTCOME: ${{ steps.inventory.outcome }}
         run: |
           failed=0
-          for check in SCREEN TEST EDITION NAV COMPILE INVENTORY; do
-            var="${check}_OUTCOME"
-            eval "outcome=\\$${var}"
-            if [ "$outcome" != "success" ]; then
-              echo "::error::${check} gate did not pass (outcome: ${outcome})"
+          checks=(SCREEN TEST EDITION NAV COMPILE INVENTORY)
+          outcomes=("$SCREEN_OUTCOME" "$TEST_OUTCOME" "$EDITION_OUTCOME"
+                    "$NAV_OUTCOME" "$COMPILE_OUTCOME" "$INVENTORY_OUTCOME")
+          for i in "${!checks[@]}"; do
+            if [ "${outcomes[i]}" != "success" ]; then
+              echo "::error::${checks[i]} gate did not pass (outcome: ${outcomes[i]})"
               failed=1
             fi
           done
