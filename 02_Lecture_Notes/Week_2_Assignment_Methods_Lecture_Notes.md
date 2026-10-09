@@ -1,0 +1,174 @@
+# HSE 711 — Week 2: Data Wrangling and Visualization Lecture Notes
+
+[Section index](README.md) · [Editable R Markdown](Week_2_Assignment_Methods_Lecture_Notes.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
+
+## On this page
+
+- [Purpose and learning objectives](#purpose-and-learning-objectives)
+- [1. Make random data reproducible](#1-make-random-data-reproducible)
+- [2. Set boundaries and build derived categories](#2-set-boundaries-and-build-derived-categories)
+- [3. Distinguish wide and long data](#3-distinguish-wide-and-long-data)
+- [4. Build a plot by mapping data to axes](#4-build-a-plot-by-mapping-data-to-axes)
+- [5. Inspect paired measurements with scatter plots](#5-inspect-paired-measurements-with-scatter-plots)
+- [6. Summarize, audit missingness, and check visualization](#6-summarize-audit-missingness-and-check-visualization)
+- [7. Explain the method used for each assignment task](#7-explain-the-method-used-for-each-assignment-task)
+- [8. Final self-check: what Week 2 mastery requires](#8-final-self-check-what-week-2-mastery-requires)
+
+## Purpose and learning objectives
+
+The Week 2 lecture introduces simulation, data-frame construction, categorical variables, tidyverse operations, long and wide representations, descriptive statistics, and plots. These notes connect those **lecture methods** to the skills needed for the data-wrangling assignment without publishing the assignment or its solutions. The original [chunk-by-chunk Week 2 notes](Week_2_Learning_Objective_Notes.md) remain the detailed lecture reference.
+
+| Assignment skill | Lecture topics | Evidence you can produce |
+| --- | --- | --- |
+| Construct reproducible simulated records | Chunks 2–10: `rnorm()`, `rbinom()`, `set.seed()`, `data.frame()` | Same code and seed produce the same example values |
+| Set categories and conditional labels | Chunks 6, 13–15: factors and `case_when()` | Each derived label follows its stated rule |
+| Reshape wide data to long | Chunks 18–19: `pivot_longer()`, `pivot_wider()` | Row counts and identifiers behave as expected |
+| Make grouped and layered graphs | Chunks 20–34: histograms, scatter, box, jitter | Axes, grouping, labels, and interpretation agree |
+| Check conclusions and export | Chunks 27–30, 40–44: Anscombe, plots, summaries | Explain what graphs show and what they cannot establish |
+
+## 1. Make random data reproducible
+
+**Lecture idea:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.
+
+```r
+set.seed(246)
+n_samp <- 12L
+practice_df <- data.frame(
+  participant_id = sprintf("P%03d", seq_len(n_samp)),
+  age = round(rnorm(n_samp, mean = 45, sd = 8)),
+  group = sample(c("A", "B"), n_samp, replace = TRUE)
+)
+head(practice_df)
+stopifnot(nrow(practice_df) == n_samp)
+```
+
+**Why it works:** `set.seed()` makes the sequence reproducible for compatible R versions and settings. `rnorm()` makes numeric observations; `sample()` draws labels; `data.frame()` places equal-length vectors into columns.
+
+**Mastery checkpoint:** Change the seed and explain what changes; change only the sample size and verify row count and unique IDs.
+
+## 2. Set boundaries and build derived categories
+
+The lecture uses categorization tools such as `cut()`, `factor()`, and `case_when()`. A derived category must be calculated *after* its source columns exist. If you clip values with `pmax()` and `pmin()`, values accumulate at boundaries; **clipping is not the same as sampling from a truncated normal distribution**.
+
+```r
+practice_df$score <- pmax(0, pmin(100, round(rnorm(n_samp, 65, 18))))
+practice_df$score_group <- factor(
+  ifelse(practice_df$score >= 70, "Higher", "Lower"),
+  levels = c("Lower", "Higher")
+)
+
+table(practice_df$score_group, useNA = "ifany")
+stopifnot(all(practice_df$score >= 0 & practice_df$score <= 100))
+```
+
+**Why it works:** Comparisons produce logical values. `ifelse()` chooses labels row by row, and `factor()` specifies the category order. For more than two categories, compare with the lecture's `dplyr::case_when()`.
+
+**Mastery checkpoint:** Articulate the exact inclusive or exclusive boundary and test a value equal to the threshold.
+
+## 3. Distinguish wide and long data
+
+**Lecture idea:** One person can occupy one row in wide form, with several measurement columns. Long form holds one measurement per row. The change reorganizes observations; it does not generate new participants.
+
+```r
+# Requires tidyr. Install separately if it is not already available.
+library(tidyr)
+
+practice_df$reading_a <- seq_len(n_samp) + 10
+practice_df$reading_b <- seq_len(n_samp) + 20
+
+reading_long <- pivot_longer(
+  practice_df,
+  cols = c(reading_a, reading_b),
+  names_to = "reading_type",
+  values_to = "reading_value"
+)
+
+stopifnot(nrow(reading_long) == 2L * nrow(practice_df))
+head(reading_long)
+
+reading_wide <- pivot_wider(
+  reading_long,
+  names_from = reading_type,
+  values_from = reading_value
+)
+stopifnot(nrow(reading_wide) == nrow(practice_df))
+```
+
+**Why it works:** Each original participant contributes two long-form measurement rows. `pivot_wider()` can reverse the transformation if the identifier and measurement-type combinations are unique.
+
+**Mastery checkpoint:** Identify which columns must remain as stable participant identifiers, then explain why long-form row count increases.
+
+## 4. Build a plot by mapping data to axes
+
+A `ggplot()` call specifies the data and the visual mapping. A geometry determines how the values appear. For grouped boxes, the x position holds the measurement category, y holds a numeric value, and the fill indicates a grouping variable.
+
+```r
+library(ggplot2)
+
+ggplot(
+  reading_long,
+  aes(x = reading_type, y = reading_value, fill = group)
+) +
+  geom_boxplot() +
+  labs(
+    title = "Illustrative measurements by group",
+    x = "Measurement type",
+    y = "Illustrative units",
+    fill = "Group"
+  ) +
+  theme_minimal()
+```
+
+**Why it works:** Each box summarizes the central distribution and spread of one combination of variables. With very small groups, box shapes can be unstable. Compare the lecture's histogram, jitter, and scatter examples for different analytical questions.
+
+**Mastery checkpoint:** Explain the mapping and each axis in plain language without claiming that a group difference is statistically significant.
+
+## 5. Inspect paired measurements with scatter plots
+
+A scatter plot displays two values measured on the same observational unit. It can reveal direction, curvature, clusters, or outlying values, but does not establish a causal relationship.
+
+```r
+ggplot(practice_df, aes(x = reading_a, y = reading_b)) +
+  geom_point() +
+  labs(
+    title = "Relationship between two practice measurements",
+    x = "Reading A (illustrative units)",
+    y = "Reading B (illustrative units)"
+  ) +
+  theme_minimal()
+```
+
+**Mastery checkpoint:** Explain why the input for this comparison is the wide-form table and why a plot alone cannot establish causality.
+
+## 6. Summarize, audit missingness, and check visualization
+
+```r
+summary(practice_df$age)
+sum(is.na(practice_df$age))
+aggregate(score ~ group, data = practice_df, FUN = mean)
+```
+
+**Why it works:** Summaries describe values by group, while `is.na()` identifies missing data. Means calculated from available cases must say how missing observations were handled. The lecture's Anscombe quartet demonstrates that similar summary statistics can conceal very different patterns.
+
+**Mastery checkpoint:** Describe the denominator for a missingness rate, then state one limitation of the displayed plot.
+
+## 7. Explain the method used for each assignment task
+
+For every analysis, identify its input, operation, output, validation, and interpretation. Do not merely state that the command ran. The assigned thresholds and required fields belong in your own submission: rehearse the **logic** with these independent practice variables first.
+
+## 8. Final self-check: what Week 2 mastery requires
+
+Mark each objective only when you can **perform and explain it without copying a solution**.
+
+- [ ] **Simulation:** Create a labeled table with a fixed seed, correct number of rows, reproducible IDs, and documented distributions.
+- [ ] **Rules and factors:** Produce categorical variables from explicit conditions; test boundary values and account for missing values.
+- [ ] **Reshaping:** Convert two numeric columns to long form, verify the expected row count, and recover wide form using identifiers.
+- [ ] **Plot design:** Build and label grouped box, histogram, and scatter plots from the appropriate data representation.
+- [ ] **Interpretation:** Describe shape, spread, grouping, and outliers without confusing descriptive patterns with inference or causation.
+- [ ] **Quality assurance:** Re-run from a clean session; verify dimensions, classes, factor levels, missingness, and required packages.
+
+**Mastery standard:** All six objectives demonstrated with a fresh toy dataset; each plot must have a defensible interpretation, and the workflow must run in order without relying on undeclared objects. If any step fails, revisit the corresponding lecture chunk and repeat that checkpoint.
+
+**Related:** [Week 2 lecture chunk reference](Week_2_Learning_Objective_Notes.md) · [Group work](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)
