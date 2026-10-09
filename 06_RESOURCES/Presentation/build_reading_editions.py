@@ -39,7 +39,10 @@ def rmarkdown(source: Path) -> str:
     if len(parts) != 3 or parts[0].strip():
         raise ValueError(f'{source.relative_to(ROOT)}: expected YAML front matter')
     _, metadata, body = parts
-    match = re.search(r'^title:\s*[\"\']?(.+?)[\"\']?\s*
+    match = re.search(r'^title:\\s*(.+?)\\s*$', metadata, re.M)
+    if not match:
+        raise ValueError(f'{source.relative_to(ROOT)}: missing title in YAML front matter')
+    title = match.group(1).strip().strip('"').strip("'")
     body = re.sub(r'^```\{(r|bash|sh)[^}]*\}', r'```\1', body, flags=re.M)
     body = re.sub(r'^```\{[^}]*\}', '```text', body, flags=re.M)
     body = re.sub(r'`r [^`]+`', '[computed when rendered]', body)
