@@ -8,12 +8,12 @@ This report continues the [originality roadmap](ORIGINALITY_ROADMAP.md). It dist
 
 ## Verified baseline
 
-The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 80 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
+The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 82 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
 
 | Check | Executed result |
 | --- | --- |
 | Strict originality scanner | REVIEW; 12 findings across 12 paths; zero BLOCK findings; expected exit 1 |
-| Originality regression suite | 20 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
+| Originality regression suite | 26 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
 | Reading-edition freshness | All seven generated editions current |
 | Local navigation | Pass; external destinations are not verified by this check |
 | Python compilation | Validation and publishing scripts compile |
@@ -58,10 +58,24 @@ After fetching origin, local refs enumerate 257 reachable commits, 729 trees, an
 | 6 | Close O11 | No unresolved BLOCK/REVIEW indicators, current provenance evidence, recorded human decisions, verified CI, and closed history decision |
 | 7 | Close each work batch on main | Validate, commit, create a reviewable PR, merge into main, and synchronize the local checkout |
 
-The user reports an existing review record and will provide its location. Until examined, it supplies no file-specific clearance. The active goal remains open through the unresolved gates.
+The user supplied local Week 1–3 comparison sources. These were read locally and not uploaded. They establish a comparison corpus, not an authorship or permission attestation. The active goal remains open through the unresolved gates.
 
 ## Evidence model and sources
 
 Run `python3 scripts/build_provenance_inventory.py --output /tmp/hse-public-provenance.json` for current file digests, record coverage, obsolete paths, and changed snapshots. `current` means bytes match an observed baseline; it never means rights-cleared. The record file's own digest is deliberately omitted to avoid self-reference. Newly edited records must be tied to a new observation; do not carry forward a stale content claim.
 
 Original expression, methodological novelty, and reuse permission are separate questions. Copyright protects qualifying expression rather than methods or facts; a root MIT notice cannot establish rights in contributed third-party material. See the [U.S. Copyright Office overview](https://www.copyright.gov/what-is-copyright/) and [MIT license text](https://opensource.org/license/mit). Where automated generation was used, human authorship must be assessed from the actual contribution; prompts or Git authorship alone do not establish it. See the [Copyright Office AI copyrightability report](https://www.copyright.gov/ai/Copyright-and-Artificial-Intelligence-Part-2-Copyrightability-Report.pdf), especially its conclusions. This report makes no registration or institutional-approval claim.
+
+## Local restricted-source comparison — follow-up
+
+Compared the public tracked tree against 108 local files from the user-designated Week 1–3 folders. All 108 received streamed SHA256 comparison; 50 eligible text/PDF files received normalized 20-token-window comparison. Larger datasets and nontext assets received byte comparison only. Zero current byte matches or shared 20-token windows were found. This is a bounded comparison result, not proof of independent authorship: paraphrases, shorter copied fragments, partial datasets, and transformed figures can evade detection.
+
+History enumeration compared 508 reachable blobs by bytes and eligible text blobs by normalized tokens. Zero whole-file byte matches were found, but 30 historical blobs had shared token windows, including old Week 1–3 group-work guides and Week 3 lecture references. Some had hundreds of matched windows. No restricted excerpts, filesystem locations, source files, or source hashes are included in this public report. Detailed findings remain outside the repository.
+
+The current tree passes this source comparison; **historical source-text exposure remains unresolved**. Current-tree cleanup and a regular main merge cannot remove old blobs. A history remediation decision must cover all affected branches, PR refs, retained Actions artifacts, and GitHub caches; external clones cannot be erased by Git operations. Full-history clearance is not claimed.
+
+### Run the source comparison locally
+
+Use [compare_private_sources.py](scripts/compare_private_sources.py) with one or more `--private-source-dir` arguments pointing to authorized local directories, `--history` when required, and `--output` pointing outside this repository. Reports contain public paths, opaque source IDs, and match counts, never matched source text. The scanner rejects source folders and output paths inside the public repository. It fails on empty source corpora and returns nonzero when current or historical matches are found. CI uses synthetic fixtures; restricted originals must never be supplied to public Actions jobs.
+
+Six additional tests cover byte copies, normalized overlap, independent text, source-directory containment, deleted historic content, and empty source sets. The complete suite has 26 passing tests. No source corpus or private comparison report is committed.

@@ -19,7 +19,7 @@ The public repository may explain general methods using independently written co
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 20 regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 80 paths have per-file intake records; rights provenance and human decisions pending |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 82 paths have per-file intake records; rights provenance and human decisions pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | 257 commits / 729 trees / 497 blobs enumerated; historical exposure and remediation decision remain open |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
@@ -129,3 +129,9 @@ This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91e
 - The user reports an existing review record and will provide its location. Incorporate it only after inspecting scope, reviewer, authorizations, and artifact versions.
 
 **Next:** reconcile the existing record against every public path, finish resource/media and authorized course-source comparisons, adjudicate history, and close O11 only with actual evidence. Merge each validated maintenance batch into main while preserving the closed clearance gate.
+
+## Pass 11 — local source comparison scanner (2026-10-09)
+
+The user supplied Week 1–3 local source folders, which were read solely for comparison. No originals, matched excerpts, source paths, source hashes, or private reports were committed. Added a local-only byte/text comparison scanner and six synthetic regression scenarios; all 26 tests pass.
+
+The current public tree has zero identical-byte or shared-20-token findings against the 108-file corpus. Historical comparison found 30 overlapping text blobs among 508 reachable blobs. Historical remediation is now supported by direct source comparison but remains undecided. O10 has bounded automated comparison evidence; required human comparison/rights sign-off remains separate. O9 and O11 stay open. See [total status](ORIGINALITY_STATUS.md) for scope, exclusions, and the proposed remediation decision.
