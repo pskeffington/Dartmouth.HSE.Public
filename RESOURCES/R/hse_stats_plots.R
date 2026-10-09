@@ -1,12 +1,5 @@
-# HSE 711 | Public plotting and statistics helpers
-# Copyright (c) 2026. Educational examples; not clinical software.
-#
-# DESIGN
-# - Source this file to define functions; sourcing never loads datasets or draws figures.
-# - Base R handles data checks/statistics; ggplot2 is needed ONLY when plotting.
-# - Column names are passed as strings to keep calls simple for beginners.
-# - Functions return values or ggplot objects; saving is a separate, explicit step.
-# - Never substitute CPM for raw counts in edgeR differential-expression models.
+# Core R statistics and plotting helpers. Source once; no work runs on load.
+# Inputs use column names as strings. Keep raw counts for edgeR inference.
 
 # Validate an input data.frame and a list of column names before plotting.
 hse_check_cols <- function(data, cols) {
