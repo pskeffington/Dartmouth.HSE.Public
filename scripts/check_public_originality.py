@@ -87,6 +87,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     ap.add_argument("--json", action="store_true", help="Emit machine-readable results")
+    ap.add_argument("--fail-on-review", action="store_true",
+                    help="Fail the gate when manual review remains unresolved")
     args = ap.parse_args()
     try:
         report = scan(args.root.resolve())
@@ -100,7 +102,7 @@ def main() -> int:
         for finding in report["findings"]:
             print(f"  {finding['level'].upper()}: {finding['path']}: {finding['reason']}")
         print(report["limitations"])
-    return 1 if report["status"] == "BLOCK" else 0
+    return 1 if report["status"] == "BLOCK" or (args.fail_on_review and report["status"] == "REVIEW") else 0
 
 if __name__ == "__main__":
     sys.exit(main())
