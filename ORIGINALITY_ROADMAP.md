@@ -16,7 +16,7 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Repaired pattern escaping; regression test added to CI; execution unverified |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Numbered lecture-chunk regression repaired; strict CI rejects REVIEW; run result unverified |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Initial provisional register created; individual file verification and approvals pending |
@@ -56,12 +56,24 @@ The public repository may explain general methods using independently written co
 
 **Priority next:** run CI and inspect results; expand provenance checks to all remaining resources/binaries; inspect full reachable Git history with an authorized clone; conduct the private Geisel-source comparison.
 
+## Pass 7 — reliability and release-gate hardening (2026-10-09)
+
+- Inspected the originality scanner, regression tests, reading-edition builder, and GitHub Actions configuration via connected GitHub.
+- Corrected the detector to recognize `Lecture 3 chunks 10-15`, `chunk 17`, and numbered ranges. Independently checked the regular expression against positive and negative examples in a Python runtime; this did **not** execute the repository's full tests.
+- Distinguished explicit restriction notices from general author-written distribution cautions, which are now review indicators instead of definitive blocks. This is classification logic, not a legal determination.
+- Added `--fail-on-review`: the informational CLI still emits REVIEW with exit 0, while GitHub Actions now exits nonzero for unresolved reviews. Regression tests cover both modes.
+- Attempted to inspect the public Actions page; its status could not be fetched. A GitHub checkout from this runtime also failed DNS resolution, so CI health and complete test execution remain **unverified**.
+- No Git history rewrite or copyright-clearance declaration was made.
+
+**Next:** execute the strict gate and tests in the connected repository's Actions environment, triage file-specific REVIEW findings, and continue private provenance/history comparisons before marking O5 or O11 complete.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
 
 ```bash
-python3 scripts/check_public_originality.py --json
+python3 scripts/check_public_originality.py --json --fail-on-review
+python3 -m unittest discover -s tests -p 'test_originality_screen.py' -v
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 python3 06_RESOURCES/Presentation/check_navigation.py
 python3 -m py_compile scripts/check_public_originality.py 06_RESOURCES/Presentation/*.py
