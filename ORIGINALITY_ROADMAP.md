@@ -19,7 +19,7 @@ The public repository may explain general methods using independently written co
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 32 total regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 83 paths have per-file intake records; rights provenance and human decisions pending |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 87 paths have per-file intake records; rights provenance and human decisions pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | 257 commits / 729 trees / 497 blobs enumerated; historical exposure and remediation decision remain open |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
@@ -173,3 +173,7 @@ The current public tree has zero identical-byte or shared-20-token findings agai
 Integration follow-up: preserved the concurrent exact reading-source manifest gate and its four tests from public main `36ccdc4`. All 30 tests pass after integration; current provenance intake covers 83 tracked paths.
 
 Latest integration: preserved public resource/TeX heuristic screening from main `8ac9b0f`; all 32 tests pass.
+
+## Local audit — prevent reference-source uploads (2026-10-09)
+
+Every file in the user-designated private source folders is protected from public upload. Added a fail-closed local pre-push guard, a safe installer, and repository agent instructions requiring guarded publication. The hook inspects proposed committed trees and intermediate new commits, including renamed byte-identical sources and PDF text. Corpus configuration and indexes remain outside tracked Git files. Eight real-push synthetic scenarios pass, bringing the suite to 40 tests. Refresh the installed executable copies after changing guard code. Other clones and API/UI routes are not protected by a local hook; the repository instructions prohibit bypass routes. Historic exposure and rights clearance remain separate open gates.

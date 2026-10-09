@@ -8,12 +8,12 @@ This report continues the [originality roadmap](ORIGINALITY_ROADMAP.md). It dist
 
 ## Verified baseline
 
-The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 83 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
+The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 87 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
 
 | Check | Executed result |
 | --- | --- |
 | Strict originality scanner | REVIEW; 12 findings across 12 paths; zero BLOCK findings; expected exit 1 |
-| Originality regression suite | 32 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
+| Originality regression suite | 40 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
 | Reading-edition freshness | All seven generated editions current |
 | Local navigation | Pass; external destinations are not verified by this check |
 | Python compilation | Validation and publishing scripts compile |
@@ -79,3 +79,11 @@ The current tree passes this source comparison; **historical source-text exposur
 Use [compare_private_sources.py](scripts/compare_private_sources.py) with one or more `--private-source-dir` arguments pointing to authorized local directories, `--history` when required, and `--output` pointing outside this repository. Reports contain public paths, opaque source IDs, and match counts, never matched source text. The scanner rejects source folders and output paths inside the public repository. It fails on empty source corpora and returns nonzero when current or historical matches are found. CI uses synthetic fixtures; restricted originals must never be supplied to public Actions jobs.
 
 Six additional tests cover byte copies, normalized overlap, independent text, source-directory containment, deleted historic content, and empty source sets. The originality suite has 26 passing tests; the integrated reading-source manifest adds four, with two further resource-screening tests, for 32 total. No source corpus or private comparison report is committed.
+
+## Installed private-source upload guard
+
+The user's source files are reference-only: all files under the authorized Week 1–3 folders are excluded from public upload. The local pre-push guard is installed in this checkout; its corpus configuration, executable copies, and fingerprints remain untracked. It compares the actual commit content being proposed, including intermediate new commits. Eight real-push synthetic tests cover safe pushes, renamed sources, protected filenames, a clean working copy masking a committed source, a source deleted in a later commit, missing folders, and preservation of existing hooks. The full suite has 40 tests.
+
+Source comparison now includes all 119 files, including hidden/generated files, rather than omitting local metadata. The refreshed bounded current-tree comparison found zero matches; 50 eligible text/PDF sources were normalized and every file received byte comparison. Protected filenames add conservative defense for source files that have been modified. Byte checks cover all formats and sizes; token checks are bounded to supported extractable text and PDF files up to 2 MB. Metadata changes, paraphrases, transformed figures, and partial large datasets are not exhaustively detected. No legal or institutional clearance is inferred.
+
+The installed guard's check of the current main commit passed. Publication in this checkout must go through the guarded Git push; direct API/UI writes and hook bypass are prohibited by repository instructions. This is local enforcement, not server enforcement. Other clones need their own installation. Historical overlap remains open and is not removed by this preventive control.
