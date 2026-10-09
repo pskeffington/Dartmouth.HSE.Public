@@ -144,6 +144,14 @@ The public repository may explain general methods using independently written co
 
 **Next:** execute the new scanner and test suite, confirm whether the ten protective-text indicators disappear without hiding affirmative reuse, and finish the two PDF provenance records plus the historical rights decision.
 
+## Pass 16 — custom APA template origin and PDF integrity (2026-10-09)
+
+- Recorded the contributor's explicit statement that the APA manuscript and bibliography catalogue are independently made general-purpose templates, not Dartmouth/Geisel-derived documents. A standard APA format is not by itself evidence of copied institutional expression.
+- Examined the supplied local PDF verifier output: both generated PDFs match the recorded intake SHA-256 hashes. Manuscript: 6 pages, pdfTeX 1.40.27; catalogue: 5 pages, pdfTeX 1.40.25. The output identifies both TeX and `.bib` inputs; no inspection tools were missing.
+- Refined their audit category to `CONTRIBUTOR_DECLARED_INDEPENDENT_TEMPLATE`. No evidence presently warrants labeling either PDF as a copied Dartmouth document merely because it is educational.
+- Retained `UNVERIFIED` rights status and `HOLD` release disposition until a fresh isolated TeX/Biber build, page/text visual correspondence, font/package rights review, and documented reviewer disposition are complete. The media-file heuristic is not silently disabled.
+- O9 historical text overlaps and the wider O10/O11 human review are unaffected. This audit-document update is prepared for a guarded local commit and is not itself proof that CI ran or that Git history changed.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:

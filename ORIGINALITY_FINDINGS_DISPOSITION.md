@@ -23,6 +23,19 @@ The following original public-course-boundary statements were reviewed by inspec
 
 **Result:** Scanner-classification defects addressed in code. This is *not* approval of those ten files for publication. The bounded Week 1–3 comparison recorded in the status report, contributor authorship, and applicable course sharing policy require separate consideration. Current-source assertions are not institutional permission.
 
+## Contributor-declared custom-template classification — 2026-10-09
+
+The contributor identifies both APA 7 assets as independently developed, general-purpose examples, **not adaptations of a Dartmouth/Geisel template**. This is a recorded contributor declaration, not an independent institutional similarity determination. Applying a widely used manuscript format is not itself evidence that a file reproduces protected Dartmouth expression.
+
+The user's local PDF audit verified the exact recorded SHA-256 for both compiled files, with no missing inspection tools:
+
+| Custom example | Observed PDF SHA-256 | Confirmed evidence | Open evidence |
+| --- | --- | --- | --- |
+| `06_RESOURCES/LaTeX/Example_APA_7_Manuscript.pdf` | `18ab38b366fd2fa13e9b1636d4b2881896fa9fd3b11633ced3447bb0c9e13273` | Matches intake; six letter-sized pages; TeX and bibliography inputs identified | Fresh isolated TeX/Biber build and page comparison; third-party/font rights; reviewer/date |
+| `06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.pdf` | `612d0876e69b9ca55770a5c158c787ad53797fffc4166963e45f93e7d56ece4d` | Matches intake; five letter-sized pages; TeX and practice bibliography inputs identified | Fresh isolated TeX/Biber build and page comparison; third-party/font rights; reviewer/date |
+
+**Classification:** `CONTRIBUTOR_DECLARED_INDEPENDENT_TEMPLATE` for Dartmouth-origin classification only. **Rights state:** `UNVERIFIED`; **release decision:** `HOLD`. The heuristic scanner's generic PDF/media review findings are still valid as provenance reminders. Do not suppress them based on the contributor statement or byte-identical intake snapshots.
+
 ## Two PDF provenance reviews still open
 
 | File | Known evidence | Required closure | State |
