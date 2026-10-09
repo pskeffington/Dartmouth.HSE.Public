@@ -1,0 +1,34 @@
+/* Shared stylesheet for locally knitted HSE reading companions. */
+:root { color-scheme: light; }
+body { font-size: 18px; line-height: 1.65; color: #202d29; background: #fff; }
+.main-container { max-width: 1120px; }
+h1, h2, h3 { color: #164b38; line-height: 1.25; }
+h2 { margin-top: 2rem; padding-top: .65rem; border-top: 1px solid #d6e1da; }
+p, li { max-width: 78ch; }
+a { color: #176448; text-decoration: underline; text-underline-offset: .16em; }
+a:focus-visible, button:focus-visible { outline: 3px solid #976d12; outline-offset: 3px; }
+pre { font-size: 15px; line-height: 1.5; padding: 1rem; border-color: #cbd8cf; }
+pre code { white-space: pre; }
+code { color: #284d3c; background-color: #f0f5f2; }
+blockquote { border-left: 4px solid #39765a; background: #f0f5f2; padding: .7rem 1rem; }
+table { width: 100%; margin: 1rem 0; }
+th, td { padding: .65rem; vertical-align: top; border-bottom: 1px solid #d6e1da; }
+th { background: #edf3ef; }
+.tocify { font-size: 15px; }
+.tocify .active { background-color: #164b38; }
+img { max-width: 100%; height: auto; }
+@media (max-width: 767px) {
+  body { font-size: 17px; }
+  .main-container { padding: 0 1rem; }
+  pre { overflow-x: auto; }
+  table { display: block; overflow-x: auto; }
+}
+@media print {
+  body { font-size: 11pt; line-height: 1.45; }
+  .tocify, .code-folding-btn { display: none; }
+  .main-container { max-width: none; margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  pre code { white-space: pre-wrap; }
+  h1, h2, h3 { break-after: avoid; }
+  img, blockquote { break-inside: avoid; }
+}

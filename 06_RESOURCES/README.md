@@ -6,6 +6,7 @@ Reusable methods, functions, teaching references and templates for health data s
 
 - [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.
 - [Easy Bash commands](Bash/EASY_COMMAND_SHEET.md): navigate, inspect, select fields and check a script.
+- [Read and explain a plot](READING_PLOTS.md): axes, distributions, groups and statistical annotations.
 - [Follow-along guide](../FOLLOW_ALONG.md): prepare a session and review each week.
 
 ## Choose a resource
@@ -66,6 +67,10 @@ The [Week 4 LaTeX template](LaTeX/) contains learning objectives, command exampl
 Smoke tests are in [tests](tests/), including descriptive statistics, gene plots, regression, panels, annotations and summary narratives. These tests require R and appropriate packages and are **not a substitute for independent scientific validation**. Run the relevant test before relying on a figure or statistical result.
 
 Report sample sizes, missingness, measures, units and statistical assumptions. Distinguish descriptive log-CPM analysis from count-based models for RNA-seq inference. The literature matrix is methodological background, not confirmation of project-specific clinical results.
+
+## Presentation formats
+
+Weekly reading editions are generated from their editable sources. See [reading editions and HTML styling](Presentation/README.md) for updating the pages and knitting a readable companion.
 
 ## Local-only inputs
 

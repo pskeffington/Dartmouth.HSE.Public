@@ -1,7 +1,13 @@
 ---
 title: "HSE 711 Week 4 — Introduction to Bash Scripting"
 output:
-  html_document: default
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+    code_folding: show
+    css: ../06_RESOURCES/Presentation/reading.css
   pdf_document: default
 ---
 
