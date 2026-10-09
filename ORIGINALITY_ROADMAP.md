@@ -18,7 +18,7 @@ The public repository may explain general methods using independently written co
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Full independent diagnostic checks; tracked dataset and missing-input guards added; CI results unverified |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
-| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven pairs reconciled; builder now fails if expected source files disappear; runtime check still unverified |
+| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Exact seven-file source manifest enforced; omission/substitution regression tests committed; execution unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
@@ -100,6 +100,17 @@ The public repository may explain general methods using independently written co
 
 **Next:** obtain actual push-run Actions logs and artifacts, adjudicate flagged datasets/media and course-like files with original permissions, and perform the private source-to-public comparison. The final clearance gate remains open.
 
+## Pass 11 — exact publication source manifest (2026-10-09)
+
+- Verified the existence of the seven expected Week 1–4 lecture and Week 1–3 group-work R Markdown sources through connected GitHub.
+- Replaced the previous `len(sources) < 7` gate with explicit required-path validation in `06_RESOURCES/Presentation/build_reading_editions.py`. A missing expected source now fails even if an unrelated `Week*.Rmd` file makes the count seven.
+- Added `tests/test_reading_source_manifest.py` to check for manifest duplicates, presence in the current checkout, missing-but-substituted sources, and zero-source failure.
+- Updated GitHub Actions to run those source-manifest tests alongside the originality regression tests.
+- The expected-source manifest is intentionally maintained in code and must be updated through review when the official scope of published student-authored companions changes.
+- No CI execution outcome or institutional source-comparison evidence was available through the connector. These commits update controls; they do **not** close O7 or certify originality.
+
+**Next:** inspect the actual push-triggered Actions artifact and run logs; adjudicate media/data source provenance; conduct authorized source similarity and historic exposure review. Do not rewrite repository history without a documented authorization decision.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
@@ -107,6 +118,7 @@ Run in the local checkout after syncing main:
 ```bash
 python3 scripts/check_public_originality.py --json --fail-on-review
 python3 -m unittest discover -s tests -p 'test_originality*.py' -v
+python3 -m unittest discover -s tests -p 'test_reading_source_manifest.py' -v
 python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 python3 06_RESOURCES/Presentation/check_navigation.py
