@@ -13,7 +13,7 @@ output:
 
 ## Purpose and learning objectives
 
-Week 3 moves from plot creation to combining independently supplied tables, examining missing observations, fitting simple descriptive models, using repeated plotting functions, and automating file-by-file review. The assignment applies those tools to multiple survey tables and publication-style figures. This guide uses independent toy data instead of the assignment submission or source datasets. Consult the existing [21-chunk lecture reference](Week_3_Learning_Objective_Notes.md) for the original lecture sequence.
+Week 3 moves from plot creation to combining independently supplied tables, examining missing observations, fitting simple descriptive models, using repeated plotting functions, and automating file-by-file review. The assignment applies those tools to multiple survey tables and publication-style figures. This guide uses independent toy data instead of the assignment submission or source datasets. Consult the existing [21-chunk lecture reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) for the original lecture sequence.
 
 | Assignment skill | Lecture topic | Mastery evidence |
 | --- | --- | --- |
@@ -208,4 +208,4 @@ if (requireNamespace("ggpubr", quietly = TRUE)) {
 
 **Mastery standard:** All eight objectives demonstrated on a new dataset with correctly checked join cardinality and missing-value handling. The student can defend every plot's purpose and limitations and repeat the code without untracked manual steps.
 
-**Related:** [Week 3 lecture chunk reference](Week_3_Learning_Objective_Notes.md) · [Week 3 group work](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)
+**Related:** [Week 3 lecture chunk reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) · [Week 3 group work](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)

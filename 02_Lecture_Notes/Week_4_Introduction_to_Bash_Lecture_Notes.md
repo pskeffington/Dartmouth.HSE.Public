@@ -1,6 +1,6 @@
 # HSE 711 Week 4 — Introduction to Bash Scripting
 
-[Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+[Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
 > **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
