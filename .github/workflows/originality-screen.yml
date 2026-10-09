@@ -52,7 +52,7 @@ jobs:
       - name: Run originality-regression tests
         shell: bash
         run: |
-          python3 -m unittest discover -s tests -p 'test_originality_screen.py' -v
+          python3 -m unittest discover -s tests -p 'test_originality*.py' -v
       - name: Verify public reading editions are current
         shell: bash
         run: |
