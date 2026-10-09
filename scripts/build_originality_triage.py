@@ -50,7 +50,7 @@ def render(report: dict) -> str:
         out += ["## File-specific review", ""]
         for finding in sorted(rows, key=lambda x: (x["path"], x["level"], x["reason"])):
             out += [
-                f"### \`{finding['path']}\`",
+                f"### `{finding['path']}`",
                 f"- Indicator: **{finding['level'].upper()}** — {finding['reason']}",
                 f"- Required action: {review_action(finding['reason'])}",
                 "- Human reviewer / date: **PENDING**",
