@@ -10,6 +10,14 @@ This is an independent, student-authored educational repository, not an official
 5. Review all images, PDFs, binary assets, and generated artifacts before release.
 6. Conduct human review of code and commentary for unattributed copying, including outputs from automated tools.
 
+## Course-file dependency and public boundary
+
+Public lecture and group-work pages may summarize general computational methods, but **must not supply enough course-specific detail to reconstruct assessed Geisel assignments**. Keep authoritative prompts, scoring rubrics, instructor examples, starter scripts, tables, reference results, and graded responses in an authorized private workspace.
+
+Every course-related publication must be reviewed for: (a) copied or closely paraphrased prompt language; (b) reproduced lecture code and figures; (c) ready-to-submit answers; (d) embedded source data or schema exports; (e) generated Markdown or HTML that republishes content removed from its source; and (f) disclosures in prior commits. Cite public research sources where relevant. Course-file dependency is a separation of materials, **not** a legal defense against copying or an assertion that general-purpose computing resources must be inoperable.
+
+New material requires human approval of source provenance and permission. Automated gates should flag likely problems but must not certify originality.
+
 ## Validator
 
 Run `python3 scripts/check_public_originality.py` from the repository root, or `python3 scripts/check_public_originality.py --json` for a structured report.
