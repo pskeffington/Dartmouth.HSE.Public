@@ -1,43 +1,34 @@
-# Group Work — Scholarly teaching walkthroughs
+# Group Work
 
-This collection presents the public HSE 711 exercises as readable academic teaching narratives. Each walkthrough connects the question under study to its R implementation, the meaning of the resulting output, and the limitations of the evidence. These independent teaching notes are not official Dartmouth course instructions.
+**Narrative walkthroughs and reproducible classroom labs — HSE 711**
 
-## Week 4 deployment
+These materials connect a research question to implementation, expected output, interpretation and limitations. Original exercises remain recognizable, with additional scholarly explanation and verification guidance.
 
-- [Runnable Bash lab](Week_4_Bash_Lab/README.md) — staged exercises, source schema, verified counts, and local smoke-test instructions.
+## Exercise library
 
-## Week 4 update
+| Week | Topic | Walkthrough | Ready-to-run materials |
+| --- | --- | --- | --- |
+| 1 | Introductory R, data types, indexing and functions | [Week 1 (.Rmd)](Week_1_Group_Work_Narrative_Walkthrough.Rmd) | Embedded R examples |
+| 2 | Data preparation, visualizations and Wilcoxon comparisons | [Week 2 (.Rmd)](Week_2_Group_Work_Narrative_Walkthrough.Rmd) | Requires separate arsenic CSV |
+| 3 | Simulation, reusable functions and multiple CSV files | [Week 3 (.Rmd)](Week_3_Group_Work_Narrative_Walkthrough.Rmd) | Simulations and separate course CSVs |
+| 4 | Bash metadata manipulation | [Week 4 (.Rmd)](Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) | [Bash lab scripts and tests](Week_4_Bash_Lab/) |
 
-[Week 4 — Bash metadata exercise](Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) covers all five provided tasks with annotated command examples, a filename mismatch note, source-data limitations, and safe cleanup instructions.
+## Week 4: run the lab
 
-## Reading sequence
+From the repository root, with `pseudo_metadata.csv` already in the ignored `data/` directory:
 
-| Week | Teaching focus | Scholarly emphasis |
-|---|---|---|
-| [Week 1: Introduction to R](Week_1_Group_Work_Narrative_Walkthrough.Rmd) | Data types, missing values, matrices, functions, iteration | How data representation and identifier integrity affect analytical validity |
-| [Week 2: Data wrangling and visualization](Week_2_Group_Work_Narrative_Walkthrough.Rmd) | Source checking, categorical recoding, plots, Wilcoxon testing, reshaping | How eligibility, units, visualization choices, and sampling limit inference |
-| [Week 3: Reusable analysis](Week_3_Group_Work_Narrative_Walkthrough.Rmd) | Simulations, functions, histograms, multi-file data processing | Reproducibility, sampling variability, unit-aware interpretation, and source-data boundaries |
-
-## Reading a scientific exercise
-
-For each exercise, identify its **research question**, **data-generating process or source**, **transformation**, **method**, **observable outcome**, and **interpretive limitations**. The code shows implementation; the prose provides the rationale for choosing the operation and the limits on what it demonstrates.
-
-The [summary-statistics guide](../RESOURCES/SUMMARY_STATISTICS.md) supplies groupwise means, standard deviations, quartiles, IQR, sample sizes, missingness and an automatically generated descriptive narrative. The [statistical plotting modules](../RESOURCES/ONE_CALL_PLOTS.md) offer reusable, annotated displays. Those tools supplement the course exercises rather than replace their original function calls.
-
-## Evidence and execution boundaries
-
-Week 1 examples use illustrative values. Week 2's arsenic exercise requires the original course CSV, which is not distributed in this repository. Week 3 Questions 1–4 use simulated observations, while Question 5 requires external course files. No unexecuted result is reported as an observed empirical finding. Numerical interpretation should follow execution with the relevant source data, record units, show the denominator and missingness, and distinguish descriptive patterns from hypothesis tests.
-
-## Reproduction
-
-```sh
-# From the public repository root; install R, rmarkdown and required
-# packages first. CSV-dependent chunks need the original course files.
-Rscript -e 'rmarkdown::render("Group Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd")'
+```bash
+bash "Group Work/Week_4_Bash_Lab/test_week4.sh"
+bash "Group Work/Week_4_Bash_Lab/run_week4.sh" \
+  data/pseudo_metadata.csv ./week4_practice
 ```
 
-Other walkthroughs can be rendered by changing the file name, after supplying their documented data dependencies. Rendering is not claimed as completed in this documentation.
+The script deliberately removes the temporary `new_dir` created in Question 3, but retains `only_female.txt` and `females_metadata.csv` in `week4_practice/`. The source exercise uses both names; the lab documents that distinction.
 
-## Week 4 formal write-up
+## How to read a worked example
 
-Use the [student LaTeX lab-report template](../RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex) to document the five Bash metadata exercises, preserving observed outputs and a reproducibility checklist.
+A good learning narrative identifies the **question**, **input**, **method**, **observed output**, and **limits of interpretation**. Means and SDs describe magnitude and variability; medians and IQRs describe central tendency and spread with less sensitivity to extreme observations. A plot or a difference in sample means is not, by itself, evidence of causation or statistical significance.
+
+Use the [complete summary statistics](../RESOURCES/SUMMARY_STATISTICS.md), [annotated plot functions](../RESOURCES/PLOT_ANNOTATIONS.md), and [student LaTeX report template](../RESOURCES/LaTeX/) where appropriate.
+
+**Source boundary:** The Week 2 and part of the Week 3 work depend on course files not published here. Week 4 uses synthetic classroom metadata. Do not assert empirical results unless the relevant analysis has been run and checked.
