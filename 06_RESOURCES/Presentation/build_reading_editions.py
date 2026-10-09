@@ -46,13 +46,13 @@ def rmarkdown(source: Path) -> str:
     body = re.sub(r'^```\{(r|bash|sh)[^}]*\}', r'```\1', body, flags=re.M)
     body = re.sub(r'^```\{[^}]*\}', '```text', body, flags=re.M)
     body = re.sub(r'`r [^`]+`', '[computed when rendered]', body)
+    course_keyed = source.parent == GROUP_WORK
+    notice = ('**Course-file dependency.** This independent guide is not a substitute for official Geisel prompts and course inputs. Obtain these separately and perform assessed work privately.' if course_keyed else 'Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.')
     header = (
         f'# {title}\n\n'
         f'[Section index](README.md) · [Editable R Markdown]({source.name}) · '
         '[Repository home](../README.md)\n\n'
-        '> **Reading edition.** Code is displayed for study and has not been executed '
-        'to generate this page. Run the source chunks in order to produce and check '
-        'outputs; data-dependent examples need separately supplied course files.\n\n'
+        f'> **Reading edition.** {notice}\n\n'
     )
     return contents(header + body.lstrip())
 
@@ -107,8 +107,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Report stale editions without writing.')
     args = parser.parse_args()
-    sources = sorted(LECTURES.glob('Week*.R'))
-    sources += sorted(LECTURES.glob('Week*.Rmd'))
+    # Curated conceptual .R reference notes have manually edited .md companions.
+    # Do not regenerate them as transcripts or source-code excerpts.
+    sources = sorted(LECTURES.glob('Week*.Rmd'))
     sources += sorted(GROUP_WORK.glob('Week*.Rmd'))
     stale = []
     for source in sources:
