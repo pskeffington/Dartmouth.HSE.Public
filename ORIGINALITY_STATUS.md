@@ -8,12 +8,12 @@ This report continues the [originality roadmap](ORIGINALITY_ROADMAP.md). It dist
 
 ## Verified baseline
 
-The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 82 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
+The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 83 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
 
 | Check | Executed result |
 | --- | --- |
 | Strict originality scanner | REVIEW; 12 findings across 12 paths; zero BLOCK findings; expected exit 1 |
-| Originality regression suite | 26 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
+| Originality regression suite | 30 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
 | Reading-edition freshness | All seven generated editions current |
 | Local navigation | Pass; external destinations are not verified by this check |
 | Python compilation | Validation and publishing scripts compile |
@@ -78,4 +78,4 @@ The current tree passes this source comparison; **historical source-text exposur
 
 Use [compare_private_sources.py](scripts/compare_private_sources.py) with one or more `--private-source-dir` arguments pointing to authorized local directories, `--history` when required, and `--output` pointing outside this repository. Reports contain public paths, opaque source IDs, and match counts, never matched source text. The scanner rejects source folders and output paths inside the public repository. It fails on empty source corpora and returns nonzero when current or historical matches are found. CI uses synthetic fixtures; restricted originals must never be supplied to public Actions jobs.
 
-Six additional tests cover byte copies, normalized overlap, independent text, source-directory containment, deleted historic content, and empty source sets. The complete suite has 26 passing tests. No source corpus or private comparison report is committed.
+Six additional tests cover byte copies, normalized overlap, independent text, source-directory containment, deleted historic content, and empty source sets. The originality suite has 26 passing tests; the integrated reading-source manifest adds four, for 30 total. No source corpus or private comparison report is committed.
