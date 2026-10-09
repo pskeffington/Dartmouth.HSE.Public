@@ -2,7 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
+> **Reading edition.** Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.
 
 # Lecture companion: the shell as a reproducible research interface
 
