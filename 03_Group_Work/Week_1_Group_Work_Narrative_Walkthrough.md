@@ -1,348 +1,37 @@
-# HSE 711 — Week 1 Group Work: Introduction to R
-
-[Section index](README.md) · [Editable R Markdown](Week_1_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
-
-> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
-
-## On this page
+# HSE 711 · Week 1: Introduction to R — Independent study guide
 
-- [Session checkpoints](#session-checkpoints)
-- [Source and scope](#source-and-scope)
-- [Exercise 1: Identify the data types](#exercise-1-identify-the-data-types)
-- [Exercise 2: Build a list of different vector types](#exercise-2-build-a-list-of-different-vector-types)
-- [Exercise 3: Convert floating-point values](#exercise-3-convert-floating-point-values)
-- [Exercise 4: Find a word while handling missing values](#exercise-4-find-a-word-while-handling-missing-values)
-- [Exercise 5: Count missing entries](#exercise-5-count-missing-entries)
-- [Exercise 6: Count values below a threshold](#exercise-6-count-values-below-a-threshold)
-- [Exercise 7: Count an exact character match](#exercise-7-count-an-exact-character-match)
-- [Exercise 8: Combine two inclusion conditions](#exercise-8-combine-two-inclusion-conditions)
-- [Exercise 9: Select three vector entries](#exercise-9-select-three-vector-entries)
-- [Exercise 10: Inspect factor levels](#exercise-10-inspect-factor-levels)
-- [Exercise 11: Name and extract list components](#exercise-11-name-and-extract-list-components)
-- [Exercise 12: Generate a synthetic count matrix](#exercise-12-generate-a-synthetic-count-matrix)
-- [Exercise 13: Label genes and participants](#exercise-13-label-genes-and-participants)
-- [Exercise 14: Select a matrix cell](#exercise-14-select-a-matrix-cell)
-- [Exercise 15: Append a numeric participant column](#exercise-15-append-a-numeric-participant-column)
-- [Exercise 16: Observe matrix coercion](#exercise-16-observe-matrix-coercion)
-- [Exercise 17: Rebuild a numeric matrix](#exercise-17-rebuild-a-numeric-matrix)
-- [Exercise 18: Convert a matrix to a data frame](#exercise-18-convert-a-matrix-to-a-data-frame)
-- [Exercise 19: Create participant metadata](#exercise-19-create-participant-metadata)
-- [Exercise 20: Extract the age column](#exercise-20-extract-the-age-column)
-- [Exercise 21: Combine a function, loop, and conditional](#exercise-21-combine-a-function-loop-and-conditional)
-- [What we should carry forward](#what-we-should-carry-forward)
-- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
-- [Continue learning](#continue-learning)
+[Group work index](README.md) · [Editable R Markdown](Week_1_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
 
-## Session checkpoints
+These independently written **method notes are not an assignment, answer key, submission, or substitute for Geisel course materials**. To perform the coursework, obtain the official prompt, any instructor-provided code, and required files through an authorized course channel. None are distributed here.
 
-**Goal:** inspect R objects, select values and build a labeled table. The examples generate their own values; run the source chunks in order.
+**Course-file dependency:** This public guide deliberately contains no exercise text, course dataset, completed solution, or runnable assignment workflow. Read the official source to determine the actual task, variables, permitted techniques, and required deliverables. Any work based on those inputs belongs in a private course workspace.
 
-| Stop after | Check | Explain to a partner |
-| --- | --- | --- |
-| Exercises 1–8 | Classes, missing values and selection conditions | Why is a missing value different from a nonmatch? |
-| Exercises 9–11 | Selected entries and list components | What changes between `[ ]` and `[[ ]]`? |
-| Exercises 12–18 | Matrix dimensions, labels and storage type | What happens when text is added to a numeric matrix? |
-| Exercises 19–21 | Metadata columns and function output | Which objects does the function use, and when does the conditional run? |
+## Study checkpoints
 
-This walkthrough follows the 21 exercises in the provided Week 1 working file. We move from inspecting individual values to selecting data, building tables, and combining a function with a loop. Each section explains the reasoning before showing commented base R code. Run the chunks from top to bottom in a fresh R session.
+### Object inspection
 
-Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over stylistic choices. For direct comparison with Lecture 1, the count-data pipeline keeps its `num.vector`, `count.vector`, `count.matrix`, and `count.df` names. Other added objects use descriptive `snake_case` names; the separate participant metadata table uses `participant.df` to match the lecture's data-frame suffix. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
+Compare storage type, class, shape, and missing values before transforming an object.
 
-## Source and scope
+### Indexing and selection
 
-- Lecture: `Lecture_1_Introduction_to_R(1).Rmd`.
-- Group work: `Introduction_to_R_Class_Exercises(WORKING).Rmd`.
-- Exercise 4 adapts the word-selection task from the working file; the source exercise attributes its longer passage to [a Science Advances article](https://www.science.org/doi/10.1126/sciadv.abd2688) ([alternate PubMed record](https://pubmed.ncbi.nlm.nih.gov/33115748/)). The public example uses a short illustrative vector.
+Explain positional, logical, and name-based selection; distinguish empty selections from missing values.
 
-The explanations are a study walkthrough, not a reproduction of the instructor's prompts. The original working file remains unchanged.
+### Structured objects
 
-## Exercise 1: Identify the data types
+Identify when vectors, lists, matrices, factors, and data frames are appropriate.
 
-**Before you start.** Check how R stores a value before choosing an operation. A number that looks like an integer may still be stored as numeric. `class()` reports the stored type; it does not describe the clinical meaning of a variable.
+### Functions and iteration
 
-We begin by assigning the three objects and asking R to report their classes. A whole-looking number such as 3 is still stored as numeric by default; an integer requires an explicit conversion or an L suffix. This check helps us choose valid operations before analyzing a variable.
+Describe inputs, return values, side effects, and a minimal verification plan.
 
-```r
-# Lecture chunk references: 2, 5–7.
-a <- 3.14
-b <- "pie"
-c <- 3
+## Private execution boundary
 
-# Inspect each object rather than infer type from its appearance.
-class(a)  # numeric
-class(b)  # character
-class(c)  # numeric
-```
+1. Obtain the authorized Geisel materials separately; do not redistribute them.
+2. Use an untracked private workspace for source files, scratch scripts, results, and submissions.
+3. Confirm the current course integrity and collaboration policy before using AI or external examples.
+4. Create your own implementation from the official requirements and validate against local inputs.
+5. Publish neither the original questions nor your assessed solution here.
 
-## Exercise 2: Build a list of different vector types
+## Source attribution and limits
 
-Next, we use a list because its components can have different types. Each component remains a vector with one type. We use the lecture's `students <- list(...)` object name and give this exercise's components descriptive type names. Here the object illustrates list structure; the entries are not actual student records.
-
-```r
-# Lecture chunk references: 5, 15–16.
-students <- list(
-  integers = as.integer(c(1, 2, 3)),
-  floats = c(1.01, 2.02, 3.03),
-  characters = c("aaa", "bbbb", "ccc")
-)
-str(students)
-```
-
-## Exercise 3: Convert floating-point values
-
-We convert the supplied values with as.integer(). This truncates toward zero rather than rounding: 8.88 becomes 8. We use my_integers because the exercise explicitly requests that output name; this uses the output name required by the exercise.
-
-```r
-# Lecture chunk references: 8.
-my_floats <- c(1.67, 1.11, 2.25, 8.88, 6.67, 1048.2)
-my_integers <- as.integer(my_floats)
-my_integers  # 1 1 2 8 6 1048
-```
-
-## Exercise 4: Find a word while handling missing values
-
-**Check your result.** `NA` means a value is missing; it is different from an observed value that does not match your target. Exclude missing values explicitly before selecting or counting matches.
-
-The supplied arthritis vector contains both words and missing values. A comparison alone leaves NA entries in the selection mask. We first exclude missing entries, then select the exact word. This pattern also applies to selecting a category from an imported dataset. The short vector below adapts the selection task for a public walkthrough; it preserves four missing entries without reproducing the source passage. It is used for indexing practice, not to draw medical conclusions.
-
-```r
-# Lecture chunk references: 3–4, 11, 13.
-arthritis <- c(
-  "rheumatoid", "arthritis", NA, "immune", "response",
-  NA, "arthritis", "RA", NA, "study", NA
-)
-
-# Both conditions must hold for a word to be selected.
-arthritis[!is.na(arthritis) & arthritis == "rheumatoid"]
-# Expected: "rheumatoid"
-```
-
-## Exercise 5: Count missing entries
-
-is.na() returns TRUE for each missing element. Summing that logical vector counts the TRUE values because R treats TRUE as 1 and FALSE as 0 in this calculation. This is a compact missingness audit.
-
-```r
-# Lecture chunk references: 13.
-sum(is.na(arthritis))  # 4
-```
-
-## Exercise 6: Count values below a threshold
-
-We compare every element with 10 and sum the resulting logical vector. The comparison is strictly less than, so 10 itself is excluded. If real data contain NA, decide explicitly how those missing values should affect the count.
-
-```r
-# Lecture chunk references: 3, 7.
-number_vector <- c(30, 29, 48, 10, 0, 8, 56, 77, 211, 674, 1)
-sum(number_vector < 10)  # 3
-```
-
-## Exercise 7: Count an exact character match
-
-The same counting pattern works with text. Equality is case-sensitive, and we compare against a quoted character value. This is useful for checking repeated labels.
-
-```r
-# Lecture chunk references: 3, 7.
-letter_vector <- c("v", "a", "b", "g", "f", "a", "n", "m", "q", "a", "c", "w", "w", "i", "e", "y")
-sum(letter_vector == "a")  # 3
-```
-
-## Exercise 8: Combine two inclusion conditions
-
-We give this exercise its own five_count_vector rather than overwriting the threshold vector from Exercise 6. We want values equal to 5 OR greater than 5555. Parentheses make each condition clear, while | combines them element by element. Values exactly equal to 5555 do not meet the second condition.
-
-```r
-# Lecture chunk references: 3–4.
-five_count_vector <- c(5, 5, 55, 555555, 555, 55555, 5, 5, 555555555,
-                       55, 55, 555, 5, 5, 55555555, 5, 55, 5, 5555,
-                       5, 555, 5555)
-sum((five_count_vector == 5) | (five_count_vector > 5555))  # 13
-```
-
-## Exercise 9: Select three vector entries
-
-We use the lecture's `char_vector` name for the five-item character vector and select positions 1, 3, and 5. R uses one-based indexing. Saving the result gives us a reusable subset while leaving the original five-element vector intact.
-
-```r
-# Lecture chunk references: 5, 11.
-char_vector <- c("tacos", "burritos", "enchalada", "chalupa", "arroz")
-char_subset <- char_vector[c(1, 3, 5)]
-char_subset
-```
-
-## Exercise 10: Inspect factor levels
-
-We convert smoking_status into a factor and inspect its levels. The levels identify the available categories, not their frequencies. With no explicit levels argument, these labels are ordinarily sorted alphabetically; set levels explicitly when order matters.
-
-```r
-# Lecture chunk references: 14.
-smoking_status <- c("Never Smoker", "Current Smoker", "Former Smoker", "Former Smoker", "Never Smoker", "Never Smoker", "Never Smoker", "Current Smoker", "Former Smoker", "Former Smoker")
-smoking_status <- factor(smoking_status)
-levels(smoking_status)
-# Current Smoker, Former Smoker, Never Smoker
-```
-
-## Exercise 11: Name and extract list components
-
-We give the grocery vectors meaningful category names. Double brackets extract the second component as a vector, so class() reports character. Single brackets would retain a list, which is a different structure.
-
-```r
-# Lecture chunk references: 15–16.
-grocery_list <- list(
-  c("Peaches", "Bananas", "Strawberries", "Melon"),
-  c("Spinach", "Lettuce", "Carrot", "Kale"),
-  c("Oreos", "Chocolate Cake", "Gummy Bears", "Marshmellows")
-)
-names(grocery_list) <- c("Fruits", "Veggies", "Snacks")
-grocery_list[[2]]
-class(grocery_list[[2]])  # character
-```
-
-## Exercise 12: Generate a synthetic count matrix
-
-**Why this matters.** In a gene-by-sample matrix, rows identify genes and columns identify samples. Check both the dimensions and the labels so each value can be traced to the correct gene and sample. This example generates synthetic values for practice.
-
-A five-by-five matrix needs 25 values. We sample from 0 through 20 with replacement, then fill the matrix row by row. A seed makes repeated runs reproducible under the same R random-number settings. These are teaching data, not observed patient or gene measurements.
-
-```r
-# Lecture chunk references: 17–19; seed practice in 33.
-set.seed(123)
-num.vector <- c(0:20)
-count.vector <- sample(num.vector, size = 25, replace = TRUE)
-count.matrix <- matrix(count.vector, nrow = 5, ncol = 5, byrow = TRUE)
-count.matrix
-```
-
-## Exercise 13: Label genes and participants
-
-Names make the matrix interpretable: rows represent genes and columns represent participants. We keep the exact labels from the exercise, then check that the orientation matches our intent. This becomes essential when matching a matrix to participant metadata.
-
-```r
-# Lecture chunk references: 20–21.
-rownames(count.matrix) <- c("PTEN", "BRCA1", "TP53", "EGFR", "IL6")
-colnames(count.matrix) <- paste("Participant", 106:110)
-count.matrix
-```
-
-## Exercise 14: Select a matrix cell
-
-Matrix indexing always places the row before the column. To obtain column 3, row 5, we therefore write [5, 3]. The labels provide a second way to check that this is IL6 for Participant 108.
-
-```r
-# Lecture chunk references: 22.
-count.matrix[5, 3]
-# Same cell, selected by its labels.
-count.matrix["IL6", "Participant 108"]
-```
-
-## Exercise 15: Append a numeric participant column
-
-We append five values because the matrix has five gene rows. The snake_case object name participant_111 describes the new vector; the displayed column label retains the exercise's "Participant 111" spelling. As in the lecture's new_col example, cbind() combines by position, so the values must already follow gene order.
-
-```r
-# Lecture chunk references: 24.
-participant_111 <- c(1, 2, 3, 4, 5)
-count.matrix <- cbind(count.matrix, participant_111)
-colnames(count.matrix)[ncol(count.matrix)] <- "Participant 111"
-dim(count.matrix)  # 5 rows, 6 columns
-```
-
-## Exercise 16: Observe matrix coercion
-
-A matrix has one underlying data type. Adding letters forces the numeric values to become character strings. We inspect both class and storage mode: it remains a matrix, but its contents are now character. This explains why mixed metadata belongs in a data frame instead.
-
-```r
-# Lecture chunk references: 6, 8, 19, 24.
-participant_112 <- c("a", "b", "c", "d", "e")
-count.matrix <- cbind(count.matrix, participant_112)
-colnames(count.matrix)[ncol(count.matrix)] <- "Participant 112"
-class(count.matrix)
-storage.mode(count.matrix)  # character
-```
-
-## Exercise 17: Rebuild a numeric matrix
-
-We start fresh so the character column from the previous exercise does not carry forward. The supplied draft samples 50 values for only 25 cells; we correct size to 25. Using a new seed gives a reproducible second example without relying on earlier random draws.
-
-```r
-# Lecture chunk references: 17–21.
-set.seed(124)
-num.vector <- c(0:20)
-count.vector <- sample(num.vector, size = 25, replace = TRUE)
-count.matrix <- matrix(count.vector, ncol = 5, nrow = 5, byrow = TRUE)
-rownames(count.matrix) <- c("PTEN", "BRCA1", "TP53", "EGFR", "IL6")
-colnames(count.matrix) <- paste("Participant", 106:110)
-count.matrix
-```
-
-## Exercise 18: Convert a matrix to a data frame
-
-**Check your result.** A matrix stores one type of value; a data frame can store different types in different columns. After conversion, check the dimensions and column types with `dim()` and `str()`.
-
-We use as.data.frame() to change the container while retaining the gene rows and participant columns. Conversion does not transpose the data or turn it into participant metadata. The frame can subsequently hold columns of different types.
-
-```r
-# Lecture chunk references: 27–28.
-count.df <- as.data.frame(count.matrix)
-str(count.df)
-```
-
-## Exercise 19: Create participant metadata
-
-Now we create a separate table with one participant per row. The name participant.df describes the table's role and follows the lecture's count.df data-frame pattern. Its three columns map to Participant ID, Age, and Disease Status, but use lowercase snake_case so column access does not require backticks. The IDs are character identifiers, not quantities to calculate with.
-
-```r
-# Lecture chunk references: 27.
-participant.df <- data.frame(
-  participant_id = c("106", "107", "109"),
-  age = c(45, 23, 99),
-  disease_status = c("Case", "Control", "Case")
-)
-participant.df
-```
-
-## Exercise 20: Extract the age column
-
-The dollar operator returns the named column as a vector. That is the appropriate structure for a later numerical summary. It differs from participant.df["age"], which retains a one-column data frame.
-
-```r
-# Lecture chunk references: 28.
-participant.df$age  # 45 23 99
-```
-
-## Exercise 21: Combine a function, loop, and conditional
-
-Finally, we wrap the repeated operation in my_first_function(). At each row we inspect disease_status: a case prints its participant_id, and a control prints its age. seq_len(nrow(df)) is a small refinement of the lecture’s index loop because it also handles zero rows. The explicit else-if avoids treating every non-case label as a control. This teaching example assumes complete Case/Control labels; imported data should be checked first.
-
-```r
-# Lecture chunk references: 30–33, 36–39.
-my_first_function <- function(df) {
-  # Loop through rows and use the same row index for every column.
-  for (i in seq_len(nrow(df))) {
-    if (df$disease_status[i] == "Case") {
-      print(df$participant_id[i])
-    } else if (df$disease_status[i] == "Control") {
-      print(df$age[i])
-    }
-  }
-}
-
-# Call the function without copying the Console prompt (>).
-my_first_function(participant.df)
-# Prints "106", then 23, then "109".
-```
-
-## What we should carry forward
-
-The recurring pattern is to identify the structure, inspect the values, and then choose the operation. Comparisons create logical vectors; those vectors can select observations or count matches. Lists preserve different component types, matrices support one-type rectangular data, and data frames support mixed columns. Functions make a process reusable, while loops and conditionals control how it operates on each observation.
-
-The walkthrough corrects the working file's comment syntax, misplaced code, duplicate chunk labels, `count.matric` spelling, unnecessary Console prompt, missing-value selection, and matrix-size mismatch. It omits the decorative closing text so the document stays focused on the exercises.
-
-## Scholarly reporting and reproducibility
-
-A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
-
-The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
-
-## Continue learning
-
-[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Next week](Week_2_Group_Work_Narrative_Walkthrough.md)
+This commentary describes general computational concepts. Exact course requirements, input schemas, and marking criteria can only be established from the original course documents. This page neither verifies nor reproduces them.
