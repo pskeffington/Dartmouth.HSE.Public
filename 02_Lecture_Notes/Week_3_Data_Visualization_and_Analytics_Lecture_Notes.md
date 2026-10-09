@@ -2,13 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
-
-## Purpose and learning objectives
-
-These independent notes discuss joining tables, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. They do not reproduce the official survey exercise, required deliverables, or lecture sequence. Consult authorized Geisel files for all course-specific requirements.
-
-**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
+> **Reading edition.** Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.
 
 ## On this page
 
@@ -21,6 +15,12 @@ These independent notes discuss joining tables, analytical selection, reusable p
 - [6. Import multiple files without losing track of them](#6-import-multiple-files-without-losing-track-of-them)
 - [7. Build a publication-readable figure panel](#7-build-a-publication-readable-figure-panel)
 - [8. Final self-check: what Week 3 mastery requires](#8-final-self-check-what-week-3-mastery-requires)
+
+## Purpose and learning objectives
+
+These independent notes discuss joining tables, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. They do not reproduce the official survey exercise, required deliverables, or lecture sequence. Consult authorized Geisel files for all course-specific requirements.
+
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## 1. Identify the join key before combining tables
 
