@@ -128,20 +128,3 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
-, metadata, re.M)
-    if not match:
-        raise ValueError(f'{source.relative_to(ROOT)}: missing title in YAML front matter')
-    title = match.group(1).strip().strip('\"\'')
-    body = re.sub(r'^```\{(r|bash|sh)[^}]*\}', r'```\1', body, flags=re.M)
-    body = re.sub(r'^```\{[^}]*\}', '```text', body, flags=re.M)
-    body = re.sub(r'`r [^`]+`', '[computed when rendered]', body)
-    header = (
-        f'# {title}\n\n'
-        f'[Section index](README.md) · [Editable R Markdown]({source.name}) · '
-        '[Repository home](../README.md)\n\n'
-        '> **Reading edition.** Code is displayed for study and has not been executed '
-        'to generate this page. Run the source chunks in order to produce and check '
-        'outputs; data-dependent examples need separately supplied course files.\n\n'
-    )
-    return contents(header + body.lstrip())
-
