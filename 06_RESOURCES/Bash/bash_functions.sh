@@ -25,7 +25,7 @@ hse_require_file() {
 hse_tsv_records() {
   [[ $# -eq 1 ]] || { hse_error 'usage: hse_tsv_records file.tsv'; return 2; }
   hse_require_file "$1" || return
-  awk 'END {print NR > 0 ? NR - 1 : 0}' "$1"
+  awk 'END {print (NR > 0 ? NR - 1 : 0)}' "$1"
 }
 
 # Print TSV field names with 1-based positions for safe column selection.

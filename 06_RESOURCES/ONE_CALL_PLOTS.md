@@ -3,8 +3,8 @@
 Load these files **in order** from the repository root:
 
 ```r
-source("06_06_RESOURCES/R/hse_stats_plots.R")
-source("06_06_RESOURCES/R/hse_one_call_plots.R")
+source("06_RESOURCES/R/hse_stats_plots.R")
+source("06_RESOURCES/R/hse_one_call_plots.R")
 ```
 
 These functions run the test, build a ready-to-print `ggplot2` visualization, and put the full `htest` result in `attr(p, "hse_test")`. No external plot-annotation package is required. The functions use **complete observations** and never infer pairing.
@@ -47,4 +47,4 @@ hse_save_plot(p, "figures/group_comparison.pdf", width=7, height=5)
 - `hse_plot_gene_wilcox()`: convenient single-gene descriptive comparison; exploratory Wilcoxon statistics cannot replace count-based edgeR inferential analysis. With many tested genes, explicitly control multiple testing.
 - **P-values are not effect sizes.** Graphs must document biological group sizes, assay scale, study design, selection rules and adjustment family. These utilities are teaching helpers, not clinical decision support.
 
-Tests: `Rscript --vanilla 06_06_RESOURCES/tests/test_hse_one_call_plots.R`. Test execution depends on an R environment with ggplot2 installed.
+Tests: `Rscript --vanilla 06_RESOURCES/tests/test_hse_one_call_plots.R`. Test execution depends on an R environment with ggplot2 installed.

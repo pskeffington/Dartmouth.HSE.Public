@@ -1,13 +1,23 @@
----
-title: "HSE 711 Week 4 — Introduction to Bash Scripting"
-output:
-  html_document: default
-  pdf_document: default
----
+# HSE 711 Week 4 — Introduction to Bash Scripting
+
+[Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
 # Lecture companion: the shell as a reproducible research interface
 
 This companion follows the supplied twelve-page *Introduction to Bash Scripting* lecture. It explains the scientific rationale behind each operation while retaining the lecture's progression: shell history and motivation, navigation, inspection, file management, scripting, pipelines, control structures, and calling R from Bash. The lecture text is the source for the instructional sequence; clearly identified *practice safeguards* below are additions for reproducible use. This is an independent teaching commentary, not a reproduction of the original lecture.
+
+## On this page
+
+- [1. Shells, Bash, and computational research](#1-shells-bash-and-computational-research)
+- [2. Navigating and organizing a filesystem](#2-navigating-and-organizing-a-filesystem)
+- [3. Inspecting research files without loading everything](#3-inspecting-research-files-without-loading-everything)
+- [4. Scripts, shebangs, and reproducibility](#4-scripts-shebangs-and-reproducibility)
+- [5. Pipes, redirection, and columns](#5-pipes-redirection-and-columns)
+- [6. Conditionals and loops](#6-conditionals-and-loops)
+- [7. Bash and R: division of responsibility](#7-bash-and-r-division-of-responsibility)
+- [Scholarly synthesis](#scholarly-synthesis)
 
 ## 1. Shells, Bash, and computational research
 

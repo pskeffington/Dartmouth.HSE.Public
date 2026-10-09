@@ -2,6 +2,12 @@
 
 Reusable methods, functions, teaching references and templates for health data science. All code is educational, **not clinical decision software**.
 
+## Start with the short sheets
+
+- [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.
+- [Easy Bash commands](Bash/EASY_COMMAND_SHEET.md): navigate, inspect, select fields and check a script.
+- [Follow-along guide](../FOLLOW_ALONG.md): prepare a session and review each week.
+
 ## Choose a resource
 
 | Need | Guide | Code |
@@ -20,11 +26,11 @@ Reusable methods, functions, teaching references and templates for health data s
 Load modules in dependency order:
 
 ```r
-source("06_06_RESOURCES/R/hse_stats_plots.R")
-source("06_06_RESOURCES/R/hse_gene_visuals.R")
-source("06_06_RESOURCES/R/hse_one_call_plots.R")
-source("06_06_RESOURCES/R/hse_biostat_panels.R")
-source("06_06_RESOURCES/R/hse_plot_annotations.R")
+source("06_RESOURCES/R/hse_stats_plots.R")
+source("06_RESOURCES/R/hse_gene_visuals.R")
+source("06_RESOURCES/R/hse_one_call_plots.R")
+source("06_RESOURCES/R/hse_biostat_panels.R")
+source("06_RESOURCES/R/hse_plot_annotations.R")
 ```
 
 **Descriptive report:**
