@@ -16,13 +16,24 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Rule updated; CI result unverified |
-| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Pending file-by-file audit |
-| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Pending execution |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | CI enhanced with reading-edition and link gates; workflow result unverified |
+| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: targeted R/Bash audit and two course-dependent examples cleaned; full artifact-by-artifact review pending |
+| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Pending; current-branch removal is insufficient |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
+
+## Pass 4 — resource and publication tooling review (2026-10-09)
+
+- Removed lecture-chunk references and assignment extension language from `06_RESOURCES/R/Week_3_Reusable_Functions.R`; function behavior remains intact.
+- Replaced the coursework-specific metadata filtering example in `06_RESOURCES/Bash/BASH_OPERATION_SHEET.md` with a generic categorical-filter demonstration.
+- Inspected seven R Markdown and Markdown reading-edition pairs. Four lecture companions had mismatched generated headers; all four were refreshed to match their current generator output. The other three pairs already matched.
+- Removed the obsolete `commented_lecture` converter, eliminating a legacy path that could regenerate copied lecture-code sections.
+- Added publishing freshness, internal navigation, and Python syntax checks to the GitHub Actions originality workflow.
+- No local Git checkout was available in this environment. The source comparisons were performed through the connected GitHub repository; runtime validation and CI outcomes have **not** been independently confirmed.
+
+**Next pass:** Inspect remaining Bash and R resource examples, LaTeX bibliographies, images/media, and any historical commits that contained original course material. Verify the Actions run and reconcile failures before raising the release gate.
 
 ## Required acceptance commands
 
