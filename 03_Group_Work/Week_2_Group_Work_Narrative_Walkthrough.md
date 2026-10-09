@@ -1,12 +1,22 @@
----
-title: "HSE 711 — Week 2 Group Work: Data Wrangling and Visualization"
-author: "Paul Skeffington"
-output: html_document
----
+# HSE 711 — Week 2 Group Work: Data Wrangling and Visualization
+
+[Section index](README.md) · [Editable R Markdown](Week_2_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
 This narrative follows all five Week 2 in-class exercises in order. The code uses Lecture 2's progression: inspect and filter a data frame, build base and ggplot figures, test a two-group comparison, generate reproducible `random_data`, summarize it, and reshape it with `pivot_longer()`. Run chunks from top to bottom in a fresh R session.
 
 The source CSV is held with the course material and is **not included in this public repository**. Put `In_Class_Exercises_Arsenic.csv` (or the downloaded `In_Class_Exercises_Arsenic(1)(1).csv`) in the repository's ignored `data/` folder before knitting. The supplied CSV does not specify arsenic measurement units, so figures say "recorded units" until the course documentation confirms a unit. Install `ggplot2`, `tidyr`, `knitr`, and `rmarkdown` locally before knitting; this file does not install packages during a run. HTML output avoids a LaTeX dependency.
+
+## On this page
+
+- [Exercise 1 — Import, inspect, and make a base R box plot](#exercise-1--import-inspect-and-make-a-base-r-box-plot)
+- [Exercise 2 — Grouped horizontal box plots with jitter](#exercise-2--grouped-horizontal-box-plots-with-jitter)
+- [Exercise 3 — Violin plot and two-group Wilcoxon test](#exercise-3--violin-plot-and-two-group-wilcoxon-test)
+- [Exercise 4 — Generate and summarize 200 synthetic participants](#exercise-4--generate-and-summarize-200-synthetic-participants)
+- [Exercise 5 — Remove Sex and pivot Age/Ferritin_Level long](#exercise-5--remove-sex-and-pivot-ageferritin_level-long)
+- [Carry forward](#carry-forward)
+- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
 
 ## Exercise 1 — Import, inspect, and make a base R box plot
 
@@ -15,7 +25,7 @@ The source CSV is held with the course material and is **not included in this pu
 
 Lecture 2 creates a data frame, inspects it, and uses base plotting functions before moving to ggplot. We apply that sequence to the supplied CSV. The column map makes the original `Arsenic_Total`, `Gender`, and `Marital_Status` labels explicit. Gender and marital values are categories, not numerical measurements. We exclude missing arsenic or gender only for this first plot; a missing marital value should not discard an otherwise eligible participant.
 
-```{r week2-setup, include=TRUE}
+```r
 # Lecture chunks 01, 06, 11–14, 20–21, 26, 42.
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
                       fig.width = 7, fig.height = 5)
@@ -118,7 +128,7 @@ The box summarizes the middle half of observed values around a median; whisker-o
 
 Lecture chunks 31–32 map one variable to an axis and another to `fill`, then add individual observations. We keep complete rows for the three plotted fields, dodge the boxes by marital status, and use the same dodge width for jittered points. `coord_flip()` puts gender on the displayed y-axis as requested. Suppressing the boxplot's own outlier glyph avoids drawing observations twice; it does not drop them.
 
-```{r week2-grouped-boxplots, fig.height=6}
+```r
 # Lecture chunks 31–32.
 group_data <- droplevels(nhanes_data[complete.cases(nhanes_data), ])
 if (nrow(group_data) == 0) stop("No complete rows for the grouped plot.")
@@ -146,7 +156,7 @@ gender_plot
 
 A violin summarizes distribution shape; the narrow box and jitter supply complementary views. The independent Wilcoxon rank-sum comparison concerns **Married versus Never Married only**, even though the violin displays all available marital groups. Following the lecture's test-on-plot idea, we compute the test explicitly, then use its p-value in the subtitle. This avoids guessing a number or testing an unintended collection of groups. Ties are handled with the approximate test (`exact = FALSE`).
 
-```{r week2-violin-wilcoxon, fig.height=6}
+```r
 # Lecture chunks 31–32, 39–40, 44.
 violin_data <- droplevels(nhanes_data[complete.cases(
   nhanes_data[c("Total_Arsenic", "Marital_Status")]), ])
@@ -180,7 +190,7 @@ violin_plot <- ggplot(violin_data,
 violin_plot
 ```
 
-The computed result is **`r p_label`**. A p-value does not quantify the size or cause of a difference. A median interpretation also needs attention to the shapes of the two distributions. This exercise does not use NHANES survey weights, strata, or clusters, so do not generalize its inferential result to the US population.
+The source calculates `p_label` when it is run; this reading edition contains no computed p-value. A p-value does not quantify the size or cause of a difference. A median interpretation also needs attention to the shapes of the two distributions. This exercise does not use NHANES survey weights, strata, or clusters, so do not generalize its inferential result to the US population.
 
 ## Exercise 4 — Generate and summarize 200 synthetic participants
 
@@ -189,7 +199,7 @@ The computed result is **`r p_label`**. A p-value does not quantify the size or 
 
 Lecture chunks 2–7 demonstrate seeded random data in `random_data`, while chunk 15 summarizes by group. We reuse that lecture name and the assignment's exact six column labels. Cases receive a lower expected ferritin level by construction; this is a simulation choice, not a clinical estimate. BMI is generated near 25 and bounded to plausible teaching values; age is sampled from adults 18–99. The ferritin ranges in the prompt are context, not diagnostic rules.
 
-```{r week2-synthetic-participants}
+```r
 # Lecture chunks 02–07, 15, 44.
 set.seed(711)
 n <- 200
@@ -239,7 +249,7 @@ The summary is calculated from the generated sample, not asserted in advance. We
 
 In wide form, each participant has one row with separate Age and Ferritin_Level columns. Following lecture chunk 18's `pivot_longer()` example, we remove `Sex` from a **new** object and pivot those two measurements into a `Measurement` and `Value` pair. Each of 200 participants should then have two rows; the original `random_data` remains unchanged.
 
-```{r week2-pivot-longer}
+```r
 # Lecture chunks 11, 18–19.
 random_data_nosex <- random_data[, names(random_data) != "Sex",
                                  drop = FALSE]

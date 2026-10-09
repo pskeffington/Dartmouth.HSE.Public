@@ -1,15 +1,26 @@
----
-title: "HSE 711 Week 4 — Bash Group Work Narrative Walkthrough"
-output:
-  html_document: default
-  pdf_document: default
----
+# HSE 711 Week 4 — Bash Group Work Narrative Walkthrough
+
+[Section index](README.md) · [Editable R Markdown](Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
 # Group work: reproducible operations on study metadata
 
 This walkthrough follows the supplied five-part exercise for `pseudo_metadata.csv`, described as synthetic metadata for ten participants. The educational objective is to move from basic inspection to selection, documented file creation, column extraction and safe cleanup. The working dataset is not included here; the commands are therefore **instructions, not observed results**.
 
 The exercise refers to both `only_female.txt` (Question 2) and `females_metadata.csv` (Question 3). They are not the same filename. To preserve that distinction while creating a coherent workflow, the example produces `only_female.txt` as requested and explicitly copies it to `females_metadata.csv` before Question 3. This is an **implementation bridge**, not a claimed correction to the original prompt.
+
+## On this page
+
+- [Verified classroom file and runnable companion](#verified-classroom-file-and-runnable-companion)
+- [Setup: identify the study file](#setup-identify-the-study-file)
+- [Question 1: count the file lines](#question-1-count-the-file-lines)
+- [Question 2: retain female participant records](#question-2-retain-female-participant-records)
+- [Question 3: create a workspace and document the subset](#question-3-create-a-workspace-and-document-the-subset)
+- [Question 4: extract the third and fourth columns](#question-4-extract-the-third-and-fourth-columns)
+- [Question 5: inspect and clean up the exercise folder](#question-5-inspect-and-clean-up-the-exercise-folder)
+- [Interpretation and academic discussion](#interpretation-and-academic-discussion)
+- [Practical review questions](#practical-review-questions)
 
 ## Verified classroom file and runnable companion
 

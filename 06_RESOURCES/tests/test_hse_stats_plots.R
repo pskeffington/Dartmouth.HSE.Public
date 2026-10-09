@@ -1,10 +1,10 @@
 # Run from any working directory using:
-# Rscript --vanilla HSE_711/library/tests/test_hse_stats_plots.R
+# Rscript --vanilla 06_RESOURCES/tests/test_hse_stats_plots.R
 args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", args, value = TRUE)
 if (!length(file_arg)) stop("Run via Rscript --vanilla <test path>.")
 script <- normalizePath(sub("^--file=", "", file_arg[1]), mustWork = TRUE)
-source(file.path(dirname(script), "..", "hse_stats_plots.R"))
+source(file.path(dirname(script), "..", "R", "hse_stats_plots.R"))
 d <- data.frame(id = rep(1:4, each = 2),
                 group = rep(c("A", "B"), 4),
                 value = c(1, 2, 2, 3, 3, 4, 4, 5))

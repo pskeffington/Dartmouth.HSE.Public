@@ -1,4 +1,4 @@
-# Week 4 Bash Group Work — Deployment package
+# Week 4 Bash Group Work — Runnable lab
 
 **Verified source layout:** `"","sampleID","condition","age","sex","batch"`. In the uploaded classroom example, there are 10 data records plus 1 header, and `sex` in field 5 uses `F` and `M` (not `Female` and `Male`). Quoted field contents are simple and contain no embedded commas in the provided sample.
 
@@ -28,4 +28,4 @@ bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
 
 The shell exercise assumes fixed, simple six-column CSV records, consistent with the supplied synthetic file. For general quoted CSV containing embedded commas/newlines, use a CSV-aware parser. This is a learning script, not a production ETL system.
 
-See [scholarly walkthrough](../Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) and the [LaTeX report template](../../06_06_RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex).
+See [scholarly walkthrough](../Week_4_Bash_Group_Work_Narrative_Walkthrough.md) and the [LaTeX report template](../../06_RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex).

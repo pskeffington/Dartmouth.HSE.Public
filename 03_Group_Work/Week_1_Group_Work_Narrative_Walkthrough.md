@@ -1,12 +1,39 @@
----
-title: "HSE 711 — Week 1 Group Work: Introduction to R"
-author: "Paul Skeffington"
-output: html_document
----
+# HSE 711 — Week 1 Group Work: Introduction to R
+
+[Section index](README.md) · [Editable R Markdown](Week_1_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
 This walkthrough follows the 21 exercises in the provided Week 1 working file. We move from inspecting individual values to selecting data, building tables, and combining a function with a loop. Each section explains the reasoning before showing commented base R code. Run the chunks from top to bottom in a fresh R session.
 
 Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over stylistic choices. For direct comparison with Lecture 1, the count-data pipeline keeps its `num.vector`, `count.vector`, `count.matrix`, and `count.df` names. Other added objects use descriptive `snake_case` names; the separate participant metadata table uses `participant.df` to match the lecture's data-frame suffix. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
+
+## On this page
+
+- [Source and scope](#source-and-scope)
+- [Exercise 1: Identify the data types](#exercise-1-identify-the-data-types)
+- [Exercise 2: Build a list of different vector types](#exercise-2-build-a-list-of-different-vector-types)
+- [Exercise 3: Convert floating-point values](#exercise-3-convert-floating-point-values)
+- [Exercise 4: Find a word while handling missing values](#exercise-4-find-a-word-while-handling-missing-values)
+- [Exercise 5: Count missing entries](#exercise-5-count-missing-entries)
+- [Exercise 6: Count values below a threshold](#exercise-6-count-values-below-a-threshold)
+- [Exercise 7: Count an exact character match](#exercise-7-count-an-exact-character-match)
+- [Exercise 8: Combine two inclusion conditions](#exercise-8-combine-two-inclusion-conditions)
+- [Exercise 9: Select three vector entries](#exercise-9-select-three-vector-entries)
+- [Exercise 10: Inspect factor levels](#exercise-10-inspect-factor-levels)
+- [Exercise 11: Name and extract list components](#exercise-11-name-and-extract-list-components)
+- [Exercise 12: Generate a synthetic count matrix](#exercise-12-generate-a-synthetic-count-matrix)
+- [Exercise 13: Label genes and participants](#exercise-13-label-genes-and-participants)
+- [Exercise 14: Select a matrix cell](#exercise-14-select-a-matrix-cell)
+- [Exercise 15: Append a numeric participant column](#exercise-15-append-a-numeric-participant-column)
+- [Exercise 16: Observe matrix coercion](#exercise-16-observe-matrix-coercion)
+- [Exercise 17: Rebuild a numeric matrix](#exercise-17-rebuild-a-numeric-matrix)
+- [Exercise 18:](#exercise-18)
+- [Exercise 19: Create participant metadata](#exercise-19-create-participant-metadata)
+- [Exercise 20: Extract the age column](#exercise-20-extract-the-age-column)
+- [Exercise 21: Combine a function, loop, and conditional](#exercise-21-combine-a-function-loop-and-conditional)
+- [What we should carry forward](#what-we-should-carry-forward)
+- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
 
 ## Source and scope
 
@@ -23,7 +50,7 @@ The explanations are a study walkthrough, not a reproduction of the instructor's
 
 We begin by assigning the three objects and asking R to report their classes. A whole-looking number such as 3 is still stored as numeric by default; an integer requires an explicit conversion or an L suffix. This check helps us choose valid operations before analyzing a variable.
 
-```{r group-work-01}
+```r
 # Lecture chunk references: 2, 5–7.
 a <- 3.14
 b <- "pie"
@@ -39,7 +66,7 @@ class(c)  # numeric
 
 Next, we use a list because its components can have different types. Each component remains a vector with one type. We use the lecture's `students <- list(...)` object name and give this exercise's components descriptive type names. Here the object illustrates list structure; the entries are not actual student records.
 
-```{r group-work-02}
+```r
 # Lecture chunk references: 5, 15–16.
 students <- list(
   integers = as.integer(c(1, 2, 3)),
@@ -53,7 +80,7 @@ str(students)
 
 We convert the supplied values with as.integer(). This truncates toward zero rather than rounding: 8.88 becomes 8. We use my_integers because the exercise explicitly requests that output name; this uses the output name required by the exercise.
 
-```{r group-work-03}
+```r
 # Lecture chunk references: 8.
 my_floats <- c(1.67, 1.11, 2.25, 8.88, 6.67, 1048.2)
 my_integers <- as.integer(my_floats)
@@ -67,7 +94,7 @@ my_integers  # 1 1 2 8 6 1048
 
 The supplied arthritis vector contains both words and missing values. A comparison alone leaves NA entries in the selection mask. We first exclude missing entries, then select the exact word. This pattern also applies to selecting a category from an imported dataset. The short vector below adapts the selection task for a public walkthrough; it preserves four missing entries without reproducing the source passage. It is used for indexing practice, not to draw medical conclusions.
 
-```{r group-work-04}
+```r
 # Lecture chunk references: 3–4, 11, 13.
 arthritis <- c(
   "rheumatoid", "arthritis", NA, "immune", "response",
@@ -83,7 +110,7 @@ arthritis[!is.na(arthritis) & arthritis == "rheumatoid"]
 
 is.na() returns TRUE for each missing element. Summing that logical vector counts the TRUE values because R treats TRUE as 1 and FALSE as 0 in this calculation. This is a compact missingness audit.
 
-```{r group-work-05}
+```r
 # Lecture chunk references: 13.
 sum(is.na(arthritis))  # 4
 ```
@@ -92,7 +119,7 @@ sum(is.na(arthritis))  # 4
 
 We compare every element with 10 and sum the resulting logical vector. The comparison is strictly less than, so 10 itself is excluded. If real data contain NA, decide explicitly how those missing values should affect the count.
 
-```{r group-work-06}
+```r
 # Lecture chunk references: 3, 7.
 number_vector <- c(30, 29, 48, 10, 0, 8, 56, 77, 211, 674, 1)
 sum(number_vector < 10)  # 3
@@ -102,7 +129,7 @@ sum(number_vector < 10)  # 3
 
 The same counting pattern works with text. Equality is case-sensitive, and we compare against a quoted character value. This is useful for checking repeated labels.
 
-```{r group-work-07}
+```r
 # Lecture chunk references: 3, 7.
 letter_vector <- c("v", "a", "b", "g", "f", "a", "n", "m", "q", "a", "c", "w", "w", "i", "e", "y")
 sum(letter_vector == "a")  # 3
@@ -112,7 +139,7 @@ sum(letter_vector == "a")  # 3
 
 We give this exercise its own five_count_vector rather than overwriting the threshold vector from Exercise 6. We want values equal to 5 OR greater than 5555. Parentheses make each condition clear, while | combines them element by element. Values exactly equal to 5555 do not meet the second condition.
 
-```{r group-work-08}
+```r
 # Lecture chunk references: 3–4.
 five_count_vector <- c(5, 5, 55, 555555, 555, 55555, 5, 5, 555555555,
                        55, 55, 555, 5, 5, 55555555, 5, 55, 5, 5555,
@@ -124,7 +151,7 @@ sum((five_count_vector == 5) | (five_count_vector > 5555))  # 13
 
 We use the lecture's `char_vector` name for the five-item character vector and select positions 1, 3, and 5. R uses one-based indexing. Saving the result gives us a reusable subset while leaving the original five-element vector intact.
 
-```{r group-work-09}
+```r
 # Lecture chunk references: 5, 11.
 char_vector <- c("tacos", "burritos", "enchalada", "chalupa", "arroz")
 char_subset <- char_vector[c(1, 3, 5)]
@@ -135,7 +162,7 @@ char_subset
 
 We convert smoking_status into a factor and inspect its levels. The levels identify the available categories, not their frequencies. With no explicit levels argument, these labels are ordinarily sorted alphabetically; set levels explicitly when order matters.
 
-```{r group-work-10}
+```r
 # Lecture chunk references: 14.
 smoking_status <- c("Never Smoker", "Current Smoker", "Former Smoker", "Former Smoker", "Never Smoker", "Never Smoker", "Never Smoker", "Current Smoker", "Former Smoker", "Former Smoker")
 smoking_status <- factor(smoking_status)
@@ -147,7 +174,7 @@ levels(smoking_status)
 
 We give the grocery vectors meaningful category names. Double brackets extract the second component as a vector, so class() reports character. Single brackets would retain a list, which is a different structure.
 
-```{r group-work-11}
+```r
 # Lecture chunk references: 15–16.
 grocery_list <- list(
   c("Peaches", "Bananas", "Strawberries", "Melon"),
@@ -166,7 +193,7 @@ class(grocery_list[[2]])  # character
 
 A five-by-five matrix needs 25 values. We sample from 0 through 20 with replacement, then fill the matrix row by row. A seed makes repeated runs reproducible under the same R random-number settings. These are teaching data, not observed patient or gene measurements.
 
-```{r group-work-12}
+```r
 # Lecture chunk references: 17–19; seed practice in 33.
 set.seed(123)
 num.vector <- c(0:20)
@@ -179,7 +206,7 @@ count.matrix
 
 Names make the matrix interpretable: rows represent genes and columns represent participants. We keep the exact labels from the exercise, then check that the orientation matches our intent. This becomes essential when matching a matrix to participant metadata.
 
-```{r group-work-13}
+```r
 # Lecture chunk references: 20–21.
 rownames(count.matrix) <- c("PTEN", "BRCA1", "TP53", "EGFR", "IL6")
 colnames(count.matrix) <- paste("Participant", 106:110)
@@ -190,7 +217,7 @@ count.matrix
 
 Matrix indexing always places the row before the column. To obtain column 3, row 5, we therefore write [5, 3]. The labels provide a second way to check that this is IL6 for Participant 108.
 
-```{r group-work-14}
+```r
 # Lecture chunk references: 22.
 count.matrix[5, 3]
 # Same cell, selected by its labels.
@@ -201,7 +228,7 @@ count.matrix["IL6", "Participant 108"]
 
 We append five values because the matrix has five gene rows. The snake_case object name participant_111 describes the new vector; the displayed column label retains the exercise's "Participant 111" spelling. As in the lecture's new_col example, cbind() combines by position, so the values must already follow gene order.
 
-```{r group-work-15}
+```r
 # Lecture chunk references: 24.
 participant_111 <- c(1, 2, 3, 4, 5)
 count.matrix <- cbind(count.matrix, participant_111)
@@ -213,7 +240,7 @@ dim(count.matrix)  # 5 rows, 6 columns
 
 A matrix has one underlying data type. Adding letters forces the numeric values to become character strings. We inspect both class and storage mode: it remains a matrix, but its contents are now character. This explains why mixed metadata belongs in a data frame instead.
 
-```{r group-work-16}
+```r
 # Lecture chunk references: 6, 8, 19, 24.
 participant_112 <- c("a", "b", "c", "d", "e")
 count.matrix <- cbind(count.matrix, participant_112)
@@ -226,7 +253,7 @@ storage.mode(count.matrix)  # character
 
 We start fresh so the character column from the previous exercise does not carry forward. The supplied draft samples 50 values for only 25 cells; we correct size to 25. Using a new seed gives a reproducible second example without relying on earlier random draws.
 
-```{r group-work-17}
+```r
 # Lecture chunk references: 17–21.
 set.seed(124)
 num.vector <- c(0:20)
@@ -244,7 +271,7 @@ count.matrix
 
 We use as.data.frame() to change the container while retaining the gene rows and participant columns. Conversion does not transpose the data or turn it into participant metadata. The frame can subsequently hold columns of different types.
 
-```{r group-work-18}
+```r
 # Lecture chunk references: 27–28.
 count.df <- as.data.frame(count.matrix)
 str(count.df)
@@ -254,7 +281,7 @@ str(count.df)
 
 Now we create a separate table with one participant per row. The name participant.df describes the table's role and follows the lecture's count.df data-frame pattern. Its three columns map to Participant ID, Age, and Disease Status, but use lowercase snake_case so column access does not require backticks. The IDs are character identifiers, not quantities to calculate with.
 
-```{r group-work-19}
+```r
 # Lecture chunk references: 27.
 participant.df <- data.frame(
   participant_id = c("106", "107", "109"),
@@ -268,7 +295,7 @@ participant.df
 
 The dollar operator returns the named column as a vector. That is the appropriate structure for a later numerical summary. It differs from participant.df["age"], which retains a one-column data frame.
 
-```{r group-work-20}
+```r
 # Lecture chunk references: 28.
 participant.df$age  # 45 23 99
 ```
@@ -277,7 +304,7 @@ participant.df$age  # 45 23 99
 
 Finally, we wrap the repeated operation in my_first_function(). At each row we inspect disease_status: a case prints its participant_id, and a control prints its age. seq_len(nrow(df)) is a small refinement of the lecture’s index loop because it also handles zero rows. The explicit else-if avoids treating every non-case label as a control. This teaching example assumes complete Case/Control labels; imported data should be checked first.
 
-```{r group-work-21}
+```r
 # Lecture chunk references: 30–33, 36–39.
 my_first_function <- function(df) {
   # Loop through rows and use the same row index for every column.
