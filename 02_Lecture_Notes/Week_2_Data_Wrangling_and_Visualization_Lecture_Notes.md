@@ -1,19 +1,24 @@
----
-title: "HSE 711 — Week 2: Data Wrangling and Visualization Lecture Notes"
-author: "Independent course study companion"
-output:
-  html_document:
-    toc: true
-    toc_depth: 2
-    toc_float:
-      collapsed: false
-    code_folding: show
-    css: ../06_RESOURCES/Presentation/reading.css
----
+# HSE 711 — Week 2: Data Wrangling and Visualization Lecture Notes
+
+[Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
+
+## On this page
+
+- [Purpose and learning objectives](#purpose-and-learning-objectives)
+- [1. Make random data reproducible](#1-make-random-data-reproducible)
+- [2. Set boundaries and build derived categories](#2-set-boundaries-and-build-derived-categories)
+- [3. Distinguish wide and long data](#3-distinguish-wide-and-long-data)
+- [4. Build a plot by mapping data to axes](#4-build-a-plot-by-mapping-data-to-axes)
+- [5. Inspect paired measurements with scatter plots](#5-inspect-paired-measurements-with-scatter-plots)
+- [6. Summarize, audit missingness, and check visualization](#6-summarize-audit-missingness-and-check-visualization)
+- [7. Explain the method used for each assignment task](#7-explain-the-method-used-for-each-assignment-task)
+- [8. Final self-check: what Week 2 mastery requires](#8-final-self-check-what-week-2-mastery-requires)
 
 ## Purpose and learning objectives
 
-The Week 2 lecture introduces simulation, data-frame construction, categorical variables, tidyverse operations, long and wide representations, descriptive statistics, and plots. These notes connect those **lecture methods** to the skills needed for the data-wrangling assignment without publishing the assignment or its solutions. The original [chunk-by-chunk Week 2 notes](Week_2_Learning_Objective_Notes.md) remain the detailed lecture reference.
+The Week 2 lecture introduces simulation, data-frame construction, categorical variables, tidyverse operations, long and wide representations, descriptive statistics, and plots. These notes connect those **lecture methods** to the skills needed for the data-wrangling assignment without publishing the assignment or its solutions. The original [chunk-by-chunk Week 2 notes](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) remain the detailed lecture reference.
 
 | Assignment skill | Lecture topics | Evidence you can produce |
 | --- | --- | --- |
@@ -27,7 +32,7 @@ The Week 2 lecture introduces simulation, data-frame construction, categorical v
 
 **Lecture idea:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.
 
-```{r week2-simulation}
+```r
 set.seed(246)
 n_samp <- 12L
 practice_df <- data.frame(
@@ -47,7 +52,7 @@ stopifnot(nrow(practice_df) == n_samp)
 
 The lecture uses categorization tools such as `cut()`, `factor()`, and `case_when()`. A derived category must be calculated *after* its source columns exist. If you clip values with `pmax()` and `pmin()`, values accumulate at boundaries; **clipping is not the same as sampling from a truncated normal distribution**.
 
-```{r week2-conditions}
+```r
 practice_df$score <- pmax(0, pmin(100, round(rnorm(n_samp, 65, 18))))
 practice_df$score_group <- factor(
   ifelse(practice_df$score >= 70, "Higher", "Lower"),
@@ -66,7 +71,7 @@ stopifnot(all(practice_df$score >= 0 & practice_df$score <= 100))
 
 **Lecture idea:** One person can occupy one row in wide form, with several measurement columns. Long form holds one measurement per row. The change reorganizes observations; it does not generate new participants.
 
-```{r week2-pivot}
+```r
 # Requires tidyr. Install separately if it is not already available.
 library(tidyr)
 
@@ -99,7 +104,7 @@ stopifnot(nrow(reading_wide) == nrow(practice_df))
 
 A `ggplot()` call specifies the data and the visual mapping. A geometry determines how the values appear. For grouped boxes, the x position holds the measurement category, y holds a numeric value, and the fill indicates a grouping variable.
 
-```{r week2-plot}
+```r
 library(ggplot2)
 
 ggplot(
@@ -124,7 +129,7 @@ ggplot(
 
 A scatter plot displays two values measured on the same observational unit. It can reveal direction, curvature, clusters, or outlying values, but does not establish a causal relationship.
 
-```{r week2-scatter}
+```r
 ggplot(practice_df, aes(x = reading_a, y = reading_b)) +
   geom_point() +
   labs(
@@ -139,7 +144,7 @@ ggplot(practice_df, aes(x = reading_a, y = reading_b)) +
 
 ## 6. Summarize, audit missingness, and check visualization
 
-```{r week2-summary}
+```r
 summary(practice_df$age)
 sum(is.na(practice_df$age))
 aggregate(score ~ group, data = practice_df, FUN = mean)
@@ -166,4 +171,4 @@ Mark each objective only when you can **perform and explain it without copying a
 
 **Mastery standard:** All six objectives demonstrated with a fresh toy dataset; each plot must have a defensible interpretation, and the workflow must run in order without relying on undeclared objects. If any step fails, revisit the corresponding lecture chunk and repeat that checkpoint.
 
-**Related:** [Week 2 lecture chunk reference](Week_2_Learning_Objective_Notes.md) · [Group work](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)
+**Related:** [Week 2 lecture chunk reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) · [Group work](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)

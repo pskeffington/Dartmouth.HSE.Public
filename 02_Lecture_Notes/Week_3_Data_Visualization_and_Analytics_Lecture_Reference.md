@@ -1,6 +1,6 @@
 # HSE 711 · Week 3 learning notes
 
-[Lecture index](README.md) · [Commented source](Week_3_Learning_Objective_Notes.R) · [Repository home](../README.md)
+[Lecture index](README.md) · [Commented source](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.R) · [Repository home](../README.md)
 
 > **Reading edition.** Original lecture references are retained for study. The commented source runs no analysis. Code below is reference material; check paths, packages, inputs and prerequisites before using it.
 
