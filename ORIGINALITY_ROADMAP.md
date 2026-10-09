@@ -133,6 +133,17 @@ The public repository may explain general methods using independently written co
 
 **Next action:** download and read the current Actions artifacts; review all flagged paths against original source materials and contributor/rights evidence, recording decisions at exact file versions. Complete the historical-remediation authorization decision before considering O11 clearance. Do not force-push automatically.
 
+## Pass 14 — disposition of the 12 baseline findings (2026-10-09)
+
+- Inspected the 10 text files flagged for their protective course-use notices. They instructed readers not to reproduce restricted source materials or to obtain course inputs privately. These are not affirmative statements that instructor content was republished.
+- Replaced broad source-reference and no-reproduction regexes with narrower **affirmative reuse** patterns; added unit and Git-fixture regression checks distinguishing a caution from a declaration of included/copied source code.
+- Created [file-specific findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md) covering all 12 baseline paths. **No original-author rights approval was inferred** from an indicator's disappearance.
+- The other two findings concern compiled LaTeX PDFs. They remain **HOLD** until the binary/source hashes, build lineages, embedded assets, source rights, and reviewer decisions are verified. No blanket binary exception was introduced.
+- The prior 30 historical blob overlaps remain unresolved. No history rewrite or deletion was performed.
+- New CI and scanner execution after these changes remain unverified; the original 12-finding report is a dated baseline, not an updated scan result.
+
+**Next:** execute the new scanner and test suite, confirm whether the ten protective-text indicators disappear without hiding affirmative reuse, and finish the two PDF provenance records plus the historical rights decision.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
