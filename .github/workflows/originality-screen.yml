@@ -64,13 +64,20 @@ jobs:
       - name: Compile Python validation and publication scripts
         shell: bash
         run: |
-          python3 -m py_compile scripts/check_public_originality.py 06_RESOURCES/Presentation/*.py
+          python3 -m py_compile scripts/check_public_originality.py scripts/build_provenance_inventory.py 06_RESOURCES/Presentation/*.py
+      - name: Inventory tracked artifact provenance
+        if: always()
+        shell: bash
+        run: |
+          python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
       - name: Save screening report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: originality-screening-report
-          path: originality-report.json
+          path: |
+            originality-report.json
+            provenance-inventory.json
           if-no-files-found: warn
           retention-days: 30
       - name: Enforce originality release decision
