@@ -1,8 +1,10 @@
-# APA 7 student manuscript template
+# Example APA 7 Manuscript
+
+**Header note:** This file is known to compile safely.
 
 [Resource index](../README.md) · [Repository home](../../README.md)
 
-[Editable LaTeX manuscript](APA_7_Student_Manuscript_Template.tex) · [Compiled example PDF](APA_7_Student_Manuscript_Template.pdf)
+[Editable LaTeX manuscript](Example_APA_7_Manuscript.tex) · [Compiled example PDF](Example_APA_7_Manuscript.pdf)
 
 This template turns the Week 4 metadata exercise into a student manuscript example. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures contain explicit placeholders; no numerical findings are supplied.
 
@@ -35,8 +37,8 @@ The Times-family font is a portable TeX substitute, rather than a bundled propri
 From this folder:
 
 ```bash
-pdflatex -interaction=nonstopmode -halt-on-error APA_7_Student_Manuscript_Template.tex
-pdflatex -interaction=nonstopmode -halt-on-error APA_7_Student_Manuscript_Template.tex
+pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
 ```
 
 The source uses common TeX packages and compiles without an `apa7` class or a BibTeX/Biber run. It explicitly configures student-paper layout using `article`. References are editable entries in `thebibliography`; `natbib` formats the in-text examples, but does not automatically validate or convert the reference text. For a larger bibliography, consider the [APA 7 citation package](https://ctan.org/pkg/biblatex-apa) and its Biber workflow.
@@ -48,5 +50,3 @@ For an assigned abstract, change `\includeabstractfalse` to `\includeabstracttru
 Use APA's [student paper setup guide](https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf), [title-page guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page) and [heading guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/headings), together with the instructor's instructions.
 
 The manuscript example uses the lab's actual six-field schema: `sex` is field 5 with `F`/`M` codes. The source input is held locally in the ignored `data/` folder. See the [Week 4 reading walkthrough](../../03_Group_Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.md) and [runnable lab](../../03_Group_Work/Week_4_Bash_Lab/README.md) for the procedure and its limitations.
-
-The previous [Week 4 filename](Week_4_Bash_LaTeX_Template.tex) remains as a compatibility entry point. To use that entry point, keep both `.tex` files together and compile from this directory. Edit the canonical manuscript source to update either entry point.
