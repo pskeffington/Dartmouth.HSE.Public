@@ -1,96 +1,66 @@
-# RESOURCES — R functions, genomic graphics, and literature
+# Resources
 
-This is the entry point for students and collaborators. All examples are **educational**, not diagnostic or clinical software.
+Reusable methods, functions, teaching references and templates for health data science. All code is educational, **not clinical decision software**.
 
-## Files
+## Choose a resource
 
-### LaTeX study templates
+| Need | Guide | Code |
+| --- | --- | --- |
+| Complete descriptive statistics, IQR and narrative | [Summary statistics](SUMMARY_STATISTICS.md) | [R statistics](R/hse_stats_plots.R) |
+| One-call regression and Wilcoxon plots | [Statistical graphics](ONE_CALL_PLOTS.md) | [R plot functions](R/hse_one_call_plots.R) |
+| Faceted panels and clinical biostatistics figures | [Biostatistics panels](BIOSTAT_PLOT_PANELS.md) | [R panel functions](R/hse_biostat_panels.R) |
+| Consistent figure titles, sample sizes and annotations | [Plot annotations](PLOT_ANNOTATIONS.md) | [R annotation functions](R/hse_plot_annotations.R) |
+| Gene-expression heatmaps, PCA and volcano plots | [Gene graphics](R/hse_gene_visuals.R) | [R source](R/hse_gene_visuals.R) |
+| Bash syntax, operations and safe scripting | [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) | [Bash helpers](Bash/bash_functions.sh) |
+| Week 4 formatted learning document | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/Week_4_Bash_LaTeX_Template.tex) |
+| Research and coding references | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) · [Literature matrix](Literature/LITERATURE_MATRIX.md) | [Matrix CSV](Literature/literature_matrix.csv) |
 
-- [Week 4 Bash LaTeX template](LaTeX/Week_4_Bash_LaTeX_Template.tex) — editable learning document and five-exercise lab report.
-- [Template instructions](LaTeX/README.md) — compilation steps and source-data boundaries.
+## R statistics and visualization
 
-
-### Bash programming
-
-- [Bash literature review](Bash/BASH_LITERATURE_REVIEW.md) — annotated sources on Bash syntax, shell safety, text processing, portability and bioinformatics workflows.
-- [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) — beginner-to-intermediate command reference and worked metadata exercises.
-- [Reusable Bash functions](Bash/bash_functions.sh) — sourceable helpers for file validation, TSV inspection, SHA-256 and Rscript orchestration.
-
-### R programming
-
-- [Complete summary statistics + narrative](SUMMARY_STATISTICS.md) — IQR, quartiles, spread, sample sizes, missingness, and automatically generated reader summaries.
-- [Summary statistics tests](tests/test_hse_summary_report.R) — small deterministic example and boundary checks.
-
-- [Automatic figure annotations](PLOT_ANNOTATIONS.md) — method, sample counts, p-values, units, statistical cautions, provenance, figure audits and export manifests.
-- [Annotation functions](R/hse_plot_annotations.R) — source after other plotting modules to annotate downstream one-call plots.
-- [Annotation tests](tests/test_hse_plot_annotations.R) — synthetic regression, Wilcoxon, panels and export audits.
-
-- [Biostatistics plot panels](BIOSTAT_PLOT_PANELS.md) — one-call ggplot facets, Wilcoxon panels, longitudinal and confidence-interval plots, forest, ROC, survival and model diagnostics.
-- [Biostatistics panel R functions](R/hse_biostat_panels.R) — thoroughly commented source code.
-- [Biostatistics plot tests](tests/test_hse_biostat_panels.R) — synthetic examples and optional-dependency checks.
-
-- [One-call statistical graphics](ONE_CALL_PLOTS.md) — ready-made regression, Pearson/Spearman, Wilcoxon, Kruskal-Wallis and gene-expression plots, with annotated p-values.
-- [One-call plotting functions](R/hse_one_call_plots.R) — reusable implementation and test-result attributes.
-- [Statistical plotting smoke tests](tests/test_hse_one_call_plots.R) — synthetic-data validation script.
-
-- [R/hse_stats_plots.R](R/hse_stats_plots.R) — descriptive statistics, Wilcoxon tests, correlation, basic plots, CPM and gene-panel preparation.
-- [R/hse_gene_visuals.R](R/hse_gene_visuals.R) — selected-gene heatmaps, PCA, mean–variance plots, and model-derived volcano plots.
-- [R/Week_3_Reusable_Functions.R](R/Week_3_Reusable_Functions.R) — original annotated Week 3 classroom functions.
-- [tests/test_hse_stats_plots.R](tests/test_hse_stats_plots.R) and [tests/test_hse_gene_visuals.R](tests/test_hse_gene_visuals.R) — synthetic-data smoke tests.
-- [Literature/literature_matrix.csv](Literature/literature_matrix.csv) — machine-readable evidence matrix.
-- [Literature/LITERATURE_MATRIX.md](Literature/LITERATURE_MATRIX.md) — explanatory literature evidence and limitations.
-
-## Quick start
-
-From the repository root:
+Load modules in dependency order:
 
 ```r
 source("RESOURCES/R/hse_stats_plots.R")
 source("RESOURCES/R/hse_gene_visuals.R")
+source("RESOURCES/R/hse_one_call_plots.R")
+source("RESOURCES/R/hse_biostat_panels.R")
+source("RESOURCES/R/hse_plot_annotations.R")
+```
+
+**Descriptive report:**
+
+```r
 data(mtcars)
-mtcars$cyl <- factor(mtcars$cyl)
-hse_describe(mtcars, "mpg", "cyl")
-p <- hse_box(mtcars, "mpg", "cyl")
-print(p)
-hse_save_plot(p, "figures/mtcars_mpg.pdf")
+report <- hse_summary_report(mtcars, "mpg", unit = "miles per gallon")
+hse_print_summary(report)
 ```
 
-To explore real RNA-seq data, supply a named integer gene-by-sample count matrix and sample metadata. Use `hse_cpm(counts)` for **TMM-adjusted logCPM displays**; preserve raw counts and edgeR offsets for differential-expression inference.
+**Annotated visualization:**
 
 ```r
-# Only after defining counts and metadata:
-# logcpm <- hse_cpm(counts)
-# genes <- hse_gene_top_var(logcpm, 40)
-# p <- hse_gene_heatmap(logcpm, genes)
-# print(p)
+plot <- hse_plot_test(mtcars, "wt", "mpg")
+hse_plot_audit(plot)
+print(plot)
 ```
 
-## Install optional packages
+For additional historical classroom functions, see [Week 3 reusable functions](R/Week_3_Reusable_Functions.R).
 
-```r
-install.packages("ggplot2")
-# Optional faster row-wise matrix statistics:
-install.packages("matrixStats")
-# Bioconductor edgeR is needed for the CPM helper:
-if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-BiocManager::install("edgeR")
-```
+## Bash programming
 
-## Tests
+Start with the [operation reference](Bash/BASH_OPERATION_SHEET.md), then the [annotated literature review](Bash/BASH_LITERATURE_REVIEW.md). The [sourceable utility functions](Bash/bash_functions.sh) provide file checking, TSV inspection, checksum utilities and Rscript orchestration.
 
-```sh
-Rscript --vanilla RESOURCES/tests/test_hse_stats_plots.R
-Rscript --vanilla RESOURCES/tests/test_hse_gene_visuals.R
-```
+The [Week 4 runnable exercise](../Group%20Work/Week_4_Bash_Lab/) expects local synthetic data in `data/`, which Git ignores.
 
-The tests were authored as smoke tests and must be executed in an environment with R installed before describing them as passed. Plotting checks are conditional on ggplot2; CPM checks are conditional on edgeR.
+## LaTeX learning and reports
 
-## Literature and publication standards
+The [Week 4 LaTeX template](LaTeX/) contains learning objectives, command examples, report sections, observation placeholders and reproducibility checks. TeX compilation requires a separate LaTeX installation.
 
-The literature matrix was transferred from the research literature compilation as a **bibliographic/methods resource**, not as release of private project data. Some entries discuss unpublished or internal evidence; these are annotated and **must not be presented as independently verified public results**. Always distinguish primary evidence, background sources, exploratory comparisons, and provenance exclusions.
+## Tests and scientific boundaries
 
-Publication figures should have explicit assay scale, sample counts, consistent labels, reproducible code, and traceable software versions. Heatmap row z-scores are not CPM magnitudes. Volcano plots require independent model-derived logFC and adjusted p-values.
+Smoke tests are in [tests](tests/), including descriptive statistics, gene plots, regression, panels, annotations and summary narratives. These tests require R and appropriate packages and are **not a substitute for independent scientific validation**. Run the relevant test before relying on a figure or statistical result.
 
-## Layout migration
+Report sample sizes, missingness, measures, units and statistical assumptions. Distinguish descriptive log-CPM analysis from count-based models for RNA-seq inference. The literature matrix is methodological background, not confirmation of project-specific clinical results.
 
-Earlier paths under `HSE_711/library/` and `HSE_711/notes/` moved to `RESOURCES/R/`, `Lecture Notes/` and `Group Work/`. Source code demonstrations and file references should use the paths above.
+## Local-only inputs
+
+`/data/` and `/week4_practice/` are excluded by `.gitignore`. Do not use `git add -f` to publish them. Avoid committing sensitive data, restricted classroom files or identifiable patient records.
