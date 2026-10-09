@@ -18,7 +18,7 @@ The subsequently supplied `pseudo_metadata.csv` has **11 lines** (one header, te
 For a ready-to-run implementation of all five exercises, use [Week 4 Bash Lab](Week_4_Bash_Lab/README.md). The staged command is:
 
 ```bash
-bash "Group Work/Week_4_Bash_Lab/run_week4.sh" /path/to/pseudo_metadata.csv ./week4_practice
+bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" /path/to/pseudo_metadata.csv ./week4_practice
 ```
 
 The initial commands below remain as a teaching example of header-based selection, not the verified runnable implementation; the exercise-specific script uses the observed F/M schema and includes guardrails against deleting an unrelated folder.
@@ -122,4 +122,4 @@ The five tasks illustrate a complete miniature processing pipeline: validate a s
 4. Why can `cut -d ','` produce incorrect results on a CSV with quoted commas?
 5. What should an analyst verify before running a recursive removal command?
 
-For a broader treatment, see the [Bash literature review](../RESOURCES/Bash/BASH_LITERATURE_REVIEW.md), [operation sheet](../RESOURCES/Bash/BASH_OPERATION_SHEET.md), and [reusable Bash functions](../RESOURCES/Bash/bash_functions.sh).
+For a broader treatment, see the [Bash literature review](../06_06_RESOURCES/Bash/BASH_LITERATURE_REVIEW.md), [operation sheet](../06_06_RESOURCES/Bash/BASH_OPERATION_SHEET.md), and [reusable Bash functions](../06_06_RESOURCES/Bash/bash_functions.sh).
