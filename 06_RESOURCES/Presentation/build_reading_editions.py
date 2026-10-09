@@ -9,6 +9,23 @@ ROOT = Path(__file__).resolve().parents[2]
 LECTURES = ROOT / '02_Lecture_Notes'
 GROUP_WORK = ROOT / '03_Group_Work'
 
+# Explicit baseline prevents missing files being masked by unrelated new sources.
+# Adding a new reading edition is a reviewed source-manifest change.
+REQUIRED_SOURCES = (
+    "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
+    "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
+    "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
+    "02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.Rmd",
+    "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
+    "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
+    "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
+)
+
+def verify_required_sources(root: Path, sources: list[Path]) -> list[str]:
+    available = {p.relative_to(root).as_posix() for p in sources}
+    return sorted(set(REQUIRED_SOURCES) - available)
+
+
 
 def anchor(title: str) -> str:
     """Create the same simple heading anchors used by the reading editions."""
@@ -67,9 +84,11 @@ def main():
     # public instructor-code transcripts from R scripts.
     sources = sorted(LECTURES.glob('Week*.Rmd'))
     sources += sorted(GROUP_WORK.glob('Week*.Rmd'))
-    # A missing course directory must never turn a vacuous zero-file check green.
-    if len(sources) < 7:
-        print(f'ERROR: expected at least 7 reading sources, found {len(sources)}.')
+    missing = verify_required_sources(ROOT, sources)
+    if missing:
+        print("ERROR: required public reading sources are missing:")
+        for name in missing:
+            print(f"  - {name}")
         return 2
     stale = []
     for source in sources:
