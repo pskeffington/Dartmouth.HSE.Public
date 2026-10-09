@@ -47,8 +47,17 @@ class CourseSignalTests(unittest.TestCase):
             "All rights reserved"))
         self.assertIsNone(restriction["explicit rights restriction"].search(
             "Please do not share these notes"))
-        self.assertIsNotNone(review["distribution warning; verify origin"].search(
-            "Do not reproduce the source handout"))
+        self.assertFalse(any(p.search("Do not reproduce the source handout")
+                             for p in review.values()))
+        self.assertFalse(any(p.search(
+            "Obtain the instructor-provided code from the authorized course channel")
+                             for p in review.values()))
+        self.assertTrue(any(p.search(
+            "We copied the instructor handout code into this repository")
+                            for p in review.values()))
+        self.assertTrue(any(p.search(
+            "Instructor-provided code was included in the public guide")
+                            for p in review.values()))
 
     def test_release_gate_fails_on_unresolved_review(self) -> None:
         report = {"status": "REVIEW", "tracked_files": 1,
