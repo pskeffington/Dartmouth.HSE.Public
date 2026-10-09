@@ -137,4 +137,46 @@ Bash can pass arguments and redirect console output, but it cannot establish bio
 
 The methodological progression is from *where the data reside*, to *what the data contain*, to *how operations are repeated and documented*. Students should be able to explain which commands inspect data, which transform it, and which may permanently alter it. They should also be able to show that the shell's orchestration logic is distinct from substantive R statistical analysis.
 
-**Execution boundary:** `data.csv` and the class's `pseudo_metadata.csv` ARE not supplied with this lecture text, so no file-specific output or participant count is asserted here. The example commands are instructional and must be executed in (your) an appropriate local directory.
+**Execution boundary:** `data.csv` and the class's `pseudo_metadata.csv` are not supplied with this lecture text, so no file-specific output or participant count is asserted here. Run examples only against authorized inputs in an appropriate local directory.
+
+## 8. Applied workflow: from an assignment prompt to a checked shell script
+
+The lecture moves from finding files to inspecting content, automating repeated operations, and invoking R. Practise that complete sequence in a disposable folder before applying it to coursework. The following is a **self-contained practice example**, not an assignment solution.
+
+```bash
+# Run within a disposable directory created for this exercise.
+mkdir -p week4_practice
+cd week4_practice
+printf 'sample,value\na,4\nb,9\n' > measurements.csv
+
+pwd
+head -n 3 measurements.csv
+wc -l measurements.csv
+
+# Check for a valid input before processing it.
+if [[ -f measurements.csv ]]; then
+  printf 'Input exists\n'
+fi
+```
+
+**Why it works:** `mkdir` establishes an explicit working location; `printf` writes known practice content; `head` and `wc` inspect text without loading R; `[[ -f ... ]]` confirms a file is present. The count includes the header. The practice command uses `>`, which overwrites the file if it already exists: run it only in a disposable location.
+
+**Mastery checkpoint:** Describe which lines create files, which inspect them, and which conditionally branch. Identify the exact working directory that determines where `measurements.csv` is found.
+
+## 9. Final self-check: what Week 4 mastery requires
+
+Mark an objective only when you can demonstrate it in a clean practice directory and explain its effect.
+
+- [ ] **Shell model:** Distinguish an interactive shell, a script, and the R process it launches.
+- [ ] **Navigation:** Use `pwd`, `ls`, and `cd` to resolve relative versus absolute paths and recover from a wrong directory.
+- [ ] **File inspection:** Use `head`, `tail`, `wc`, and `less` to inspect a text dataset without confusing line counts with data-record counts.
+- [ ] **Safe file operations:** Demonstrate `mkdir`, `cp`, and `mv` in a disposable directory; explain overwrites and why `rm` requires explicit care.
+- [ ] **Reproducible scripts:** Create a shebang-based Bash script, quote variable expansions, check syntax with `bash -n`, and run it.
+- [ ] **Pipes and columns:** Explain standard input/output, `|`, `>`, and `>>`; demonstrate a safe text extraction and identify cases where naive CSV splitting is invalid.
+- [ ] **Control flow:** Write an `if` condition and a file loop that do not fail when optional inputs are absent.
+- [ ] **Bash-to-R bridge:** Explain and demonstrate how `Rscript` receives positional arguments through `commandArgs(trailingOnly = TRUE)`.
+- [ ] **Reproducibility boundary:** Record inputs, commands, validation evidence, and outputs; distinguish a script that completes from a scientifically valid result.
+
+**Mastery standard:** All nine objectives demonstrated in an authorized practice workspace. A peer can follow your script from a clean directory, identify each file operation and argument, and reproduce the expected text output without guessing hidden paths.
+
+**Related:** [Bash operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) · [Bash utility examples](../06_RESOURCES/Bash/bash_functions.sh) · [Lecture index](README.md)
