@@ -19,7 +19,7 @@ Reusable methods, functions, teaching references and templates for health data s
 | Consistent figure titles, sample sizes and annotations | [Plot annotations](PLOT_ANNOTATIONS.md) | [R annotation functions](R/hse_plot_annotations.R) |
 | Gene-expression heatmaps, PCA and volcano plots | [Gene graphics](R/hse_gene_visuals.R) | [R source](R/hse_gene_visuals.R) |
 | Bash syntax, operations and safe scripting | [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) | [Bash helpers](Bash/bash_functions.sh) |
-| Week 4 formatted learning document | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/Week_4_Bash_LaTeX_Template.tex) |
+| APA 7 student manuscript example | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/APA_7_Student_Manuscript_Template.tex) |
 | Research and coding references | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) · [Literature matrix](Literature/LITERATURE_MATRIX.md) | [Matrix CSV](Literature/literature_matrix.csv) |
 
 ## R statistics and visualization
@@ -60,7 +60,7 @@ The [Week 4 runnable exercise](../03_Group_Work/Week_4_Bash_Lab/) expects local 
 
 ## LaTeX learning and reports
 
-The [Week 4 LaTeX template](LaTeX/) contains learning objectives, command examples, report sections, observation placeholders and reproducibility checks. TeX compilation requires a separate LaTeX installation.
+The [APA 7 student manuscript template](LaTeX/) contains a student title page, manuscript sections, author–date citations, references, table/figure placeholders and a reproducibility appendix. TeX compilation requires a separate LaTeX installation.
 
 ## Navigation checks
 
