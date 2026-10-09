@@ -46,8 +46,8 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 | Week | Lecture | Group work |
 | --- | --- | --- |
 | 1 | [Introduction to R lecture notes](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
-| 2 | [Learning objective notes](02_Lecture_Notes/Week_2_Learning_Objective_Notes.md) | [Data wrangling and visualization](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
-| 3 | [Learning objective notes](02_Lecture_Notes/Week_3_Learning_Objective_Notes.md) | [Simulation and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
+| 2 | [Lecture methods + mastery](02_Lecture_Notes/Week_2_Assignment_Methods_Lecture_Notes.md) | [Data wrangling and visualization](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
+| 3 | [Lecture methods + mastery](02_Lecture_Notes/Week_3_Assignment_Methods_Lecture_Notes.md) | [Simulation and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
 | 4 | [Introduction to Bash](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | Execution materials maintained privately |
 
 ## Repository organization
