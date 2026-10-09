@@ -65,7 +65,7 @@ The public group-work files now contain original method-level checkpoints, not a
 
 ## Originality and public-release screening
 
-Follow the [gated originality roadmap](ORIGINALITY_ROADMAP.md) for completed remediation, remaining manual comparisons, generated-edition checks, and historical repository review. The repository is not certified copyright-cleared.
+Follow the [gated originality roadmap](ORIGINALITY_ROADMAP.md), [provisional provenance register](PROVENANCE_REGISTER.md), and [historical exposure review](HISTORY_EXPOSURE_REVIEW.md) for completed remediation, remaining manual comparisons, generated-edition checks, and historical repository review. The repository is not certified copyright-cleared.
 
 This repository is an **independent student-authored learning resource**, not an official Dartmouth publication. The intent is to publish original explanations, original example code, and appropriately credited references—not to redistribute restricted instructional materials.
 
