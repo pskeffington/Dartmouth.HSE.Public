@@ -1,0 +1,58 @@
+name: Public originality screening
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: originality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  originality:
+    name: Copyright and originality indicators
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out all tracked source files
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run public originality screening
+        id: screen
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/check_public_originality.py --json > originality-report.json
+          result=$?
+          set -e
+          python3 -m json.tool originality-report.json > /dev/null
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads(Path("originality-report.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as out:
+              out.write("## Public originality screening\n\n")
+              out.write(f"**Status:** {report['status']}  \n")
+              out.write(f"**Tracked files:** {report['tracked_files']}  \n")
+              out.write(f"**Findings:** {len(report['findings'])}\n\n")
+              out.write("Heuristic screening is not proof of ownership or copyright clearance. REVIEW findings must be checked manually.\n\n")
+              for item in report['findings'][:100]:
+                  out.write(f"- **{item['level'].upper()}** `{item['path']}`: {item['reason']}\n")
+          PY
+          exit "$result"
+      - name: Save screening report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: originality-screening-report
+          path: originality-report.json
+          if-no-files-found: warn
+          retention-days: 30
