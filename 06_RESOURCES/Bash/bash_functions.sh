@@ -49,14 +49,14 @@ hse_sha256() {
 }
 
 # Run an R analysis using its explicit path; forward all additional arguments.
-# The R script itself must validate its scientific input and output contract.
+# The R script_path itself must validate its scientific input and output contract.
 hse_run_r() {
-  [[ $# -ge 1 ]] || { hse_error 'usage: hse_run_r script.R [args...]'; return 2; }
+  [[ $# -ge 1 ]] || { hse_error 'usage: hse_run_r script_path.R [args...]'; return 2; }
   hse_require_command Rscript || return
-  local script=$1
+  local script_path=$1
   shift
-  hse_require_file "$script" || return
-  Rscript --vanilla "$script" "$@"
+  hse_require_file "$script_path" || return
+  Rscript --vanilla "$script_path" "$@"
 }
 
 # To try these operations:
