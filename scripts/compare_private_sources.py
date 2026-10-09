@@ -47,8 +47,7 @@ def compare(root, source_dirs, history=False):
     if any(directory.resolve().is_relative_to(root) for directory in source_dirs):
         raise ValueError("Restricted source directories must be outside the public repository")
     sources = sorted({p.resolve() for directory in source_dirs
-                      for p in directory.rglob('*') if p.is_file()
-                      and p.name not in {'.DS_Store', '.Rhistory'}})
+                      for p in directory.rglob('*') if p.is_file()})
     if not sources:
         raise ValueError('No local comparison sources were found')
     if any(p.is_relative_to(root) for p in sources):

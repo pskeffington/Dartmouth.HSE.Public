@@ -33,3 +33,13 @@ For each public contribution, document: source/author; whether wholly original, 
 ## Local source comparison
 
 For an authorized local comparison, use `scripts/compare_private_sources.py`. Supply restricted input folders outside the repository and write its report outside the repository. Do not upload originals, source excerpts, private reports, or source corpora to GitHub Actions. This scanner supplements the heuristic screen with whole-file hashes and normalized 20-token matching, including reachable historical text blobs when requested. It does not detect every paraphrase or transformed figure and cannot certify rights. Public CI tests only synthetic fixtures.
+
+## Prevent source uploads before transfer
+
+Every file in the authorized private reference folders is protected, including datasets, generated outputs, and hidden files. Public work may explain independently authored applications of methods and ideas; it must not reproduce the source files or substantial source expression. Keep source text, hashes, token indexes, local folder locations, and detailed comparison evidence outside tracked Git files.
+
+The checkout-local pre-push hook uses [check_source_upload.py](scripts/check_source_upload.py) to inspect actual proposed commit trees and intermediate new commits, rather than the working tree alone. It blocks identical source bytes, protected filenames, shared normalized 20-token sequences, and unreviewed symlink/submodule content. It checks candidate PDF text through local Poppler. Missing/empty source folders, invalid configuration, unavailable PDF extraction, and unsupported ref targets block publication.
+
+Install or refresh it with [install_source_upload_guard.py](scripts/install_source_upload_guard.py), passing each authorized private folder using `--private-source-dir`. It stores configuration and executable copies only in the untracked Git directory, preserves unrelated existing hooks, and makes no network upload. The user-specific configuration is never committed. [Agent instructions](AGENTS.md) require guarded Git publication and prohibit API/UI uploads that bypass it.
+
+This hook protects ordinary pushes from this configured checkout. It is not a GitHub server rule: another clone, an API/UI write, or deliberately bypassing hooks can evade it. Do not use those routes. Public CI cannot access the private corpus and remains a secondary heuristic control, not pre-transfer protection. Existing public history and external caches require separate remediation.
