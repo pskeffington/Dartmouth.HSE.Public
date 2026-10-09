@@ -32,3 +32,9 @@ Update a family-level entry only after its individual files have been inspected.
 ## Release rule
 
 No `Hold clearance` entry may be represented as cleared without human review and evidence. A clear automated screen does not close a provenance item. Review Git history separately from the current tree.
+
+## Per-file baseline — 2026-10-09
+
+[PROVENANCE_RECORDS.json](PROVENANCE_RECORDS.json) records every tracked path individually, with observed version, source relationship where known, and unresolved rights action. [Total repository status](ORIGINALITY_STATUS.md) records executed checks and remaining gates. These are automated intake observations; all human review decisions remain pending. The existing review record reported by the user has not yet been supplied or examined.
+
+The inventory joins entries by exact path, rejects duplicates, and reports changed bytes, missing paths, and obsolete entries. An observed digest is not an authorship or permission attestation. The record file's own digest is omitted to avoid recursion.
