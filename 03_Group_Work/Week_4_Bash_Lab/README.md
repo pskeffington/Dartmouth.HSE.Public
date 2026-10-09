@@ -7,7 +7,7 @@
 Clone the repository locally, create the **root-level `data/` folder**, and place the course-supplied `pseudo_metadata.csv` inside it. `/data/` and `/week4_practice/` are Git-ignored; do not force-add them or upload confidential records.
 
 ```sh
-bash "Group Work/Week_4_Bash_Lab/run_week4.sh" ./data/pseudo_metadata.csv ./week4_practice
+bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" ./data/pseudo_metadata.csv ./week4_practice
 ```
 
 The script implements all five questions and leaves `only_female.txt` and `females_metadata.csv` in the practice workspace. The nested `new_dir` is created, populated, inspected, and deleted in the fifth exercise. Run with a **new, disposable workspace**; the script refuses to remove a preexisting `new_dir`.
@@ -22,10 +22,10 @@ The script implements all five questions and leaves `only_female.txt` and `femal
 ## Verify scripts
 
 ```sh
-bash -n "Group Work/Week_4_Bash_Lab/run_week4.sh"
-bash "Group Work/Week_4_Bash_Lab/test_week4.sh"
+bash -n "03_Group_Work/Week_4_Bash_Lab/run_week4.sh"
+bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
 ```
 
 The shell exercise assumes fixed, simple six-column CSV records, consistent with the supplied synthetic file. For general quoted CSV containing embedded commas/newlines, use a CSV-aware parser. This is a learning script, not a production ETL system.
 
-See [scholarly walkthrough](../Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) and the [LaTeX report template](../../RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex).
+See [scholarly walkthrough](../Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd) and the [LaTeX report template](../../06_06_RESOURCES/LaTeX/Week_4_Bash_LaTeX_Template.tex).
