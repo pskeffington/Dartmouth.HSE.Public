@@ -14,7 +14,6 @@ Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusa
 | --- | --- |
 | Follow a weekly lecture | [Lecture Notes](02_Lecture_Notes/) |
 | Work through a classroom exercise | [Group Work](03_Group_Work/) |
-| Run the Week 4 Bash metadata lab | [Week 4 Lab](03_Group_Work/Week_4_Bash_Lab/) |
 | Generate descriptive statistics or annotated plots in R | [R Resources](06_RESOURCES/#r-statistics-and-visualization) |
 | Study Bash, scripting, and data processing | [Bash Resources](06_RESOURCES/#bash-programming) |
 | Prepare an APA 7 student manuscript | [LaTeX Template](06_RESOURCES/LaTeX/) |
@@ -28,7 +27,7 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 | 1 | Lecture companion not posted | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
 | 2 | [Learning objective notes](02_Lecture_Notes/Week_2_Learning_Objective_Notes.md) | [Data wrangling and visualization](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
 | 3 | [Learning objective notes](02_Lecture_Notes/Week_3_Learning_Objective_Notes.md) | [Simulation and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
-| 4 | [Introduction to Bash](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | [Bash metadata walkthrough](03_Group_Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.md) · [Run the lab](03_Group_Work/Week_4_Bash_Lab/) |
+| 4 | [Introduction to Bash](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | Execution materials maintained privately |
 
 ## Repository organization
 
@@ -41,21 +40,9 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 | [Assignments](05_Assignments/) | Assignment-related teaching materials when appropriate to share |
 | [RESOURCES](06_RESOURCES/) | R functions, statistical plots, Bash utilities, LaTeX templates and literature |
 
-## Quick start: Week 4 Bash
+## Private execution boundary
 
-Use your **local** copy of the supplied classroom data:
-
-```bash
-# In an existing clone, open a terminal at the repository root.
-pwd
-mkdir -p data
-# Place pseudo_metadata.csv inside ./data/ before continuing.
-bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
-bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
-  data/pseudo_metadata.csv ./week4_practice
-```
-
-The repository ignores the root-level `data/` folder and the generated `week4_practice/` output. Never force-add source data or confidential records to this public repository.
+Continued analysis, lab execution scripts, local datasets and generated outputs are maintained exclusively in the private repository.
 
 ## Scientific and academic-use notes
 

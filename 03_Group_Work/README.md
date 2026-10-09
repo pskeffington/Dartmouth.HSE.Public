@@ -15,19 +15,6 @@ Read the Markdown walkthrough in your browser. Open its linked `.Rmd` source in 
 | 1 | Introductory R, data types, indexing and functions | [Week 1 (read)](Week_1_Group_Work_Narrative_Walkthrough.md) | Embedded R examples |
 | 2 | Data preparation, visualizations and Wilcoxon comparisons | [Week 2 (read)](Week_2_Group_Work_Narrative_Walkthrough.md) | Requires separate arsenic CSV |
 | 3 | Simulation, reusable functions and multiple CSV files | [Week 3 (read)](Week_3_Group_Work_Narrative_Walkthrough.md) | Simulations and separate course CSVs |
-| 4 | Bash metadata manipulation | [Week 4 (read)](Week_4_Bash_Group_Work_Narrative_Walkthrough.md) | [Bash lab scripts and tests](Week_4_Bash_Lab/) |
-
-## Week 4: run the lab
-
-From the repository root, with `pseudo_metadata.csv` already in the ignored `data/` directory:
-
-```bash
-bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
-bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
-  data/pseudo_metadata.csv ./week4_practice
-```
-
-The script deliberately removes the temporary `new_dir` created in Question 3, but retains `only_female.txt` and `females_metadata.csv` in `week4_practice/`. The source exercise uses both names; the lab documents that distinction.
 
 ## How to read a worked example
 

@@ -16,7 +16,6 @@ Use a Bash terminal. Examples that reference course files assume you are at the 
 | Count lines | `wc -l data/pseudo_metadata.csv` | Includes the header; counts newline characters |
 | Inspect interactively | `less data/pseudo_metadata.csv` | Press `q` to leave |
 | Search literal text | `grep -n 'sample' data/pseudo_metadata.csv` | Matching lines with line numbers; text search, not a field filter |
-| Check Bash syntax | `bash -n 03_Group_Work/Week_4_Bash_Lab/run_week4.sh` | No output on success; does not run the lab |
 
 ## Practice without course files
 
@@ -38,21 +37,6 @@ awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/only_female.txt"
 ```
 
 **Expected:** the header, S01 and S03, followed by a record count of `2`. This practice file has three simple fields and no quoted commas or multiline values.
-
-## Apply the course schema correctly
-
-The Week 4 file has six fields: an unnamed first field, `sampleID`, `condition`, `age`, `sex`, `batch`. Sex is field **5**, encoded as `F` / `M`. The lab validates that layout and handles the simple quoted values in the supplied classroom format. Use the [runnable lab](../../03_Group_Work/Week_4_Bash_Lab/README.md) for that file; the three-column practice filter above has a different schema.
-
-```bash
-# Run the synthetic fixture test first; it needs no course file.
-bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
-
-# After placing the course input in data/, run in a disposable workspace.
-bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
-  data/pseudo_metadata.csv ./week4_practice
-```
-
-**Check:** the lab retains `only_female.txt` and `females_metadata.csv`. Its temporary `new_dir` is removed during the cleanup exercise. A general CSV with embedded commas or newlines requires a CSV-aware parser.
 
 ## Load reusable helpers
 

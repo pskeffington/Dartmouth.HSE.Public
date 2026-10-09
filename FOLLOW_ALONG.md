@@ -17,7 +17,7 @@ Keep course-supplied inputs in the ignored `data/` folder. Some original lecture
 | Week 1 · R foundations | [Group walkthrough](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) | Types, lists, indexing, missing values and functions | What does the object contain, and which indexing rule selects it? |
 | Week 2 · Data wrangling | [Lecture notes](02_Lecture_Notes/Week_2_Learning_Objective_Notes.md) | [Group walkthrough](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md); data-dependent tasks need the separate arsenic CSV | Which rows and columns remain? What does each row represent after reshaping? |
 | Week 3 · Visualization | [Lecture notes](02_Lecture_Notes/Week_3_Learning_Objective_Notes.md) | [Group walkthrough](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md); Questions 1–4 simulate data, Question 5 needs course CSVs | What do the plot's axes, groups and marks mean? Are these simulated or observed measurements? |
-| Week 4 · Bash | [Lecture walkthrough](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | [Group walkthrough](03_Group_Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.md) and [runnable lab](03_Group_Work/Week_4_Bash_Lab/README.md) | Does the count include a header? Which field encodes sex, and which files remain after cleanup? |
+| Week 4 · Bash | [Lecture walkthrough](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | Execution materials maintained privately | Does the count include a header? Which field encodes sex, and which files remain after cleanup? |
 
 The group walkthroughs provide a checkpoint table and previous/next-week links. Use the [plot-reading guide](06_RESOURCES/READING_PLOTS.md) when preparing a short explanation of a figure.
 
