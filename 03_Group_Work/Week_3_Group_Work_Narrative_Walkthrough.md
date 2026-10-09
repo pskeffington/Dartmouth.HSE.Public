@@ -1,10 +1,18 @@
 # HSE 711 · Week 3: Data Visualization and Analytics — Independent study guide
 
-[Group work index](README.md) · [Editable R Markdown](Week_3_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+[Section index](README.md) · [Editable R Markdown](Week_3_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** **Course-file dependency.** This independent guide is not a substitute for official Geisel prompts and course inputs. Obtain these separately and perform assessed work privately.
 
 These independently written **method notes are not an assignment, answer key, submission, or substitute for Geisel course materials**. To perform the coursework, obtain the official prompt, any instructor-provided code, and required files through an authorized course channel. None are distributed here.
 
 **Course-file dependency:** This public guide deliberately contains no exercise text, course dataset, completed solution, or runnable assignment workflow. Read the official source to determine the actual task, variables, permitted techniques, and required deliverables. Any work based on those inputs belongs in a private course workspace.
+
+## On this page
+
+- [Study checkpoints](#study-checkpoints)
+- [Private execution boundary](#private-execution-boundary)
+- [Source attribution and limits](#source-attribution-and-limits)
 
 ## Study checkpoints
 
