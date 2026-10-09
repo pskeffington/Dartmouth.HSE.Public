@@ -5,6 +5,7 @@ from __future__ import annotations
 import importlib.util
 import pathlib
 import unittest
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -48,6 +49,19 @@ class CourseSignalTests(unittest.TestCase):
             "Please do not share these notes"))
         self.assertIsNotNone(review["distribution warning; verify origin"].search(
             "Do not reproduce the source handout"))
+
+    def test_release_gate_fails_on_unresolved_review(self) -> None:
+        report = {"status": "REVIEW", "tracked_files": 1,
+                  "findings": [], "limitations": "manual approval required"}
+        with mock.patch.object(screen, "scan", return_value=report):
+            with mock.patch("sys.argv", ["check_public_originality.py",
+                                         "--json", "--fail-on-review"]):
+                with mock.patch("builtins.print"):
+                    self.assertEqual(screen.main(), 1)
+            with mock.patch("sys.argv", ["check_public_originality.py",
+                                         "--json"]):
+                with mock.patch("builtins.print"):
+                    self.assertEqual(screen.main(), 0)
 
     def test_policy_paths_outside_course_scope(self) -> None:
         self.assertFalse("PROVENANCE_REGISTER.md".startswith(screen.COURSE_PUBLIC))
