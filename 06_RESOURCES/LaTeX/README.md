@@ -29,8 +29,8 @@ The template explains shell navigation, file inspection, scripting, AWK selectio
 
 ## Related teaching materials
 
-- [Week 4 Lecture Narrative](../../Lecture%20Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.Rmd)
-- [Week 4 Group Work Walkthrough](../../Group%20Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd)
+- [Week 4 Lecture Narrative](../../02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.Rmd)
+- [Week 4 Group Work Walkthrough](../../03_Group_Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.Rmd)
 - [Bash Operations Sheet](../Bash/BASH_OPERATION_SHEET.md)
 
 No PDF compilation is claimed until a LaTeX compiler is run.
