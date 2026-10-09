@@ -18,7 +18,7 @@ This template turns the Week 4 metadata exercise into a student manuscript examp
 | Header | Page number at the upper right, beginning with 1 on the title page |
 | Student title page | Bold centered title, student, affiliation, course, instructor and due date |
 | Headings | Unnumbered APA-style levels 1–3; no separate “Introduction” heading |
-| Citations | Author–date examples; standalone `natbib` mode or optional `biblatex-apa` mode |
+| Citations | Author–date examples; `biblatex-apa` and Biber; example `.bib` already connected |
 | References | New page; alphabetical entries; double spacing; 0.5-inch hanging indents |
 | Tables and figures | Bold numbers, italic titles above, explanatory notes below |
 | Abstract | Off by default; enable if the instructor requests it |
@@ -28,40 +28,27 @@ The Times-family font is a portable TeX substitute, rather than a bundled propri
 
 ## Personalize and compile
 
-1. Copy the canonical `.tex` file into your own working folder or upload it to Overleaf. Copy `Example_References.bib` alongside it if you plan to use bibliography-file mode.
+1. Copy `Example_APA_7_Manuscript.tex` and `Example_References.bib` together into your working folder or Overleaf project. The template already loads this bibliography. Copy `compile_manuscript.sh` too if you want the local one-command build.
 2. Edit the metadata block near the top: title, student name, department/program, course, instructor and due date.
 3. Replace the instructional paragraphs with your study's question, design, methods and verified results. Remove unused tables, figures and appendix material.
-4. Replace both example citations and reference entries with the works you actually use. Each retained reference must be cited in the text. Choose one bibliography mode below.
-5. Follow that mode's compile sequence and inspect the PDF before submission.
+4. Replace both example citations and reference entries with the works you actually use. Each retained reference must be cited in the text. Keep the bibliography filename or update the existing resource line if you rename it.
+5. Follow the compile sequence and inspect the PDF before submission.
 
-### Option 1: Standalone compilation
+### Ready-linked APA 7 build
 
-Leave `\usebibfilefalse` in the manuscript. References are supplied manually in `thebibliography`; the `.bib` file is not read in this mode. Compile from this folder:
+The supplied template is ready to use: it loads `Example_References.bib`, cites two real Dr. Seuss books and prints the cited records under References. No mode switch, package block or manual reference list needs to be added.
+
+Use a TeX installation containing `biblatex`, `biblatex-apa`, `csquotes` and `babel`, plus the **Biber** executable. The [APA citation package](https://ctan.org/pkg/biblatex-apa) uses Biber. Use your TeX distribution's package manager to install missing packages and keep Biber compatible with `biblatex`.
+
+With the three files together, run from this folder:
 
 ```bash
-pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
-pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
+bash compile_manuscript.sh
 ```
 
-This mode uses common TeX packages and compiles without an `apa7` class or a BibTeX/Biber run. The source configures student-paper layout using `article`. `natbib` formats citations but does not automatically correct manually typed reference entries.
+The [build script](compile_manuscript.sh) checks the bibliography dependencies and runs the four passes below. It also works when called by path from another working directory.
 
-### Option 2: APA 7 bibliography-file compilation
-
-Use a TeX installation containing `biblatex`, `biblatex-apa`, `csquotes` and `babel`, plus the **Biber** executable. The [APA citation package](https://ctan.org/pkg/biblatex-apa) uses Biber for this workflow. Package installation depends on your TeX distribution; use its package manager to install missing packages and keep Biber compatible with `biblatex`.
-
-In the source, change the active line:
-
-```latex
-\usebibfilefalse
-```
-
-to:
-
-```latex
-\usebibfiletrue
-```
-
-The template then loads these settings automatically:
+The template already contains these settings:
 
 ```latex
 \usepackage[american]{babel}
@@ -71,7 +58,7 @@ The template then loads these settings automatically:
 \addbibresource{Example_References.bib}
 ```
 
-**Do not paste a second copy of this block into the supplied template.** It is shown to explain the connection. The template loads `natbib` only in standalone mode and `biblatex` only in bibliography-file mode. Keep those systems separate when adapting other manuscripts.
+**Do not paste a second copy of this block into the supplied template.** It is shown to explain the existing connection. This template uses `biblatex`; do not add `natbib` or a manual `thebibliography` list.
 
 Run all four commands from the directory containing the `.tex` and `.bib` files:
 
@@ -84,7 +71,7 @@ pdflatex -interaction=nonstopmode -halt-on-error Example_APA_7_Manuscript.tex
 
 The first pass creates the `.bcf` control file. Biber reads that file and the `.bib` entries, then writes bibliography data to `.bbl`. The final LaTeX passes resolve citations, references and cross-references. Give Biber the document basename **without `.tex`**. Run Biber again after changing the bibliography or which works you cite.
 
-On Overleaf, upload the `.tex` and `.bib` together, set the manuscript as the main document, enable `\usebibfiletrue` and recompile using pdfLaTeX. Its build system normally runs the bibliography backend selected in the source. Inspect the compilation log if references do not appear.
+On Overleaf, upload the `.tex` and `.bib` together, set the manuscript as the main document, recompile using pdfLaTeX. Its build system normally runs the bibliography backend selected in the source. Inspect the compilation log if references do not appear.
 
 ## Create and connect your own bibliography
 
@@ -101,7 +88,7 @@ For example, this is a real reference already included in the example file:
 }
 ```
 
-If you rename the bibliography, update the existing connection inside the `\ifusebibfile` block:
+If you rename the bibliography, update the existing connection in the preamble:
 
 ```latex
 \addbibresource{references.bib}
@@ -114,9 +101,9 @@ Citation keys connect the manuscript to entries; they are not printed author nam
 This demonstrates a parenthetical citation \parencite{seuss1957cat}.
 ```
 
-The supplied template supports these two commands in **both** modes. In bibliography-file mode, `\textcite` and `\parencite` are provided by `biblatex`; in standalone mode, the template maps them to `natbib` commands. Keys used in standalone mode must have corresponding manual `\bibitem` entries.
+Both commands are provided by `biblatex`. The keys must match records in the connected `.bib`; no manual `\bibitem` entries are needed.
 
-For a page-specific citation in bibliography-file mode:
+For a page-specific citation:
 
 ```latex
 \parencite[p. 3]{seuss1957cat}
@@ -131,7 +118,7 @@ The References section is already wired to print cited entries:
 \printbibliography[heading=none]
 ```
 
-The surrounding conditional prints this in bibliography-file mode and the manual list otherwise. The uncited `seuss1960eggs` book in the example `.bib` is excluded until you cite it. To inspect every entry during editing, temporarily add `\nocite{*}` before printing the bibliography; this includes every entry in every loaded bibliography file. Remove it for a reference list that should contain only cited works.
+The uncited `seuss1960eggs` book in the example `.bib` is excluded until you cite it. To inspect every entry during editing, temporarily add `\nocite{*}` before printing the bibliography; this includes every entry in every loaded bibliography file. Remove it for a reference list that should contain only cited works.
 
 ### Bibliography fields to check
 
@@ -157,10 +144,18 @@ Verify exported metadata against the original work. Different entry types requir
 | Biber cannot find `.bcf` | Run the first LaTeX pass successfully; use the document basename and correct working directory. |
 | Bibliography file not found | Match `\addbibresource` to the exact filename and location, including capitalization. |
 | Citation key undefined | Check that the cited key exists; run the full four-command sequence. |
-| New `.bib` entries do not affect the PDF | Confirm `\usebibfiletrue`; standalone mode does not read `.bib` files. |
-| References change after switching modes | Clear that document's generated auxiliary files or use a clean build, then run the chosen mode's full sequence. |
+| New `.bib` entries do not affect the PDF | Check the resource filename, cite the new key and run the full build again. |
+| Old manual-mode auxiliary files cause errors | Use a clean build, then run the full four-command sequence. |
 
-The standalone manuscript has been compiled twice and its PDF visually checked. Biber and `biblatex-apa` are unavailable in the editing environment, so the optional automatic-bibliography build has **not** been executed here. The header's compilation note refers to the verified standalone configuration. See the package's [official documentation](https://ctan.org/pkg/biblatex-apa) for automatic APA 7 reference formatting.
+The ready-linked manuscript has been built successfully with PDFLaTeX, Biber 2.21, `biblatex` 3.21 and `biblatex-apa` 9.20. The final build resolves the citation keys and prints the references from `Example_References.bib`; its PDF has been visually checked. The header's compilation note applies to this connected configuration. See the package's [official documentation](https://ctan.org/pkg/biblatex-apa) for automatic APA 7 reference formatting.
+
+For the complete fictional practice catalogue, run:
+
+```bash
+bash compile_manuscript.sh --catalogue
+```
+
+This builds [Example_APA_7_Reference_Catalogue.tex](Example_APA_7_Reference_Catalogue.tex), which is already connected to `Example_Entry_Types.bib`. Its [compiled PDF](Example_APA_7_Reference_Catalogue.pdf) prints all 52 practice records. The catalogue stays separate from the manuscript's real reference file.
 
 For an assigned abstract, change `\includeabstractfalse` to `\includeabstracttrue`. The abstract appears on its own page as an unindented paragraph. Professional journal submissions can require a running head, author note, separate figure files or a journal class; follow that venue's requirements.
 

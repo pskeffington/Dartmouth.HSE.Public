@@ -1,0 +1,34 @@
+% Dr. Seuss-themed APA 7 reference catalogue: fictional practice records.
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=apa]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+% Fictional jurisdiction label for this teaching catalogue only.
+\NewBibliographyString{examplereadingsociety}
+\DefineBibliographyStrings{american}{
+  examplereadingsociety = {Example Reading Society}
+}
+\addbibresource{Example_Entry_Types.bib}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+\doublespacing
+\raggedright
+\setlength{\bibhang}{0.5in}
+\setlength{\bibitemsep}{0pt}
+\begin{document}
+\begin{center}
+\textbf{Dr. Seuss-Themed APA 7 Reference Catalogue}
+\end{center}
+\noindent All 52 entries below are fictional teaching examples, not real
+sources. The metadata and example.org links must be replaced before use in
+research. See Bibliography\_Guide.md for each entry type and citation key.
+This catalogue shows automatic formatting; it does not verify source metadata.
+\nocite{*}
+\printbibliography[title={Practice References}]
+\end{document}

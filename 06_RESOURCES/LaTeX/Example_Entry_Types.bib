@@ -38,7 +38,7 @@
 @article{practice-magazine,
   author             = {Reader, Riley and Scholar, Morgan},
   date               = {2025},
-  entrysubtype       = {magazine},
+  entrysubtype       = {nonacademic},
   title              = {Reading {Dr. Seuss} aloud},
   journaltitle       = {Example Reading Magazine},
   volume             = {3},
@@ -51,7 +51,7 @@
 @article{practice-newspaper,
   author             = {Reader, Riley},
   date               = {2025-03-02},
-  entrysubtype       = {newspaper},
+  entrysubtype       = {nonacademic},
   title              = {A classroom celebrates reading},
   journaltitle       = {Example Campus News},
   pages              = {A1, A3},
@@ -191,7 +191,7 @@
   author             = {{{Example Literacy Standards Board}}},
   date               = {2025},
   title              = {Reading-workshop documentation standard},
-  number             = {ELS 100},
+  titleaddon         = {Standard No. {ELS} 100},
   organization       = {Example Literacy Standards Board},
   url                = {https://example.org/standard},
 }
@@ -248,7 +248,6 @@
   date               = {2025},
   title              = {Classroom readings of {Dr. Seuss}},
   institution        = {Example University},
-  type               = {Doctoral dissertation},
   publisher          = {Example University Repository},
   url                = {https://example.org/dissertation},
 }
@@ -260,7 +259,7 @@
   date               = {2025},
   title              = {A {Dr. Seuss} reading workshop},
   institution        = {Example University},
-  howpublished       = {unpublished},
+  type               = {Unpublished master's thesis},
 }
 
 % Unpublished manuscript
@@ -349,12 +348,9 @@
   author+an:role     = {1=writer;2=director},
   date               = {2025-03-02},
   entrysubtype       = {tvepisode},
-  title              = {Reading day},
+  title              = {Reading day ({Season} 1, {Episode} 3)},
   maintitle          = {Example classroom stories},
-  editor             = {Producer, Parker},
-  editortype         = {executiveproducer},
-  number             = {3},
-  volume             = {1},
+  execproducer       = {Producer, Parker},
   publisher          = {Example Television},
 }
 
@@ -450,7 +446,7 @@
 % FICTIONAL PRACTICE ENTRY: replace before submission.
 @online{practice-social,
   author             = {Reader, Riley},
-  author+an:username = {1=readingexample},
+  author+an:username = {1="@readingexample"},
   date               = {2025-03-02},
   title              = {Our reading group is discussing {The Lorax} today},
   titleaddon         = {Status update},
@@ -486,7 +482,7 @@
   author             = {Reviewer, Robin},
   date               = {2025},
   title              = {An example review of a classroom reading guide},
-  titleaddon         = {Review of the book A student guide to studying Dr. Seuss, by R. Reader and M. Scholar},
+  titleaddon         = {Review of the book {A student guide to studying Dr. Seuss}, by {R. Reader} and {M. Scholar}},
   journaltitle       = {Example Review Journal},
   volume             = {1},
   pages              = {5--6},
@@ -499,7 +495,7 @@
   date               = {2025},
   title              = {Example reading-engagement scale},
   titleaddon         = {Measurement instrument},
-  publisher          = {Example Test Publisher},
+  organization       = {Example Test Publisher},
   url                = {https://example.org/instrument},
 }
 
@@ -510,7 +506,7 @@
   date               = {2000-03-02},
   title              = {Example reading-workshop letter},
   titleaddon         = {Letter},
-  howpublished       = {Example Reading Collection (Box 1, Folder 2), Example University Archives},
+  addendum           = {Example Reading Collection (Box 1, Folder 2), Example University Archives},
 }
 
 % Court decision (fictional practice)
@@ -570,9 +566,10 @@
 }
 
 % Constitutional provision (FICTIONAL PRACTICE ENTRY)
-% Literal source label is fictional; adapt fields for the actual jurisdiction.
+% Source is a localization key defined in Example_APA_7_Reference_Catalogue.tex.
+% For actual legal references use the appropriate supported jurisdiction key.
 @constitution{practice-constitution,
-  source = {Example Reading Society},
+  source = {examplereadingsociety},
   type = {constitution},
   article = {I},
   section = {1}
