@@ -16,7 +16,7 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 20 regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 32 total regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 83 paths have per-file intake records; rights provenance and human decisions pending |
@@ -111,6 +111,16 @@ The public repository may explain general methods using independently written co
 
 **Next:** inspect the actual push-triggered Actions artifact and run logs; adjudicate media/data source provenance; conduct authorized source similarity and historic exposure review. Do not rewrite repository history without a documented authorization decision.
 
+## Pass 12 — cross-directory instructional-source screening (2026-10-09)
+
+- Reviewed the public scanner and identified a detection gap: lecture-chunk, verbatim-prompt, and assignment-item heuristics applied only to `02_Lecture_Notes/`, `03_Group_Work/`, and `05_Assignments/`. Course-derived passages could therefore evade this specific check if moved to the public `06_RESOURCES/` examples.
+- Expanded course-content heuristic screening to `06_RESOURCES/` and to `.tex` files. This **flags** suspected reuse for manual review; it does not automatically assert infringement. Generic resources without indicators remain eligible for `SCREEN_CLEAR` in this heuristic category.
+- Updated the Git-fixture integration tests to expect a resource lecture mapping to trigger `REVIEW`, to flag copied-prompt indicators in LaTeX, and to retain a negative test for generic independent resources.
+- Clarified the scanner report's first-megabyte inspection limitation. Oversized text already generates a review finding and therefore cannot silently clear under the strict gate.
+- Commits were made through the connected GitHub repository; actual CI execution and comparison with authorized Geisel instructional files remain unverified. Historical Git exposures remain unresolved.
+
+**Next:** inspect current Actions artifacts, review the resulting resource-level flags against legitimate examples, then finish binary provenance and private institutional-source comparison. Do not use broad suppressions to turn CI green.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
@@ -140,7 +150,7 @@ If generated editions are stale, rebuild them and inspect diffs before committin
 
 **Decision rule:** Do not mark the repo copyright-cleared until O6–O11 are satisfied and human review confirms provenance and permissions.
 
-## Pass 12 — executed validation and total repository status (2026-10-09)
+## Local audit — executed validation and total repository status (2026-10-09)
 
 This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91edf`; earlier unverified-runtime statements above are historical snapshots.
 
@@ -154,10 +164,12 @@ This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91e
 
 **Next:** reconcile the existing record against every public path, finish resource/media and authorized course-source comparisons, adjudicate history, and close O11 only with actual evidence. Merge each validated maintenance batch into main while preserving the closed clearance gate.
 
-## Pass 13 — local source comparison scanner (2026-10-09)
+## Local audit — source comparison scanner (2026-10-09)
 
 The user supplied Week 1–3 local source folders, which were read solely for comparison. No originals, matched excerpts, source paths, source hashes, or private reports were committed. Added a local-only byte/text comparison scanner and six synthetic regression scenarios; all 26 tests pass.
 
 The current public tree has zero identical-byte or shared-20-token findings against the 108-file corpus. Historical comparison found 30 overlapping text blobs among 508 reachable blobs. Historical remediation is now supported by direct source comparison but remains undecided. O10 has bounded automated comparison evidence; required human comparison/rights sign-off remains separate. O9 and O11 stay open. See [total status](ORIGINALITY_STATUS.md) for scope, exclusions, and the proposed remediation decision.
 
 Integration follow-up: preserved the concurrent exact reading-source manifest gate and its four tests from public main `36ccdc4`. All 30 tests pass after integration; current provenance intake covers 83 tracked paths.
+
+Latest integration: preserved public resource/TeX heuristic screening from main `8ac9b0f`; all 32 tests pass.

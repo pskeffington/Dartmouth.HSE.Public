@@ -77,8 +77,17 @@ class ScanIntegrationTests(unittest.TestCase):
                    if item["path"] == "06_RESOURCES/example.rds"]
         self.assertEqual(len(matches), 1)
 
-    def test_non_course_mapping_not_auto_restricted(self) -> None:
+    def test_resource_lecture_mapping_requires_review(self) -> None:
         self.tracked("06_RESOURCES/methods.md", "Lecture 3 chunks 10-15")
+        self.assertEqual(screen.scan(self.root)["status"], "REVIEW")
+
+    def test_tex_prompt_reproduction_requires_review(self) -> None:
+        self.tracked("06_RESOURCES/LaTeX/example.tex",
+                     "The prompts below are preserved")
+        self.assertEqual(screen.scan(self.root)["status"], "REVIEW")
+
+    def test_generic_resource_remains_clear(self) -> None:
+        self.tracked("06_RESOURCES/methods.md", "A generic histogram example")
         self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
 
 
