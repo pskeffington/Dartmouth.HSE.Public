@@ -11,6 +11,8 @@ from pathlib import Path
 
 RESTRICTED_EXT = {".ppt", ".pptx", ".key", ".pages", ".doc", ".docx"}
 REVIEW_EXT = {".pdf", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".zip"}
+DATA_EXT = {".csv", ".tsv", ".xlsx", ".xls", ".xpt", ".rds", ".rdata",
+            ".parquet", ".feather", ".sav", ".dta"}
 RESTRICTED_NAME = re.compile(r"(?:^|[/_. -])(syllabus|instructor[_. -]?(?:copy|notes|solution|slides)|answer[_. -]?key|solution[_. -]?key|course[_. -]?(?:handout|packet)|lecture[_. -]?slides)(?:$|[/_. -])", re.I)
 RESTRICTED_TEXT = [
     ("explicit rights restriction", re.compile(r"all rights reserved|(?:this (?:file|document|material|work) is )?for (?:enrolled )?students only|not for (?:public )?distribution", re.I)),
@@ -65,6 +67,8 @@ def scan(root: Path) -> dict:
             findings.append({"path": rel, "level": "block", "reason": "restricted-format or instructor/course-material filename; manual clearance required"})
         elif suffix in REVIEW_EXT:
             findings.append({"path": rel, "level": "review", "reason": "binary/media file requires provenance and rights review"})
+        elif suffix in DATA_EXT:
+            findings.append({"path": rel, "level": "review", "reason": "tracked data requires source, privacy, and redistribution review"})
         data = path.read_bytes()[:MAX_TEXT_BYTES + 1]
         if b"\0" in data[:8192]:
             if suffix not in RESTRICTED_EXT | REVIEW_EXT:
