@@ -13,15 +13,9 @@ output:
 
 ## Purpose and learning objectives
 
-Week 3 moves from plot creation to combining independently supplied tables, examining missing observations, fitting simple descriptive models, using repeated plotting functions, and automating file-by-file review. The assignment applies those tools to multiple survey tables and publication-style figures. This guide uses independent toy data instead of the assignment submission or source datasets. Consult the existing [21-chunk lecture reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) for the original lecture sequence.
+These independent notes discuss joining tables, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. They do not reproduce the official survey exercise, required deliverables, or lecture sequence. Consult authorized Geisel files for all course-specific requirements.
 
-| Assignment skill | Lecture topic | Mastery evidence |
-| --- | --- | --- |
-| Import and inspect survey tables | Chunks 1–3: `read_xpt()`, `head()`, `glimpse()` | Columns, IDs, and type checks documented |
-| Select and join fields | Chunk 3: `inner_join()` | Join key uniqueness and retention verified |
-| Recode survey response categories | Chunks 5–7: missingness and filtering | Distinguish recorded "unknown" responses from `NA` |
-| Construct and explain plot panels | Chunks 4, 8–11: histogram, violin, ECDF, scatter, linear fit | Each plot answers a stated question |
-| Generalize workflows | Chunks 10–21: plotting functions, loops, file lists, heatmaps | Reusable code and input checks |
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## 1. Identify the join key before combining tables
 
