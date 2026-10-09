@@ -19,6 +19,14 @@ RESTRICTED_TEXT = [
 REVIEW_TEXT = [
     ("instructor-provided source reference", re.compile(r"(?:instructor|professor)(?:.{0,35})(?:provided|working file|handout|slide deck)", re.I)),
 ]
+# Heuristic signals confined to public instructional publications. These warrant
+# review, not a conclusive claim that material was copied.
+COURSE_SPECIFIC = [
+    ("lecture chunk mapping", re.compile(r"\\b(?:lecture\\s+)?chunks?\\s*\\d+(?:\\s*[-–]\\s*\\d+)?", re.I)),
+    ("verbatim-prompt indicator", re.compile(r"(?:prompts?\\s+(?:below\\s+)?(?:are|is)\\s+preserved|copied\\s+(?:from|verbatim)|original\\s+(?:assignment|exercise)\\s+questions?)", re.I)),
+    ("assignment item mapping", re.compile(r"\\bassignment\\s+(?:task|item|question)\\s*[|:#-]", re.I)),
+]
+COURSE_PUBLIC = ("02_Lecture_Notes/", "03_Group_Work/", "05_Assignments/")
 MAX_TEXT_BYTES = 1_000_000
 SKIP = {".git", "__pycache__", ".venv", "node_modules"}
 
@@ -58,6 +66,10 @@ def scan(root: Path) -> dict:
         for reason, pattern in RESTRICTED_TEXT:
             if pattern.search(text):
                 findings.append({"path": rel, "level": "block", "reason": reason})
+        if rel.startswith(COURSE_PUBLIC) and suffix.lower() in {".md", ".rmd", ".r", ".py", ".sh"}:
+            for reason, pattern in COURSE_SPECIFIC:
+                if pattern.search(text):
+                    findings.append({"path": rel, "level": "review", "reason": reason})
         for reason, pattern in REVIEW_TEXT:
             if pattern.search(text):
                 findings.append({"path": rel, "level": "review", "reason": reason})
