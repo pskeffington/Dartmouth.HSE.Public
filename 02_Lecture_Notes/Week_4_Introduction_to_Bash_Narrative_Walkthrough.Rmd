@@ -125,7 +125,7 @@ if (is.na(n)) stop("n must be numeric")
 # read, validate, analyze and write within a deliberate R workflow
 ```
 
-Bash can pass arguments and redirect console output, but it cannot establish biological validity or inferential confidence. The [Bash operation sheet](../RESOURCES/Bash/BASH_OPERATION_SHEET.md) and [function library](../RESOURCES/Bash/bash_functions.sh) provide further practice.
+Bash can pass arguments and redirect console output, but it cannot establish biological validity or inferential confidence. The [Bash operation sheet](../06_06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) and [function library](../06_06_RESOURCES/Bash/bash_functions.sh) provide further practice.
 
 ## Scholarly synthesis
 
