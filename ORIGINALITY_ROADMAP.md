@@ -16,9 +16,9 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Exact fixture-file false-positive repaired; eight Git-fixture scenarios; CI execution unverified |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Full independent diagnostic checks; tracked dataset and missing-input guards added; CI results unverified |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
-| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
+| O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven pairs reconciled; builder now fails if expected source files disappear; runtime check still unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
@@ -87,6 +87,18 @@ The public repository may explain general methods using independently written co
 - Historical course exposure and actual institutional permissions remain unreviewed; no change to the O9–O11 clearance decisions.
 
 **Next:** read CI run logs/artifacts from a reachable environment; separate legitimate restricted content from synthetic fixture strings; complete remaining media/provenance source checks.
+
+## Pass 10 — validator completeness and CI result isolation (2026-10-09)
+
+- Audited the live `main` workflow, scanner, test files, and reading-edition builder using the GitHub connector.
+- The workflow now records the individual outcomes of screening, regression tests, edition freshness, navigation, Python compilation, and provenance-inventory generation. All checks are diagnostic even after one check fails; the final step blocks on **any** unsuccessful required outcome.
+- Extended `scripts/check_public_originality.py` to flag tracked structured data files (including CSV, TSV, XLSX, SAS transport, R data, and columnar data formats) for privacy, source, and redistribution review. These files are not automatically presumed infringing; unresolved reviews still fail the strict release gate.
+- Added integration-test cases for CSV provenance flags and suppression of duplicate binary warnings.
+- The reading-edition builder now fails if it discovers fewer than the seven expected R Markdown source files; formerly a missing source tree could result in a false-green zero-source validation.
+- A fresh repository clone again failed with DNS resolution of `github.com`. The connector endpoint for commit workflow runs searches pull-request-triggered runs only and returned no runs for the inspected commit. **This is not evidence that push-triggered CI passed or failed.**
+- No definitive finding of copyright infringement, clean Git history, or institutional approval has been made.
+
+**Next:** obtain actual push-run Actions logs and artifacts, adjudicate flagged datasets/media and course-like files with original permissions, and perform the private source-to-public comparison. The final clearance gate remains open.
 
 ## Required acceptance commands
 
