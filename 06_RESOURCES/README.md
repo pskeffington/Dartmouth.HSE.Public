@@ -20,11 +20,11 @@ Reusable methods, functions, teaching references and templates for health data s
 Load modules in dependency order:
 
 ```r
-source("RESOURCES/R/hse_stats_plots.R")
-source("RESOURCES/R/hse_gene_visuals.R")
-source("RESOURCES/R/hse_one_call_plots.R")
-source("RESOURCES/R/hse_biostat_panels.R")
-source("RESOURCES/R/hse_plot_annotations.R")
+source("06_06_RESOURCES/R/hse_stats_plots.R")
+source("06_06_RESOURCES/R/hse_gene_visuals.R")
+source("06_06_RESOURCES/R/hse_one_call_plots.R")
+source("06_06_RESOURCES/R/hse_biostat_panels.R")
+source("06_06_RESOURCES/R/hse_plot_annotations.R")
 ```
 
 **Descriptive report:**
@@ -49,7 +49,7 @@ For additional historical classroom functions, see [Week 3 reusable functions](R
 
 Start with the [operation reference](Bash/BASH_OPERATION_SHEET.md), then the [annotated literature review](Bash/BASH_LITERATURE_REVIEW.md). The [sourceable utility functions](Bash/bash_functions.sh) provide file checking, TSV inspection, checksum utilities and Rscript orchestration.
 
-The [Week 4 runnable exercise](../Group%20Work/Week_4_Bash_Lab/) expects local synthetic data in `data/`, which Git ignores.
+The [Week 4 runnable exercise](../03_Group_Work/Week_4_Bash_Lab/) expects local synthetic data in `data/`, which Git ignores.
 
 ## LaTeX learning and reports
 
