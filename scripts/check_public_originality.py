@@ -29,7 +29,7 @@ COURSE_SPECIFIC = [
     ("verbatim-prompt indicator", re.compile(r"(?:prompts?\s+(?:below\s+)?(?:are|is)\s+preserved|copied\s+(?:from|verbatim)|original\s+(?:assignment|exercise)\s+questions?)", re.I)),
     ("assignment item mapping", re.compile(r"\bassignment\s+(?:task|item|question)\s*[|:#-]", re.I)),
 ]
-COURSE_PUBLIC = ("02_Lecture_Notes/", "03_Group_Work/", "05_Assignments/")
+COURSE_PUBLIC = ("02_Lecture_Notes/", "03_Group_Work/", "05_Assignments/", "06_RESOURCES/")
 MAX_TEXT_BYTES = 1_000_000
 SKIP = {".git", "__pycache__", ".venv", "node_modules"}
 # These exact files contain quoted heuristic patterns and artificial violation
@@ -83,7 +83,7 @@ def scan(root: Path) -> dict:
         for reason, pattern in RESTRICTED_TEXT:
             if pattern.search(text):
                 findings.append({"path": rel, "level": "block", "reason": reason})
-        if rel.startswith(COURSE_PUBLIC) and suffix.lower() in {".md", ".rmd", ".r", ".py", ".sh"}:
+        if rel.startswith(COURSE_PUBLIC) and suffix in {".md", ".rmd", ".r", ".py", ".sh", ".tex"}:
             for reason, pattern in COURSE_SPECIFIC:
                 if pattern.search(text):
                     findings.append({"path": rel, "level": "review", "reason": reason})
@@ -93,7 +93,7 @@ def scan(root: Path) -> dict:
     findings.sort(key=lambda f: (f["path"], f["level"], f["reason"]))
     return {"status": "BLOCK" if any(f["level"] == "block" for f in findings) else ("REVIEW" if findings else "SCREEN_CLEAR"),
             "tracked_files": len(paths), "findings": findings,
-            "limitations": "Heuristic screening only: cannot establish originality, permission, similarity, public-domain status, or clean Git history."}
+            "limitations": "Heuristic screening only: scans at most the first 1 MB of each file; cannot establish originality, permission, similarity, public-domain status, or clean Git history."}
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
