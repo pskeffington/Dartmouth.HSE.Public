@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Week 4 Bash lab: synthetic regression / smoke test.
-# Run: bash "Group Work/Week_4_Bash_Lab/test_week4.sh"
+# Run: bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
 # Creates a temporary 3-record CSV; no course data required.
 set -euo pipefail
 
