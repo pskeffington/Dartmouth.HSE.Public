@@ -2,11 +2,13 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
+> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
 
 # Lecture companion: the shell as a reproducible research interface
 
-This companion follows the supplied twelve-page *Introduction to Bash Scripting* lecture. It explains the scientific rationale behind each operation while retaining the lecture's progression: shell history and motivation, navigation, inspection, file management, scripting, pipelines, control structures, and calling R from Bash. The lecture text is the source for the instructional sequence; clearly identified *practice safeguards* below are additions for reproducible use. This is an independent teaching commentary, not a reproduction of the original lecture.
+This independent commentary explains Bash navigation, scripts, pipelines, and responsible data-handling methods. It is not a reproduction of a Geisel lecture or a solution to assigned Bash work. The official lesson, assessment prompt, and classroom input files remain available only through authorized course channels.
+
+**Required source boundary:** The official lecture and course instructions are needed to determine any assessed tasks.
 
 ## On this page
 
@@ -18,7 +20,7 @@ This companion follows the supplied twelve-page *Introduction to Bash Scripting*
 - [6. Conditionals and loops](#6-conditionals-and-loops)
 - [7. Bash and R: division of responsibility](#7-bash-and-r-division-of-responsibility)
 - [Scholarly synthesis](#scholarly-synthesis)
-- [8. Applied workflow: from an assignment prompt to a checked shell script](#8-applied-workflow-from-an-assignment-prompt-to-a-checked-shell-script)
+- [8. General-purpose shell workflow and verification](#8-general-purpose-shell-workflow-and-verification)
 - [9. Final self-check: what Week 4 mastery requires](#9-final-self-check-what-week-4-mastery-requires)
 
 ## 1. Shells, Bash, and computational research
@@ -149,7 +151,7 @@ The methodological progression is from *where the data reside*, to *what the dat
 
 **Execution boundary:** `data.csv` and the class's `pseudo_metadata.csv` are not supplied with this lecture text, so no file-specific output or participant count is asserted here. Run examples only against authorized inputs in an appropriate local directory.
 
-## 8. Applied workflow: from an assignment prompt to a checked shell script
+## 8. General-purpose shell workflow and verification
 
 The lecture moves from finding files to inspecting content, automating repeated operations, and invoking R. Practise that complete sequence in a disposable folder before applying it to coursework. The following is a **self-contained practice example**, not an assignment solution.
 
