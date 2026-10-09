@@ -4,23 +4,7 @@
 
 > **Reading edition.** Original lecture references are retained for study. The commented source runs no analysis. Code below is reference material; check paths, packages, inputs and prerequisites before using it.
 
-Dartmouth | HSE.711 | Week 3 learning-objective notes
-
-Source: Lecture_3_Data_Visualization_and_Analytics(2).Rmd
-
-Chunk references count all 21 R chunks in source order, including setup.
-
-Entire file is commented for study; sourcing it runs no analysis.
-
-Objectives: inspect and join data; assess distributions and missingness;
-
-fit an exploratory linear model; build reusable functions; iterate files;
-
-keep named data lists; interpret annotated heatmaps.
-
-Original lecture code below is reference material, not a corrected pipeline.
-
-Data files were not attached; numeric lecture results are not reproduced.
+Dartmouth | HSE.711 | Week 3 learning-objective notes Source: Lecture_3_Data_Visualization_and_Analytics(2).Rmd Chunk references count all 21 R chunks in source order, including setup. Entire file is commented for study; sourcing it runs no analysis. Objectives: inspect and join data; assess distributions and missingness; fit an exploratory linear model; build reusable functions; iterate files; keep named data lists; interpret annotated heatmaps. Original lecture code below is reference material, not a corrected pipeline. Data files were not attached; numeric lecture results are not reproduced.
 
 ## On this page
 

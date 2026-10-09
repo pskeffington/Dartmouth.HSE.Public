@@ -21,6 +21,8 @@ Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusa
 
 ## Course materials
 
+Each group walkthrough opens with session checkpoints. Use them to pause, check output and explain the method to a partner. For figures, keep the [plot-reading guide](06_RESOURCES/READING_PLOTS.md) beside the code.
+
 | Week | Lecture | Group work |
 | --- | --- | --- |
 | 1 | Lecture companion not posted | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |

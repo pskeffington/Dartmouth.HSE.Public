@@ -4,12 +4,9 @@
 
 > **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
-This walkthrough follows the 21 exercises in the provided Week 1 working file. We move from inspecting individual values to selecting data, building tables, and combining a function with a loop. Each section explains the reasoning before showing commented base R code. Run the chunks from top to bottom in a fresh R session.
-
-Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over stylistic choices. For direct comparison with Lecture 1, the count-data pipeline keeps its `num.vector`, `count.vector`, `count.matrix`, and `count.df` names. Other added objects use descriptive `snake_case` names; the separate participant metadata table uses `participant.df` to match the lecture's data-frame suffix. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
-
 ## On this page
 
+- [Session checkpoints](#session-checkpoints)
 - [Source and scope](#source-and-scope)
 - [Exercise 1: Identify the data types](#exercise-1-identify-the-data-types)
 - [Exercise 2: Build a list of different vector types](#exercise-2-build-a-list-of-different-vector-types)
@@ -28,12 +25,28 @@ Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(
 - [Exercise 15: Append a numeric participant column](#exercise-15-append-a-numeric-participant-column)
 - [Exercise 16: Observe matrix coercion](#exercise-16-observe-matrix-coercion)
 - [Exercise 17: Rebuild a numeric matrix](#exercise-17-rebuild-a-numeric-matrix)
-- [Exercise 18:](#exercise-18)
+- [Exercise 18: Convert a matrix to a data frame](#exercise-18-convert-a-matrix-to-a-data-frame)
 - [Exercise 19: Create participant metadata](#exercise-19-create-participant-metadata)
 - [Exercise 20: Extract the age column](#exercise-20-extract-the-age-column)
 - [Exercise 21: Combine a function, loop, and conditional](#exercise-21-combine-a-function-loop-and-conditional)
 - [What we should carry forward](#what-we-should-carry-forward)
 - [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
+- [Continue learning](#continue-learning)
+
+## Session checkpoints
+
+**Goal:** inspect R objects, select values and build a labeled table. The examples generate their own values; run the source chunks in order.
+
+| Stop after | Check | Explain to a partner |
+| --- | --- | --- |
+| Exercises 1–8 | Classes, missing values and selection conditions | Why is a missing value different from a nonmatch? |
+| Exercises 9–11 | Selected entries and list components | What changes between `[ ]` and `[[ ]]`? |
+| Exercises 12–18 | Matrix dimensions, labels and storage type | What happens when text is added to a numeric matrix? |
+| Exercises 19–21 | Metadata columns and function output | Which objects does the function use, and when does the conditional run? |
+
+This walkthrough follows the 21 exercises in the provided Week 1 working file. We move from inspecting individual values to selecting data, building tables, and combining a function with a loop. Each section explains the reasoning before showing commented base R code. Run the chunks from top to bottom in a fresh R session.
+
+Lecture references use the 46 sequential chunks in `Lecture_1_Introduction_to_R(1).Rmd`, including its non-executing template chunks. The code uses `<-`, `#` comments, base R data structures, indexing, and explicit loops from that lecture. Required exercise names take precedence over stylistic choices. For direct comparison with Lecture 1, the count-data pipeline keeps its `num.vector`, `count.vector`, `count.matrix`, and `count.df` names. Other added objects use descriptive `snake_case` names; the separate participant metadata table uses `participant.df` to match the lecture's data-frame suffix. HTML output avoids a LaTeX dependency; PDF can be selected if a local TeX installation is available.
 
 ## Source and scope
 
@@ -45,8 +58,7 @@ The explanations are a study walkthrough, not a reproduction of the instructor's
 
 ## Exercise 1: Identify the data types
 
-**Methodological context.** Statistical programming begins with the distinction between a value's appearance and its computational representation. This initial inspection is not merely syntactic: type assumptions determine which mathematical operations, comparisons, and missing-value rules are valid. Students should interpret the printed class as an observation about R's stored object, rather than a statement about the biological or clinical meaning of a variable.
-
+**Before you start.** Check how R stores a value before choosing an operation. A number that looks like an integer may still be stored as numeric. `class()` reports the stored type; it does not describe the clinical meaning of a variable.
 
 We begin by assigning the three objects and asking R to report their classes. A whole-looking number such as 3 is still stored as numeric by default; an integer requires an explicit conversion or an L suffix. This check helps us choose valid operations before analyzing a variable.
 
@@ -89,8 +101,7 @@ my_integers  # 1 1 2 8 6 1048
 
 ## Exercise 4: Find a word while handling missing values
 
-**Interpretive note.** Missingness and substantive nonmatches represent different states. A character value that does not equal the target is observed evidence of a nonmatch; an `NA` supplies no observed value at all. The filtering condition therefore makes the analysis population explicit before any count or selection is reported.
-
+**Check your result.** `NA` means a value is missing; it is different from an observed value that does not match your target. Exclude missing values explicitly before selecting or counting matches.
 
 The supplied arthritis vector contains both words and missing values. A comparison alone leaves NA entries in the selection mask. We first exclude missing entries, then select the exact word. This pattern also applies to selecting a category from an imported dataset. The short vector below adapts the selection task for a public walkthrough; it preserves four missing entries without reproducing the source passage. It is used for indexing practice, not to draw medical conclusions.
 
@@ -188,8 +199,7 @@ class(grocery_list[[2]])  # character
 
 ## Exercise 12: Generate a synthetic count matrix
 
-**Research application.** Gene-by-sample matrices are a foundational structure in transcriptomic analysis. Their orientation and dimension labels are part of the scientific data contract: a numerical entry has meaning only when the corresponding feature and specimen can be identified. The values generated here are synthetic teaching data and must not be interpreted as measured RNA-seq counts or expression estimates.
-
+**Why this matters.** In a gene-by-sample matrix, rows identify genes and columns identify samples. Check both the dimensions and the labels so each value can be traced to the correct gene and sample. This example generates synthetic values for practice.
 
 A five-by-five matrix needs 25 values. We sample from 0 through 20 with replacement, then fill the matrix row by row. A seed makes repeated runs reproducible under the same R random-number settings. These are teaching data, not observed patient or gene measurements.
 
@@ -264,10 +274,9 @@ colnames(count.matrix) <- paste("Participant", 106:110)
 count.matrix
 ```
 
-## Exercise 18:
+## Exercise 18: Convert a matrix to a data frame
 
-**Interpretive note.** Moving between matrices and data frames changes which kinds of variables may coexist. At each conversion, verify both column types and dimensions rather than assuming that a successful command has preserved the intended data structure.
- Convert the matrix to a data frame
+**Check your result.** A matrix stores one type of value; a data frame can store different types in different columns. After conversion, check the dimensions and column types with `dim()` and `str()`.
 
 We use as.data.frame() to change the container while retaining the gene rows and participant columns. Conversion does not transpose the data or turn it into participant metadata. The frame can subsequently hold columns of different types.
 
@@ -328,9 +337,12 @@ The recurring pattern is to identify the structure, inspect the values, and then
 
 The walkthrough corrects the working file's comment syntax, misplaced code, duplicate chunk labels, `count.matric` spelling, unnecessary Console prompt, missing-value selection, and matrix-size mismatch. It omits the decorative closing text so the document stays focused on the exercises.
 
-
 ## Scholarly reporting and reproducibility
 
 A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
 
 The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
+
+## Continue learning
+
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Next week](Week_2_Group_Work_Narrative_Walkthrough.md)
