@@ -24,7 +24,7 @@ Run `python3 scripts/check_public_originality.py` from the repository root, or `
 
 **BLOCK** (exit 1) indicates restrictive markers requiring removal or documented clearance. **REVIEW** (exit 0 in informational mode, exit 1 with `--fail-on-review`) requires manual verification before claiming the repository is publication-ready. **SCREEN_CLEAR** (exit 0) means no configured signatures were detected, **not** that originality or copyright clearance is established.
 
-The script inspects tracked files in the working tree; it does not inspect untracked files, Git history, external source repositories, or similarity with Dartmouth course content. A separate reviewer must compare suspect materials with the actual teaching sources, check licensing and authorship, and inspect historical commits. Do not present its output as an institutional certification.
+The scanner omits heuristic text matching for an explicit allowlist of policy/evidence files and two named synthetic regression-test scripts; this is not a general directory exclusion, and filename/binary checks still apply. These files require normal authorship review. The script inspects tracked files in the working tree; it does not inspect untracked files, Git history, external source repositories, or similarity with Dartmouth course content. A separate reviewer must compare suspect materials with the actual teaching sources, check licensing and authorship, and inspect historical commits. Do not present its output as an institutional certification.
 
 ## Manual review record
 
