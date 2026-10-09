@@ -13,16 +13,17 @@ RESTRICTED_EXT = {".ppt", ".pptx", ".key", ".pages", ".doc", ".docx"}
 REVIEW_EXT = {".pdf", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".zip"}
 RESTRICTED_NAME = re.compile(r"(?:^|[/_. -])(syllabus|instructor[_. -]?(?:copy|notes|solution|slides)|answer[_. -]?key|solution[_. -]?key|course[_. -]?(?:handout|packet)|lecture[_. -]?slides)(?:$|[/_. -])", re.I)
 RESTRICTED_TEXT = [
-    ("explicit rights restriction", re.compile(r"all rights reserved|do not (?:distribute|share|reproduce)|for (?:enrolled )?students only|not for (?:public )?distribution", re.I)),
+    ("explicit rights restriction", re.compile(r"all rights reserved|(?:this (?:file|document|material|work) is )?for (?:enrolled )?students only|not for (?:public )?distribution", re.I)),
     ("course-platform export", re.compile(r"canvas\.dartmouth\.edu/courses/|blackboard\.dartmouth\.edu/", re.I)),
 ]
 REVIEW_TEXT = [
+    ("distribution warning; verify origin", re.compile(r"do not (?:distribute|share|reproduce)", re.I)),
     ("instructor-provided source reference", re.compile(r"(?:instructor|professor)(?:.{0,35})(?:provided|working file|handout|slide deck)", re.I)),
 ]
 # Heuristic signals confined to public instructional publications. These warrant
 # review, not a conclusive claim that material was copied.
 COURSE_SPECIFIC = [
-    ("lecture chunk mapping", re.compile(r"\b(?:lecture\s+)?chunks?\s*\d+(?:\s*[-–]\s*\d+)?", re.I)),
+    ("lecture chunk mapping", re.compile(r"\b(?:lecture\s+\d+[,.:]?\s*)?chunks?\s*\d+(?:\s*[-–]\s*\d+)?", re.I)),
     ("verbatim-prompt indicator", re.compile(r"(?:prompts?\s+(?:below\s+)?(?:are|is)\s+preserved|copied\s+(?:from|verbatim)|original\s+(?:assignment|exercise)\s+questions?)", re.I)),
     ("assignment item mapping", re.compile(r"\bassignment\s+(?:task|item|question)\s*[|:#-]", re.I)),
 ]
