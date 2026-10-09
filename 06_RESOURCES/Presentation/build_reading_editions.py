@@ -57,63 +57,19 @@ def rmarkdown(source: Path) -> str:
     return contents(header + body.lstrip())
 
 
-def commented_lecture(source: Path) -> str:
-    """Present a comment-only lecture script as explanatory Markdown."""
-    lines = [re.sub(r'^# ?', '', line) for line in source.read_text().splitlines()]
-    week = source.name.split('_')[1]
-    first_heading = next(
-        (i for i, line in enumerate(lines) if re.match(r'CHUNK |===== Lecture', line)),
-        None,
-    )
-    if first_heading is None:
-        raise ValueError(f'{source.relative_to(ROOT)}: no recognizable lecture chunks')
-    # Fold line-wrapped introductory comments into a readable paragraph.
-    intro = ' '.join(line for line in lines[:first_heading] if line)
-    out = [
-        f'# HSE 711 · Week {week} learning notes', '',
-        f'[Lecture index](README.md) · [Commented source]({source.name}) · [Repository home](../README.md)', '',
-        '> **Reading edition.** Original lecture references are retained for study. '
-        'The commented source runs no analysis. Code below is reference material; '
-        'check paths, packages, inputs and prerequisites before using it.', '', intro, '',
-    ]
-    in_code = False
-    for line in lines[first_heading:]:
-        heading = re.match(r'(?:CHUNK (\d+) — (.*)|===== Lecture 3, chunk (\d+): (.*?) =====)', line)
-        if heading:
-            if in_code:
-                out.extend(['```', ''])
-                in_code = False
-            number = heading.group(1) or heading.group(3)
-            title = heading.group(2) or heading.group(4)
-            title = re.sub(r' \(source line \d+\)$', '', title)
-            if title.isupper():
-                title = title.capitalize()
-            out.extend([f'## {number}. {title}', ''])
-        elif line == 'Lecture reference code:':
-            out.extend(['', '**Lecture reference code**', '', '```r'])
-            in_code = True
-        elif in_code:
-            out.append(line)
-        else:
-            line = re.sub(r'^(Objective/how|Learn): ', '**Learn:** ', line)
-            line = re.sub(r'^Apply: ', '**Apply:** ', line)
-            out.extend([line, ''] if line else [''])
-    if in_code:
-        out.append('```')
-    return contents(re.sub(r'\n{3,}', '\n\n', '\n'.join(out)) + '\n')
-
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Report stale editions without writing.')
     args = parser.parse_args()
-    # Curated conceptual .R reference notes have manually edited .md companions.
-    # Do not regenerate them as transcripts or source-code excerpts.
+    # Publish student-authored R Markdown only. Standalone conceptual .R
+    # references have manually maintained .md companions; never generate
+    # public instructor-code transcripts from R scripts.
     sources = sorted(LECTURES.glob('Week*.Rmd'))
     sources += sorted(GROUP_WORK.glob('Week*.Rmd'))
     stale = []
     for source in sources:
-        output = rmarkdown(source) if source.suffix == '.Rmd' else commented_lecture(source)
+        output = rmarkdown(source)
         target = source.with_suffix('.md')
         if not target.exists() or target.read_text(encoding='utf-8') != output:
             stale.append(str(target.relative_to(ROOT)))
