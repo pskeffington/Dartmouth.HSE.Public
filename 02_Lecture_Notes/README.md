@@ -6,6 +6,7 @@ Narrative teaching companions for **HSE 711: Foundations in Data Science**. Each
 
 | Week | Topic | Material |
 | --- | --- | --- |
+| 1 | Introduction to R: methods for approaching Assignment 1 | [Lecture notes (read)](Week_1_Introduction_to_R_Lecture_Notes.md) |
 | 2 | Data wrangling and visualization | [Learning objective notes (read)](Week_2_Learning_Objective_Notes.md) |
 | 3 | Data visualization and analytics | [Learning objective notes (read)](Week_3_Learning_Objective_Notes.md) |
 | 4 | Introduction to Bash scripting | [Narrative lecture companion (read)](Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) |
