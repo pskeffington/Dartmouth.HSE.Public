@@ -13,17 +13,9 @@ output:
 
 ## Purpose and learning objectives
 
-These notes explain **how to approach** the first Introduction to R assignment using the methods introduced in the Week 1 lecture: object classes, vectors and lists, indexing, logical comparisons, loops, data frames, file input, graphics, and functions. They provide **parallel practice examples**, not the assignment answers, submission, or supplied dataset. The original lecture source is referenced by the existing Week 1 group-work companion but is not reproduced here.
+These independent notes cover R objects, indexing, logical operations, tabular structures, data import, graphics, and reusable functions. They do not supply the official assignment, data, or graded implementation. To perform Geisel-specific coursework, consult the authorized lecture and assignment files in a private workspace.
 
-By the end, you should be able to explain the reasoning for every line of your own code, inspect results, and independently adapt the techniques to the assigned inputs.
-
-| Assignment task | Lecture technique to revisit | Check your understanding |
-| --- | --- | --- |
-| 1a–b: identify and count object types | `list()`, `class()`, `for`, `table()` | Why inspect each list component separately? |
-| 1c–e: comparisons, factors, positions | `is.numeric()`, `if`, `factor()`, `which()` | How do you avoid comparing letters with numbers? |
-| 2a–c: import and dimensions | `read.delim()`, `row.names`, `nrow()`, `ncol()` | Which axis represents genes versus samples? |
-| 2d–e: graph and export | `hist()`, `[rows, columns]`, `write.csv()` | What happens when a matrix or table is subset incorrectly? |
-| 3: categorize values with a function | `function()`, `for`, `if/else`, `return()` | What does the function accept and produce? |
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## 1. Understanding R objects before classifying them
 
@@ -194,7 +186,7 @@ str(practice_result)
 
 ## 7. Explaining your method, not just showing output
 
-For each part of the assignment, write one or two sentences answering: **What object did I start with? What did this function, loop, or index operation do? How did I check the result?** Distinguish a descriptive graph from an inferential result.
+For each independent practice activity, write one or two sentences answering: **What object did I start with? What did this function, loop, or index operation do? How did I check the result?** Distinguish a descriptive graph from an inferential result.
 
 A useful repeatable workflow is: inspect the data, choose the operation, run a small test, verify dimensions or positions, and only then apply the method to the full input. Keep your own solutions and any classroom-restricted data in the appropriate private or submission location.
 
