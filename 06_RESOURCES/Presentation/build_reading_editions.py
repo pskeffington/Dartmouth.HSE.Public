@@ -67,6 +67,10 @@ def main():
     # public instructor-code transcripts from R scripts.
     sources = sorted(LECTURES.glob('Week*.Rmd'))
     sources += sorted(GROUP_WORK.glob('Week*.Rmd'))
+    # A missing course directory must never turn a vacuous zero-file check green.
+    if len(sources) < 7:
+        print(f'ERROR: expected at least 7 reading sources, found {len(sources)}.')
+        return 2
     stale = []
     for source in sources:
         output = rmarkdown(source)
