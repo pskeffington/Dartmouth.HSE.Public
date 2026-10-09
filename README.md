@@ -83,6 +83,8 @@ python3 scripts/check_public_originality.py --json --fail-on-review  # strict CI
 | `REVIEW` | File(s) need a provenance/permissions check | Inspect each flagged file before public release; CI fails closed |
 | `BLOCK` | Potentially restricted material detected | Remove, replace, or document redistribution authorization |
 
+The same workflow also publishes a **per-file SHA256 provenance inventory** as a short-lived Actions artifact. Run `python3 scripts/build_provenance_inventory.py --output provenance-inventory.json` in a local checkout to reproduce it. All inventory records are marked unverified; hashes demonstrate file identity only, not originality or permission. Review the register and historical exposure report before release.
+
 **This validator is a screening gate, not proof of originality or legal clearance.** It does not compare text with Dartmouth source materials, inspect historical Git commits or untracked files, or verify third-party permissions. Flagged content must be reviewed by a person. See the [originality and rights policy](ORIGINALITY_POLICY.md) for the publication standard and manual review requirements.
 
 ## Private execution boundary
