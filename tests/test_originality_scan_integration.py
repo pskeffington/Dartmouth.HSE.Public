@@ -63,6 +63,20 @@ class ScanIntegrationTests(unittest.TestCase):
         self.tracked("tests/test_unreviewed.py", "All rights reserved")
         self.assertEqual(screen.scan(self.root)["status"], "BLOCK")
 
+    def test_boundary_policy_prose_is_not_a_rights_violation(self) -> None:
+        self.tracked("03_Group_Work/README.md",
+                     "Obtain instructor-provided code via the authorized course channel. "
+                     "Do not reproduce original handouts.")
+        self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
+
+    def test_admitted_instructor_material_still_requires_review(self) -> None:
+        self.tracked("03_Group_Work/copied_notes.md",
+                     "We copied the instructor handout code into this repository.")
+        report = screen.scan(self.root)
+        self.assertEqual(report["status"], "REVIEW")
+        self.assertTrue(any("instructor source included" in item["reason"]
+                            for item in report["findings"]))
+
     def test_tracked_csv_needs_provenance_review(self) -> None:
         self.tracked("06_RESOURCES/example.csv", "id,value\\n1,4\\n")
         report = screen.scan(self.root)
