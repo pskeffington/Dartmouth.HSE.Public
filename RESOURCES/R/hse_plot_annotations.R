@@ -1,10 +1,5 @@
-# HSE Public: downstream figure annotations and export provenance
-# Source after hse_stats_plots.R, hse_one_call_plots.R and hse_biostat_panels.R.
-# No datasets are read, no plots are generated, and no globals are changed.
-#
-# Every plot carries readable title/subtitle/caption, accurate axis labels,
-# and an inspectable annotation record. Missing inferential values stay absent.
-# Do not infer p-values from graphics, or relabel descriptive CI as model CI.
+# Figure annotation and export helpers; source after plotting modules.
+# Statistical results are retained; annotations do not validate inference.
 
 hse_annotation <- function(plot, title = NULL, subtitle = NULL,
                            x = NULL, y = NULL, method = NULL,
@@ -137,7 +132,6 @@ if (exists("hse_plot_wilcox", mode = "function") &&
     p
   }
 }
-
 
 # Extend consistent annotations to the remaining teaching plot factories.
 if (exists("hse_plot_multigroup",mode="function") &&
