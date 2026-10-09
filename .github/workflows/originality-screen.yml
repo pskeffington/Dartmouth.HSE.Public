@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python3 scripts/check_public_originality.py --json > originality-report.json
+          python3 scripts/check_public_originality.py --json --fail-on-review > originality-report.json
           result=$?
           set -e
           python3 -m json.tool originality-report.json > /dev/null
@@ -43,7 +43,7 @@ jobs:
               out.write(f"**Status:** {report['status']}  \n")
               out.write(f"**Tracked files:** {report['tracked_files']}  \n")
               out.write(f"**Findings:** {len(report['findings'])}\n\n")
-              out.write("Heuristic screening is not proof of ownership or copyright clearance. REVIEW findings must be checked manually.\n\n")
+              out.write("Heuristic screening is not proof of ownership or copyright clearance. REVIEW findings require documented clearance; this release gate fails until resolved.\n\n")
               for item in report['findings'][:100]:
                   out.write(f"- **{item['level'].upper()}** `{item['path']}`: {item['reason']}\n")
           PY
