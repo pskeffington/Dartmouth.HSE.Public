@@ -37,6 +37,10 @@ mkdir -p my_project/data      # Create nested directories
 
 `cp` duplicates files, `mv` relocates or renames them, `cat` displays complete text, and `rm` deletes entries. These operations are important for source provenance: a renamed or overwritten file can break the connection between analysis and input. **Practice safeguard (added):** work inside a disposable exercise directory and check the target before any recursive deletion.
 
+**Optional game-based reinforcement:** [Terminus](https://terminus-global.vercel.app/) introduces terminal navigation through a command-line adventure; [Hack RUN](https://store.steampowered.com/app/378110/Hack_RUN/) uses simulated DOS/UNIX-style command prompts to make inspecting files and moving through a system part of solving puzzles; [Hacknet](https://store.steampowered.com/app/365450/Hacknet/) introduces simulated remote-system exploration. Requiring a player to recall and apply navigation commands repeatedly can encourage retrieval practice and make basic operations more familiar than passive reading alone. These games use simplified interfaces, so they supplement rather than replace practice in a real, authorized terminal.
+
+**Mastery transfer:** Without following a game walkthrough, open a local terminal and demonstrate `pwd`, `ls`, `cd`, and `head` on a disposable exercise directory. Explain the working directory and relative path at each step.
+
 ## 3. Inspecting research files without loading everything
 
 The lecture uses a synthetic gene-by-sample count file, `data.csv`, to motivate `head`, `tail`, `less`, and `wc`. In this example, rows are genes and columns are samples; displaying a header is therefore a preliminary schema check, not a statistical analysis.
