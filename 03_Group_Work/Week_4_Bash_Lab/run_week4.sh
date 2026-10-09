@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # HSE 711 Week 4: reproducible five-question metadata lab.
-# Usage: bash "Group Work/Week_4_Bash_Lab/run_week4.sh" path/to/pseudo_metadata.csv [workspace]
+# Usage: bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" path/to/pseudo_metadata.csv [workspace]
 # Safety: only creates/deletes a nested "new_dir" inside the named workspace.
 set -euo pipefail
 
