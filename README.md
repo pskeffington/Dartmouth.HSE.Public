@@ -26,7 +26,9 @@ My introduction to Bash came through playing [Terminus](https://terminus-global.
 
 For an approachable introduction to remote systems and networking, I also recommend [Hacknet](https://store.steampowered.com/app/365450/Hacknet/), a terminal-driven simulation game. Its missions turn ideas such as remote connections, host discovery, ports, and navigating unfamiliar systems into interactive problems rather than vocabulary to memorize. I found this game-based approach a useful companion to learning command-line tools.
 
-Hacknet uses a **fictional, simplified command environment**: it teaches concepts and curiosity, not the exact syntax or security practices of real SSH or network administration. To move from the game into a legitimate practice environment, start with your own computer or a lab machine you have permission to administer:
+Another useful option is [Hack RUN](https://store.steampowered.com/app/378110/Hack_RUN/), a command-prompt adventure that uses simulated DOS- and UNIX-style environments. It makes navigating directories, reading files, and recognizing basic command patterns part of solving the game's puzzles. <em>Rather than memorizing a printed command list, players repeatedly retrieve and apply commands to make progress.</em> That task-driven repetition can support familiarity and recall of basic computational operations; transferring the skill to a real terminal still requires practice with actual commands.
+
+Hacknet and Hack RUN use **fictional, simplified command environments**: it teaches concepts and curiosity, not the exact syntax or security practices of real SSH or network administration. To move from the game into a legitimate practice environment, start with your own computer or a lab machine you have permission to administer:
 
 | Goal | Real-world command | What it does |
 | --- | --- | --- |
@@ -37,7 +39,7 @@ Hacknet uses a **fictional, simplified command environment**: it teaches concept
 | Inspect local network interfaces | `ip addr` (Linux) or `ifconfig` (macOS) | Displays local addressing information |
 | Check a service you operate | `curl -I https://host.example` | Retrieves HTTP response headers |
 
-**Learning path:** Play Terminus for terminal navigation, explore Hacknet for networking intuition, then practice SSH and diagnostics against your own local virtual machine or an explicitly authorized training host. Use SSH keys, verify host fingerprints, and never attempt access to systems without permission.
+**Learning path:** Play Terminus for terminal navigation, use Hack RUN for repeated command-prompt navigation and file inspection, explore Hacknet for networking intuition, then practice SSH and diagnostics against your own local virtual machine or an explicitly authorized training host. Use SSH keys, verify host fingerprints, and never attempt access to systems without permission.
 
 ## Course materials
 
