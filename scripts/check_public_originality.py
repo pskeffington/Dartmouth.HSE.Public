@@ -22,9 +22,9 @@ REVIEW_TEXT = [
 # Heuristic signals confined to public instructional publications. These warrant
 # review, not a conclusive claim that material was copied.
 COURSE_SPECIFIC = [
-    ("lecture chunk mapping", re.compile(r"\\b(?:lecture\\s+)?chunks?\\s*\\d+(?:\\s*[-–]\\s*\\d+)?", re.I)),
-    ("verbatim-prompt indicator", re.compile(r"(?:prompts?\\s+(?:below\\s+)?(?:are|is)\\s+preserved|copied\\s+(?:from|verbatim)|original\\s+(?:assignment|exercise)\\s+questions?)", re.I)),
-    ("assignment item mapping", re.compile(r"\\bassignment\\s+(?:task|item|question)\\s*[|:#-]", re.I)),
+    ("lecture chunk mapping", re.compile(r"\b(?:lecture\s+)?chunks?\s*\d+(?:\s*[-–]\s*\d+)?", re.I)),
+    ("verbatim-prompt indicator", re.compile(r"(?:prompts?\s+(?:below\s+)?(?:are|is)\s+preserved|copied\s+(?:from|verbatim)|original\s+(?:assignment|exercise)\s+questions?)", re.I)),
+    ("assignment item mapping", re.compile(r"\bassignment\s+(?:task|item|question)\s*[|:#-]", re.I)),
 ]
 COURSE_PUBLIC = ("02_Lecture_Notes/", "03_Group_Work/", "05_Assignments/")
 MAX_TEXT_BYTES = 1_000_000
@@ -61,7 +61,11 @@ def scan(root: Path) -> dict:
             findings.append({"path": rel, "level": "review", "reason": "text file exceeded scan limit"})
         text = data[:MAX_TEXT_BYTES].decode("utf-8", errors="replace")
         # Treat the checker and policy documentation as rules, not evidence of violations.
-        if rel in {"scripts/check_public_originality.py", "ORIGINALITY_POLICY.md"}:
+        if rel in {
+            "scripts/check_public_originality.py", "ORIGINALITY_POLICY.md",
+            "ORIGINALITY_ROADMAP.md", "PROVENANCE_REGISTER.md",
+            "HISTORY_EXPOSURE_REVIEW.md",
+        }:
             continue
         for reason, pattern in RESTRICTED_TEXT:
             if pattern.search(text):
