@@ -2,7 +2,8 @@
 % Header note: This file is known to compile safely.
 \documentclass[12pt,letterpaper]{article}
 % APA 7 student manuscript example. Edit the metadata and bracketed content.
-% Compile twice with pdfLaTeX. No BibTeX/Biber step is required.
+% Default: compile twice with pdfLaTeX; no bibliography backend is required.
+% Optional .bib mode: set \usebibfiletrue below and run PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX.
 % This file configures a standard article class explicitly for student papers.
 % It is not a journal-specific template or a completed empirical study.
 \usepackage[T1]{fontenc}
@@ -16,7 +17,22 @@
 \usepackage{booktabs,array}
 \usepackage{graphicx,float}
 \usepackage{listings}
-\usepackage[authoryear,round]{natbib}
+% Keep the default mode self-contained. Enable only after installing the
+% biblatex, biblatex-apa, csquotes, babel and Biber dependencies.
+\newif\ifusebibfile
+\usebibfilefalse % Change to \usebibfiletrue to read Example_References.bib.
+\ifusebibfile
+  \usepackage[american]{babel}
+  \usepackage{csquotes}
+  \usepackage[backend=biber,style=apa]{biblatex}
+  \DeclareLanguageMapping{american}{american-apa}
+  \addbibresource{Example_References.bib}
+\else
+  \usepackage[authoryear,round]{natbib}
+  % Uniform citation commands in both modes.
+  \let\textcite\citet
+  \let\parencite\citep
+\fi
 \usepackage[hidelinks]{hyperref}
 \urlstyle{same}
 
@@ -39,8 +55,13 @@
 \titlespacing{\subsection}{0pt}{0pt}{0pt}
 \titlespacing{\subsubsection}{0pt}{0pt}{0pt}
 \setlength{\bibhang}{0.5in}
-\setlength{\bibsep}{0pt}
-\renewcommand{\bibsection}{\section*{References}}
+\ifusebibfile
+  \setlength{\bibitemsep}{0pt}
+  \AtBeginBibliography{\doublespacing}
+\else
+  \setlength{\bibsep}{0pt}
+  \renewcommand{\bibsection}{}
+\fi
 \lstset{language=bash,basicstyle=\ttfamily\footnotesize,
   breaklines=true,columns=fullflexible,keepspaces=true,
   showstringspaces=false,frame=none,aboveskip=0.5\baselineskip,
@@ -84,8 +105,9 @@ by the instructor. Replace this instruction only after verifying the results.]
 % The repeated paper title introduces the text; do not add "Introduction".
 \section*{\papertitle}
 This example shows how a student can organize a short manuscript around a
-reproducible data-processing exercise. It follows the student-paper setup
-described by \citet{apa-paper}. Replace the instructional prose and bracketed
+reproducible data-processing exercise. Its citation demonstrations use
+books by \textcite{seuss1957cat}. These literary sources demonstrate citation
+formatting; they do not support claims about the metadata-processing method. Replace the instructional prose and bracketed
 fields with your own account of the work. The example uses synthetic classroom
 metadata; it contains no observed research findings.
 
@@ -204,24 +226,25 @@ parsing. Do not frame successful file creation as proof of scientific validity.]
 step. Close with a concise answer to the objective; avoid introducing new
 results or making claims beyond the study design.]
 
-The student title-page guide provides an additional formatting reference
-\citep{apa-title}. In your manuscript, move substantive citation discussion
-into the relevant text section; this sentence is included to demonstrate a
-parenthetical citation. Delete it when replacing these instructional sources.
+A second citation example refers to a different book by the same author
+\parencite{seuss1971lorax}. This sentence demonstrates author--date citation
+syntax, not evidence for this exercise. Replace these examples with sources
+relevant to your research question.
 % References: new page, bold centered heading, alphabetical entries,
 % double spacing and 0.5-inch hanging indents. Cite every retained entry.
 \newpage
+\section*{References}
+\ifusebibfile
+\printbibliography[heading=none]
+\else
 \begin{thebibliography}{}
-\bibitem[American Psychological Association(n.d.)]{apa-title}
-American Psychological Association. (n.d.).
-\textit{Title page setup}.
-\url{https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page}
+\bibitem[Seuss(1957)]{seuss1957cat}
+Seuss, D. (1957). \textit{The cat in the hat}. Random House.
 
-\bibitem[American Psychological Association(2025)]{apa-paper}
-American Psychological Association. (2025).
-\textit{Student paper setup guide}.
-\url{https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf}
+\bibitem[Seuss(1971)]{seuss1971lorax}
+Seuss, D. (1971). \textit{The Lorax}. Random House.
 \end{thebibliography}
+\fi
 
 % Appendix: separate page after references. Code is supplementary material.
 \newpage
