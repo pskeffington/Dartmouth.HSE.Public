@@ -4,18 +4,18 @@
 
 ## Purpose
 
-This directory contains **publishing utilities** for public course notes and exercises. It is not a repository of slide decks, presentation submissions, or research results. Lecture notes and group work remain in their respective course directories.
+This directory contains **publishing utilities** for independently authored public study notes. It is not a repository of slide decks, presentation submissions, or research results. Lecture notes and group work remain in their respective course directories.
 
 | File | Responsibility |
 | --- | --- |
-| [`build_reading_editions.py`](build_reading_editions.py) | Generate browser-friendly Markdown reading editions from the editable coursework sources |
+| [`build_reading_editions.py`](build_reading_editions.py) | Generate browser-friendly Markdown reading editions from the student-authored R Markdown sources |
 | [`check_navigation.py`](check_navigation.py) | Check local document links, headings, code fences, and stylesheet paths |
 | [`reading.css`](reading.css) | Consistent formatting for locally knitted R Markdown HTML |
 | [`LINK_AUDIT.md`](LINK_AUDIT.md) | Dated evidence of navigation and external-link checks; a historical report, not a list of confirmed broken links |
 
 ## Editing workflow
 
-1. Edit the original `.Rmd` or `.R` teaching material in `02_Lecture_Notes/` or `03_Group_Work/`, not the generated Markdown.
+1. Edit the independent `.Rmd` teaching material in `02_Lecture_Notes/` or `03_Group_Work/`, not the generated Markdown.
 2. From the repository root, regenerate reading editions:
 
    ```bash
@@ -35,17 +35,9 @@ The builder uses the Python standard library. It does **not** execute R, validat
 
 ## HTML and PDF
 
-For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages and make locally authorized classroom inputs available before knitting.
+For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages. Keep any authorized course inputs out of public source control; public method guides do not require instructor files.
 
-For Week 3, render from the repository root to resolve course-data paths correctly:
-
-```r
-rmarkdown::render(
-  "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
-  output_format = "html_document",
-  knit_root_dir = normalizePath(".")
-)
-```
+For a generic HTML reading edition, build the Markdown from the independent `.Rmd` sources using the publishing tool. Rendering is optional and must not introduce restricted course prompts, outputs, or datasets.
 
 For interpreting figures, use the [plot-reading guide](../READING_PLOTS.md). For guided exercises, see the [follow-along guide](../../FOLLOW_ALONG.md).
 
