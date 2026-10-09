@@ -121,6 +121,18 @@ The public repository may explain general methods using independently written co
 
 **Next:** inspect current Actions artifacts, review the resulting resource-level flags against legitimate examples, then finish binary provenance and private institutional-source comparison. Do not use broad suppressions to turn CI green.
 
+## Pass 13 — actionable review queue from executed findings (2026-10-09)
+
+- Inspected the existing local audit summary in [ORIGINALITY_STATUS.md](ORIGINALITY_STATUS.md): 32 tests previously reported passing, seven reading editions current, and the baseline strict scanner recorded 12 REVIEW findings with zero BLOCK indicators. The bounded current-tree comparison found no 20-token overlap against the user's local Week 1–3 corpus, but 30 historical blobs had overlaps. Historical rights review is **not closed**.
+- Confirmed the documented baseline GitHub Actions run `37985520307` has a completed **failure** conclusion via the GitHub connector. This verifies the historical run, not the newest push-triggered run.
+- Re-inspected a focused sample of the current policy/notes files. The flags include original cautionary wording and references to authorized instructor files, which require adjudication rather than removal of warnings just to obtain a green badge.
+- Added `scripts/build_originality_triage.py` to transform the scanner's machine-readable findings into a file-specific human-review queue. Every entry has an explicit **HOLD** disposition and fields for reviewer, original-authorship/permission evidence, current-version verification, and required action. No restricted source excerpt is reproduced.
+- Added synthetic tests in `tests/test_originality_triage.py` for pending reviews, block counts, zero-indicator caveats, and invalid inputs; CI discovers these with the existing `test_originality*.py` pattern.
+- GitHub Actions now generates `originality-triage.md`, uploads it with the screening and provenance artifacts, and treats failure to generate the queue as another required gate failure.
+- No actual latest Actions result or private institutional rights attestation was available in this pass. The baseline 12 findings remain unresolved until reviewed; neither zero text overlap nor matching hashes establishes a license.
+
+**Next action:** download and read the current Actions artifacts; review all flagged paths against original source materials and contributor/rights evidence, recording decisions at exact file versions. Complete the historical-remediation authorization decision before considering O11 clearance. Do not force-push automatically.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
@@ -128,6 +140,7 @@ Run in the local checkout after syncing main:
 ```bash
 python3 scripts/check_public_originality.py --json --fail-on-review
 python3 -m unittest discover -s tests -p 'test_originality*.py' -v
+python3 scripts/build_originality_triage.py originality-report.json --output originality-triage.md
 python3 -m unittest discover -s tests -p 'test_reading_source_manifest.py' -v
 python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
