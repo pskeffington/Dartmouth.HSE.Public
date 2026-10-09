@@ -1,7 +1,5 @@
-# One-call statistical visualizations for Dartmouth HSE Public.
-# Source RESOURCES/R/hse_stats_plots.R before this module.
-# Every function returns a ggplot with the computed result in attr(plot,"hse_test").
-# These functions perform exploratory statistical analyses, NOT edgeR QL tests.
+# One-call statistical plots. Source hse_stats_plots.R first.
+# P-values are exploratory; these functions do not fit edgeR models.
 
 hse_plot_test <- function(data, x, y, method = c("pearson","spearman"),
                           fit = TRUE, conf_level = .95) {
