@@ -62,6 +62,10 @@ The [Week 4 runnable exercise](../03_Group_Work/Week_4_Bash_Lab/) expects local 
 
 The [Week 4 LaTeX template](LaTeX/) contains learning objectives, command examples, report sections, observation placeholders and reproducibility checks. TeX compilation requires a separate LaTeX installation.
 
+## Navigation checks
+
+Run the [navigation checker](Presentation/check_navigation.py) after changing paths or headings. The [link audit](Presentation/LINK_AUDIT.md) records the external destinations that could and could not be retrieved.
+
 ## Tests and scientific boundaries
 
 Smoke tests are in [tests](tests/), including descriptive statistics, gene plots, regression, panels, annotations and summary narratives. These tests require R and appropriate packages and are **not a substitute for independent scientific validation**. Run the relevant test before relying on a figure or statistical result.
