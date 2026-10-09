@@ -74,12 +74,13 @@ A [scheduled GitHub Actions originality check](.github/workflows/originality-scr
 ```bash
 python3 scripts/check_public_originality.py
 python3 scripts/check_public_originality.py --json
+python3 scripts/check_public_originality.py --json --fail-on-review  # strict CI-style gate
 ```
 
 | Result | Interpretation | Action |
 | --- | --- | --- |
 | `SCREEN_CLEAR` | No configured indicators were detected | Still verify authorship, licensing, and source attribution |
-| `REVIEW` | File(s) need a provenance/permissions check | Inspect each flagged file before public release |
+| `REVIEW` | File(s) need a provenance/permissions check | Inspect each flagged file before public release; CI fails closed |
 | `BLOCK` | Potentially restricted material detected | Remove, replace, or document redistribution authorization |
 
 **This validator is a screening gate, not proof of originality or legal clearance.** It does not compare text with Dartmouth source materials, inspect historical Git commits or untracked files, or verify third-party permissions. Flagged content must be reviewed by a person. See the [originality and rights policy](ORIGINALITY_POLICY.md) for the publication standard and manual review requirements.
