@@ -21,3 +21,12 @@ __pycache__/
 # Continued analysis belongs exclusively in the private repository.
 /AI Enabled Research/
 /work/
+
+# Prevent reintroducing private research/finance materials.
+/portfolio_valuation_manifest.json
+/06_RESOURCES/Literature/LITERATURE_MATRIX.md
+/06_RESOURCES/Literature/literature_matrix.csv
+/RESOURCES/Literature/LITERATURE_MATRIX.md
+/RESOURCES/Literature/literature_matrix.csv
+/03_Group_Work/Week_4_Bash_Lab/
+/Group Work/Week_4_Bash_Lab/
