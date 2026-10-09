@@ -4,6 +4,28 @@
 
 > **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
+## On this page
+
+- [Session checkpoints](#session-checkpoints)
+- [Question 1](#question-1)
+- [Question 2](#question-2)
+- [Question 3](#question-3)
+- [Question 4](#question-4)
+- [Question 5](#question-5)
+- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
+- [Continue learning](#continue-learning)
+
+## Session checkpoints
+
+**Goal:** simulate cohorts, reuse functions and combine files. Questions 1–4 create their own data. Question 5 needs course CSVs in `data/In-Class-Exercises`; the source skips that question when no files are found.
+
+| Stop after | Check | Explain to a partner |
+| --- | --- | --- |
+| Question 1 | Bounds, rounding, units and plot labels | Which simulation choices determine the plotted values? |
+| Question 2 | Named list and summaries across twenty cohorts | Why do repeated random samples give different summaries? |
+| Questions 3–4 | Function inputs, returned summary and histogram bins | What can change through an argument without editing the function? |
+| Question 5 | File list, combined rows, category labels and group sizes | How do you know that every intended CSV was included? |
+
 The five question prompts below are preserved from the supplied exercise. Each walkthrough connects the task to the attached Week 3 lecture. Chunk numbers count every R chunk in source order, including setup (21 chunks total). Prior Lecture 1 and 2 references are omitted because those source files were not supplied.
 
 Run the chunks in order. Questions 1–4 generate simulated data; Question 5 requires the actual CSVs. Set the working directory to the folder containing `data/`. The setup parameter skips Question 5 when those files are absent, so the simulation notes can still knit. This does not reproduce Question 5 results.
@@ -15,19 +37,9 @@ filenames <- list.files(path = data_path, pattern = "\\.csv$", full.names = TRUE
 csv_ready <- length(filenames) > 0L
 ```
 
-
-## On this page
-
-- [Question 1](#question-1)
-- [Question 2](#question-2)
-- [Question 3](#question-3)
-- [Question 4](#question-4)
-- [Question 5](#question-5)
-- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
-
 ## Question 1
 
-**Learning objective and rationale.** This exercise integrates controlled simulation with the visual description of a continuous biomarker. Before interpreting the boxplots, a reader should verify the sampling rule, numerical bounds, rounding, and units. The sex categories are used to demonstrate grouping; because measurements are simulated, the resulting patterns do not establish sex-related biological differences.
+**Before you plot.** Check the simulation rules, bounds, rounding and units before reading the box plots. Sex categories demonstrate grouping here. The simulated differences do not establish biological differences.
 
 Create a data frame of random data containing the following columns:
 
@@ -64,7 +76,6 @@ head(random_data)
 
 str(random_data)
 
-
 # Build the labeled box plot. 
 
 box_plot <- ggplot(
@@ -94,13 +105,12 @@ box_plot <- ggplot(
     panel.grid.minor = element_blank()
   )
 
-
 print(box_plot)
 ```
 
 ## Question 2
 
-**Why replicate a simulated cohort?** Repetition permits the reader to distinguish a generating distribution from its individual realizations. Across twenty simulated data frames, the age summaries provide a first demonstration of sampling variability. The `lapply()` pattern also illustrates how a single analytical operation can be applied consistently without manually maintaining twenty nearly identical code blocks.
+**Why replicate a simulated cohort?** Twenty simulated cohorts show how summaries vary between random draws. `lapply()` applies the same operation to every data frame, so you can compare results without maintaining twenty separate code blocks.
 
 Use the code above to generate 20 data frames with the same specifications, then summarize `Age` in each. (Hint: `lapply()`.)
 
@@ -111,14 +121,12 @@ The second `lapply()` selects `Age` from each cohort and returns its summary in 
 ```r
 # Lecture 3, chunks 14–15: iteration and summaries; lapply() is an exercise extension.
 
-
 set.seed(123)
 n <- 100
 
 data_list <- lapply(1:20, function(i) {
 
   # Reuse the Question 1 generator; seed stays outside the function.
-
 
   # Assignment extension: runif() and rounding platelet counts.
   random_data <- data.frame(
@@ -145,7 +153,7 @@ print(age_summary)
 
 ## Question 3
 
-**From repetition to abstraction.** A reusable summary function makes its inputs and expected outputs explicit. That matters for scholarly reproducibility: another analyst should be able to apply the same rule to a second cohort without editing the function body. For a fuller descriptive review, the companion resources provide mean, SD, quartiles, median, IQR, range, missingness, and a generated narrative, while the original exercise code remains intact.
+**Reuse the method.** A function gives the same input the same treatment across datasets. State what it accepts and what it returns. For a fuller report, use the summary resources to inspect sample size, missingness, center and spread.
 
 A reusable summary function: Using the code you generated above, generate a function that takes a continuous covariate as input and applies it to the function you used above to summarize the spread of the age variable. Apply it to `Platelet_Count`.
 
@@ -155,7 +163,6 @@ We now separate the summary operation from the particular variable. `summary_cov
 
 ```r
 # Lecture 3, chunks 10 and 15: reusable functions and summaries.
-
 
 summary_cov <- function(cov) {
   return(summary(cov))
@@ -167,12 +174,11 @@ platelet_summary <- lapply(data_list, function(random_data) {
 
 print(platelet_summary)
 
-
 ```
 
 ## Question 4
 
-**Graphical interpretation.** Histograms represent the distribution of observations within specified bins. Their shape is sensitive to bin width, and repeated plots should use comparable choices when the purpose is between-cohort comparison. A figure should report variable units and the provenance of its simulated data rather than imply that a smooth-looking histogram establishes normality.
+**Read the histogram.** A histogram counts observations within intervals. Compare plots using consistent bin choices, label the units and identify simulated data. A smooth-looking histogram alone does not establish normality.
 
 Add histograms, saved to separate files: Extend the function so it also draws a histogram of the chosen covariate for each data frame and saves each plot to its own file.
 
@@ -183,13 +189,11 @@ The output folder is created before plotting. `seq_along(data_list)` supplies a 
 ```r
 # Lecture 3, chunks 10 and 16: functions and repeated histograms.
 
-
 dir.create("figures", recursive = TRUE, showWarnings = FALSE)
 
 summary_cov <- function(cov, file, label) {
 
   cov_summary <- summary(cov)
-
 
   png(filename = file, width = 1800, height = 1200, res = 200)
 
@@ -205,7 +209,6 @@ summary_cov <- function(cov, file, label) {
     border = "white"
   )
 
-
   return(cov_summary)
 }
 
@@ -219,12 +222,11 @@ platelet_summary <- lapply(seq_along(data_list), function(i) {
 
 print(platelet_summary)
 
-
 ```
 
 ## Question 5
 
-**Source-data boundary.** Unlike the preceding simulation tasks, this exercise depends on supplied CSV files. The conclusions therefore remain conditional until the actual records and field definitions are available and the code is executed. An informative results paragraph should describe row counts after import, eligibility and missingness, observed group sizes, measurement units, and what the figures show; no numerical finding should be invented in their absence.
+**Check the inputs.** This question needs the supplied CSVs. After running it, report the imported row count, missing values, group sizes and units, then describe the figures. The public reading edition contains no computed findings for these files.
 
 Suppose your working directory contains a folder called data/In-Class-Exercises/ with several CSV files. Each file has the same columns:
 - Participant_ID: Unique patient identifier
@@ -378,9 +380,12 @@ If Question 5 is skipped, add the assignment CSVs to `data/In-Class-Exercises/` 
 
 For review, explain why named lists retain all cohorts, why row binding differs from joining, how a function parameter selects the measurement being summarized, and how mapped aesthetics differ from a fixed color outside `aes()`. Do not claim observed results for the CSV task until the data have been run.
 
-
 ## Scholarly reporting and reproducibility
 
 A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
 
 The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
+
+## Continue learning
+
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_2_Group_Work_Narrative_Walkthrough.md) · [Next week](Week_4_Bash_Group_Work_Narrative_Walkthrough.md)

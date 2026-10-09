@@ -1,8 +1,26 @@
 ---
 title: "HSE 711 — Week 2 Group Work: Data Wrangling and Visualization"
 author: "Paul Skeffington"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+    code_folding: show
+    css: ../06_RESOURCES/Presentation/reading.css
 ---
+
+## Session checkpoints
+
+**Goal:** inspect a dataset, compare distributions and reshape simulated measurements. Exercises 1–3 need the course arsenic CSV in the root `data/` folder. The source stops if that file is missing; the simulation sections later in the source do not make the whole document self-contained.
+
+| Stop after | Check | Explain to a partner |
+| --- | --- | --- |
+| Exercise 1 | Field names, category codes and eligible records | Which observations enter the box plot? |
+| Exercises 2–3 | Individual points, distribution shapes and comparison groups | What does the graph show, and what does the rank test add? |
+| Exercise 4 | Simulation parameters and realized summaries | Why might the sample mean differ from its generating mean? |
+| Exercise 5 | Participant IDs, measurement labels and row count | Why are two measurement rows not two independent participants? |
 
 This narrative follows all five Week 2 in-class exercises in order. The code uses Lecture 2's progression: inspect and filter a data frame, build base and ggplot figures, test a two-group comparison, generate reproducible `random_data`, summarize it, and reshape it with `pivot_longer()`. Run chunks from top to bottom in a fresh R session.
 
@@ -10,8 +28,7 @@ The source CSV is held with the course material and is **not included in this pu
 
 ## Exercise 1 — Import, inspect, and make a base R box plot
 
-**Scientific framing.** An imported dataset is not yet an analytical dataset. Field names, measurement units, encoded categories, missingness, and implausible observations must be reviewed before visualization. The resulting boxplot describes the available observations and should not, without a documented sampling design, be treated as a population estimate.
-
+**Before you plot.** Before plotting, check column names, units, category labels, missing values and implausible observations. This box plot describes the available records; population conclusions require a documented sampling design.
 
 Lecture 2 creates a data frame, inspects it, and uses base plotting functions before moving to ggplot. We apply that sequence to the supplied CSV. The column map makes the original `Arsenic_Total`, `Gender`, and `Marital_Status` labels explicit. Gender and marital values are categories, not numerical measurements. We exclude missing arsenic or gender only for this first plot; a missing marital value should not discard an otherwise eligible participant.
 
@@ -113,8 +130,7 @@ The box summarizes the middle half of observed values around a median; whisker-o
 
 ## Exercise 2 — Grouped horizontal box plots with jitter
 
-**Why layer observations?** A boxplot efficiently summarizes the median, interquartile range, and conventional whiskers, but it can conceal sample size, discreteness, and clustering. Displaying individual observations makes those features more visible. Jitter is a graphical displacement only; it does not change the observed measurements or the statistical summaries.
-
+**Why layer observations?** A box plot shows the median and middle half of the values, but it can hide how many observations lie behind the summary. Adding points shows overlap and clustering. Jitter separates points visually without changing their measured values.
 
 Lecture chunks 31–32 map one variable to an axis and another to `fill`, then add individual observations. We keep complete rows for the three plotted fields, dodge the boxes by marital status, and use the same dodge width for jittered points. `coord_flip()` puts gender on the displayed y-axis as requested. Suppressing the boxplot's own outlier glyph avoids drawing observations twice; it does not drop them.
 
@@ -141,8 +157,7 @@ gender_plot
 
 ## Exercise 3 — Violin plot and two-group Wilcoxon test
 
-**Interpreting the evidence.** A violin plot depicts an estimated distributional shape whose appearance depends on the smoothing method and sample size. The Wilcoxon rank-sum test provides a separate inferential calculation; its p-value should not be described generically as proof of different medians without additional distributional assumptions. Any conclusion must identify eligible participants, comparison groups, and whether survey sampling was incorporated.
-
+**Read the result.** A violin shows an estimated distribution shape; its appearance depends on smoothing and sample size. The Wilcoxon rank-sum test is a separate comparison of ranks. Explain the eligible records and group definitions before interpreting its p-value; a difference in ranks does not automatically mean a difference in medians.
 
 A violin summarizes distribution shape; the narrow box and jitter supply complementary views. The independent Wilcoxon rank-sum comparison concerns **Married versus Never Married only**, even though the violin displays all available marital groups. Following the lecture's test-on-plot idea, we compute the test explicitly, then use its p-value in the subtitle. This avoids guessing a number or testing an unintended collection of groups. Ties are handled with the approximate test (`exact = FALSE`).
 
@@ -184,8 +199,7 @@ The computed result is **`r p_label`**. A p-value does not quantify the size or 
 
 ## Exercise 4 — Generate and summarize 200 synthetic participants
 
-**Simulation and reproducibility.** A random-number seed fixes the sequence generated by a given implementation, while distribution parameters describe the hypothetical population used for the exercise. The realized sample mean and spread need not equal their generating targets. Summary statistics therefore report what the simulation actually produced, not merely what its parameters specified.
-
+**Simulation and reproducibility.** A seed makes the random sequence repeatable under compatible R settings. The distribution parameters specify the generating model; the sample mean and spread describe the values actually drawn. Those sample summaries need not equal the parameters.
 
 Lecture chunks 2–7 demonstrate seeded random data in `random_data`, while chunk 15 summarizes by group. We reuse that lecture name and the assignment's exact six column labels. Cases receive a lower expected ferritin level by construction; this is a simulation choice, not a clinical estimate. BMI is generated near 25 and bounded to plausible teaching values; age is sampled from adults 18–99. The ferritin ranges in the prompt are context, not diagnostic rules.
 
@@ -234,8 +248,7 @@ The summary is calculated from the generated sample, not asserted in advance. We
 
 ## Exercise 5 — Remove Sex and pivot Age/Ferritin_Level long
 
-**Unit and identity preservation.** Reshaping reorganizes records rather than creating new study participants. Each original participant contributes multiple measurement rows, and the measurement identifier is essential for distinguishing age from ferritin. Subsequent charts and tests must not treat these rows as independent people or pool values measured in incompatible units.
-
+**Check the reshaped table.** Reshaping changes the arrangement of measurements, not the number of participants. Keep participant identifiers and measurement labels. Age and ferritin have different units, and multiple rows from one participant are not independent people.
 
 In wide form, each participant has one row with separate Age and Ferritin_Level columns. Following lecture chunk 18's `pivot_longer()` example, we remove `Sex` from a **new** object and pivot those two measurements into a `Measurement` and `Value` pair. Each of 200 participants should then have two rows; the original `random_data` remains unchanged.
 
@@ -259,9 +272,12 @@ The repeated IDs represent two measurements per person, not 400 people. `Value` 
 
 This week links data hygiene to inference: inspect types and categories, filter only the missingness relevant to a plot or test, document the comparison, seed simulations, and validate reshaping by ID. Group figures are exploratory; the unweighted classroom arsenic test is not a survey-weighted NHANES analysis. The lecture's generated `random_data` naming and wide-to-long pattern are retained so a reader can move between examples without learning an unrelated object vocabulary.
 
-
 ## Scholarly reporting and reproducibility
 
 A useful teaching narrative connects the **question**, the **analytic decision**, the **observed or simulated output**, and the **limits of interpretation**. When discussing a quantitative variable, use mean with standard deviation and median with Q1, Q3 and interquartile range (IQR); specify the number of nonmissing observations and the amount of missing data. The shared [descriptive statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) provides a reusable R function and reader-facing narrative for this purpose. Figure annotations should state the variable, its units, the comparison groups, and the analytic method when applicable.
 
 The original exercise commands remain in place for instructional comparison. Code comments explain *how* a command works; surrounding prose explains *why* the operation is appropriate, what a result would mean, and which conclusions the exercise cannot establish. All numerical interpretations require actual execution against the stated input data.
+
+## Continue learning
+
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_1_Group_Work_Narrative_Walkthrough.md) · [Next week](Week_3_Group_Work_Narrative_Walkthrough.md)

@@ -1,9 +1,26 @@
 ---
 title: "HSE 711 Week 4 — Bash Group Work Narrative Walkthrough"
 output:
-  html_document: default
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+    code_folding: show
+    css: ../06_RESOURCES/Presentation/reading.css
   pdf_document: default
 ---
+
+## Session checkpoints
+
+**Goal:** inspect metadata, select records, create outputs and verify cleanup. Use the course six-field CSV for the runnable lab. For a data-free practice example, open the [easy command sheet](../06_RESOURCES/Bash/EASY_COMMAND_SHEET.md).
+
+| Stop after | Check | Explain to a partner |
+| --- | --- | --- |
+| Question 1 | File header and line count | Does the count include the header? |
+| Question 2 | Field 5, F/M codes and retained header | Why is a field comparison better than searching for the letter F anywhere? |
+| Questions 3–4 | Copied filename and extracted columns | Which output contains condition and age? |
+| Question 5 | Disposable folder removal and retained subset files | Which files remain, and where are they stored? |
 
 # Group work: reproducible operations on study metadata
 
@@ -123,3 +140,7 @@ The five tasks illustrate a complete miniature processing pipeline: validate a s
 5. What should an analyst verify before running a recursive removal command?
 
 For a broader treatment, see the [Bash literature review](../06_RESOURCES/Bash/BASH_LITERATURE_REVIEW.md), [operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md), and [reusable Bash functions](../06_RESOURCES/Bash/bash_functions.sh).
+
+## Continue learning
+
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_3_Group_Work_Narrative_Walkthrough.md)

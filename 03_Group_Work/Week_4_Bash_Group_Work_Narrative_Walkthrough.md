@@ -4,14 +4,9 @@
 
 > **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
-# Group work: reproducible operations on study metadata
-
-This walkthrough follows the supplied five-part exercise for `pseudo_metadata.csv`, described as synthetic metadata for ten participants. The educational objective is to move from basic inspection to selection, documented file creation, column extraction and safe cleanup. The working dataset is not included here; the commands are therefore **instructions, not observed results**.
-
-The exercise refers to both `only_female.txt` (Question 2) and `females_metadata.csv` (Question 3). They are not the same filename. To preserve that distinction while creating a coherent workflow, the example produces `only_female.txt` as requested and explicitly copies it to `females_metadata.csv` before Question 3. This is an **implementation bridge**, not a claimed correction to the original prompt.
-
 ## On this page
 
+- [Session checkpoints](#session-checkpoints)
 - [Verified classroom file and runnable companion](#verified-classroom-file-and-runnable-companion)
 - [Setup: identify the study file](#setup-identify-the-study-file)
 - [Question 1: count the file lines](#question-1-count-the-file-lines)
@@ -21,6 +16,24 @@ The exercise refers to both `only_female.txt` (Question 2) and `females_metadata
 - [Question 5: inspect and clean up the exercise folder](#question-5-inspect-and-clean-up-the-exercise-folder)
 - [Interpretation and academic discussion](#interpretation-and-academic-discussion)
 - [Practical review questions](#practical-review-questions)
+- [Continue learning](#continue-learning)
+
+## Session checkpoints
+
+**Goal:** inspect metadata, select records, create outputs and verify cleanup. Use the course six-field CSV for the runnable lab. For a data-free practice example, open the [easy command sheet](../06_RESOURCES/Bash/EASY_COMMAND_SHEET.md).
+
+| Stop after | Check | Explain to a partner |
+| --- | --- | --- |
+| Question 1 | File header and line count | Does the count include the header? |
+| Question 2 | Field 5, F/M codes and retained header | Why is a field comparison better than searching for the letter F anywhere? |
+| Questions 3–4 | Copied filename and extracted columns | Which output contains condition and age? |
+| Question 5 | Disposable folder removal and retained subset files | Which files remain, and where are they stored? |
+
+# Group work: reproducible operations on study metadata
+
+This walkthrough follows the supplied five-part exercise for `pseudo_metadata.csv`, described as synthetic metadata for ten participants. The educational objective is to move from basic inspection to selection, documented file creation, column extraction and safe cleanup. The working dataset is not included here; the commands are therefore **instructions, not observed results**.
+
+The exercise refers to both `only_female.txt` (Question 2) and `females_metadata.csv` (Question 3). They are not the same filename. To preserve that distinction while creating a coherent workflow, the example produces `only_female.txt` as requested and explicitly copies it to `females_metadata.csv` before Question 3. This is an **implementation bridge**, not a claimed correction to the original prompt.
 
 ## Verified classroom file and runnable companion
 
@@ -134,3 +147,7 @@ The five tasks illustrate a complete miniature processing pipeline: validate a s
 5. What should an analyst verify before running a recursive removal command?
 
 For a broader treatment, see the [Bash literature review](../06_RESOURCES/Bash/BASH_LITERATURE_REVIEW.md), [operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md), and [reusable Bash functions](../06_RESOURCES/Bash/bash_functions.sh).
+
+## Continue learning
+
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_3_Group_Work_Narrative_Walkthrough.md)
