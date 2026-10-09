@@ -1,19 +1,43 @@
-# Reading editions and presentation styling
+# Reading editions and document publishing
 
-[Resource index](../README.md) · [Repository home](../../README.md)
+[Resources](../README.md) · [Repository home](../../README.md)
 
-The weekly Markdown editions are the default browser-reading format. Their editable `.Rmd` and comment-only `.R` sources remain beside them. To change a lesson, edit its source first and update the reading editions with:
+## Purpose
 
-```bash
-python3 06_RESOURCES/Presentation/build_reading_editions.py
-python3 06_RESOURCES/Presentation/build_reading_editions.py --check
-```
+This directory contains **publishing utilities** for public course notes and exercises. It is not a repository of slide decks, presentation submissions, or research results. Lecture notes and group work remain in their respective course directories.
 
-The builder uses only Python's standard library. It formats prose and code fences, adds contents and source links, and labels inline computed output as available when rendered. It does not run R or create scientific results. `--check` reports stale editions without writing files.
+| File | Responsibility |
+| --- | --- |
+| [`build_reading_editions.py`](build_reading_editions.py) | Generate browser-friendly Markdown reading editions from the editable coursework sources |
+| [`check_navigation.py`](check_navigation.py) | Check local document links, headings, code fences, and stylesheet paths |
+| [`reading.css`](reading.css) | Consistent formatting for locally knitted R Markdown HTML |
+| [`LINK_AUDIT.md`](LINK_AUDIT.md) | Dated evidence of navigation and external-link checks; a historical report, not a list of confirmed broken links |
 
-For a locally knitted HTML companion, open a weekly `.Rmd` in RStudio and choose **Knit to HTML**. Its output settings provide a floating contents menu, collapsible code and the shared [reading stylesheet](reading.css). Install required packages and provide course inputs first. PDF output, where offered, uses the TeX installation and its own defaults; the CSS applies to HTML only.
+## Editing workflow
 
-For Week 3, run the following in the R Console **from the repository root** so its `data/In-Class-Exercises` path resolves correctly. The Knit button's default working directory is the source file's folder, which can cause Question 5 to skip even when the data exists at the repository root.
+1. Edit the original `.Rmd` or `.R` teaching material in `02_Lecture_Notes/` or `03_Group_Work/`, not the generated Markdown.
+2. From the repository root, regenerate reading editions:
+
+   ```bash
+   python3 06_RESOURCES/Presentation/build_reading_editions.py
+   ```
+
+3. Verify generated pages and local navigation without changing files:
+
+   ```bash
+   python3 06_RESOURCES/Presentation/build_reading_editions.py --check
+   python3 06_RESOURCES/Presentation/check_navigation.py
+   ```
+
+4. Review the changed Markdown before committing. When links or outside sources change, document the results in the [link audit](LINK_AUDIT.md), distinguishing inaccessible sites from proven broken URLs.
+
+The builder uses the Python standard library. It does **not** execute R, validate statistical findings, or regenerate experimental results. A passing navigation check establishes local document consistency, not scientific reproducibility.
+
+## HTML and PDF
+
+For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages and make locally authorized classroom inputs available before knitting.
+
+For Week 3, render from the repository root to resolve course-data paths correctly:
 
 ```r
 rmarkdown::render(
@@ -23,8 +47,8 @@ rmarkdown::render(
 )
 ```
 
-Review the [follow-along guide](../../FOLLOW_ALONG.md) for input locations and the [plot-reading guide](../READING_PLOTS.md) for explanations of figures. A formatted reading edition does not verify the underlying analysis.
+For interpreting figures, use the [plot-reading guide](../READING_PLOTS.md). For guided exercises, see the [follow-along guide](../../FOLLOW_ALONG.md).
 
-## Check navigation
+## Maintenance boundary
 
-Run `python3 06_RESOURCES/Presentation/check_navigation.py` from the repository root. See the [link audit](LINK_AUDIT.md) for scope and external-reference access results.
+Keep source lessons in course folders, reusable formatting/build tooling here, and scientific analyses or private datasets outside the public publishing workflow. The `Presentation/` path is retained for compatibility with existing `.Rmd` CSS references and automation; moving or renaming it requires an atomic update of every caller.
