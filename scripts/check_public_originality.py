@@ -22,13 +22,13 @@ REVIEW_TEXT = [
     # Positive disclosure of source reuse. Rules forbidding republication are
     # policy language, not evidence that source content was republished.
     ("instructor source included", re.compile(
-        r"\\b(?:included|embedded|copied|reproduced|transcribed|uploaded)\\b"
-        r"[^.\\n]{0,65}\\b(?:instructor|professor|course)\\b"
-        r"[^.\\n]{0,35}\\b(?:code|material|handout|slides?|solution|prompt)\\b",
+        r"\b(?:included|embedded|copied|reproduced|transcribed|uploaded)\b"
+        r"[^.\n]{0,65}\b(?:instructor|professor|course)\b"
+        r"[^.\n]{0,35}\b(?:code|material|handout|slides?|solution|prompt)\b",
         re.I)),
     ("verbatim instructor material", re.compile(
-        r"\\b(?:instructor|professor)[- ]provided\\b"
-        r"[^.\\n]{0,50}\\b(?:reproduced|copied|included|embedded|transcribed)\\b",
+        r"\b(?:instructor|professor)[- ]provided\b"
+        r"[^.\n]{0,50}\b(?:reproduced|copied|included|embedded|transcribed)\b",
         re.I)),
 ]
 # Heuristic signals confined to public instructional publications. These warrant
