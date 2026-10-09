@@ -75,21 +75,7 @@ def main() -> int:
             if len(sections) != 3 or sections[0].strip():
                 errors.append(f'{source.relative_to(ROOT)}: missing YAML front matter')
                 continue
-            match = re.search(r'^\s+css:\s*(.+)
-            if match and not (source.parent / match[1].strip()).is_file():
-                errors.append(f'{source.relative_to(ROOT)}: missing HTML stylesheet')
-    print(f'Checked {checked} local links across {len(documents)} documents.')
-    print(f'Found {len(externals)} distinct external Markdown destinations; network access is not checked here.')
-    if errors:
-        print('\n'.join(errors))
-        return 1
-    print('PASS: local paths, directory landing pages, fragments and HTML stylesheet paths.')
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())
-, sections[1], re.M)
+            match = re.search(r'^\s+css:\s*(.+)$', sections[1], re.M)
             if match and not (source.parent / match[1].strip()).is_file():
                 errors.append(f'{source.relative_to(ROOT)}: missing HTML stylesheet')
     print(f'Checked {checked} local links across {len(documents)} documents.')
