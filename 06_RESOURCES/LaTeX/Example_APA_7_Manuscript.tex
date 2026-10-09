@@ -55,7 +55,7 @@
 \newcommand{\papertitle}{Example APA 7 Manuscript}
 \newcommand{\studentname}{[Student Name]}
 \newcommand{\affiliation}{[Department or Program], [Institution]}
-\newcommand{\coursename}{HSE 711: Foundations in Data Science}
+\newcommand{\coursename}{[Course Name]}
 \newcommand{\instructorname}{[Instructor Name]}
 \newcommand{\duedate}{[Month Day, Year]}
 % Abstracts are not normally required for student papers unless assigned.
@@ -88,8 +88,8 @@ by the instructor. Replace this instruction only after verifying the results.]
 
 % Begin the text under the repeated paper title.
 \section*{\papertitle}
-This template organizes a student manuscript around a reproducible
-classroom exercise using synthetic metadata. Replace the bracketed prompts
+This template organizes a student manuscript around an independently chosen
+research question and permitted data. Replace the bracketed guidance
 with your question, methods, verified results, and interpretation. The
 Dr. Seuss references illustrate narrative citation, \textcite{seuss1957cat},
 and parenthetical citation \parencite{seuss1971lorax}. Use sources relevant
@@ -102,16 +102,14 @@ select records using a documented rule, and verify the resulting files.]
 
 \section{Method}
 \subsection{Design and Data Source}
-The worked example is a descriptive file-processing exercise using
-\texttt{pseudo\_metadata.csv}. The classroom schema has six fields: an unnamed
-first field, sample identifier, condition, age, sex, and batch. The sex field
-uses \texttt{F} and \texttt{M}. These labels are source-file encodings and are
-not inferred from participant names or other variables.
+[Describe an independently selected study or demonstration dataset. Identify
+its public source or your right to use it, its unit of observation, field
+schema, collection process, and limitations. Do not insert restricted course
+datasets or original assignment requirements into a public template.]
 
-[Report the data source, acquisition date, inclusion criteria, sample size,
-and relevant permissions. For an empirical study, describe the sampling
-design and ethics approval or exemption as applicable. For this synthetic
-exercise, state that the records are simulated and identify the course source.]
+[Report acquisition date, inclusion criteria, sample size, and relevant
+permissions. For an empirical study, describe the sampling design and ethics
+approval or exemption when applicable.]
 
 \subsection{Measures and Variables}
 [Define the variables relevant to the question, their units, category labels,
@@ -119,12 +117,9 @@ missing-value conventions, and any derived measures. Distinguish identifiers
 from measurements. State the source of definitions rather than inventing units.]
 
 \subsection{Procedure}
-The procedure inspects the file header, counts lines, retains the header while
-selecting \texttt{F}-coded records from field 5, and saves the subset as
-\texttt{only\_female.txt}. A copied alias,
-\texttt{females\_metadata.csv}, preserves the second filename used in the
-exercise. The lab also extracts condition and age into a temporary directory
-and removes that directory after inspection. The original input is retained.
+[Document the steps used to validate a permitted source file, inspect its
+schema, apply justified inclusion rules, and check outputs. Use independently
+written examples rather than reproduced classroom commands or solutions.]
 
 [Describe the exact software versions, commands or functions, file locations,
 validation checks, and deviations from the planned procedure. Simple AWK and
@@ -135,8 +130,8 @@ CSV-aware parser is needed for embedded commas or multiline fields.]
 [State the descriptive summaries or statistical models used, the treatment of
 missing data, assumption checks, significance threshold if applicable, and
 multiple-testing adjustment if relevant. Explain the design rather than
-listing software packages. The Bash example verifies records and files; it
-does not require a hypothesis test.]
+listing software packages. A descriptive file-processing example may verify records and files without
+requiring a hypothesis test.]
 
 \section{Results}
 [Report only output that was actually produced and checked. Begin with the
@@ -201,9 +196,8 @@ and distinguish a descriptive pattern from inferential evidence.]
 
 \subsection{Limitations}
 [Explain limitations of the design, input quality, missing data, assumptions,
-and generalizability. For this example, synthetic records cannot establish
-population findings, and simple delimiter tools do not implement general CSV
-parsing. Explain how these constraints affect the interpretation.]
+and generalizability. When using synthetic records, avoid claims about real populations. Simple
+delimiter tools do not implement general CSV parsing. Explain how these constraints affect the interpretation.]
 
 \subsection{Implications and Conclusion}
 [Explain the practical or methodological implication and the next justified
@@ -220,9 +214,9 @@ results or making claims beyond the study design.]
 \newpage
 \section*{Appendix}
 \section*{Reproducible Command Example}
-This example is run from the repository root with the course file in the
-ignored \texttt{data/} directory. The fixture test supplies synthetic
-input. Inspect the retained subset files after completing the lab.
+These generic inspection commands assume a separately supplied, permitted
+sample file under the ignored \texttt{data/} directory. They neither execute
+nor reproduce coursework.
 
 \begin{singlespace}
 \begin{lstlisting}
@@ -235,7 +229,7 @@ wc -l data/example_table.csv
 \end{singlespace}
 
 [Record the operating system, Bash version, source-file checksum, execution
-date, and validation outcomes. Include this appendix when the assignment
+date, and validation outcomes. Include this appendix when your independently prepared manuscript
 requires supplementary commands.]
 
 \end{document}
