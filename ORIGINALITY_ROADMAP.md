@@ -19,7 +19,7 @@ The public repository may explain general methods using independently written co
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Executed locally: 20 regression tests pass; strict screen remains REVIEW; baseline CI failure verified from logs |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: stale manuscript PDF rebuilt and visually reviewed; Bash example executed; remaining provenance and catalogue review pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | All seven editions current by execution; navigation passes; authoritative comparison remains separate |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 82 paths have per-file intake records; rights provenance and human decisions pending |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | All 83 paths have per-file intake records; rights provenance and human decisions pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | 257 commits / 729 trees / 497 blobs enumerated; historical exposure and remediation decision remain open |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
@@ -88,6 +88,29 @@ The public repository may explain general methods using independently written co
 
 **Next:** read CI run logs/artifacts from a reachable environment; separate legitimate restricted content from synthetic fixture strings; complete remaining media/provenance source checks.
 
+## Pass 10 — validator completeness and CI result isolation (2026-10-09)
+
+- Audited the live `main` workflow, scanner, test files, and reading-edition builder using the GitHub connector.
+- The workflow now records the individual outcomes of screening, regression tests, edition freshness, navigation, Python compilation, and provenance-inventory generation. All checks are diagnostic even after one check fails; the final step blocks on **any** unsuccessful required outcome.
+- Extended `scripts/check_public_originality.py` to flag tracked structured data files (including CSV, TSV, XLSX, SAS transport, R data, and columnar data formats) for privacy, source, and redistribution review. These files are not automatically presumed infringing; unresolved reviews still fail the strict release gate.
+- Added integration-test cases for CSV provenance flags and suppression of duplicate binary warnings.
+- The reading-edition builder now fails if it discovers fewer than the seven expected R Markdown source files; formerly a missing source tree could result in a false-green zero-source validation.
+- A fresh repository clone again failed with DNS resolution of `github.com`. The connector endpoint for commit workflow runs searches pull-request-triggered runs only and returned no runs for the inspected commit. **This is not evidence that push-triggered CI passed or failed.**
+- No definitive finding of copyright infringement, clean Git history, or institutional approval has been made.
+
+**Next:** obtain actual push-run Actions logs and artifacts, adjudicate flagged datasets/media and course-like files with original permissions, and perform the private source-to-public comparison. The final clearance gate remains open.
+
+## Pass 11 — exact publication source manifest (2026-10-09)
+
+- Verified the existence of the seven expected Week 1–4 lecture and Week 1–3 group-work R Markdown sources through connected GitHub.
+- Replaced the previous `len(sources) < 7` gate with explicit required-path validation in `06_RESOURCES/Presentation/build_reading_editions.py`. A missing expected source now fails even if an unrelated `Week*.Rmd` file makes the count seven.
+- Added `tests/test_reading_source_manifest.py` to check for manifest duplicates, presence in the current checkout, missing-but-substituted sources, and zero-source failure.
+- Updated GitHub Actions to run those source-manifest tests alongside the originality regression tests.
+- The expected-source manifest is intentionally maintained in code and must be updated through review when the official scope of published student-authored companions changes.
+- No CI execution outcome or institutional source-comparison evidence was available through the connector. These commits update controls; they do **not** close O7 or certify originality.
+
+**Next:** inspect the actual push-triggered Actions artifact and run logs; adjudicate media/data source provenance; conduct authorized source similarity and historic exposure review. Do not rewrite repository history without a documented authorization decision.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
@@ -95,6 +118,7 @@ Run in the local checkout after syncing main:
 ```bash
 python3 scripts/check_public_originality.py --json --fail-on-review
 python3 -m unittest discover -s tests -p 'test_originality*.py' -v
+python3 -m unittest discover -s tests -p 'test_reading_source_manifest.py' -v
 python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 python3 06_RESOURCES/Presentation/check_navigation.py
@@ -116,7 +140,7 @@ If generated editions are stale, rebuild them and inspect diffs before committin
 
 **Decision rule:** Do not mark the repo copyright-cleared until O6–O11 are satisfied and human review confirms provenance and permissions.
 
-## Pass 10 — executed validation and total repository status (2026-10-09)
+## Pass 12 — executed validation and total repository status (2026-10-09)
 
 This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91edf`; earlier unverified-runtime statements above are historical snapshots.
 
@@ -130,8 +154,10 @@ This work is confined to `Dartmouth.HSE.Public`. Starting public main was `4f91e
 
 **Next:** reconcile the existing record against every public path, finish resource/media and authorized course-source comparisons, adjudicate history, and close O11 only with actual evidence. Merge each validated maintenance batch into main while preserving the closed clearance gate.
 
-## Pass 11 — local source comparison scanner (2026-10-09)
+## Pass 13 — local source comparison scanner (2026-10-09)
 
 The user supplied Week 1–3 local source folders, which were read solely for comparison. No originals, matched excerpts, source paths, source hashes, or private reports were committed. Added a local-only byte/text comparison scanner and six synthetic regression scenarios; all 26 tests pass.
 
 The current public tree has zero identical-byte or shared-20-token findings against the 108-file corpus. Historical comparison found 30 overlapping text blobs among 508 reachable blobs. Historical remediation is now supported by direct source comparison but remains undecided. O10 has bounded automated comparison evidence; required human comparison/rights sign-off remains separate. O9 and O11 stay open. See [total status](ORIGINALITY_STATUS.md) for scope, exclusions, and the proposed remediation decision.
+
+Integration follow-up: preserved the concurrent exact reading-source manifest gate and its four tests from public main `36ccdc4`. All 30 tests pass after integration; current provenance intake covers 83 tracked paths.
