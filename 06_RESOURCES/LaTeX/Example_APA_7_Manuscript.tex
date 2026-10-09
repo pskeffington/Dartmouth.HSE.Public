@@ -2,8 +2,8 @@
 % Header note: This file is known to compile safely.
 \documentclass[12pt,letterpaper]{article}
 % APA 7 student manuscript example. Edit the metadata and bracketed content.
-% Default: compile twice with pdfLaTeX; no bibliography backend is required.
-% Optional .bib mode: set \usebibfiletrue below and run PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX.
+% Ready to build: Example_References.bib is connected below.
+% Run ./compile_manuscript.sh or PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX.
 % This file configures a standard article class explicitly for student papers.
 % It is not a journal-specific template or a completed empirical study.
 \usepackage[T1]{fontenc}
@@ -17,22 +17,12 @@
 \usepackage{booktabs,array}
 \usepackage{graphicx,float}
 \usepackage{listings}
-% Keep the default mode self-contained. Enable only after installing the
-% biblatex, biblatex-apa, csquotes, babel and Biber dependencies.
-\newif\ifusebibfile
-\usebibfilefalse % Change to \usebibfiletrue to read Example_References.bib.
-\ifusebibfile
-  \usepackage[american]{babel}
-  \usepackage{csquotes}
-  \usepackage[backend=biber,style=apa]{biblatex}
-  \DeclareLanguageMapping{american}{american-apa}
-  \addbibresource{Example_References.bib}
-\else
-  \usepackage[authoryear,round]{natbib}
-  % Uniform citation commands in both modes.
-  \let\textcite\citet
-  \let\parencite\citep
-\fi
+% The example bibliography is already connected; no switch or pasted block needed.
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=apa]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\addbibresource{Example_References.bib}
 \usepackage[hidelinks]{hyperref}
 \urlstyle{same}
 
@@ -55,13 +45,8 @@
 \titlespacing{\subsection}{0pt}{0pt}{0pt}
 \titlespacing{\subsubsection}{0pt}{0pt}{0pt}
 \setlength{\bibhang}{0.5in}
-\ifusebibfile
-  \setlength{\bibitemsep}{0pt}
-  \AtBeginBibliography{\doublespacing}
-\else
-  \setlength{\bibsep}{0pt}
-  \renewcommand{\bibsection}{}
-\fi
+\setlength{\bibitemsep}{0pt}
+\AtBeginBibliography{\doublespacing}
 \lstset{language=bash,basicstyle=\ttfamily\footnotesize,
   breaklines=true,columns=fullflexible,keepspaces=true,
   showstringspaces=false,frame=none,aboveskip=0.5\baselineskip,
@@ -234,17 +219,7 @@ relevant to your research question.
 % double spacing and 0.5-inch hanging indents. Cite every retained entry.
 \newpage
 \section*{References}
-\ifusebibfile
 \printbibliography[heading=none]
-\else
-\begin{thebibliography}{}
-\bibitem[Seuss(1957)]{seuss1957cat}
-Seuss, D. (1957). \textit{The cat in the hat}. Random House.
-
-\bibitem[Seuss(1971)]{seuss1971lorax}
-Seuss, D. (1971). \textit{The Lorax}. Random House.
-\end{thebibliography}
-\fi
 
 % Appendix: separate page after references. Code is supplementary material.
 \newpage

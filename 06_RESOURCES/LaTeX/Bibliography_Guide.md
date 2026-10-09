@@ -8,7 +8,7 @@ Use this guide alongside APA's [reference examples](https://apastyle.apa.org/sty
 
 | File | Contents | How to use it |
 | --- | --- | --- |
-| [Example_References.bib](Example_References.bib) | Three real Dr. Seuss books: *The cat in the hat*, *Green eggs and ham*, and *The Lorax* | Loaded when the manuscript's bibliography-file mode is enabled. Two books are cited; the third demonstrates an uncited record. |
+| [Example_References.bib](Example_References.bib) | Three real Dr. Seuss books: *The cat in the hat*, *Green eggs and ham*, and *The Lorax* | Already connected to the supplied manuscript. Two books are cited; the third demonstrates an uncited record. |
 | [Example_Entry_Types.bib](Example_Entry_Types.bib) | 52 fictional, Dr. Seuss-themed practice records across 29 entry types | Browse and copy a suitable structure. Replace all metadata before using it in your research. Not loaded by the manuscript. |
 
 **All `practice-` records are invented.** Their authors, journals, dates, page numbers, organizations, legal citations and `example.org` links are placeholders. They are not publications by Dr. Seuss or claims about his work. The theme appears in titles and classroom topics; it does not imply that Dr. Seuss authored a dataset, journal article or legal document. No text from his books is reproduced.
@@ -25,7 +25,7 @@ Open the practice catalogue and search for a citation key from this table. Each 
 | Books and reference works | `practice-edition`, `practice-edited`, `practice-translation`, `practice-ebook`, `practice-chapter`, `practice-referencebook`, `practice-dictionary`, `practice-updating` | `@book`, `@collection`, `@incollection`, `@reference`, `@inreference`: author/editor, date, title, edition, publisher; chapter author, editor, book title and pages for a chapter; translator/original date when applicable. |
 | Reports and gray literature | `practice-report`, `practice-government`, `practice-brief`, `practice-standard` | `@report`, `@manual`: issuing organization, date, title, report/standard number, institution or organization, URL. A PDF's file format does not determine its reference type. |
 | Conferences | `practice-talk`, `practice-poster`, `practice-proceedings-paper`, `practice-proceedings` | `@presentation`, `@inproceedings`, `@proceedings`: presentation type, event name/date/location, or the published proceedings' editor, publisher and pages. A proceedings article in a journal uses `@article`. |
-| Dissertations and theses | `practice-dissertation`, `practice-thesis` | `@phdthesis`, `@mastersthesis`: degree institution, publication status, repository/database and URL when applicable. Use `howpublished = {unpublished}` for an unpublished thesis. |
+| Dissertations and theses | `practice-dissertation`, `practice-thesis` | `@phdthesis`, `@mastersthesis`: degree institution, publication status, repository/database and URL when applicable. Use an explicit unpublished-thesis descriptor in `type` for this example. |
 | Reviews | `practice-review` | `@article` with `titleaddon`: review author and date, review title, description of the reviewed work, journal details. The reviewer is the author of the review. |
 | Unpublished and informally published works | `practice-manuscript`, `practice-preprint` | `@unpublished`, `@online`: manuscript status/institution or preprint archive and URL. Do not label a preprint as a published journal article. |
 | Data | `practice-data` | `@dataset`: creator, date, title, version, repository/publisher, DOI or URL, and data-set descriptor. Record the exact version used. |
@@ -40,7 +40,7 @@ The catalogue uses types and fields supported by [biblatex-apa](https://ctan.org
 
 ## Connect, cite and print
 
-1. Follow the [README's bibliography-file setup and four-command build](README.md#option-2-apa-7-bibliography-file-compilation). Enable `\usebibfiletrue`.
+1. Follow the [README's ready-linked build](README.md#ready-linked-apa-7-build). The source already connects the example bibliography.
 2. Keep the real reference file connected through the existing `\addbibresource{Example_References.bib}` line. Add verified sources to that file or rename it and update the connection.
 3. Use the entry key, not the filename, in your citation:
 
@@ -55,16 +55,19 @@ This is a parenthetical citation example \parencite{seuss1971lorax}.
 
 The first example displays an author in the sentence with a parenthesized year; the second places author and year in parentheses. These sentences demonstrate syntax, not literary findings. Page 12 is a locator example only. Do not reuse it as evidence without reading that page in your edition.
 
-The template already contains `\printbibliography[heading=none]` under its References heading. Cite every retained reference. In standalone mode, `.bib` records are ignored: keys must match manual `\bibitem` entries instead. Automatic sorting, date-letter disambiguation and metadata formatting belong to bibliography-file mode.
+The template already contains `\printbibliography[heading=none]` under its References heading. Cite every retained reference. The ready-linked template uses automatic sorting, date-letter disambiguation and metadata formatting from `biblatex-apa`.
 
-For a **separate practice preview**, copy the manuscript into a disposable practice folder, enable bibliography-file mode, change its existing resource line to the following, and place both `.bib` files alongside it:
+## Ready-built practice catalogue
 
-```latex
-\addbibresource{Example_References.bib}
-\addbibresource{Example_Entry_Types.bib}
+The separate [catalogue source](Example_APA_7_Reference_Catalogue.tex) already loads `Example_Entry_Types.bib` and uses `\nocite{*}` to print all 52 records. Its [compiled PDF](Example_APA_7_Reference_Catalogue.pdf) is included. Build it from this folder:
+
+```bash
+bash compile_manuscript.sh --catalogue
 ```
 
-Temporarily add `\nocite{*}` just before `\printbibliography[heading=none]`, then run the full PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX sequence. This prints all loaded records, including the fictional practice entries. Label that PDF as a practice catalogue. Remove the practice resource and `\nocite{*}` before preparing a research submission. Never treat successful compilation as confirmation that an entry is a real source.
+The same script runs PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX for either document. No copying, mode switch or resource insertion is needed. The manuscript loads only its real Dr. Seuss book file; the catalogue loads only its clearly fictional practice file. If you borrow a record for research, replace its metadata and put the verified record into your manuscript's bibliography.
+
+The fictional constitution example uses a custom localization key defined in the catalogue source. Replace it with the supported key for the actual jurisdiction when adapting the record; a jurisdiction name is not an arbitrary free-text `source` field for this driver.
 
 ## Fields students commonly need
 
@@ -85,7 +88,7 @@ Temporarily add `\nocite{*}` just before `\printbibliography[heading=none]`, the
 | Retrieval date | Use `urldate = {2026-10-09}` when the content changes over time and is not archived, such as a living reference entry. Do not add retrieval dates to every webpage. Replace the example date with your actual access date. |
 | Reprinted or translated work | Verify `origdate`, current `date`, translator, edition and publisher; cite the version consulted and inspect the two-date output. |
 | Media role | APA-style fields such as `author+an:role = {1=director}` assign a role to the first listed creator. Check the role against the credits. |
-| Username | `author+an:username = {1=readingexample}` attaches the handle to the first author; use the actual account details. |
+| Username | `author+an:username = {1="@readingexample"}` attaches the handle to the first author; use the actual account details. |
 | Special characters | Escape prose `&` as `\&` and `%` as `\%` in LaTeX-valued fields; keep URL/DOI fields as actual identifiers. |
 
 ## Cases that do not become ordinary reference entries
@@ -98,4 +101,4 @@ When quoting a source without page numbers, use a meaningful paragraph, section 
 
 Check each record against the source, read the rendered reference list and confirm that author, date, title, source, punctuation, italics and links fit that source category. Check that every in-text key resolves and every listed reference is cited. Remove all fictional entries and unused instructional prose. Automatic formatting cannot verify metadata or establish that a source supports your claim.
 
-The standalone manuscript PDF has been compiled and visually checked. The editing environment lacks Biber and `biblatex-apa`, so the optional automatic build and practice-catalogue rendering have not been run here. Inspect those outputs after compiling with the required tools.
+Both the ready-linked manuscript and the full practice catalogue have been built with PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX using Biber 2.21, `biblatex` 3.21 and `biblatex-apa` 9.20. Their final logs contain no unresolved citations or bibliography warnings, and their rendered PDFs have been visually checked. Continue to verify metadata and source-specific APA details for your own references.
