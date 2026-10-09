@@ -3,10 +3,10 @@
 Source **after** the core R plotting modules:
 
 ```r
-source("RESOURCES/R/hse_stats_plots.R")
-source("RESOURCES/R/hse_one_call_plots.R")
-source("RESOURCES/R/hse_biostat_panels.R")
-source("RESOURCES/R/hse_plot_annotations.R")
+source("06_06_RESOURCES/R/hse_stats_plots.R")
+source("06_06_RESOURCES/R/hse_one_call_plots.R")
+source("06_06_RESOURCES/R/hse_biostat_panels.R")
+source("06_06_RESOURCES/R/hse_plot_annotations.R")
 ```
 
 The annotation module decorates the existing plotting functions so a normal **one-call** statistical plot includes clear figure title, x/y axes, statistical method, sample size, p-value if applicable, multiple-testing details, and an appropriate limitations caption. Original statistical test objects remain available in `attr(plot, "hse_test")` or the existing function-specific attributes.
@@ -56,5 +56,5 @@ This checks annotation presence, **not** correctness of the statistical model or
 To validate the implementation:
 
 ```sh
-Rscript --vanilla RESOURCES/tests/test_hse_plot_annotations.R
+Rscript --vanilla 06_06_RESOURCES/tests/test_hse_plot_annotations.R
 ```
