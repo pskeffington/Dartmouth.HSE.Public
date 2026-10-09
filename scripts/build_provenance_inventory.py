@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import json
 import subprocess
@@ -18,6 +19,14 @@ CATEGORIES = {
 }
 
 def inventory(root: Path) -> dict:
+    register_path = root / "PROVENANCE_RECORDS.json"
+    records = {}
+    if register_path.is_file():
+        for record in json.loads(register_path.read_text(encoding="utf-8"))["entries"]:
+            path = record["path"]
+            if path in records:
+                raise ValueError(f"Duplicate provenance path: {path}")
+            records[path] = record
     tracked = subprocess.run(
         ["git", "ls-files", "-z"], cwd=root, check=True,
         stdout=subprocess.PIPE
@@ -32,19 +41,36 @@ def inventory(root: Path) -> dict:
             entries.append({"path": rel, "status": "missing", "review": "required"})
             continue
         data = p.read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        record = records.get(rel)
+        evidence = "unrecorded"
+        if record:
+            evidence = ("pending" if not record["observed_sha256"] else
+                        "current" if record["observed_sha256"] == digest else "stale")
         category = next((v for prefix, v in CATEGORIES.items()
                          if rel.startswith(prefix)), "other")
         entries.append({
             "path": rel,
             "category": category,
             "bytes": len(data),
-            "sha256": hashlib.sha256(data).hexdigest(),
+            "sha256": digest,
             "review": "unverified",
+            "provenance_record": record,
+            "snapshot_evidence": evidence,
         })
     return {
-        "schema": "public-provenance-inventory-v1",
+        "schema": "public-provenance-inventory-v2",
         "tracked_files": len(entries),
         "entries": entries,
+        "record_coverage": {
+            "recorded": sum(e.get("provenance_record") is not None for e in entries),
+            "unrecorded_paths": [e["path"] for e in entries
+                                 if not e.get("provenance_record")],
+            "obsolete_record_paths": sorted(set(records) - {e["path"] for e in entries}),
+            "snapshot_evidence": dict(collections.Counter(
+                e.get("snapshot_evidence", "missing") for e in entries)),
+        },
+        "rights_status": "UNVERIFIED",
         "warning": (
             "A digest confirms content identity, not authorship, permissions, "
             "copyright clearance, or similarity to institutional sources."

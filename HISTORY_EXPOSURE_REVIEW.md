@@ -38,3 +38,7 @@ Object inventory paths and logs should remain private until reviewed. `git rev-l
 ## Release decision
 
 **O9 remains OPEN.** Current-tree changes do not resolve the two confirmed historic source exposures. Authoritative comparison, a complete reachable-object inventory, and a documented remediation decision are required before closing O9.
+
+## Local enumeration follow-up — 2026-10-09
+
+At baseline public main `4f91edfea8b76d9ec7632eea948ba609c2630de0`, after fetching origin, `git rev-list --objects --all` and `git cat-file --batch-check` enumerated 257 commits, 729 trees, and 497 blobs across local branches and remote-tracking refs. No tags were present. GitHub API confirmed four remote heads and no releases. The counts cover objects reachable from these local refs; they do not establish absence of other PR refs, caches, attachments, forks, or external copies. No exhaustive similarity or rights adjudication is claimed. O9 remains open.

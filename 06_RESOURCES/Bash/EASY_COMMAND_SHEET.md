@@ -30,10 +30,10 @@ printf 'row_id,category,value\nR01,A,35\nR02,B,42\nR03,A,51\n' \
 # Retain the header and select category A records from field 2.
 awk -F ',' 'NR == 1 || $2 == "A"' "$practice_dir/metadata.csv" \
   > "$practice_dir/category_a.txt"
-cat "$practice_dir/only_female.txt"
+cat "$practice_dir/category_a.txt"
 
 # Count selected records after excluding the header.
-awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/only_female.txt"
+awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/category_a.txt"
 ```
 
 **Expected:** the header, R01 and R03, followed by a record count of `2`. This practice file has three simple fields and no quoted commas or multiline values.
