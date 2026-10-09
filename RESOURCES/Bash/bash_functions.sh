@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Dartmouth HSE Public | Bash utilities for educational research pipelines.
-# Compatible with Bash 3.2+. Source this file: source RESOURCES/Bash/bash_functions.sh
-# Sourcing only defines functions; it does not change directories or mutate files.
+# Sourceable Bash helpers; compatible with Bash 3.2+.
+# Sourcing defines functions only: no files are modified.
 
 # Print consistent errors to stderr and return failure to the caller.
 hse_error() {
