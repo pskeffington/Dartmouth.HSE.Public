@@ -131,4 +131,4 @@ Bash can pass arguments and redirect console output, but it cannot establish bio
 
 The methodological progression is from *where the data reside*, to *what the data contain*, to *how operations are repeated and documented*. Students should be able to explain which commands inspect data, which transform it, and which may permanently alter it. They should also be able to show that the shell's orchestration logic is distinct from substantive R statistical analysis.
 
-**Execution boundary:** `data.csv` and the class's `pseudo_metadata.csv` ARE not supplied with this lecture text, so no file-specific output or participant count is asserted here. The example commands are instructional and must be executed in an appropriate local directory.
+**Execution boundary:** `data.csv` and the class's `pseudo_metadata.csv` ARE not supplied with this lecture text, so no file-specific output or participant count is asserted here. The example commands are instructional and must be executed in (your) an appropriate local directory.
