@@ -71,7 +71,7 @@ def scan(root: Path) -> dict:
             findings.append({"path": rel, "level": "review", "reason": "tracked data requires source, privacy, and redistribution review"})
         data = path.read_bytes()[:MAX_TEXT_BYTES + 1]
         if b"\0" in data[:8192]:
-            if suffix not in RESTRICTED_EXT | REVIEW_EXT:
+            if suffix not in RESTRICTED_EXT | REVIEW_EXT | DATA_EXT:
                 findings.append({"path": rel, "level": "review", "reason": "other binary format requires provenance review"})
             continue
         if len(data) > MAX_TEXT_BYTES:
