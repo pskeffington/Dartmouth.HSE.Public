@@ -2,13 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
-
-## Purpose and learning objectives
-
-These independent notes explain simulation, tabular transformation, missing-data checks, and visualization principles. They are not keyed to the instructor's numbered code chunks or assignment items. Consult the authorized Geisel lecture, assessment instructions, and locally obtained data for course-specific application.
-
-**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
+> **Reading edition.** Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.
 
 ## On this page
 
@@ -21,6 +15,12 @@ These independent notes explain simulation, tabular transformation, missing-data
 - [6. Summarize, audit missingness, and check visualization](#6-summarize-audit-missingness-and-check-visualization)
 - [7. Explain each method in your own words](#7-explain-each-method-in-your-own-words)
 - [8. Final self-check: what Week 2 mastery requires](#8-final-self-check-what-week-2-mastery-requires)
+
+## Purpose and learning objectives
+
+These independent notes explain simulation, tabular transformation, missing-data checks, and visualization principles. They are not keyed to the instructor's numbered code chunks or assignment items. Consult the authorized Geisel lecture, assessment instructions, and locally obtained data for course-specific application.
+
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## 1. Make random data reproducible
 
