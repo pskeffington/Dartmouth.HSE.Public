@@ -1,9 +1,5 @@
-# HSE 711 | Genomic visualization helpers (educational)
-# Load AFTER hse_stats_plots.R. All functions return ggplot objects.
-# Inputs: expression matrix (genes x samples), with unique dimnames.
-# For RNA-seq figures use log2 CPM from hse_cpm(), never CPM as edgeR model input.
-# Performance: subset rows before reshape; use matrixStats only if installed;
-# PCA transposes the selected matrix, not an entire count collection.
+# Gene plots: source hse_stats_plots.R first.
+# Plot log2 CPM for exploration; keep raw counts for statistical models.
 
 hse_gene_validate <- function(expr, genes = NULL) {
   if (!is.matrix(expr) || !is.numeric(expr) || any(!is.finite(expr)))
