@@ -12,5 +12,3 @@ Run the appropriate script from the repository root using `Rscript --vanilla` an
 | One-call comparisons | [Comparison check](test_hse_one_call_plots.R) |
 | Figure panels | [Panel check](test_hse_biostat_panels.R) |
 | Annotations | [Annotation check](test_hse_plot_annotations.R) |
-
-For the data-free Bash fixture, use the [Week 4 lab check](../../03_Group_Work/Week_4_Bash_Lab/test_week4.sh). These checks use teaching examples; they do not validate an empirical research finding.

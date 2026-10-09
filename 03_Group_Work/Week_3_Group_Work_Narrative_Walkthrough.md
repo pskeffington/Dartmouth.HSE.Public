@@ -388,4 +388,4 @@ The original exercise commands remain in place for instructional comparison. Cod
 
 ## Continue learning
 
-[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_2_Group_Work_Narrative_Walkthrough.md) · [Next week](Week_4_Bash_Group_Work_Narrative_Walkthrough.md)
+[Group index](README.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Previous week](Week_2_Group_Work_Narrative_Walkthrough.md)

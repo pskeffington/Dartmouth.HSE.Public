@@ -162,5 +162,3 @@ For an assigned abstract, change `\includeabstractfalse` to `\includeabstracttru
 ## APA guidance and course example
 
 Use APA's [student paper setup guide](https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf), [title-page guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page) and [heading guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/headings), together with the instructor's instructions.
-
-The manuscript example uses the lab's actual six-field schema: `sex` is field 5 with `F`/`M` codes. The source input is held locally in the ignored `data/` folder. See the [Week 4 reading walkthrough](../../03_Group_Work/Week_4_Bash_Group_Work_Narrative_Walkthrough.md) and [runnable lab](../../03_Group_Work/Week_4_Bash_Lab/README.md) for the procedure and its limitations.

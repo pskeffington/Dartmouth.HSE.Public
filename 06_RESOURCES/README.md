@@ -56,7 +56,6 @@ For additional historical classroom functions, see [Week 3 reusable functions](R
 
 Start with the [operation reference](Bash/BASH_OPERATION_SHEET.md), then the [annotated literature review](Bash/BASH_LITERATURE_REVIEW.md). The [sourceable utility functions](Bash/bash_functions.sh) provide file checking, TSV inspection, checksum utilities and Rscript orchestration.
 
-The [Week 4 runnable exercise](../03_Group_Work/Week_4_Bash_Lab/) expects local synthetic data in `data/`, which Git ignores.
 
 ## LaTeX learning and reports
 
