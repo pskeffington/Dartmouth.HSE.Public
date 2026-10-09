@@ -30,6 +30,18 @@ COURSE_SPECIFIC = [
 COURSE_PUBLIC = ("02_Lecture_Notes/", "03_Group_Work/", "05_Assignments/")
 MAX_TEXT_BYTES = 1_000_000
 SKIP = {".git", "__pycache__", ".venv", "node_modules"}
+# These exact files contain quoted heuristic patterns and artificial violation
+# examples. Continue checking their tracked presence, filename, and binary type,
+# but do not treat their intentional test strings as published teaching content.
+RULE_DOCUMENTS = {
+    "scripts/check_public_originality.py",
+    "ORIGINALITY_POLICY.md",
+    "ORIGINALITY_ROADMAP.md",
+    "PROVENANCE_REGISTER.md",
+    "HISTORY_EXPOSURE_REVIEW.md",
+    "tests/test_originality_screen.py",
+    "tests/test_originality_scan_integration.py",
+}
 
 def tracked_files(root: Path) -> list[Path]:
     try:
@@ -62,11 +74,7 @@ def scan(root: Path) -> dict:
             findings.append({"path": rel, "level": "review", "reason": "text file exceeded scan limit"})
         text = data[:MAX_TEXT_BYTES].decode("utf-8", errors="replace")
         # Treat the checker and policy documentation as rules, not evidence of violations.
-        if rel in {
-            "scripts/check_public_originality.py", "ORIGINALITY_POLICY.md",
-            "ORIGINALITY_ROADMAP.md", "PROVENANCE_REGISTER.md",
-            "HISTORY_EXPOSURE_REVIEW.md",
-        }:
+        if rel in RULE_DOCUMENTS:
             continue
         for reason, pattern in RESTRICTED_TEXT:
             if pattern.search(text):
