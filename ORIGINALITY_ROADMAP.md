@@ -17,10 +17,10 @@ The public repository may explain general methods using independently written co
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
 | O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | CI enhanced with reading-edition and link gates; workflow result unverified |
-| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: targeted R/Bash audit and two course-dependent examples cleaned; full artifact-by-artifact review pending |
+| O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: R/Bash plus LaTeX manuscript and README spot review; Week 4 appendix dependency removed; full audit pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Pending |
-| O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Pending; current-branch removal is insufficient |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Initial provisional register created; individual file verification and approvals pending |
+| O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
 
@@ -34,6 +34,16 @@ The public repository may explain general methods using independently written co
 - No local Git checkout was available in this environment. The source comparisons were performed through the connected GitHub repository; runtime validation and CI outcomes have **not** been independently confirmed.
 
 **Next pass:** Inspect remaining Bash and R resource examples, LaTeX bibliographies, images/media, and any historical commits that contained original course material. Verify the Actions run and reconcile failures before raising the release gate.
+
+## Pass 5 — historical exposure and provenance (2026-10-09)
+
+- Created [provisional provenance register](PROVENANCE_REGISTER.md) covering lecture notes, group work, R/Bash/LaTeX resources, publishing utilities, binary assets, and governance scripts. All entries remain subject to human verification.
+- Confirmed that historical commit `3132a041436fa4d82baa919fe524b3bda69b5082` included numbered Week 3 group-work questions/worked code and 21 Week 3 lecture-reference code sections. These were subsequently replaced in the present tree, but remain part of the historic snapshot.
+- Added [history exposure review](HISTORY_EXPOSURE_REVIEW.md) with read-only inventory commands, a private source-comparison protocol, and explicit **no automatic history rewrite** safeguards.
+- Spot-checked APA 7 manuscript and practice bibliography materials. Removed the manuscript README's Week 4 coursework characterization and replaced the manuscript appendix's old Week 4 lab invocations with generic examples. The bibliography catalogue contains fictional illustrative records; author/source verification and compilation tests remain pending.
+- This was a targeted connector audit, **not** a complete Git-object, binary-media, authorship, or third-party-license audit. No copyright clearance, source-originality certification, or historical remediation approval is claimed.
+
+**Next gates:** finish individual provenance records, enumerate all reachable historic objects, inspect media and bibliography rights, execute CI and document checks, and compare against authorized Geisel files before granting release clearance.
 
 ## Required acceptance commands
 
