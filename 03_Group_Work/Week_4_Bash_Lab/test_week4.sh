@@ -5,12 +5,12 @@
 set -euo pipefail
 
 # Locate this script and create an automatically cleaned test workspace.
-here=$(cd "$(dirname "$0")" && pwd -P)
-tmp=$(mktemp -d)
-trap 'rm -r "$tmp"' EXIT
+script_dir=$(cd "$(dirname "$0")" && pwd -P)
+temp_dir=$(mktemp -d)
+trap 'rm -r "$temp_dir"' EXIT
 
 # Fixture: two female-coded participants, one male-coded participant.
-cat > "$tmp/pseudo_metadata.csv" <<'CSV'
+cat > "$temp_dir/pseudo_metadata.csv" <<'CSV'
 "","sampleID","condition","age","sex","batch"
 "Disease_1","Disease_1","Disease",56,"F","Batch1"
 "Disease_2","Disease_2","Disease",44,"M","Batch1"
@@ -18,15 +18,15 @@ cat > "$tmp/pseudo_metadata.csv" <<'CSV'
 CSV
 
 # Run the complete five-question exercise against the synthetic fixture.
-bash "$here/run_week4.sh" "$tmp/pseudo_metadata.csv" "$tmp/practice"
+bash "$script_dir/run_week4.sh" "$temp_dir/pseudo_metadata.csv" "$temp_dir/practice"
 
 # Confirm outputs were retained, temporary directory removed,
 # and both female-coded records survived filtering.
-[[ -f "$tmp/practice/only_female.txt" ]]
-[[ -f "$tmp/practice/females_metadata.csv" ]]
-[[ ! -e "$tmp/practice/new_dir" ]]
-[[ $(wc -l < "$tmp/practice/only_female.txt") -eq 3 ]]
+[[ -f "$temp_dir/practice/only_female.txt" ]]
+[[ -f "$temp_dir/practice/females_metadata.csv" ]]
+[[ ! -e "$temp_dir/practice/new_dir" ]]
+[[ $(wc -l < "$temp_dir/practice/only_female.txt") -eq 3 ]]
 
 # Extracted third and fourth columns must be condition and age.
-grep -Fq '"condition","age"' <(head -n 1 "$tmp/practice/only_female.txt" | cut -d ',' -f 3,4)
+grep -Fq '"condition","age"' <(head -n 1 "$temp_dir/practice/only_female.txt" | cut -d ',' -f 3,4)
 printf 'PASS: Week 4 staging smoke test\n'
