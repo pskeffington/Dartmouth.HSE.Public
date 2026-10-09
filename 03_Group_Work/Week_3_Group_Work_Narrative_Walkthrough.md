@@ -1,20 +1,29 @@
----
-title: "HSE.711 Week 3: Group Work Narrative Walkthrough"
-output: html_document
-date: "2026-10-01"
----
+# HSE.711 Week 3: Group Work Narrative Walkthrough
+
+[Section index](README.md) · [Editable R Markdown](Week_3_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
+
+> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
 
 The five question prompts below are preserved from the supplied exercise. Each walkthrough connects the task to the attached Week 3 lecture. Chunk numbers count every R chunk in source order, including setup (21 chunks total). Prior Lecture 1 and 2 references are omitted because those source files were not supplied.
 
 Run the chunks in order. Questions 1–4 generate simulated data; Question 5 requires the actual CSVs. Set the working directory to the folder containing `data/`. The setup parameter skips Question 5 when those files are absent, so the simulation notes can still knit. This does not reproduce Question 5 results.
 
-```{r setup, include=FALSE}
+```r
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 data_path <- "data/In-Class-Exercises"
 filenames <- list.files(path = data_path, pattern = "\\.csv$", full.names = TRUE)
 csv_ready <- length(filenames) > 0L
 ```
 
+
+## On this page
+
+- [Question 1](#question-1)
+- [Question 2](#question-2)
+- [Question 3](#question-3)
+- [Question 4](#question-4)
+- [Question 5](#question-5)
+- [Scholarly reporting and reproducibility](#scholarly-reporting-and-reproducibility)
 
 ## Question 1
 
@@ -32,7 +41,7 @@ We begin with one reproducible simulated cohort. `set.seed(123)` makes the rando
 
 We inspect `random_data` before plotting. The `box_plot` maps sex to both the x-axis and fill, following Lecture 3, chunk 17. Named colors keep Male and Female colors stable. This is simulated data, so a difference between the boxes would not establish a biological difference.
 
-```{r group-work-01}
+```r
 # Lecture 3, chunks 1 and 17: packages and box plots by sex.
 
 library(ggplot2)
@@ -99,7 +108,7 @@ Next we retain 20 simulated cohorts in `data_list`, instead of overwriting one d
 
 The second `lapply()` selects `Age` from each cohort and returns its summary in `age_summary`. This follows the `summary()` operation in Lecture 3, chunk 15. Each summary contains the minimum, quartiles, median, mean, and maximum.
 
-```{r group-work-02}
+```r
 # Lecture 3, chunks 14–15: iteration and summaries; lapply() is an exercise extension.
 
 
@@ -144,7 +153,7 @@ We now separate the summary operation from the particular variable. `summary_cov
 
 `platelet_summary` stores one summary per cohort. A summary describes the data; it does not by itself test a difference between groups.
 
-```{r group-work-03}
+```r
 # Lecture 3, chunks 10 and 15: reusable functions and summaries.
 
 
@@ -171,7 +180,7 @@ We extend `summary_cov` with a file path and a readable label. The function comp
 
 The output folder is created before plotting. `seq_along(data_list)` supplies a unique index for each output path, producing 20 separate PNGs. Running this chunk again replaces files with the same names. `platelet_summary` still contains the numerical results, so saving a plot does not discard the summaries.
 
-```{r group-work-04}
+```r
 # Lecture 3, chunks 10 and 16: functions and repeated histograms.
 
 
@@ -239,7 +248,7 @@ Before binding, we check for the required columns and consistent column sets. We
 
 The box plot follows Lecture 3, chunk 17, with jitter added for individual observations. `outlier.shape = NA` prevents duplicate drawing of flagged observations because jitter already shows them. The scatter plot follows chunk 8 and adds separate mappings: `shape = Sex` and `color = Disease_Status`. Manual scales assign Male triangles (17), Female circles (16), Case red, and Control blue. No CRP unit is invented because the question does not specify one.
 
-```{r group-work-05, eval=csv_ready}
+```r
 # Lecture 3, chunks 12, 14, 17, and 8: discover, read, box plots, scatter plots.
 
 # Setup ---------------------------------------------------------------

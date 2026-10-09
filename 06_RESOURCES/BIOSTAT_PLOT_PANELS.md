@@ -3,9 +3,9 @@
 **Source order:**
 
 ```r
-source("06_06_RESOURCES/R/hse_stats_plots.R")
-source("06_06_RESOURCES/R/hse_one_call_plots.R")
-source("06_06_RESOURCES/R/hse_biostat_panels.R")
+source("06_RESOURCES/R/hse_stats_plots.R")
+source("06_RESOURCES/R/hse_one_call_plots.R")
+source("06_RESOURCES/R/hse_biostat_panels.R")
 ```
 
 The module uses native `ggplot2::facet_wrap` and `ggplot2::facet_grid`, often called **ggplot panels** or small multiples. The exact `ggpanel` terminology is not the name of a dependency in this library.
@@ -78,7 +78,7 @@ hse_save_plot(p,"figures/biostat_panel.pdf",width=8,height=5)
 ## Testing
 
 ```sh
-Rscript --vanilla 06_06_RESOURCES/tests/test_hse_biostat_panels.R
+Rscript --vanilla 06_RESOURCES/tests/test_hse_biostat_panels.R
 ```
 
 Optional dependencies: `ggplot2` for all plots, `pROC` for ROC, and `survival` for Kaplan–Meier. R and optional packages may not be available on all learner machines; smoke tests skip their corresponding optional sections.

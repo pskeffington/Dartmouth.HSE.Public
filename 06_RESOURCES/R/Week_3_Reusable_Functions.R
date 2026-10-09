@@ -1,5 +1,5 @@
 # HSE 711 | Week 3 | Reusable summary and graph functions
-# Load once: source("HSE_711/notes/Week_3_Reusable_Functions.R")
+# Load once: source("06_RESOURCES/R/Week_3_Reusable_Functions.R")
 # Requires ggplot2. Loading this file defines functions; it reads no data.
 # Keep data_df, random_data, and data_list as in the lecture/exercises.
 # Pass column names as strings: plt_hist(data_df, "Age").
