@@ -2,7 +2,13 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_1_Introduction_to_R_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for study and has not been executed to generate this page. Run the source chunks in order to produce and check outputs; data-dependent examples need separately supplied course files.
+> **Reading edition.** Code is displayed for independent study and was not executed to produce this page. Course-specific work requires authorized Geisel files maintained privately.
+
+## Purpose and learning objectives
+
+These independent notes cover R objects, indexing, logical operations, tabular structures, data import, graphics, and reusable functions. They do not supply the official assignment, data, or graded implementation. To perform Geisel-specific coursework, consult the authorized lecture and assignment files in a private workspace.
+
+**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
 
 ## On this page
 
@@ -15,20 +21,6 @@
 - [6. Writing a reusable categorization function](#6-writing-a-reusable-categorization-function)
 - [7. Explaining your method, not just showing output](#7-explaining-your-method-not-just-showing-output)
 - [8. Final self-check](#8-final-self-check)
-
-## Purpose and learning objectives
-
-These notes explain **how to approach** the first Introduction to R assignment using the methods introduced in the Week 1 lecture: object classes, vectors and lists, indexing, logical comparisons, loops, data frames, file input, graphics, and functions. They provide **parallel practice examples**, not the assignment answers, submission, or supplied dataset. The original lecture source is referenced by the existing Week 1 group-work companion but is not reproduced here.
-
-By the end, you should be able to explain the reasoning for every line of your own code, inspect results, and independently adapt the techniques to the assigned inputs.
-
-| Assignment task | Lecture technique to revisit | Check your understanding |
-| --- | --- | --- |
-| 1a–b: identify and count object types | `list()`, `class()`, `for`, `table()` | Why inspect each list component separately? |
-| 1c–e: comparisons, factors, positions | `is.numeric()`, `if`, `factor()`, `which()` | How do you avoid comparing letters with numbers? |
-| 2a–c: import and dimensions | `read.delim()`, `row.names`, `nrow()`, `ncol()` | Which axis represents genes versus samples? |
-| 2d–e: graph and export | `hist()`, `[rows, columns]`, `write.csv()` | What happens when a matrix or table is subset incorrectly? |
-| 3: categorize values with a function | `function()`, `for`, `if/else`, `return()` | What does the function accept and produce? |
 
 ## 1. Understanding R objects before classifying them
 
@@ -199,7 +191,7 @@ str(practice_result)
 
 ## 7. Explaining your method, not just showing output
 
-For each part of the assignment, write one or two sentences answering: **What object did I start with? What did this function, loop, or index operation do? How did I check the result?** Distinguish a descriptive graph from an inferential result.
+For each independent practice activity, write one or two sentences answering: **What object did I start with? What did this function, loop, or index operation do? How did I check the result?** Distinguish a descriptive graph from an inferential result.
 
 A useful repeatable workflow is: inspect the data, choose the operation, run a small test, verify dimensions or positions, and only then apply the method to the full input. Keep your own solutions and any classroom-restricted data in the appropriate private or submission location.
 
