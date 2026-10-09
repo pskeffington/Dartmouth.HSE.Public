@@ -8,7 +8,7 @@ A public companion to graduate-level health data science coursework. Materials e
 
 Open the **reading editions** below directly in GitHub. Each has links to its editable source. For a guided session, use the [follow-along guide](FOLLOW_ALONG.md); for short examples, keep the [R function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md) and [Bash command sheet](06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) open.
 
-Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusable resources. Capstone, final-project and assignment sections are reserved; no deliverables are posted there yet.
+Current coverage: Weeks 1–4 lecture companions, Week 1–3 group work, and reusable resources. Capstone, final-project and assignment sections are reserved; no deliverables are posted there yet.
 
 | I want to… | Go to |
 | --- | --- |
@@ -45,7 +45,7 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 
 | Week | Lecture | Group work |
 | --- | --- | --- |
-| 1 | Lecture companion not posted | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
+| 1 | [Introduction to R lecture notes](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
 | 2 | [Learning objective notes](02_Lecture_Notes/Week_2_Learning_Objective_Notes.md) | [Data wrangling and visualization](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
 | 3 | [Learning objective notes](02_Lecture_Notes/Week_3_Learning_Objective_Notes.md) | [Simulation and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
 | 4 | [Introduction to Bash](02_Lecture_Notes/Week_4_Introduction_to_Bash_Narrative_Walkthrough.md) | Execution materials maintained privately |
