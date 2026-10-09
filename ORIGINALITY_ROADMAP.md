@@ -16,7 +16,7 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | End-of-job fail-closed enforcement plus six Git-fixture regression scenarios; execution unverified |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Exact fixture-file false-positive repaired; eight Git-fixture scenarios; CI execution unverified |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
 | O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
@@ -77,6 +77,16 @@ The public repository may explain general methods using independently written co
 - GitHub checkout remains inaccessible from this runtime due DNS resolution. Connected-repository commits succeeded, but CI run results, integration-test results, and actual generated inventory are not independently verified.
 
 **Next gate:** inspect Actions reports, triage any false-positive findings without automatically suppressing legitimate violations, and complete manual file-by-file rights review and historical exposure decisions.
+
+## Pass 9 — self-matching audit fixture remediation (2026-10-09)
+
+- Audited the scanner and both committed regression-test files. Found a deterministic false-positive: `tests/test_originality_screen.py` contains the literal `All rights reserved` as a positive test case, which the strict scanner would classify as BLOCK when scanning its own repository.
+- Added an **exact-path** rule-document list to omit heuristic *text* matching for the two named synthetic fixture/test scripts and existing policy/evidence files. All files still receive tracked-existence, restricted filename, binary type, and size checks.
+- Added two integration scenarios: the named fixture with a synthetic rights string is not a release blocker; an arbitrary unlisted `tests/test_unreviewed.py` containing the same string remains BLOCK. This avoids a blanket `tests/` exemption.
+- Confirmed checkout DNS failure again in this environment. The connected GitHub commits completed, but a full source checkout and GitHub Actions result were unavailable. **The eight regression scenarios are configured, not verified as passing.**
+- Historical course exposure and actual institutional permissions remain unreviewed; no change to the O9–O11 clearance decisions.
+
+**Next:** read CI run logs/artifacts from a reachable environment; separate legitimate restricted content from synthetic fixture strings; complete remaining media/provenance source checks.
 
 ## Required acceptance commands
 
