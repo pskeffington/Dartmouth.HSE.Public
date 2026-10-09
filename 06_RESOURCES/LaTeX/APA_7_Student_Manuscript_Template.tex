@@ -1,0 +1,252 @@
+\documentclass[12pt,letterpaper]{article}
+% APA 7 student manuscript example. Edit the metadata and bracketed content.
+% Compile twice with pdfLaTeX. No BibTeX/Biber step is required.
+% This file configures a standard article class explicitly for student papers.
+% It is not a journal-specific template or a completed empirical study.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx} % 12-point Times-family text; PDFLaTeX-compatible.
+\usepackage[margin=1in,headheight=15pt,headsep=0.25in]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs,array}
+\usepackage{graphicx,float}
+\usepackage{listings}
+\usepackage[authoryear,round]{natbib}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+% Student papers have a page number, without a default running head.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\doublespacing
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setcounter{secnumdepth}{0}
+% APA heading levels 1--3. Do not skip heading levels.
+\titleformat{\section}{\normalfont\normalsize\bfseries\filcenter}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{}{0pt}{}
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+\setlength{\bibhang}{0.5in}
+\setlength{\bibsep}{0pt}
+\renewcommand{\bibsection}{\section*{References}}
+\lstset{language=bash,basicstyle=\ttfamily\footnotesize,
+  breaklines=true,columns=fullflexible,keepspaces=true,
+  showstringspaces=false,frame=none,aboveskip=0.5\baselineskip,
+  belowskip=0.5\baselineskip}
+
+% -------- Edit this block first --------
+\newcommand{\papertitle}{Reproducible Processing of Synthetic Study Metadata}
+\newcommand{\studentname}{[Student Name]}
+\newcommand{\affiliation}{[Department or Program], Dartmouth College}
+\newcommand{\coursename}{HSE 711: Foundations in Data Science}
+\newcommand{\instructorname}{[Instructor Name]}
+\newcommand{\duedate}{[Month Day, Year]}
+% Abstracts are not normally required for student papers unless assigned.
+\newif\ifincludeabstract
+\includeabstractfalse % Change to \includeabstracttrue if required.
+
+\begin{document}
+
+% Title page: bold centered title, one blank double-spaced line before author.
+\begin{center}
+\vspace*{2\baselineskip}
+\textbf{\papertitle}\par
+\vspace{\baselineskip}
+\studentname\par
+\affiliation\par
+\coursename\par
+\instructorname\par
+\duedate\par
+\end{center}
+\newpage
+
+\ifincludeabstract
+\section*{Abstract}
+\noindent [Write one unindented paragraph summarizing the purpose, design,
+data, methods, principal results, and conclusion. Use the word limit assigned
+by the instructor. Replace this instruction only after verifying the results.]
+\par\noindent\textit{Keywords:} [term one], [term two], [term three]
+\newpage
+\fi
+
+% The repeated paper title introduces the text; do not add "Introduction".
+\section*{\papertitle}
+This example shows how a student can organize a short manuscript around a
+reproducible data-processing exercise. It follows the student-paper setup
+described by \citet{apa-paper}. Replace the instructional prose and bracketed
+fields with your own account of the work. The example uses synthetic classroom
+metadata; it contains no observed research findings.
+
+[Introduce the problem, explain why it matters, and summarize relevant prior
+work with citations. End this opening section with the research question or
+objective. For the Week 4 example, the objective is to inspect a metadata file,
+select records using a documented rule, and verify the resulting files.]
+
+\section{Method}
+\subsection{Design and Data Source}
+The worked example is a descriptive file-processing exercise using
+\texttt{pseudo\_metadata.csv}. The classroom schema has six fields: an unnamed
+first field, sample identifier, condition, age, sex, and batch. The sex field
+uses \texttt{F} and \texttt{M}. These labels are source-file encodings and are
+not inferred from participant names or other variables.
+
+[Report the data source, acquisition date, inclusion criteria, sample size,
+and relevant permissions. For an empirical study, describe the sampling
+design and ethics approval or exemption as applicable. For this synthetic
+exercise, state that the records are simulated and identify the course source.]
+
+\subsection{Measures and Variables}
+[Define the variables relevant to the question, their units, category labels,
+missing-value conventions, and any derived measures. Distinguish identifiers
+from measurements. State the source of definitions rather than inventing units.]
+
+\subsection{Procedure}
+The procedure inspects the file header, counts lines, retains the header while
+selecting \texttt{F}-coded records from field 5, and saves the subset as
+\texttt{only\_female.txt}. A copied alias,
+\texttt{females\_metadata.csv}, preserves the second filename used in the
+exercise. The lab also extracts condition and age into a temporary directory
+and removes that directory after inspection. The original input is retained.
+
+[Describe the exact software versions, commands or functions, file locations,
+validation checks, and deviations from the planned procedure. Simple AWK and
+CUT processing is suitable only for the documented simple CSV layout; a
+CSV-aware parser is needed for embedded commas or multiline fields.]
+
+\subsection{Analysis Plan}
+[State the descriptive summaries or statistical models used, the treatment of
+missing data, assumption checks, significance threshold if applicable, and
+multiple-testing adjustment if relevant. Explain the design rather than
+listing software packages. The Bash example verifies records and files; it
+does not require a hypothesis test.]
+
+\section{Results}
+[Report only output that was actually produced and checked. Begin with the
+number of source and eligible records, then present the findings in the order
+of the research question. Refer to each table and figure in the text. Do not
+repeat every table entry in prose.]
+
+Table~\ref{tab:validation} illustrates a results-table layout. Its cells are
+placeholders, not measured values. Figure~\ref{fig:example} illustrates the
+position of a figure number, title, image, and note. Replace the image area
+with a verified plot before submission, or remove the figure if unnecessary.
+
+% Table/figure bodies may be single-spaced for readability; main text stays double-spaced.
+% APA: bold number, italic title above; explanatory note below. No vertical rules.
+\begin{table}[H]
+\refstepcounter{table}\label{tab:validation}
+\noindent\textbf{Table \thetable}\\
+\noindent\textit{Metadata Processing and Validation Summary}\par
+\begin{singlespace}
+\smallskip
+\begin{tabular}{@{}p{0.42\linewidth}p{0.53\linewidth}@{}}
+\toprule
+Validation item & Observed result \\
+\midrule
+Source records, excluding header & [Insert verified count] \\
+Selected records, excluding header & [Insert verified count] \\
+Header retained & [Insert check outcome] \\
+Condition and age extracted & [Insert check outcome] \\
+Subset files retained after cleanup & [Insert check outcome] \\
+\bottomrule
+\end{tabular}
+\smallskip
+\end{singlespace}
+\noindent\textit{Note.} Record counts exclude the header; a newline count may
+include it. Replace every cell after inspecting the actual outputs. The table
+describes processing checks, not population estimates.
+\end{table}
+
+\begin{figure}[H]
+\refstepcounter{figure}\label{fig:example}
+\noindent\textbf{Figure \thefigure}\\
+\noindent\textit{Example Figure Area for a Verified Analysis Plot}\par
+\begin{singlespace}
+\smallskip
+\noindent\fbox{\parbox[c][1.15in][c]{0.94\linewidth}{\centering
+Replace this area with a verified figure.\\
+No data or results are displayed here.}}
+% Replace the fbox above with, for example:
+% \includegraphics[width=\linewidth]{figures/your_verified_plot.pdf}
+\smallskip
+\end{singlespace}
+\noindent\textit{Note.} Describe the observations, axes, units, groups, scale,
+and abbreviations needed to read the figure. State whether the data are
+simulated. Cite an adapted or reproduced figure and check its permission terms.
+\end{figure}
+
+\section{Discussion}
+\subsection{Principal Findings}
+[Answer the research question using the verified results. Explain the meaning
+of the findings, compare them with prior work using appropriate citations,
+and distinguish a descriptive pattern from inferential evidence.]
+
+\subsection{Limitations}
+[Explain limitations of the design, input quality, missing data, assumptions,
+and generalizability. For this example, synthetic records cannot establish
+population findings, and simple delimiter tools do not implement general CSV
+parsing. Do not frame successful file creation as proof of scientific validity.]
+
+\subsection{Implications and Conclusion}
+[Explain the practical or methodological implication and the next justified
+step. Close with a concise answer to the objective; avoid introducing new
+results or making claims beyond the study design.]
+
+The student title-page guide provides an additional formatting reference
+\citep{apa-title}. In your manuscript, move substantive citation discussion
+into the relevant text section; this sentence is included to demonstrate a
+parenthetical citation. Delete it when replacing these instructional sources.
+% References: new page, bold centered heading, alphabetical entries,
+% double spacing and 0.5-inch hanging indents. Cite every retained entry.
+\newpage
+\begin{thebibliography}{}
+\bibitem[American Psychological Association(n.d.)]{apa-title}
+American Psychological Association. (n.d.).
+\textit{Title page setup}.
+\url{https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page}
+
+\bibitem[American Psychological Association(2025)]{apa-paper}
+American Psychological Association. (2025).
+\textit{Student paper setup guide}.
+\url{https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf}
+\end{thebibliography}
+
+% Appendix: separate page after references. Code is supplementary material.
+\newpage
+\section*{Appendix}
+\section*{Reproducible Command Example}
+This example is run from the repository root with the course file in the
+ignored \texttt{data/} directory. The fixture test creates its own synthetic
+input. The lab's temporary directory is disposable; verify that the subset
+outputs remain after the lab finishes.
+
+\begin{singlespace}
+\begin{lstlisting}
+# Validate the lab using its self-contained fixture.
+bash "03_Group_Work/Week_4_Bash_Lab/test_week4.sh"
+
+# Run after placing the course CSV in data/.
+bash "03_Group_Work/Week_4_Bash_Lab/run_week4.sh" \
+  data/pseudo_metadata.csv ./week4_practice
+
+# Inspect retained output; line counts include a header.
+head -n 5 week4_practice/only_female.txt
+wc -l week4_practice/only_female.txt
+\end{lstlisting}
+\end{singlespace}
+
+[Record the operating system, Bash version, source-file checksum, execution
+date, and actual validation outcomes. Remove this appendix if supplementary
+commands are not needed for the assignment.]
+
+\end{document}

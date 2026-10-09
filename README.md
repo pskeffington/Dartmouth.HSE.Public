@@ -17,7 +17,7 @@ Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusa
 | Run the Week 4 Bash metadata lab | [Week 4 Lab](03_Group_Work/Week_4_Bash_Lab/) |
 | Generate descriptive statistics or annotated plots in R | [R Resources](06_RESOURCES/#r-statistics-and-visualization) |
 | Study Bash, scripting, and data processing | [Bash Resources](06_RESOURCES/#bash-programming) |
-| Prepare a formatted Week 4 report | [LaTeX Template](06_RESOURCES/LaTeX/) |
+| Prepare an APA 7 student manuscript | [LaTeX Template](06_RESOURCES/LaTeX/) |
 
 ## Course materials
 

@@ -16,6 +16,6 @@ Narrative teaching companions for **HSE 711: Foundations in Data Science**. Each
 
 ## Related resources
 
-The [Week 4 Bash operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) provides an annotated command reference. The [Week 4 LaTeX template](../06_RESOURCES/LaTeX/) supports a formatted student learning report. The [summary statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) covers mean, standard deviation, quartiles, IQR, missingness and automatically generated narrative interpretation.
+The [Week 4 Bash operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) provides an annotated command reference. The [APA 7 student manuscript template](../06_RESOURCES/LaTeX/) supports a formatted student learning report. The [summary statistics guide](../06_RESOURCES/SUMMARY_STATISTICS.md) covers mean, standard deviation, quartiles, IQR, missingness and automatically generated narrative interpretation.
 
 For lectures requiring data files, first confirm that the local `data/` directory contains the relevant classroom inputs. Do not commit those inputs to this public repository.
