@@ -22,6 +22,23 @@ Current coverage: Week 1 group work, Weeks 2–4 notes and group work, and reusa
 
 My introduction to Bash came through playing [Terminus](https://terminus-global.vercel.app/), a command-line adventure game. Exploring its world by typing commands made the terminal approachable and helped me learn through experimentation. That early experience grew into using Bash for file navigation, scripting, and reproducible data workflows.
 
+### How I learned SSH and networking concepts
+
+For an approachable introduction to remote systems and networking, I also recommend [Hacknet](https://store.steampowered.com/app/365450/Hacknet/), a terminal-driven simulation game. Its missions turn ideas such as remote connections, host discovery, ports, and navigating unfamiliar systems into interactive problems rather than vocabulary to memorize. I found this game-based approach a useful companion to learning command-line tools.
+
+Hacknet uses a **fictional, simplified command environment**: it teaches concepts and curiosity, not the exact syntax or security practices of real SSH or network administration. To move from the game into a legitimate practice environment, start with your own computer or a lab machine you have permission to administer:
+
+| Goal | Real-world command | What it does |
+| --- | --- | --- |
+| Connect to an authorized remote host | `ssh user@host.example` | Opens an encrypted remote shell |
+| Copy a file securely | `scp report.csv user@host.example:~/` | Transfers a file over SSH |
+| Confirm the host is reachable | `ping host.example` | Sends diagnostic echo requests (when permitted by the network) |
+| Look up a hostname | `nslookup host.example` | Queries DNS |
+| Inspect local network interfaces | `ip addr` (Linux) or `ifconfig` (macOS) | Displays local addressing information |
+| Check a service you operate | `curl -I https://host.example` | Retrieves HTTP response headers |
+
+**Learning path:** Play Terminus for terminal navigation, explore Hacknet for networking intuition, then practice SSH and diagnostics against your own local virtual machine or an explicitly authorized training host. Use SSH keys, verify host fingerprints, and never attempt access to systems without permission.
+
 ## Course materials
 
 Each group walkthrough opens with session checkpoints. Use them to pause, check output and explain the method to a partner. For figures, keep the [plot-reading guide](06_RESOURCES/READING_PLOTS.md) beside the code.
