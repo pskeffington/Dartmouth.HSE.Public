@@ -22,6 +22,7 @@ class CourseSignalTests(unittest.TestCase):
 
     def test_detects_lecture_chunk_mapping(self) -> None:
         self.assertIn("lecture chunk mapping", self.patterns("Lecture 3 chunks 10-15"))
+        self.assertIn("lecture chunk mapping", self.patterns("Chunks 20–34: plots"))
         self.assertIn("lecture chunk mapping", self.patterns("chunk 17: use plotting"))
         self.assertNotIn("lecture chunk mapping",
                          self.patterns("The code processes data in chunks."))
@@ -37,6 +38,16 @@ class CourseSignalTests(unittest.TestCase):
                       self.patterns("Assignment task | Lecture technique"))
         self.assertNotIn("assignment item mapping",
                          self.patterns("General statistics and visualization"))
+
+    def test_rights_notice_severity(self) -> None:
+        restriction = dict(screen.RESTRICTED_TEXT)
+        review = dict(screen.REVIEW_TEXT)
+        self.assertIsNotNone(restriction["explicit rights restriction"].search(
+            "All rights reserved"))
+        self.assertIsNone(restriction["explicit rights restriction"].search(
+            "Please do not share these notes"))
+        self.assertIsNotNone(review["distribution warning; verify origin"].search(
+            "Do not reproduce the source handout"))
 
     def test_policy_paths_outside_course_scope(self) -> None:
         self.assertFalse("PROVENANCE_REGISTER.md".startswith(screen.COURSE_PUBLIC))
