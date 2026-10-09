@@ -24,3 +24,7 @@ rmarkdown::render(
 ```
 
 Review the [follow-along guide](../../FOLLOW_ALONG.md) for input locations and the [plot-reading guide](../READING_PLOTS.md) for explanations of figures. A formatted reading edition does not verify the underlying analysis.
+
+## Check navigation
+
+Run `python3 06_RESOURCES/Presentation/check_navigation.py` from the repository root. See the [link audit](LINK_AUDIT.md) for scope and external-reference access results.
