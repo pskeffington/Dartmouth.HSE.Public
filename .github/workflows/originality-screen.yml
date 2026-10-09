@@ -50,23 +50,37 @@ jobs:
           PY
           exit "$result"
       - name: Run originality-regression tests
+        id: regression
+        if: always()
+        continue-on-error: true
         shell: bash
         run: |
           python3 -m unittest discover -s tests -p 'test_originality*.py' -v
       - name: Verify public reading editions are current
+        id: editions
+        if: always()
+        continue-on-error: true
         shell: bash
         run: |
           python3 06_RESOURCES/Presentation/build_reading_editions.py --check
       - name: Verify internal documentation navigation
+        id: navigation
+        if: always()
+        continue-on-error: true
         shell: bash
         run: |
           python3 06_RESOURCES/Presentation/check_navigation.py
       - name: Compile Python validation and publication scripts
+        id: compilation
+        if: always()
+        continue-on-error: true
         shell: bash
         run: |
           python3 -m py_compile scripts/check_public_originality.py scripts/build_provenance_inventory.py 06_RESOURCES/Presentation/*.py
       - name: Inventory tracked artifact provenance
+        id: inventory
         if: always()
+        continue-on-error: true
         shell: bash
         run: |
           python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
@@ -85,8 +99,22 @@ jobs:
         shell: bash
         env:
           SCREEN_OUTCOME: ${{ steps.screen.outcome }}
+          TEST_OUTCOME: ${{ steps.regression.outcome }}
+          EDITION_OUTCOME: ${{ steps.editions.outcome }}
+          NAV_OUTCOME: ${{ steps.navigation.outcome }}
+          COMPILE_OUTCOME: ${{ steps.compilation.outcome }}
+          INVENTORY_OUTCOME: ${{ steps.inventory.outcome }}
         run: |
-          if [ "$SCREEN_OUTCOME" != "success" ]; then
-            echo "Originality screening has unresolved findings or failed to execute."
+          failed=0
+          for check in SCREEN TEST EDITION NAV COMPILE INVENTORY; do
+            var="${check}_OUTCOME"
+            eval "outcome=\\$${var}"
+            if [ "$outcome" != "success" ]; then
+              echo "::error::${check} gate did not pass (outcome: ${outcome})"
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "The public-release gate remains closed. Inspect each reported check."
             exit 1
           fi
