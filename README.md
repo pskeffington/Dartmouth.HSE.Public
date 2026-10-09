@@ -67,7 +67,7 @@ Each group walkthrough opens with session checkpoints. Use them to pause, check 
 
 This repository is an **independent student-authored learning resource**, not an official Dartmouth publication. The intent is to publish original explanations, original example code, and appropriately credited references—not to redistribute restricted instructional materials.
 
-A reproducible, standard-library-only [originality screening tool](scripts/check_public_originality.py) checks Git-tracked files for potentially restricted document formats, course-material filename patterns, publication-restriction language, course-platform exports, and binary/media assets requiring manual rights review.
+A [scheduled GitHub Actions originality check](.github/workflows/originality-screen.yml) runs on every push to `main`, every pull request, every Monday, and through manual workflow dispatch. [View run results](https://github.com/pskeffington/Dartmouth.HSE.Public/actions/workflows/originality-screen.yml). A reproducible, standard-library-only [originality screening tool](scripts/check_public_originality.py) checks Git-tracked files for potentially restricted document formats, course-material filename patterns, publication-restriction language, course-platform exports, and binary/media assets requiring manual rights review.
 
 ```bash
 python3 scripts/check_public_originality.py
