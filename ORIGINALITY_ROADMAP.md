@@ -16,10 +16,10 @@ The public repository may explain general methods using independently written co
 | O2: Lecture-reference boundary | Remove source-code transcriptions, chunk-number mapping, and regenerated lecture excerpts in Weeks 2–3 | Remediated; verify against restricted originals |
 | O3: Lecture companions | Remove assignment-to-method matrices and lecture chunk mappings in Weeks 1–4; keep independent instruction | Remediated; source comparison pending |
 | O4: Repository navigation | Explain which content is independent and where official files are required | Updated |
-| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | Numbered lecture-chunk regression repaired; strict CI rejects REVIEW; run result unverified |
+| O5: CI originality screen | Screen tracked files for course-package indicators and accidental lecture/assignment mappings | End-of-job fail-closed enforcement plus six Git-fixture regression scenarios; execution unverified |
 | O6: Public resources | Inspect R, Bash, LaTeX, supporting scripts, images, and examples for course-derived code or data | Partial: APA manuscript classroom schema removed, Bash category demonstration generalized, publishing guide aligned; media and remaining files pending |
 | O7: Generated editions | Build with the updated script; run --check and link validation; inspect every generated page for old text | Seven source/readout pairs reconciled by connector-based source comparison; CI checks added; execution and link scan unverified |
-| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | Initial provisional register created; individual file verification and approvals pending |
+| O8: Provenance ledger | Record origin, license, reviewer, and release decision for every nontrivial public artifact | CI per-file SHA256 inventory configured; rights provenance and individual human approvals pending |
 | O9: Git history exposure | Inspect historical commits/branches/releases for previously published instructor or assessed material | Historical exposure confirmed in commit 3132a04; targeted report written; exhaustive history and remediation decision pending |
 | O10: Official comparison | Authorized reviewer compares public materials to actual Geisel lecture, prompt, and starter files | Requires privately held authoritative files |
 | O11: Release gate | No BLOCK indicators; review findings adjudicated; checks green; manual approvals documented | Not cleared |
@@ -67,13 +67,25 @@ The public repository may explain general methods using independently written co
 
 **Next:** execute the strict gate and tests in the connected repository's Actions environment, triage file-specific REVIEW findings, and continue private provenance/history comparisons before marking O5 or O11 complete.
 
+## Pass 8 — complete diagnostics and provenance inventory (2026-10-09)
+
+- Changed the CI originality-screening step to `continue-on-error` while retaining its reported outcome. A final unconditional step fails the job when screening did not succeed. The release gate remains fail-closed, but later diagnostic checks may still run.
+- Added six Git-fixture integration scenarios in `tests/test_originality_scan_integration.py` for lecture mapping, generic independent notes, restricted filenames, missing tracked files, binary assets, and non-course resource scope.
+- CI now discovers both `test_originality_screen.py` and `test_originality_scan_integration.py`.
+- Added `scripts/build_provenance_inventory.py` to report tracked paths, content sizes, SHA256 digests, and review categories. The workflow saves `provenance-inventory.json` alongside `originality-report.json` as a 30-day artifact.
+- **No hashes establish intellectual-property rights.** Every inventory entry defaults to unverified; the register is not a clearance list.
+- GitHub checkout remains inaccessible from this runtime due DNS resolution. Connected-repository commits succeeded, but CI run results, integration-test results, and actual generated inventory are not independently verified.
+
+**Next gate:** inspect Actions reports, triage any false-positive findings without automatically suppressing legitimate violations, and complete manual file-by-file rights review and historical exposure decisions.
+
 ## Required acceptance commands
 
 Run in the local checkout after syncing main:
 
 ```bash
 python3 scripts/check_public_originality.py --json --fail-on-review
-python3 -m unittest discover -s tests -p 'test_originality_screen.py' -v
+python3 -m unittest discover -s tests -p 'test_originality*.py' -v
+python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 python3 06_RESOURCES/Presentation/check_navigation.py
 python3 -m py_compile scripts/check_public_originality.py 06_RESOURCES/Presentation/*.py
