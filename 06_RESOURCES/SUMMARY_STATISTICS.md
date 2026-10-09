@@ -5,7 +5,7 @@ The public library provides a one-call descriptive report that is suitable for l
 ## Load and run
 
 ```r
-source("RESOURCES/R/hse_stats_plots.R")
+source("06_06_RESOURCES/R/hse_stats_plots.R")
 data(mtcars)
 
 # One call generates both the complete table and a written interpretation.
@@ -53,7 +53,7 @@ Use the report with previously validated log2 CPM from `hse_cpm()`, including on
 ## Quality checks
 
 ```sh
-Rscript --vanilla RESOURCES/tests/test_hse_summary_report.R
+Rscript --vanilla 06_06_RESOURCES/tests/test_hse_summary_report.R
 ```
 
 Synthetic tests cover missingness, quartiles, IQR, single-observation SD, empty groups, narratives and by-group summaries. Runtime validation is distinct from committed source code.
