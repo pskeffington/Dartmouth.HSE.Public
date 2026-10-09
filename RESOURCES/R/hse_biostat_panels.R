@@ -1,10 +1,6 @@
-# Dartmouth HSE Public | One-call biostatistics and ggpanel plots
+# Biostatistics and faceted ggplot2 helpers.
 # Source hse_stats_plots.R and hse_one_call_plots.R first.
-# These routines use ggplot2 and built-in statistics, except explicitly
-# optional survival / pROC packages. No work is performed when sourced.
-#
-# The word "panel" here means ggplot2 faceting (facet_wrap / facet_grid).
-# Avoid using free y-axis scales when direct magnitude comparison is intended.
+# Optional packages: pROC and survival.
 
 hse_panel <- function(plot, facet, column = NULL, ncol = 3L,
                       scales = c("fixed", "free_y", "free_x", "free")) {
