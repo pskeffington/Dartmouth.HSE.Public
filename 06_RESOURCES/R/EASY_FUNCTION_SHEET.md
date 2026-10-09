@@ -80,8 +80,8 @@ print(scatter_plot)
 
 **Scatter plot:** each point is one car. Read weight horizontally and fuel economy vertically. Color identifies cylinder count. Setting `fit = TRUE` adds one pooled linear regression line with a confidence band, even when points have groups. That line is an exploratory association.
 
-## Use the same calls with course data
+## Use the same calls with your own data
 
-Replace `car_data` and the quoted columns with your actual data frame and field names. Check `names(your_data)` first. For example, the Week 3 CSV exercise uses `Age`, `CReactive_Protein`, `Disease_Status` and `Sex`; those columns do not exist in `mtcars`.
+Replace `car_data` and the quoted columns with your actual data frame and field names. Check `names(your_data)` first. Use independently prepared or authorized inputs and document their provenance. Columns from another dataset will differ from those in `mtcars`; choose them from that dataset's documentation.
 
 For longer reports, see [summary statistics](../SUMMARY_STATISTICS.md), [one-call statistical plots](../ONE_CALL_PLOTS.md) and [plot annotations](../PLOT_ANNOTATIONS.md). Report units, sample sizes and missingness alongside every shared graph.

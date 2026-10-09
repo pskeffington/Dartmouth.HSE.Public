@@ -29,3 +29,7 @@ The scanner omits heuristic text matching for an explicit allowlist of policy/ev
 ## Manual review record
 
 For each public contribution, document: source/author; whether wholly original, adapted, or third-party; applicable license or permission; URLs/citations; reviewer/date; disposition (retain, replace, remove, or restrict). Store the record outside the public repository when it contains nonpublic academic materials.
+
+## Local source comparison
+
+For an authorized local comparison, use `scripts/compare_private_sources.py`. Supply restricted input folders outside the repository and write its report outside the repository. Do not upload originals, source excerpts, private reports, or source corpora to GitHub Actions. This scanner supplements the heuristic screen with whole-file hashes and normalized 20-token matching, including reachable historical text blobs when requested. It does not detect every paraphrase or transformed figure and cannot certify rights. Public CI tests only synthetic fixtures.

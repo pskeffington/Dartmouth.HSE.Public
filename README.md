@@ -98,3 +98,7 @@ The examples distinguish exploratory visualization from statistical inference. S
 Course-specific exercises and verification require original files distributed separately through the course. Their absence is noted; unexecuted or unavailable results are not presented as verified findings. Respect course collaboration, attribution, sharing and AI-use policies.
 
 See [RESOURCES](06_RESOURCES/) for references, tests, installation requirements and reproducibility guidance. [License](LICENSE).
+
+## Repository originality status
+
+See the [total repository status](ORIGINALITY_STATUS.md), [completion roadmap](ORIGINALITY_ROADMAP.md), and [provenance register](PROVENANCE_REGISTER.md). Current status is **REVIEW REQUIRED**; passing technical checks does not establish authorship or redistribution permission.
