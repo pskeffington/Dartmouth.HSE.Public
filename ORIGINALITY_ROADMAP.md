@@ -1,5 +1,8 @@
 # Originality and public-release roadmap
 
+**Historical audit record:** Entries below describe dated file versions and execution states. For the current publication controls, R7 restoration, completed ordinary-branch remediation, and open rights/retention decisions, see [current status](ORIGINALITY_STATUS.md) and [history review](HISTORY_EXPOSURE_REVIEW.md). Earlier counts or proposed history rewrites are not current instructions.
+
+
 **Status:** Runtime checks executed; per-file intake established; clearance pending provenance evidence, source comparison, media review, and history adjudication. See [total repository status](ORIGINALITY_STATUS.md).
 **Updated:** 2026-10-09  
 **Scope:** All tracked files in Dartmouth.HSE.Public, generated reading editions, research tools, and Git history.

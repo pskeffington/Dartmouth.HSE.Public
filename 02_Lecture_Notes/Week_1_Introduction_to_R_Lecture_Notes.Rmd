@@ -1,6 +1,6 @@
 ---
-title: "HSE 711 — Week 1: Introduction to R Lecture Notes"
-author: "Independent course study companion"
+title: "Paul's Notes — Week 1: Introduction to R"
+author: "Independent public study guide"
 output:
   html_document:
     toc: true
@@ -13,13 +13,13 @@ output:
 
 ## Purpose and learning objectives
 
-These independent notes cover R objects, indexing, logical operations, tabular structures, data import, graphics, and reusable functions. They do not supply the official assignment, data, or graded implementation. To perform Geisel-specific coursework, consult the authorized lecture and assignment files in a private workspace.
+Learn R objects, indexing, logical operations, tables, data import, graphics, and reusable functions with independent practice inputs. These notes are not an official Dartmouth or Geisel publication.
 
-**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
+These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
 
 ## 1. Understanding R objects before classifying them
 
-**Lecture idea:** R stores values inside named objects. `<-` assigns a value; `class()` describes an object's class. A list can contain different classes in separate elements, unlike an atomic vector.
+**Core concept:** R stores values inside named objects. `<-` assigns a value; `class()` describes an object's class. A list can contain different classes in separate elements, unlike an atomic vector.
 
 ```{r week1-types}
 practice_list <- list(12, "alpha", TRUE, 2.5)
@@ -28,7 +28,7 @@ practice_list <- list(12, "alpha", TRUE, 2.5)
 class(practice_list[[1]])
 class(practice_list[[2]])
 
-# Revisit the loop syntax from the lecture.
+# Inspect every component with a loop.
 practice_types <- character(length(practice_list))
 for (i in seq_along(practice_list)) {
   practice_types[i] <- class(practice_list[[i]])
@@ -77,13 +77,18 @@ positions
 
 ## 3. Importing a gene-by-sample expression table
 
-**Lecture idea:** Inspect a data frame's structure *before* processing it. `read.delim()` reads tab-separated files. `header = TRUE` uses the top row for column labels; `row.names = 1` uses the first column for row identifiers. These are different options.
+**Core concept:** Inspect a data frame's structure *before* processing it. `read.delim()` reads tab-separated files. `header = TRUE` uses the top row for column labels; `row.names = 1` uses the first column for row identifiers. These are different options.
 
-The illustrative code below is intentionally **not run**: the exercise's original clinical trial file is an independently supplied classroom input, not a public repository asset.
+Create a temporary table of invented values, then read it back. This demonstrates import options without an external dataset.
 
-```{r week1-import, eval=FALSE}
-input_path <- "data/your_local_expression_table.txt"
-stopifnot(file.exists(input_path))
+```{r week1-import}
+input_path <- tempfile(fileext = ".tsv")
+practice_input <- data.frame(
+  sample_u = c(4, 9, 2), sample_v = c(6, 7, 3),
+  row.names = c("marker_u", "marker_v", "marker_w")
+)
+write.table(practice_input, input_path, sep = "\t", quote = FALSE,
+            row.names = TRUE, col.names = NA)
 
 expression_df <- read.delim(
   file = input_path,
@@ -98,6 +103,8 @@ ncol(expression_df)            # number of sample columns
 head(rownames(expression_df))  # gene identifiers
 head(colnames(expression_df))  # sample identifiers
 str(expression_df)             # storage types
+stopifnot(identical(dim(expression_df), c(3L, 2L)))
+unlink(input_path)
 ```
 
 **Why it works:** Each gene is an observation along the row axis and each sample occupies a column in this file layout. `check.names = FALSE` avoids automatic renaming of sample identifiers. `head()` and `str()` help confirm the file was interpreted correctly.
@@ -109,7 +116,7 @@ str(expression_df)             # storage types
 A histogram describes the **distribution of numeric values** for one selected gene across the samples. It displays how many values fall inside intervals; it does not identify patient-level clinical outcomes or establish treatment effects.
 
 ```{r week1-histogram}
-# Small demonstration table, unrelated to the assigned trial.
+# Invented values for practising table selection and plotting.
 toy_expression <- data.frame(
   sample_a = c(3, 12, 6),
   sample_b = c(7, 14, 9),
@@ -152,7 +159,7 @@ colnames(toy_sub)
 
 ## 6. Writing a reusable categorization function
 
-**Lecture idea:** A function accepts an argument, performs the same logic consistently, and returns a result. The `if/else` branches belong **inside** the function, and the function is called only after it has been defined.
+**Core concept:** A function accepts an argument, performs the same logic consistently, and returns a result. The `if/else` branches belong **inside** the function, and the function is called only after it has been defined.
 
 ```{r week1-function}
 group_measurements <- function(values, cutoff = 10) {
@@ -198,4 +205,6 @@ A useful repeatable workflow is: inspect the data, choose the operation, run a s
 - Can I explain each argument to `hist()` without claiming an unsupported biological finding?
 - Can I trace a function call into its loop, branches, and return value?
 
-**Related:** [Week 1 group-work walkthrough](../03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Lecture index](README.md)
+**Related:** [Complete Week 1 lesson](../03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Topic index](README.md)
+
+[Next topic](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Paul's Notes](../README.md)

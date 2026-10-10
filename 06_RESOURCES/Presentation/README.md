@@ -4,7 +4,7 @@
 
 ## Purpose
 
-This directory contains **publishing utilities** for independently authored public study notes. It is not a repository of slide decks, presentation submissions, or research results. Lecture notes and group work remain in their respective course directories.
+This directory contains **publishing utilities** for independently authored public study notes. It is not a repository of slide decks, presentation submissions, or research results. Topic companions and weekly guides remain in their respective study directories.
 
 | File | Responsibility |
 | --- | --- |
@@ -37,10 +37,10 @@ The builder uses the Python standard library. It does **not** execute R, validat
 
 For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages. Keep any authorized course inputs out of public source control; public method guides do not require instructor files.
 
-For a generic HTML reading edition, build the Markdown from the independent `.Rmd` sources using the publishing tool. Rendering is optional and must not introduce restricted course prompts, outputs, or datasets.
+The publishing tool creates Markdown, not HTML. A separate R Markdown renderer creates HTML. Rendering is optional and must not introduce restricted course prompts, outputs, or datasets.
 
 For interpreting figures, use the [plot-reading guide](../READING_PLOTS.md). For guided exercises, see the [follow-along guide](../../FOLLOW_ALONG.md).
 
 ## Maintenance boundary
 
-Keep source lessons in course folders, reusable formatting/build tooling here, and scientific analyses or private datasets outside the public publishing workflow. The `Presentation/` path is retained for compatibility with existing `.Rmd` CSS references and automation; moving or renaming it requires an atomic update of every caller.
+Keep source lessons in study folders, reusable formatting/build tooling here, and scientific analyses or private datasets outside the public publishing workflow. The `Presentation/` path is retained for compatibility with existing `.Rmd` CSS references and automation; moving or renaming it requires an atomic update of every caller.

@@ -1,11 +1,7 @@
-# Assignments
+# Independent practice
 
-[Repository home](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md)
+Practise general methods with the [complete weekly study guides](../03_Group_Work/README.md). Each includes independently written exercises and self-assessment using synthetic inputs.
 
-This public directory is reserved for **independently authored learning guides**, not original course assignments or submitted solutions.
+Official prompts, assessed submissions, answer keys, and restricted inputs stay in authorized private workspaces. Their absence is intentional: this public section directs readers to independent practice.
 
-Do not commit instructor-provided prompts, rubrics, slides, handouts, starter code, answer keys, restricted datasets, screenshots, or substantially reproduced passages. Do not publish graded submissions or group contributions without verifying course policy and contributors' permission.
-
-Permitted additions should use original explanations, independently written code, synthetic or openly licensed data with attribution, and citations or links to authoritative sources rather than copied materials. Review both source and generated outputs before publishing.
-
-**Review gate:** Inspect proposed files manually for close paraphrases and substantial similarity. An exact-hash validator cannot prove originality. When provenance or permission is unclear, keep the file private pending review.
+[Paul's Notes](../README.md) · [Topic companions](../02_Lecture_Notes/README.md) · [Follow along](../FOLLOW_ALONG.md)

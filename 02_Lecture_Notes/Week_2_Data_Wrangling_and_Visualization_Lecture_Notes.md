@@ -1,4 +1,4 @@
-# HSE 711 — Week 2: Data Wrangling and Visualization Lecture Notes
+# Paul's Notes — Week 2: Data wrangling and visualization
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
@@ -18,13 +18,13 @@
 
 ## Purpose and learning objectives
 
-These independent notes explain simulation, tabular transformation, missing-data checks, and visualization principles. They are not keyed to the instructor's numbered code chunks or assignment items. Consult the authorized Geisel lecture, assessment instructions, and locally obtained data for course-specific application.
+Learn simulation, tabular transformation, missing-data checks, and visualization principles. These independent notes are not an official Dartmouth or Geisel publication.
 
-**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
+These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
 
 ## 1. Make random data reproducible
 
-**Lecture idea:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.
+**Core concept:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.
 
 ```r
 set.seed(246)
@@ -44,7 +44,7 @@ stopifnot(nrow(practice_df) == n_samp)
 
 ## 2. Set boundaries and build derived categories
 
-The lecture uses categorization tools such as `cut()`, `factor()`, and `case_when()`. A derived category must be calculated *after* its source columns exist. If you clip values with `pmax()` and `pmin()`, values accumulate at boundaries; **clipping is not the same as sampling from a truncated normal distribution**.
+Categorization tools include `cut()`, `factor()`, and `case_when()`. A derived category must be calculated *after* its source columns exist. If you clip values with `pmax()` and `pmin()`, values accumulate at boundaries; **clipping is not the same as sampling from a truncated normal distribution**.
 
 ```r
 practice_df$score <- pmax(0, pmin(100, round(rnorm(n_samp, 65, 18))))
@@ -57,13 +57,13 @@ table(practice_df$score_group, useNA = "ifany")
 stopifnot(all(practice_df$score >= 0 & practice_df$score <= 100))
 ```
 
-**Why it works:** Comparisons produce logical values. `ifelse()` chooses labels row by row, and `factor()` specifies the category order. For more than two categories, compare with the lecture's `dplyr::case_when()`.
+**Why it works:** Comparisons produce logical values. `ifelse()` chooses labels row by row, and `factor()` specifies the category order. For more than two categories, try `dplyr::case_when()`.
 
 **Mastery checkpoint:** Articulate the exact inclusive or exclusive boundary and test a value equal to the threshold.
 
 ## 3. Distinguish wide and long data
 
-**Lecture idea:** One person can occupy one row in wide form, with several measurement columns. Long form holds one measurement per row. The change reorganizes observations; it does not generate new participants.
+**Core concept:** One person can occupy one row in wide form, with several measurement columns. Long form holds one measurement per row. The change reorganizes observations; it does not generate new participants.
 
 ```r
 # Requires tidyr. Install separately if it is not already available.
@@ -115,7 +115,7 @@ ggplot(
   theme_minimal()
 ```
 
-**Why it works:** Each box summarizes the central distribution and spread of one combination of variables. With very small groups, box shapes can be unstable. Compare the lecture's histogram, jitter, and scatter examples for different analytical questions.
+**Why it works:** Each box summarizes the central distribution and spread of one combination of variables. With very small groups, box shapes can be unstable. Compare histograms, jitter plots, and scatter plots for different analytical questions.
 
 **Mastery checkpoint:** Explain the mapping and each axis in plain language without claiming that a group difference is statistically significant.
 
@@ -144,13 +144,13 @@ sum(is.na(practice_df$age))
 aggregate(score ~ group, data = practice_df, FUN = mean)
 ```
 
-**Why it works:** Summaries describe values by group, while `is.na()` identifies missing data. Means calculated from available cases must say how missing observations were handled. The lecture's Anscombe quartet demonstrates that similar summary statistics can conceal very different patterns.
+**Why it works:** Summaries describe values by group, while `is.na()` identifies missing data. Means calculated from available cases must say how missing observations were handled. Anscombe's quartet demonstrates that similar summary statistics can conceal very different patterns.
 
 **Mastery checkpoint:** Describe the denominator for a missingness rate, then state one limitation of the displayed plot.
 
 ## 7. Explain each method in your own words
 
-For every analysis, identify its input, operation, output, validation, and interpretation. Do not merely state that the command ran. The assigned thresholds and required fields belong in your own submission: rehearse the **logic** with these independent practice variables first.
+For every analysis, identify its input, operation, output, validation, and interpretation. Do not merely state that the command ran. Document thresholds and required fields for your own analysis; rehearse the logic with independent practice variables first.
 
 ## 8. Final self-check: what Week 2 mastery requires
 
@@ -163,6 +163,8 @@ Mark each objective only when you can **perform and explain it without copying a
 - [ ] **Interpretation:** Describe shape, spread, grouping, and outliers without confusing descriptive patterns with inference or causation.
 - [ ] **Quality assurance:** Re-run from a clean session; verify dimensions, classes, factor levels, missingness, and required packages.
 
-**Mastery standard:** All six objectives demonstrated with a fresh toy dataset; each plot must have a defensible interpretation, and the workflow must run in order without relying on undeclared objects. If any step fails, revisit the corresponding lecture chunk and repeat that checkpoint.
+**Mastery standard:** All six objectives demonstrated with a fresh toy dataset; each plot must have a defensible interpretation, and the workflow must run in order without relying on undeclared objects. If any step fails, revisit the corresponding section and repeat that checkpoint.
 
-**Related:** [Week 2 lecture chunk reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) · [Group work](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)
+**Related:** [Week 2 study reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) · [Complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Topic index](README.md)
+
+[Previous topic](Week_1_Introduction_to_R_Lecture_Notes.md) · [Next topic](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Paul's Notes](../README.md)

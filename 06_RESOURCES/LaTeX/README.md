@@ -1,7 +1,5 @@
 # Example APA 7 Manuscript
 
-**Header note:** This file is known to compile safely.
-
 [Resource index](../README.md) · [Repository home](../../README.md)
 
 [Editable LaTeX manuscript](Example_APA_7_Manuscript.tex) · [Compiled example PDF](Example_APA_7_Manuscript.pdf) · [Example bibliography](Example_References.bib) · [Full source-type guide](Bibliography_Guide.md) · [Practice entry catalogue](Example_Entry_Types.bib)
@@ -164,3 +162,14 @@ For an assigned abstract, change `\includeabstractfalse` to `\includeabstracttru
 ## APA guidance and course example
 
 Use APA's [student paper setup guide](https://apastyle.apa.org/instructional-aids/student-paper-setup-guide.pdf), [title-page guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page) and [heading guidance](https://apastyle.apa.org/style-grammar-guidelines/paper-format/headings), together with the instructor's instructions.
+
+## Isolated builds
+
+The compiler runs TeX and Biber in a temporary directory and exports only the successful PDF. Its default output directory is this folder; use an explicit destination to review a build without overwriting the published examples:
+
+```bash
+bash 06_RESOURCES/LaTeX/compile_manuscript.sh --output-dir /tmp/pauls-apa-review
+bash 06_RESOURCES/LaTeX/compile_manuscript.sh --catalogue --output-dir /tmp/pauls-apa-review
+```
+
+Invalid arguments fail before tools run. Unresolved citations or references fail the build. Bibliography data-model warnings still require review; a successful build does not certify rights or establish that an existing published PDF matches the new output.

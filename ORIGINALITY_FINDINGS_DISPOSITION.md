@@ -1,5 +1,8 @@
 # Originality findings — baseline disposition and remaining evidence
 
+**Historical audit record:** Entries below describe dated file versions and execution states. For the current publication controls, R7 restoration, completed ordinary-branch remediation, and open rights/retention decisions, see [current status](ORIGINALITY_STATUS.md) and [history review](HISTORY_EXPOSURE_REVIEW.md). Earlier counts or proposed history rewrites are not current instructions.
+
+
 **Review date:** 2026-10-09  
 **Baseline:** Executed strict scan recorded in [ORIGINALITY_STATUS.md](ORIGINALITY_STATUS.md): 12 REVIEW indicators across 12 paths, zero BLOCK indicators.  
 **Scope:** Current-tree heuristic triage, not a determination of intellectual-property ownership or permission.

@@ -1,109 +1,29 @@
-# Total repository originality status
+# Originality and publication status — Paul's Notes
 
-**Date:** 2026-10-09
-**Repository:** `pskeffington/Dartmouth.HSE.Public` only
-**Decision:** REVIEW REQUIRED — originality and rights clearance remain unverified.
+This page distinguishes technical publication checks from human authorship and rights review. Technical checks do not certify copyright clearance or institutional approval.
 
-This report continues the [originality roadmap](ORIGINALITY_ROADMAP.md). It distinguishes execution evidence from authorship, permissions, source comparison, and historical remediation. It does not assign an originality percentage: the available evidence cannot support one.
+## Current publication controls
 
-## Verified baseline
+R7 restored three complete independently developed weekly lessons with synthetic practice inputs. Their 31 R blocks executed in clean sessions; all seven reading editions were current. R7 merged through the installed private-source guard and passing ordinary-change CI. The published baseline for R8 is `ea16f80932ee60c5b34699e8b939ae94c4b571bb`.
 
-The starting public main commit was `4f91edfea8b76d9ec7632eea948ba609c2630de0`, containing 77 tracked files. This batch adds this report, a [per-file record](PROVENANCE_RECORDS.json), and provenance regression tests. All 90 paths have an intake record; none is individually rights-cleared. The records identify file versions and remaining evidence, rather than asserting authorship from a Git commit.
+R8 preserves those full lessons and their stable paths. It consolidates comment-only outlines into linked study references, makes topic imports self-contained, improves Bash argument handling, isolates LaTeX builds, and blocks unsafe symlinks in public scanners. Provenance validation now fails on stale, missing, unrecorded, unsafe, or obsolete paths; only the records file's documented self-digest omission is allowed.
 
-| Check | Executed result |
-| --- | --- |
-| Strict originality scanner | REVIEW; 12 findings across 12 paths; zero BLOCK findings; expected exit 1 |
-| Originality regression suite | 46 tests pass, including missing records, duplicate records, obsolete records, and changed-content detection |
-| Reading-edition freshness | All seven generated editions current |
-| Local navigation | Pass; external destinations are not verified by this check |
-| Python compilation | Validation and publishing scripts compile |
-| Independent Bash practice block | Header plus R01 and R03; selected-record count 2 |
-| Manuscript PDF | Rebuilt from current TeX/BibLaTeX sources; six pages visually inspected; former course schema and lab commands absent from extracted text |
+## Screening and human review
 
-The [baseline GitHub Actions run](https://github.com/pskeffington/Dartmouth.HSE.Public/actions/runs/37985520307) completed with failure. Job logs confirm SCREEN failed while tests, editions, navigation, compilation, and inventory succeeded. The workflow's final enforcement step preserved the closed release gate. A failed strict screen is an unresolved review decision, not proof of infringement or a broken test suite.
+The full strict scanner continues to report two PDF provenance reviews. The ordinary-change gate accepts only byte-identical pre-existing review findings against a verified Git baseline; new findings, changed flagged files, unsafe paths, or BLOCK findings fail. Scheduled and manual full-repository clearance checks remain strict. No detector thresholds, source-comparison thresholds, or PDF exemptions are relaxed.
 
-## Findings requiring a decision
+All per-file rights states remain `UNVERIFIED`, with human review `PENDING` and clearance on hold. The contributor's independent-template declaration is recorded in the [findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md); it does not resolve third-party, package, font, or reviewer evidence.
 
-| Paths | Evidence | Required closure |
-| --- | --- | --- |
-| `02_Lecture_Notes/README.md` | Reference to instructor-supplied materials | Compare current wording with authorized sources; document the boundary |
-| Week 3 lecture notes, `.Rmd` and `.md` | Distribution caution triggers the heuristic | Confirm caution is original policy prose and complete source comparison; retain cautions as appropriate |
-| Weeks 1–3 group-work guides, `.Rmd` and `.md` | Reference to instructor-supplied materials | Record authorized comparison and disposition for each source and generated counterpart |
-| `05_Assignments/README.md` | Reference to official source materials | Verify boundary wording and original authorship |
-| Both LaTeX PDFs | Binary assets require individual provenance | Document source/build lineage, font/package rights, third-party inputs, and reviewer disposition |
+## Source comparison and history
 
-The source boundary notices remain intact. This batch does not suppress any finding or change the scanner's release decision.
+Authorized private-source comparison and the executable local pre-push guard are mandatory before publication. Corpus paths, fingerprints, originals, and detailed comparison evidence remain outside public Git and CI. Zero matches are bounded technical observations, not proof of authorship.
 
-## Resource and binary review
+The six ordinary branches were remediated under R5. Retained GitHub PR history and external copies remain a separate open matter described in the [history review](HISTORY_EXPOSURE_REVIEW.md). R8 does not rewrite history.
 
-The previous manuscript PDF still exposed the course-specific six-field metadata schema and Week 4 lab invocations after its TeX source had been generalized. This batch replaces it with a fresh build of the current neutral source. The title page now uses institution/course placeholders; the appendix contains only generic inspection commands. Its retained bibliography cites books rather than reproducing their contents. This establishes current content and build lineage, not ownership of all embedded assets.
+## Evidence and remaining work
 
-The independent Bash example wrote `category_a.txt` but attempted to read an obsolete filename. Both reads now match the written file and the entire practice block was executed. The R quick sheet's remaining course-specific variable list has been replaced with general advice to use authorized inputs and their documentation.
+The [R7 Actions run](https://github.com/pskeffington/Dartmouth.HSE.Public/actions/runs/38010724355) passed ordinary change validation. Current candidate checks are recorded in its PR and Actions reports rather than inferred from historical test counts. The [per-file records](PROVENANCE_RECORDS.json) identify observed current versions, not licenses.
 
-The reference catalogue's extracted text identifies 52 fictional practice records with placeholder URLs. Its existing PDF was inspected through text extraction, but has not been rebuilt or fully visually reviewed in this batch. The bibliographic examples are not verified empirical references. Individual contributor provenance, any adapted snippets, and TeX font/package redistribution terms remain open for both PDFs and source templates.
+Remaining closure requires actual contributor/source/license evidence, PDF source-to-binary lineage and embedded-asset review, a named human reviewer and disposition, and platform retention follow-up. Historical audit entries in the [roadmap](ORIGINALITY_ROADMAP.md) and [findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md) describe their dated snapshots; earlier counts and incomplete-execution statements are superseded by the current candidate evidence.
 
-## History coverage
-
-After fetching origin, local refs enumerate 257 reachable commits, 729 trees, and 497 blobs; no tags were present. GitHub's heads endpoint confirmed four remote branches at the baseline. Its releases endpoint returned no releases. These are enumeration results, not an exhaustive rights review of each object. The [historical exposure report](HISTORY_EXPOSURE_REVIEW.md) remains open. PR refs, cached objects, Actions artifacts, forks, and external copies require separate review. No history was rewritten.
-
-## Completion roadmap
-
-| Order | Deliverable | Completion evidence |
-| --- | --- | --- |
-| 1 | Import the existing review record once its location is supplied | Identify reviewer, date, exact artifact versions, scope, permission basis, and gaps; keep restricted originals outside this public repo |
-| 2 | Reconcile every per-file provenance record | Original/adapted/third-party disposition, actual author/source, license or permission, and human sign-off tied to current bytes |
-| 3 | Close course-source comparisons | Authorized comparisons for O1–O3 and O10, including generated editions; replacements or permission evidence for any overlap |
-| 4 | Complete resource/media review | Inspect all remaining R/Bash/LaTeX/tooling assets and catalogue pages; verify third-party licenses and PDF source/build correspondence |
-| 5 | Adjudicate historical exposure | Review enumerated objects and platform surfaces; document remediation decision and obtain explicit authorization before a history rewrite |
-| 6 | Close O11 | No unresolved BLOCK/REVIEW indicators, current provenance evidence, recorded human decisions, verified CI, and closed history decision |
-| 7 | Close each work batch on main | Validate, commit, create a reviewable PR, merge into main, and synchronize the local checkout |
-
-The user supplied local Week 1–3 comparison sources. These were read locally and not uploaded. They establish a comparison corpus, not an authorship or permission attestation. The active goal remains open through the unresolved gates.
-
-## Evidence model and sources
-
-Run `python3 scripts/build_provenance_inventory.py --output /tmp/hse-public-provenance.json` for current file digests, record coverage, obsolete paths, and changed snapshots. `current` means bytes match an observed baseline; it never means rights-cleared. The record file's own digest is deliberately omitted to avoid self-reference. Newly edited records must be tied to a new observation; do not carry forward a stale content claim.
-
-Original expression, methodological novelty, and reuse permission are separate questions. Copyright protects qualifying expression rather than methods or facts; a root MIT notice cannot establish rights in contributed third-party material. See the [U.S. Copyright Office overview](https://www.copyright.gov/what-is-copyright/) and [MIT license text](https://opensource.org/license/mit). Where automated generation was used, human authorship must be assessed from the actual contribution; prompts or Git authorship alone do not establish it. See the [Copyright Office AI copyrightability report](https://www.copyright.gov/ai/Copyright-and-Artificial-Intelligence-Part-2-Copyrightability-Report.pdf), especially its conclusions. This report makes no registration or institutional-approval claim.
-
-## Local restricted-source comparison — follow-up
-
-Compared the public tracked tree against 108 local files from the user-designated Week 1–3 folders. All 108 received streamed SHA256 comparison; 50 eligible text/PDF files received normalized 20-token-window comparison. Larger datasets and nontext assets received byte comparison only. Zero current byte matches or shared 20-token windows were found. This is a bounded comparison result, not proof of independent authorship: paraphrases, shorter copied fragments, partial datasets, and transformed figures can evade detection.
-
-History enumeration compared 508 reachable blobs by bytes and eligible text blobs by normalized tokens. Zero whole-file byte matches were found, but 30 historical blobs had shared token windows, including old Week 1–3 group-work guides and Week 3 lecture references. Some had hundreds of matched windows. No restricted excerpts, filesystem locations, source files, or source hashes are included in this public report. Detailed findings remain outside the repository.
-
-The current tree passes this source comparison; **historical source-text exposure remains unresolved**. Current-tree cleanup and a regular main merge cannot remove old blobs. A history remediation decision must cover all affected branches, PR refs, retained Actions artifacts, and GitHub caches; external clones cannot be erased by Git operations. Full-history clearance is not claimed.
-
-### Run the source comparison locally
-
-Use [compare_private_sources.py](scripts/compare_private_sources.py) with one or more `--private-source-dir` arguments pointing to authorized local directories, `--history` when required, and `--output` pointing outside this repository. Reports contain public paths, opaque source IDs, and match counts, never matched source text. The scanner rejects source folders and output paths inside the public repository. It fails on empty source corpora and returns nonzero when current or historical matches are found. CI uses synthetic fixtures; restricted originals must never be supplied to public Actions jobs.
-
-Six additional tests cover byte copies, normalized overlap, independent text, source-directory containment, deleted historic content, and empty source sets. The originality suite has 26 passing tests; the integrated reading-source manifest adds four, with two further resource-screening tests, for 32 total. No source corpus or private comparison report is committed.
-
-## Installed private-source upload guard
-
-The user's source files are reference-only: all files under the authorized Week 1–3 folders are excluded from public upload. The local pre-push guard is installed in this checkout; its corpus configuration, executable copies, and fingerprints remain untracked. It compares the actual commit content being proposed, including intermediate new commits. Eight real-push synthetic tests cover safe pushes, renamed sources, protected filenames, a clean working copy masking a committed source, a source deleted in a later commit, missing folders, and preservation of existing hooks. The guard milestone had 40 passing tests; after integrating current triage controls, the full suite has 46 passing tests.
-
-Source comparison now includes all 119 files, including hidden/generated files, rather than omitting local metadata. The refreshed bounded current-tree comparison found zero matches; 50 eligible text/PDF sources were normalized and every file received byte comparison. Protected filenames add conservative defense for source files that have been modified. Byte checks cover all formats and sizes; token checks are bounded to supported extractable text and PDF files up to 2 MB. Metadata changes, paraphrases, transformed figures, and partial large datasets are not exhaustively detected. No legal or institutional clearance is inferred.
-
-The installed guard's check of the current main commit passed. Publication in this checkout must go through the guarded Git push; direct API/UI writes and hook bypass are prohibited by repository instructions. This is local enforcement, not server enforcement. Other clones need their own installation. Historical overlap remains open and is not removed by this preventive control.
-
-## Custom APA template audit refinement — 2026-10-09
-
-The contributor confirmed that the APA 7 manuscript and reference catalogue are independently authored general-purpose templates, not Dartmouth or Geisel adaptations. This is an **authorship/source classification declaration**, not a legal or institutional clearance certificate. The local PDF review reported `all_present_and_matching_intake: true` and confirmed both recorded artifact SHA-256 values. The manuscript has six pages (pdfTeX 1.40.27); the catalogue has five pages (pdfTeX 1.40.25). Their TeX and `.bib` inputs were identified. Different compiler versions mean a byte-for-byte rebuilt PDF mismatch, alone, would not establish content divergence.
-
-For the two PDFs, the *suspected Dartmouth-template copying* rationale is therefore not supported by the available evidence; classify these as **contributor-declared independent templates**. Continue to hold the separate source-to-output reproducibility, embedded font/third-party permission, and human reviewer checks. No generic scanner PDF exemption is authorized; final O11 rights clearance and historical overlap disposition remain open. See [findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md).
-
-## Post-baseline finding remediation — 2026-10-09
-
-The [file-specific findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md) reviews the baseline's 12 flags. Ten were generated by protective course-sharing language; the detector now distinguishes this language from affirmative reuse disclosures. These ten classifications are provisionally addressed, **not** independently rights-cleared. Two generated PDF assets still require provenance and build-lineage approval. All 30 historical overlap findings remain open. The updated scanner and tests have not yet been confirmed executing successfully in a current GitHub Actions run. The baseline REVIEW status remains the last executed status documented here.
-
-## Current executed control status after integration
-
-All 46 tests pass. The strict heuristic scan now returns REVIEW with two PDF provenance findings and zero BLOCK findings; ten cautionary-text false positives were adjudicated by the integrated classifier changes. The installed pre-transfer guard is a separate control and does not waive the two PDF reviews or historical exposure. All 90 tracked paths have intake records. Restricted-source corpus files and configuration remain outside tracked Git.
-
-## Paul's Notes weekly teaching restoration
-
-Weeks 1–3 now provide independent synthetic examples, expected behavior, exercises, and self-assessment, with authoritative R Markdown and generated reading editions. Local execution checks cover 31 R blocks in clean R sessions, including data-structure assertions, missingness, row counts, handled errors, and plot construction. The [follow-along guide](FOLLOW_ALONG.md) documents how to reproduce those checks.
-
-Ordinary change validation distinguishes unchanged baseline PDF reviews from new findings, as described in the [policy](ORIGINALITY_POLICY.md). The full strict screen remains REVIEW for both existing APA PDFs; their rights status is not cleared by this restoration. Retained platform history and other provenance limitations remain separate from current lesson execution.
+[Paul's Notes](README.md) · [Policy](ORIGINALITY_POLICY.md) · [Provenance register](PROVENANCE_REGISTER.md)

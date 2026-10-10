@@ -1,50 +1,21 @@
-# Historical Git exposure review — Dartmouth.HSE.Public
+# Historical exposure review — Paul's Notes
 
-**Review date:** 2026-10-09  
-**State:** Confirmed *historical availability of previously removed coursework-related content*; infringement and permissions unresolved. This is a targeted review, not an exhaustive scan of every reachable object, branch, tag, fork, or cache.
+This review separates ordinary Git branches from GitHub-managed retention and external copies. Current-tree checks do not establish that every historical copy has disappeared.
 
-## Confirmed findings
+## Ordinary branch remediation
 
-Historical commit [3132a041436fa4d82baa919fe524b3bda69b5082](https://github.com/pskeffington/Dartmouth.HSE.Public/commit/3132a041436fa4d82baa919fe524b3bda69b5082) was inspected through GitHub's file-by-commit interface.
+The authorized R5 operation completed the prior history rewrite for six ordinary published branches. Its targeted inventory contained 30 historical text-overlap blobs; verification found none of those targets reachable from the six rewritten branch heads. Recovery evidence and detailed comparisons remain private. R8 performs no further history rewrite.
 
-| Historical path | Observed at historical commit | Current-tree remediation | Determination |
-| --- | --- | --- | --- |
-| `03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd` | Included numbered exercise statements and worked R code; describes preserving supplied prompts | Converted to independent method notes in prior passes | Historical exposure confirmed; authorship/permissions review required |
-| `02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md` | Included 21 labeled lecture reference-code sections | Reference converted to conceptual commentary in prior passes | Historical exposure confirmed; source comparison required |
+## Retained pull-request references
 
-Do not reproduce the historical course content in new public reports or issues. A historical commit containing reproduced instructional material may still be accessible even after the current branch is cleaned. A path's presence in history is **not**, by itself, a finding of infringement.
+GitHub-managed references remained separately exposed at the R5 verification: closed PR #2 retained 27 targeted blobs, and closed PRs #3–5 retained 30 each. Open PR #1's inspected head and merge references had none of the 30 targets. This is a bounded observation of the target inventory, not an exhaustive clearance of every object.
 
-## Review and remediation protocol
+Closing a PR or cleaning ordinary branches does not guarantee removal of retained refs, caches, forks, or external clones. Platform-level retention review remains open; no GitHub deletion or disappearance is claimed. Unrelated branches and PRs are not removed during R8.
 
-1. **Preserve evidence privately.** Record historical commit IDs, paths, suspected origin, institution permission terms, and authorization decisions in a restricted review log. Do not copy the problematic passages into a public issue or evidence attachment.
-2. **Compare to authorized source files privately.** Determine whether each item is independently authored, allowable quotation, permitted reproduction, or restricted material. Seek Geisel clarification where necessary.
-3. **Inventory all reachable objects.** On an authorized local clone, inspect branches/tags, added/deleted filenames, large binaries, and the history of course directories. Review GitHub releases, attachments, actions artifacts, open PRs, forks, and externally indexed mirrors separately.
-4. **Agree on remediation with collaborators.** If unauthorized material is verified, decide whether to request targeted removal or a full history rewrite, taking account of GitHub retention/caching and cloned copies. Do **not** force-push or change public history automatically.
-5. **After authorized remediation**, coordinate re-cloning/reset instructions; invalidate outdated references or artifacts as appropriate; verify reachability on public refs and record checks. Old SHA links and cached copies may persist.
+## Remaining review
 
-### Local audit commands (read-only)
+Keep protected excerpts and detailed source evidence outside public reports. Any further platform remediation requires a documented decision and verification of the affected references. Authorship, permission, and third-party rights review remain separate from technical reachability checks.
 
-```bash
-git fetch --all --tags --prune
-git log --all --name-status -- 02_Lecture_Notes 03_Group_Work 05_Assignments
-git log --all --diff-filter=D --name-only -- 02_Lecture_Notes 03_Group_Work 05_Assignments
-git branch -a
-git tag -l
-git rev-list --objects --all > /tmp/dartmouth-public-git-objects.txt
-```
+**O9:** ordinary-branch remediation complete; GitHub retention and external-copy review open. **O11:** rights clearance remains on hold.
 
-Object inventory paths and logs should remain private until reviewed. `git rev-list --objects --all` lists reachable objects; it does not verify their rights, compare source text, or cover every external clone/cache.
-
-## Release decision
-
-**O9 remains OPEN.** Current-tree changes do not resolve the two confirmed historic source exposures. Authoritative comparison, a complete reachable-object inventory, and a documented remediation decision are required before closing O9.
-
-## Local enumeration follow-up — 2026-10-09
-
-At baseline public main `4f91edfea8b76d9ec7632eea948ba609c2630de0`, after fetching origin, `git rev-list --objects --all` and `git cat-file --batch-check` enumerated 257 commits, 729 trees, and 497 blobs across local branches and remote-tracking refs. No tags were present. GitHub API confirmed four remote heads and no releases. The counts cover objects reachable from these local refs; they do not establish absence of other PR refs, caches, attachments, forks, or external copies. No exhaustive similarity or rights adjudication is claimed. O9 remains open.
-
-## Restricted-source comparison — 2026-10-09
-
-A local-only comparison against 108 authorized Week 1–3 source files found no identical source files or shared 20-token windows in the current public tree. Comparing 508 locally reachable historical blobs found 30 text-overlap blobs in earlier group-work guides and Week 3 lecture references. No whole-file byte matches were found. This confirms historical source-text overlap rather than a conclusion of infringement; details and originals remain outside Git.
-
-A current-tree merge cannot close O9. Proposed next action: preserve a private recovery snapshot, prepare cleaned replacements for every affected published branch, obtain explicit history-rewrite authorization, update affected refs with verified leases, and request GitHub review of retained PR refs/caches. Confirm the affected ref/object set immediately before any rewrite. Do not force-push automatically. External copies and platform retention require separate handling.
+[Paul's Notes](README.md) · [Current status](ORIGINALITY_STATUS.md) · [Provenance register](PROVENANCE_REGISTER.md)

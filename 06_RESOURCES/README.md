@@ -51,7 +51,7 @@ hse_plot_audit(plot)
 print(plot)
 ```
 
-For additional historical classroom functions, see [Week 3 reusable functions](R/Week_3_Reusable_Functions.R).
+For additional basic reusable functions, see [Week 3 reusable functions](R/Week_3_Reusable_Functions.R).
 
 ## Bash programming
 
