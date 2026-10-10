@@ -10,7 +10,7 @@
   "entries": [
     {
       "path": ".github/workflows/originality-screen.yml",
-      "observed_sha256": "96073d2f191124ca1f700e47aac1c4207f73f62a5a94c66ec7dfeb23cf5e34fc",
+      "observed_sha256": "a265827f150e54011b1977912f12a6a1392d883e68bbabcc2171991af975373f",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -20,7 +20,7 @@
       "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "5b6af3c07ac3f6f79ef8ea66588e80ff733059464fdd94fb3b933ea6366981fd"
+      "observed_sha256": "6e1e29b1e5aa801c6a59d695dd4d9ec09183651427824d29de80875000fda2dd"
     },
     {
       "path": ".gitignore",
@@ -237,21 +237,21 @@
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "c628914b0d12ac20d169e98eb887c5f1c9b37463022d7eaa44aef3ea39587c1b"
+      "observed_sha256": "5f3cd831012e8b3706e9dd17a47037417e086c6d1f4cc399a6385945e30652dd"
     },
     {
       "path": "06_RESOURCES/Genomics/COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md",
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "d9a27b3cc525827be42f665934a75bb5dab015a499a9bc58702920760365d469"
+      "observed_sha256": "80d6dcbab4b33ab39c15bb000ab96146f9cd2640ad0ee6554cbe1708da24f855"
     },
     {
       "path": "06_RESOURCES/Genomics/README.md",
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "6b6e5f6f53caef45f3814ad469fd79b6f5495701a6c10b294eb81f7851654b44"
+      "observed_sha256": "855efc5d519be65e16b8acd21ae0ee2a5a9dea9afe196a62e2739bb757748bd3"
     },
     {
       "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
@@ -507,7 +507,7 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "7d1a5c625400e719ae9dded292ab961b5e82b1d0da32dd6e5af71b32fd5ff929",
+      "observed_sha256": "8160bdf3309a0e841658de38801388615cebf46dfc8f27e674a111c8f2c71f02",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -524,7 +524,7 @@
       "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "a5204f31f8857178c7cc339f5864d584ee4b99ea2c321eac730f67e3986ab7b3"
+      "observed_sha256": "dede6c14820da97ac25a678c248cf11ea476c67af6382a9b2713e1d47e47f58a"
     },
     {
       "path": "06_RESOURCES/tests/README.md",
@@ -619,7 +619,7 @@
     },
     {
       "path": "README.md",
-      "observed_sha256": "09ea3c08dadad89a54a810ebaf1e9b1b889dda6851ed58ee7aff52b131bbde70",
+      "observed_sha256": "17410a91c0c8fcaa7ea9df912d488afeea06d2e6d0b262b460bdff2fd6d971e3",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -777,6 +777,552 @@
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review",
       "observed_sha256": "7d082a0ef630234e666992446c44cbd864b233c1c32bd53cdce6f7a3dd0799e1"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "e285ef5759919804ce3fc974f0d35a6c5d880fb18e9420093c6e77f22a601168"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/FIGURES/README.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "f32623ab1e2989e3867dd02c6aeb2dea0dc4c01133256e4f92a50bfc5132bcca"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "522aeefa4b68d8a194d70faab0db32d7afb7c2f946ef7fe769065f0e37ef758a"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_ATLAS_INDEX.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "93eba5e1b415236c3beb1f8c8e3d7644d9ac71cbea5b1163756ae2e8f9889430"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_BIOLOGY_LEARNING_GUIDE.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "92d849683fbf5325fe3672525d68101e2792117073c4d962c4746c45c31683ff"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/AKT1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "1b32e0c14f4b5f56a5053b6e670e1db0532b60f89663b8e2c338e4da2775f7a6"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ATM.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "806ce1abdfb6db09295053fbd5544cc0d99dd06f78a1cfb983b9c4cbf747e0ad"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/AURKA.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "11a26762153fe4b9fa407c6bedfe1ef1a1bed3b01cd84841eb1614de7546fc37"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/BARD1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "b2e612ebd33c71e537e0de111da6f1ef1a742630b1dee909613533b0292daede"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/BAX.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "a848bf47a4c66e1c0d8a91e9d0222233c94591efbe61527681a6f0bc9918818e"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/BCL2.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "584354030d5775596634dce6ac34bce67e358d3bba514b6a08287df54f5ecbdc"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/BRCA1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "48699715960e301fd0154c3ddd45270272d318d9897a0fada81c04fe9f61533c"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/BRCA2.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "541fcd52f69bbaa159025864e21a37a34ce84d29049bdc3525e31875288f802e"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CCNB1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "7f7a26eacfe95756db8c8fd47c67168ab3f5fe4e32ddd60fa61a923cb55314bb"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CCND1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "42f0d3eba7bc6290d6e62a7b19754115460c82d6998edfa5ebdf18148a8229ee"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CCNE1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "3b528c5dd7cd695732d2db0e428e13a2815a53e4f0e577306838697f6ebe1dcc"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CD274.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "52724ed42f14e6b8eeb98d2749f39babc253496efca380b907c443b71dcfe2d9"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CD3D.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "208966eb9dd4a67917b323a7f095e9bfed9e8099b436f2d51766e05ec323bb2b"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CD68.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "c7d027ac79ae19306131c3d9f65de714a1a3d5e6da417dec6ea3368b480a79c6"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CD8A.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "df262e1f8eb5c88db461052216a81382f0ca95458cd7360336ba3678f4fb75d0"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CDC20.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "c197ae55a116cb30053bc8ae37c703dd0ed95f3e700ab71deab12fa82e828fde"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CDH1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "9b83a460ac1169191c0d4bccc6e92c908c9997bb28209673c150206237bbd999"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CDK4.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "eec26ebaa1fb1c76615893269848f84d93153da7237474c78752f1b27b0e2640"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CDK6.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "39dc432180ba032d470a572fff676f33743351ce25136a4c35d2eb345920022c"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CDKN1A.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "5e77c73a3001309eb5d2eb481d22e6a6d4508437acc696fbd4cb21dd75df6d4f"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CHEK2.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "158554f8bf7aa92af1d09d8cc00f3d72225f1fa75a5433561b36108f7901e0c6"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/COL1A1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "0ea10bb6af00879beba20193c46682416548f8ca18851256fff8bc124c5fcf2f"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/CXCL12.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "660ef76925f293bc0dd5b7fc07e0369911fedeb4826443f9b78d6fda87df00a0"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/EGFR.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "45d88d11df3abbc6d9ce0b095be48e5a65b47d8f2674302ce41f557bfe27f4d8"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/EPCAM.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "20b675ab934694a69938538ab688d4397094df85c1fb6539f1705cbf95f17690"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ERBB2.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "532544313e3b7df694a21c0f34c5e4fdbb1d2729617093a099a34a76fc537956"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ERBB3.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "2d29473c12a1c66e9e247ac8a11a31b702387e30c08aa53e9510a0cdb0163e5c"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ERBB4.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "bf07452a41b6838a8b9be74df4ecdaf862b80843a16511d3388bc3a5f72006d1"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ESR1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "09cd8d79792749c66c4e6c93a53eb10bbecd10d905c2c3ad7a81fc4fcf4c77f7"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/FGFR1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "087bd3c20fabb87bd5bc0969a92ad4f42774caa7294c4f8f5d06349db99a1b52"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/FN1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "a5e35a860b19ddfd324de98b54fd7005915ba5a0079c6b4c7f64ec2efae444f7"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/FOXA1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "03e9fcdc98150e9391848cae463dbf2e26f90d9ffec93b84cdf9d87a5ab02736"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/FOXC1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "95fec66b438f6b01f9e75624e642d27aa97258d17b56545d9f85f59f2d909511"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/GATA3.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "46d2d176c1661ba6f17e38175e801ffd6a275ff13ca4d33cbed040f971a2c007"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/HIF1A.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "a621896de7502e747848a9b69bcc0c6855478b5d027b479dd40e78611a89315a"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/ITGA6.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "c6c7bcfbc5a1205ef287a6b23643d1e3caffd67235f5ec429c9d84d83b9ae9e0"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT14.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "cb7e14653945f9382955f179ee99995b8bb8791b9c8ca4f3a89f2923214b3d13"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT17.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "ef1142cd68fc8727b108667c1f2554d5fe43e7a45c6c78ecf3b5f6379571798d"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT18.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "09e089e8eac96907b04f8ac8b9d63bd1981c600f2d87f9fe2da4c30899490f61"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT19.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "829b087687a6843813c1d7cff48bb30ba3f8de050a60571059109b2ade00e03b"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT5.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "6591bf7fb0f256417844d07358dc0958995ad4d7730a3b3e3a30d1a40838705e"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/KRT8.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "6a9a566ca46bd4b7dd0277a50bfa523e2f0fc8a6ec2cf557d89c4e13ea8aaeef"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/MALAT1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "f579dac4754e0338f830900f833ce454d3e60af2ee77268213d6148e93331879"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/MKI67.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "cf7a4b4596ac34b0c7698a5ae0f41245212a33180bc80d342c8251222d69eb78"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/MMP9.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "870d706e94f3fa139376ba78c24f48f28f2a62086260914814cbd08370a9ccd7"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/MTOR.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "aa83729d84909fca1e7dd7629e1ca625b5632d6cc7018ebeb79fdb49e84190bf"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PALB2.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "6eab527c585fea63fc95d5741037b5e3e2875f43bcbf460d16654bdba76b0157"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PDCD1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "ddef8c415ab1e809b9f73fc6643decd17f04ae52993645149bcbb6862be5a5a3"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PGR.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "9fcecb6fff8d4e61454a90b24f9423ff21582cc5a520c0428158c0bf064ccd69"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PIK3CA.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "5daf059ee950cb942ba15ebec8f7da9084d0888948c9159a82e26af8e35e7cb3"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PTEN.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "2327a27ecf3276dc2d15a80ba79a2d3459d444fcfa32b3a7d962bace776e5405"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/PTPRC.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "b8ac76f9dc530f861f89c576800008a800b3ae721594bc49ea001e4457b6b4be"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/RAD51.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "e18b763ad57a9d70310e9005cfa40d7f14a2ca11ec787db084d3e86ed0efdac7"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/RB1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "d1548b7e0817c8b1b28c0d560205145113095b0aecc4b3decaceb7ec2464a6b8"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/README.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "189d25d96b8b46ccbded0f58f57738c7c2b875bb84a1c3b49b625d3889e76df0"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/SLC2A1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "43aa048c082b8b94dc78661963fcfb11f526f32bbf1d9e181d7d64c937b5207d"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/STAT1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "c2651babcae28b19e1b7046f987479a56e1c9103a381981b4002341f11398383"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/TOP2A.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "0d7810a3dbb7d39974ce83ddac7213b793b26a0560d6940826c00f81058f8e6b"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/TP53.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "11e485f5f9905ed052058241cc056ca1836a21f66f871528b4b812e972224eb0"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/VIM.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "0e4f6ddea3b5a29cea3507e53e749f4a571383e0f25131e5bc408284ae32611a"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_CARDS/XBP1.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "839f46d0912cd924e0d7b28f360032029943f1468ea0ae83b584e17601e0a73c"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_EXPRESSION_INTERPRETATION.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "6dffbe04d9459ac6bc4f6ac166601a4009349211e487337be9b84bfef14fb327"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "5251f2df1826ee4128bce9a2c6e63278cf3a59971259bea2231b03df87f45616"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/REFERENCES/ANNOTATION_SOURCE_REGISTER.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "474bd52e8c5401d1b1d4b634db82c0c3402b65fe345a541ec2a4af05ab9396e8"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "28dd34514377bcb88f76caead45d77e7b385d57738b8a137bac02a622adcd83b"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/REFERENCES/SELECTION_RUBRIC.md",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "37d4b79ddafa1698e6057021b69c0df08af76092b90d58ae5be6c7da516f080c"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_gene_companion_heatmap.R",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "12552b316d14bd91400f6dd1af1fe218fbdd6efe7c4c8b5721c5846070fe868f"
+    },
+    {
+      "path": "scripts/build_gene_companion.py",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "bcf7dee94817cb0ae93be8e05a3ccca3932f45cb73ba50838c0f5cdc9d43c44d"
+    },
+    {
+      "path": "scripts/gene_companion_content.py",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "67ef2421675f26f9102e0f4f81903606e89ec2a970afee7c2823474f399c4e2b"
+    },
+    {
+      "path": "scripts/gene_companion_domains.py",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "fc0c2dca4e1742f849fe8115104c5555c6d3403131b1be2a5bb807cd3842f7f4"
+    },
+    {
+      "path": "scripts/validate_gene_companion.py",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "3ab69378335c7c88462b3a70f9d18b432a25200f50175d0c4b2a0bd13f9f5313"
+    },
+    {
+      "path": "tests/test_gene_companion.py",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "1064280683cefbfae78fe5b0c014c17f35315bd1c819d0565c7ebe643449a473"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/REFERENCES/COMPANION_VALIDATION_REVIEW_2026-10-10.md",
+      "observed_role": "independently authored public teaching validation report; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal guarded publication checks; not blanket rights clearance",
+      "observed_sha256": "8141e18a60420a62d3df043cbc737a17e490e444db2dc8f595a82378a0b39969"
     }
   ]
 }
