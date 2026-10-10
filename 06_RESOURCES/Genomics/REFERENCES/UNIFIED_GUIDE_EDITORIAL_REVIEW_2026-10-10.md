@@ -17,9 +17,3 @@ Original chapter prose resides in `scripts/gene_companion_chapters.py` (`UNIFIED
 - Public provenance observations and content-bound original-work authoring records were refreshed. The live protected-source comparison passed for the proposed current public tree; private inventories and detailed reports remain outside Git. Normal guarded push separately checks newly introduced history.
 
 The six-pair example has mean log2 ratio 0.5, observed range −1 to +2 and leave-one-pair mean range 0.2–0.8. It explicitly labels sensitivity as **not a confidence interval**. There are no participant records, private analyses or clinical findings in these invented values.
-
-## Publication and scientific boundaries
-
-Local checks do not substitute for GitHub-rendered review, required CI or merge checks; their final results are recorded in the associated PR. No literature evidence was upgraded: all accounts remain `ABSTRACT_ONLY`, with annotation verification kept separate. MALAT1 opposing experiments and PTEN protein/RNA disagreements remain explicit. Epidemiology retains the 2024 year and distinct sex denominators; the GDC case count remains a dated project snapshot.
-
-The two unchanged legacy LaTeX PDF rights-review findings remain unresolved. The ordinary-change originality gate passes without declaring whole-repository or historical rights clearance. Protected history is not rewritten, and no institutional sources, private comparisons, datasets, signatures or model objects are distributed by this change.
