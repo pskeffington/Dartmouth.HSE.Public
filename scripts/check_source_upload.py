@@ -107,15 +107,13 @@ def check_push(root, directories, updates, remote_name, reviews=None):
         target = git(root, 'rev-parse', f'{local_sha}^{{commit}}').decode().strip()
         # Always inspect the proposed final tree, even if the working tree is clean.
         commits.add(target)
+        # Inspect only history newly introduced to this remote, not ancestors
+        # already uploaded on another branch. The final tree is always checked
+        # above, so protected bytes cannot inherit a baseline exemption.
+        args = [target, *('^' + sha for sha in known)]
         if remote_sha != ZERO:
             base = git(root, 'rev-parse', f'{remote_sha}^{{commit}}').decode().strip()
-            args = [target, '^' + base]
-        else:
-            # Existing remote ancestry is already uploaded; inspect all newly
-            # introduced commits plus the final tree. An unknown remote forces
-            # a full history inspection rather than trusting unrelated refs.
-            known = git(root, 'for-each-ref', '--format=%(objectname)', f'refs/remotes/{remote_name}/').decode().splitlines()
-            args = [target, *('^' + sha for sha in known)]
+            args.append('^' + base)
         commits.update(git(root, 'rev-list', *args).decode().splitlines())
     for commit in commits:
         for record in git(root, 'ls-tree', '-rz', commit).split(b'\0'):

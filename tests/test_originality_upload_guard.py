@@ -89,6 +89,18 @@ class UploadGuardTests(unittest.TestCase):
         (self.sources / 'protected.rmd').unlink(); self.sources.rmdir()
         self.assertNotEqual(self.push().returncode, 0)
 
+    def test_already_uploaded_ancestry_is_not_reintroduced_on_another_branch(self):
+        self.commit('Original baseline A.'); self.review('notes.md')
+        self.assertEqual(self.push().returncode, 0)
+        self.assertEqual(self.git('push', 'origin', 'HEAD:refs/heads/feature', check=False).returncode, 0)
+        self.commit('Original intermediate C.'); self.review('notes.md')
+        self.assertEqual(self.push().returncode, 0)
+        self.commit('Original current B.'); self.review('notes.md')
+        self.assertEqual(self.push().returncode, 0)
+        # The path-bound register now contains B only. C is known remote history,
+        # not a newly exposed blob; final B remains checked on the feature push.
+        self.assertEqual(self.git('push', 'origin', 'HEAD:refs/heads/feature', check=False).returncode, 0)
+
     def test_unknown_provenance_fails_closed(self):
         self.commit('Unattributed independent-looking text.')
         self.assertNotEqual(self.push().returncode, 0)
