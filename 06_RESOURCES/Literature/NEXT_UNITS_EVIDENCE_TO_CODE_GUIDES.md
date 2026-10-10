@@ -6,6 +6,8 @@
 Each unit includes (1) independently phrased measurable learning objectives, (2) research question and evidence matrix with DOI, date, study type and limitations, (3) methods reconstruction distinguishing reported from inferred steps, (4) synthetic runnable example, (5) annotated rationale for every transformation and model, (6) expected outputs and failure modes, (7) checks for leakage, missingness, units and uncertainty, (8) exercises and rubric, (9) reproducibility manifest and (10) rights/provenance review.
 
 ## Unit 6 — Inference, estimation and uncertainty
+
+**Full teaching edition:** [Unit 6 — Estimation, uncertainty and biomedical interpretation](UNIT_06_INFERENCE_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_06_inference.R). **Status:** authored; independent runtime verification pending.
 **Objectives:** identify estimand and sampling unit; distinguish SD, SE and confidence interval; compare parametric and nonparametric procedures; report effect sizes and assumptions; interpret uncertainty without treating a p-value as probability of the null.
 
 **Methods:** define cohort, denominator, outcome, grouping variable, missingness rule, estimand, confidence interval and sensitivity analysis before testing.
