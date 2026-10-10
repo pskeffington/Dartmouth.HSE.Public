@@ -1,0 +1,45 @@
+name: Scientific visualization validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gallery:
+    name: R gallery and synthetic numerical contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Install documented runtime dependencies
+        shell: Rscript {0}
+        run: |
+          install.packages(c("ggplot2", "dplyr", "tidyr", "matrixStats", "pROC", "survival", "BiocManager"))
+          BiocManager::install("edgeR", ask = FALSE, update = FALSE)
+          dependencies <- c("ggplot2", "dplyr", "tidyr", "matrixStats", "pROC", "survival", "edgeR")
+          stopifnot(all(vapply(dependencies, requireNamespace, logical(1), quietly = TRUE)))
+      - name: Run all resource contracts
+        shell: bash
+        run: |
+          for test in 06_RESOURCES/tests/test_*.R; do
+            Rscript --vanilla "$test"
+          done
+      - name: Execute the public gallery and weekly examples
+        shell: bash
+        run: |
+          python3 scripts/validate_visualization_gallery.py --output-dir "$RUNNER_TEMP/pauls-gallery"
+          python3 scripts/validate_weekly_r.py --include-companions --output-dir "$RUNNER_TEMP/pauls-weekly-r"
+          python3 scripts/validate_weekly_bash.py --include-companion --output-dir "$RUNNER_TEMP/pauls-weekly-bash"
+      - name: Ensure examples did not write into the checkout
+        shell: bash
+        run: |
+          test -z "$(git status --porcelain)"

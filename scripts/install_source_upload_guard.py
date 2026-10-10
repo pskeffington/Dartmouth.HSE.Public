@@ -16,7 +16,7 @@ def install(root, directories):
     guard = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(guard)
     # Validate all inputs before changing configuration.
-    guard.load_corpus(root, directories)
+    corpus = guard.load_corpus(root, directories)
     existing = subprocess.run(['git', 'config', '--get', 'core.hooksPath'], cwd=root, capture_output=True, text=True)
     if existing.returncode == 0:
         raise ValueError('Custom hooksPath exists; integrate the guard without replacing it')
@@ -29,11 +29,19 @@ def install(root, directories):
     target = git_dir / 'private-source-guard'
     target.mkdir(exist_ok=True)
     hooks.mkdir(exist_ok=True)
-    for name in ('check_source_upload.py', 'compare_private_sources.py'):
+    for name in ('check_source_upload.py', 'compare_private_sources.py', 'source_origin.py'):
         shutil.copyfile(base / name, target / name)
     config = git_dir / 'private-source-guard.json'
     config.write_text(json.dumps({'source_dirs': [str(Path(p).resolve()) for p in directories]}, indent=2) + '\n')
     config.chmod(0o600)
+    # Fingerprints only, never reference passages. Retained outside tracked Git.
+    inventory = git_dir / 'source-protection-inventory.json'
+    payload = {k: sorted(corpus[k]) for k in ('hashes', 'names', 'windows')}
+    payload['segments'] = [sorted(span) for span in corpus['segments']]
+    payload['schema'] = 'protected-signatures-v1'
+    payload['source_dirs'] = [str(Path(p).resolve()) for p in directories]
+    inventory.write_text(json.dumps(payload) + '\n')
+    inventory.chmod(0o600)
     # Python launcher avoids shell escaping of the interpreter and private paths.
     hook.write_text('#!/usr/bin/env python3\n' + marker + '\nimport os\nimport sys\nos.execv(' + repr(sys.executable) + ', [' + repr(sys.executable) + ', ' + repr(str(target / 'check_source_upload.py')) + '] + sys.argv[1:])\n')
     hook.chmod(0o700)

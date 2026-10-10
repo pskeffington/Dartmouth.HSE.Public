@@ -8,6 +8,7 @@ For students beginning biomedical data science, the complete lessons connect pro
 
 | What you want to study | Where to start |
 | --- | --- |
+| Scientific figure styles and worked examples | [Visualization gallery](06_RESOURCES/VISUALIZATION_GALLERY.md) |
 | Concepts and topic notes | [Study guides](02_Lecture_Notes/README.md) |
 | Complete weekly lessons | [Weeks 1–4 teaching guides](03_Group_Work/README.md) |
 | R functions, summaries, and plots | [R resources](06_RESOURCES/R/README.md) and [function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md) |

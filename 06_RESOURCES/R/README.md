@@ -6,6 +6,7 @@ Start with the [easy function sheet](EASY_FUNCTION_SHEET.md). Its synthetic biom
 
 | Need | Read | Load |
 | --- | --- | --- |
+| Scientific colors and publication exports | [Visualization gallery](../VISUALIZATION_GALLERY.md) | [Palette helpers](hse_scientific_palette.R) |
 | Week 3 summaries and basic plots | [Easy function sheet](EASY_FUNCTION_SHEET.md) | [Reusable functions](Week_3_Reusable_Functions.R) |
 | Descriptive summaries | [Summary statistics](../SUMMARY_STATISTICS.md) | [Statistics functions](hse_stats_plots.R) |
 | Statistical comparisons | [One-call plots](../ONE_CALL_PLOTS.md) | [Plot functions](hse_one_call_plots.R) |

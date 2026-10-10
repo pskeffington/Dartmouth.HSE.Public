@@ -40,7 +40,7 @@ hse_gene_top_var <- function(expr, n = 50L) {
 # center_rows=TRUE highlights within-gene sample differences. Z-scores
 # are not absolute gene abundance and should be labeled accordingly.
 hse_gene_heatmap <- function(expr, genes, center_rows = TRUE,
-                             title = "Selected gene expression heatmap") {
+                             title = "Selected gene expression heatmap", fill_scale = NULL) {
   hse_gene_validate(expr, genes)
   hse_require_plot()
   expression_matrix <- expr[genes, , drop = FALSE]
@@ -59,9 +59,11 @@ hse_gene_heatmap <- function(expr, genes, center_rows = TRUE,
   ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$Sample, y = .data$Gene,
                                   fill = .data$Value)) +
     ggplot2::geom_raster() +
-    ggplot2::scale_fill_gradient2(low = "#2166AC", mid = "white",
+    (if (!is.null(fill_scale)) fill_scale else if (center_rows)
+      ggplot2::scale_fill_gradient2(low = "#2166AC", mid = "#F7F7F7",
                                   high = "#B2182B", midpoint = 0,
-                                  name = if (center_rows) "Row z-score" else "log2 CPM") +
+                                  na.value = "#808080", name = "Row z-score") else
+      ggplot2::scale_fill_viridis_c(na.value = "#808080", name = "log2 CPM")) +
     ggplot2::labs(title = title, x = "Sample", y = "Gene") +
     hse_theme() + ggplot2::theme(axis.text.x =
                                   ggplot2::element_text(angle = 90, hjust = 1, vjust = .5))
@@ -115,7 +117,7 @@ hse_gene_mean_variance <- function(expr) {
 # p=0 can arise from numeric underflow; floor only for display.
 hse_gene_volcano <- function(results, logfc = "logFC", fdr = "FDR",
                              gene = NULL, fdr_cutoff = .05,
-                             effect_cutoff = 1) {
+                             effect_cutoff = 1, color_scale = NULL) {
   hse_check_cols(results, c(logfc, fdr, gene))
   hse_numeric(results[[logfc]], logfc)
   hse_numeric(results[[fdr]], fdr)
@@ -131,16 +133,19 @@ hse_gene_volcano <- function(results, logfc = "logFC", fdr = "FDR",
   plot_data$status <- !is.na(plot_data$FDR) & !is.na(plot_data$logFC) &
     plot_data$FDR < fdr_cutoff & abs(plot_data$logFC) >= effect_cutoff
   ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$logFC, y = .data$score,
-                                  color = .data$status)) +
+                                  color = .data$status, shape = .data$status)) +
     ggplot2::geom_point(alpha = .55, size = 1.1, na.rm = TRUE) +
     ggplot2::geom_vline(xintercept = c(-effect_cutoff, effect_cutoff),
                         linetype = "dashed", color = "grey60") +
     ggplot2::geom_hline(yintercept = -log10(fdr_cutoff),
                         linetype = "dashed", color = "grey60") +
-    ggplot2::scale_color_manual(values = c("FALSE" = "grey70",
+    (if (!is.null(color_scale)) color_scale else
+      ggplot2::scale_color_manual(values = c("FALSE" = "grey70",
                                            "TRUE" = "#2166AC"),
                                 labels = c("FALSE" = "Other", "TRUE" = "Meets cutoffs"),
-                                name = NULL) +
+                                name = "Threshold status")) +
+    ggplot2::scale_shape_manual(values = c("FALSE" = 16, "TRUE" = 17),
+      labels = c("FALSE" = "Other", "TRUE" = "Meets cutoffs"), name = "Threshold status") +
     ggplot2::labs(title = "Differential-expression volcano",
                   x = "Model log2 fold change", y = "-log10(adjusted p-value)") +
     hse_theme()
