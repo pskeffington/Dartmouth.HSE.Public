@@ -21,6 +21,7 @@ Reusable methods, functions, teaching references and templates for health data s
 | One-call regression and Wilcoxon plots | [Statistical graphics](ONE_CALL_PLOTS.md) | [R plot functions](R/hse_one_call_plots.R) |
 | Faceted panels and clinical biostatistics figures | [Biostatistics panels](BIOSTAT_PLOT_PANELS.md) | [R panel functions](R/hse_biostat_panels.R) |
 | Consistent figure titles, sample sizes and annotations | [Plot annotations](PLOT_ANNOTATIONS.md) | [R annotation functions](R/hse_plot_annotations.R) |
+| People, breast cancer datasets and 21 common genes | [Genomics index](Genomics/README.md) · [Dataset narrative](Genomics/BREAST_CANCER_TCGA_BRCA_NARRATIVE.md) | [Gene reference guide](Genomics/COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md) |
 | Gene-expression heatmaps, PCA and volcano plots | [Gene graphics](R/hse_gene_visuals.R) | [R source](R/hse_gene_visuals.R) |
 | Bash syntax, operations and safe scripting | [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) | [Bash helpers](Bash/bash_functions.sh) |
 | APA 7 student manuscript example | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/Example_APA_7_Manuscript.tex) |

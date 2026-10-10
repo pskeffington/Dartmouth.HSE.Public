@@ -233,6 +233,27 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
+      "path": "06_RESOURCES/Genomics/BREAST_CANCER_TCGA_BRCA_NARRATIVE.md",
+      "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
+      "observed_sha256": "c628914b0d12ac20d169e98eb887c5f1c9b37463022d7eaa44aef3ea39587c1b"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md",
+      "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
+      "observed_sha256": "d9a27b3cc525827be42f665934a75bb5dab015a499a9bc58702920760365d469"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/README.md",
+      "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
+      "observed_sha256": "6b6e5f6f53caef45f3814ad469fd79b6f5495701a6c10b294eb81f7851654b44"
+    },
+    {
       "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
       "observed_sha256": "241fd8b998cf91b4224058f76ea248d74ed1e6b2315ad9a06c278d58383f105a",
       "observed_role": "template or bibliography example; rights unverified",
@@ -486,7 +507,7 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "e3123ecbcdd2855a810023e035c7a75b76336b1f046dd58ec5ef2e2a4e2e05ac",
+      "observed_sha256": "7d1a5c625400e719ae9dded292ab961b5e82b1d0da32dd6e5af71b32fd5ff929",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -598,7 +619,7 @@
     },
     {
       "path": "README.md",
-      "observed_sha256": "d7631fccf015b62a27b0135e4efe59a9750a01601a168cb501beca803ed2d404",
+      "observed_sha256": "09ea3c08dadad89a54a810ebaf1e9b1b889dda6851ed58ee7aff52b131bbde70",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
