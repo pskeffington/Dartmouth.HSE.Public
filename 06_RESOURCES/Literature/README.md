@@ -8,6 +8,8 @@ This curated matrix connects openly available programming documentation, researc
 
 For survey methodology, Bioconductor, count-based RNA-seq methods, and observational-research reporting, use the [biomedical research computing matrix](BIOMEDICAL_CODING_METHODS.md). For naming conventions, scientific data dictionaries, longitudinal identifier rules, research-code testing, and future-course quality gates, use the [biomedical coding standards framework](BIOMEDICAL_CODING_STANDARDS.md). These documents are original public-reference syntheses. For an actionable evidence-to-code review and quality-gate matrix covering NIH, FDA, CDISC, R testing and reproducibility, see the [research code quality matrix](RESEARCH_CODE_QUALITY_MATRIX.md). To plan a new course or research project, consult the [project intake, schema and reproducibility contracts](RESEARCH_PROJECT_INTAKE.md).
 
+For laboratory-unit semantics, clinical terminology, FHIR/OMOP mapping, gene identifiers and reproducible research packaging, consult the [biomedical interoperability and metadata standards matrix](INTEROPERABILITY_METADATA_STANDARDS.md).
+
 ## Evidence and usage key
 
 - **Specification/manual:** authoritative source for documented behavior, but not necessarily a recommendation for every project.

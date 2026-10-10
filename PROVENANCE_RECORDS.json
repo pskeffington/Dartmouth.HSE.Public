@@ -1,7 +1,7 @@
 {
   "schema": "public-provenance-records-v1",
   "observation_date": "2026-10-10",
-  "snapshot_base_commit": "b9a0ed44046f190a14f2214c433d2b6d6662f4d2",
+  "snapshot_base_commit": "75f4b0db7ae65ab03e7f87a5fac44375ac0d5304",
   "observer": "Codex automated intake; not a human rights reviewer",
   "common_rights_state": "UNVERIFIED",
   "common_human_review": "PENDING",
@@ -303,11 +303,18 @@
       "next_action": "Verify reference descriptions and author provenance"
     },
     {
+      "path": "06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md",
+      "observed_sha256": "1aa2fa64ab75d41feb9f52683367b6abad4f0edbc8e09aeef70d4c8d0246cc8c",
+      "observed_role": "independently authored public biomedical interoperability and metadata literature reference; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Verify public standards scope, linked source versions and authorship"
+    },
+    {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "29069cfaf3e85a141a9a74169141a5f1d1bf3768a0dcbb1e0b41b822d6d20fed",
+      "observed_sha256": "b4d9ccc0e003db32b497dbafe0ce9c10d8fb2b5d57c0fe87f49a1c48d16fb286",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Verify independent references and index accuracy"
+      "next_action": "Review independent public-reference documentation and link accuracy"
     },
     {
       "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
@@ -444,10 +451,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "0bf870b68a06ac461060afb1ecc46d5269e948870e04bcf0707a5fdfaafa852d",
+      "observed_sha256": "0c200d5d4b23fca00b09f64df4f5679a44cf49786fbc31f9bc15cdf64da43a64",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Verify independent references and index accuracy"
+      "next_action": "Review independent public-reference documentation and link accuracy"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
