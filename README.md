@@ -9,7 +9,7 @@ This public study guide contains no official lectures, assignments, restricted d
 | What you want to study | Where to start |
 | --- | --- |
 | Concepts and topic notes | [Study guides](02_Lecture_Notes/README.md) |
-| Methods and reasoning checkpoints | [Method walkthroughs](03_Group_Work/README.md) |
+| Complete weekly lessons | [Weeks 1–3 teaching guides](03_Group_Work/README.md) |
 | R functions, summaries, and plots | [R resources](06_RESOURCES/R/README.md) and [function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md) |
 | Bash, files, and scripting | [Bash resources](06_RESOURCES/Bash/README.md) and [command sheet](06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) |
 | APA 7 manuscripts and references | [LaTeX examples](06_RESOURCES/LaTeX/README.md) |
@@ -20,13 +20,13 @@ Read the Markdown editions directly in GitHub. Their linked `.Rmd` files are edi
 
 ## Weeks 1–4: concept and topic study guides
 
-Week numbers organize the topics. These are independent conceptual study guides, not reproductions of official lectures or an official syllabus. The method walkthroughs offer general reasoning checkpoints, not assigned questions or runnable assessed solutions.
+Week numbers organize the topics. These are independent conceptual study guides, not reproductions of official lectures or an official syllabus. The weekly teaching guides include runnable synthetic examples, expected results, practice, and self-assessment; they do not reproduce assigned questions or assessed solutions.
 
-| Week | Concept/topic guide | Method walkthrough |
+| Week | Concept/topic guide | Complete teaching lesson |
 | --- | --- | --- |
-| 1 | [R objects, data types, and indexing](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [Data types, indexing, and functions](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
-| 2 | [Data wrangling and visualization](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Wrangling and visualization checkpoints](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
-| 3 | [Visualization and analytical reasoning](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Simulation and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
+| 1 | [R objects, data types, and indexing](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [R foundations and reproducible practice](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
+| 2 | [Data wrangling and visualization](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Simulation, reshaping, and plot interpretation](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
+| 3 | [Visualization and analytical reasoning](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Joins, regression, and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
 | 4 | [Bash and shell workflows](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) | [General Bash operations](06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) |
 
 ## How I learned through games

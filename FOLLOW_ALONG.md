@@ -1,26 +1,38 @@
-# HSE 711 — follow-along study protocol
+# Follow along with Paul's Notes
 
-[Repository home](README.md) · [Lecture notes](02_Lecture_Notes/README.md) · [Group study references](03_Group_Work/README.md)
+[Paul's Notes](README.md) · [Weekly lessons](03_Group_Work/README.md) · [Topic companions](02_Lecture_Notes/README.md)
 
-These independent notes are **not a standalone classroom workbook**. To complete any Geisel-specific coursework, an authorized student must separately possess the current official lecture materials, assignment instructions, and any required data. This public repository intentionally omits them.
+These public lessons use independently constructed examples and synthetic inputs. You can read them on GitHub without installing R. To run the examples, use your own R session; no official Dartmouth or Geisel materials are required.
 
-## Reading and local workflow
+## Prepare a study session
 
-1. Open the public conceptual notes to review a method or validation principle.
-2. Consult your official course files to determine the actual problem, field names, input units, and constraints.
-3. Work privately with the authorized materials; keep datasets, assessed scripts, charts, and results outside public Git tracking.
-4. Verify assumptions, sample definitions, and results against your own authorized inputs.
-5. Follow the current Geisel academic-integrity and AI-use policy; do not treat public commentary as permission to use generated code in assessed work.
+1. Open a lesson's Markdown reading edition and skim its objectives and prerequisites.
+2. If executing examples, open its linked `.Rmd` source and start a fresh R session. Check the dependencies at the beginning.
+3. Work through code blocks in order. Compare objects, dimensions, missing counts, and printed results with the explanations. A silent `stopifnot()` means its check passed.
+4. For each graph, name the axes, units, and denominator before interpreting its shape. Separate descriptive patterns from statistical or causal claims.
+5. Complete the independent exercises, explain the teach-back questions aloud, and use the next-lesson link.
 
-## Week-by-week conceptual guide
+The reading-edition builder displays code without running it. A GitHub page does not itself establish execution success. The lesson-validation tool extracts and parses every R block and executes the examples in separate clean sessions, saving logs and plot files outside the repository:
 
-| Week | Study materials |
-| --- | --- |
-| 1 | [R lecture companion](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) and [method notes](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
-| 2 | [Wrangling lecture companion](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) and [method notes](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
-| 3 | [Analytics lecture companion](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) and [method notes](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
-| 4 | [Bash lecture companion](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md); assigned execution stays private |
+```bash
+python3 scripts/validate_weekly_r.py --output-dir /tmp/pauls-notes-r-checks
+```
 
-## Copyright and originality boundary
+## Choose your next lesson
 
-Course lectures and prompts are referenced by topic, not published here. No assertion of originality can be established by naming conventions, git hashes, or automated scans alone. Review source similarity, permissions, and academic-integrity rules manually before releasing new material.
+| Stage | Lesson | Related reference |
+| --- | --- | --- |
+| 1 | [R foundations](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) | [R objects and syntax](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) |
+| 2 | [Wrangling and visualization](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) | [Wrangling topic companion](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) |
+| 3 | [Visualization and analytics](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) | [Analytics topic companion](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) |
+| 4 | [Bash topic guide](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Bash command sheet](06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) |
+
+## When something differs
+
+Check spelling and object availability first, then inspect `str()`, `names()`, and `dim()`. A missing package is a dependency problem, not a data result. Seeded examples still require a compatible R and package environment; printed rounding may differ. Keep raw inputs unchanged and record exclusions rather than deleting rows without explanation.
+
+For short reminders, use the [R function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md), [plot-reading guide](06_RESOURCES/READING_PLOTS.md), and [APA 7 LaTeX guide](06_RESOURCES/LaTeX/README.md).
+
+## Public source boundary
+
+Official instructional files, private datasets, and assessed work stay in authorized private workspaces. The [source policy](ORIGINALITY_POLICY.md), [provenance register](PROVENANCE_REGISTER.md), and [history review](HISTORY_EXPOSURE_REVIEW.md) describe publication controls and remaining reviews. Technical validation is not a copyright certificate.

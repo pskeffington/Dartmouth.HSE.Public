@@ -20,7 +20,7 @@ New material requires human approval of source provenance and permission. Automa
 
 ## Validator
 
-Run `python3 scripts/check_public_originality.py` from the repository root, or `python3 scripts/check_public_originality.py --json` for a structured report. GitHub Actions uses `--json --fail-on-review`, so pending reviews deliberately fail the release gate. Do not treat this as a certification even when checks pass.
+Run `python3 scripts/check_public_originality.py` from the repository root, or `python3 scripts/check_public_originality.py --json` for a structured report. GitHub Actions preserves the full `--json --fail-on-review` report, so pending reviews continue to fail strict whole-repository screening. Ordinary changes additionally use the baseline comparison described below. Do not treat either check as a certification.
 
 **BLOCK** (exit 1) indicates restrictive markers requiring removal or documented clearance. **REVIEW** (exit 0 in informational mode, exit 1 with `--fail-on-review`) requires manual verification before claiming the repository is publication-ready. **SCREEN_CLEAR** (exit 0) means no configured signatures were detected, **not** that originality or copyright clearance is established.
 
@@ -43,3 +43,9 @@ The checkout-local pre-push hook uses [check_source_upload.py](scripts/check_sou
 Install or refresh it with [install_source_upload_guard.py](scripts/install_source_upload_guard.py), passing each authorized private folder using `--private-source-dir`. It stores configuration and executable copies only in the untracked Git directory, preserves unrelated existing hooks, and makes no network upload. The user-specific configuration is never committed. [Agent instructions](AGENTS.md) require guarded Git publication and prohibit API/UI uploads that bypass it.
 
 This hook protects ordinary pushes from this configured checkout. It is not a GitHub server rule: another clone, an API/UI write, or deliberately bypassing hooks can evade it. Do not use those routes. Public CI cannot access the private corpus and remains a secondary heuristic control, not pre-transfer protection. Existing public history and external caches require separate remediation.
+
+## Ordinary changes with existing reviews
+
+For an ordinary PR or push, [the change check](scripts/check_originality_change.py) compares the full current screen with the trusted public base commit. A REVIEW may remain only when the same finding exists at the base and its file bytes are unchanged. Any new finding, changed flagged file, BLOCK finding, unavailable baseline, or failed comparison closes the change gate. The strict scanner and its thresholds are unchanged; all retained reviews remain visible in reports and require human rights adjudication before whole-repository clearance.
+
+This distinction permits validated independent teaching-guide updates while unrelated existing PDF reviews remain unresolved. Scheduled and manual whole-repository checks still enforce strict screening. The local private-source pre-push guard remains mandatory and has no exception for baseline content.

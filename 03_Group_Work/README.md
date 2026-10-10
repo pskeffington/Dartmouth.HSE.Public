@@ -1,13 +1,15 @@
-# Group Work — independent study notes
+# Weekly lessons — Paul's Notes
 
-[Repository home](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md)
+[Paul's Notes](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md) · [R resources](../06_RESOURCES/R/README.md)
 
-This folder contains original conceptual commentary for HSE 711, **not course assignments or complete walkthroughs**. Each guide explains broad methods and quality checks. Readers must obtain the original exercise instructions and any required Geisel data from the authorized course distribution. Without those documents, the actual questions, deliverables, and course-specific implementation cannot be reconstructed from this repository.
+Start here for complete independent lessons with synthetic inputs, worked examples, expected results, debugging guidance, practice, and teach-back questions. No official course files are required. These are public study guides, not Dartmouth or Geisel teaching materials or assessed solutions.
 
-| Week | Student-authored reference |
-| --- | --- |
-| 1 | [R concepts and structural checks](Week_1_Group_Work_Narrative_Walkthrough.md) |
-| 2 | [Data wrangling and visualization methods](Week_2_Group_Work_Narrative_Walkthrough.md) |
-| 3 | [Simulation and analytical validation methods](Week_3_Group_Work_Narrative_Walkthrough.md) |
+| Lesson | What you will learn | Study time | Dependencies |
+| --- | --- | --- | --- |
+| [Week 1: R foundations](Week_1_Group_Work_Narrative_Walkthrough.md) | Objects, indexing, missing values, functions, tables, import/export, and histograms | 75–100 minutes | Base R |
+| [Week 2: Wrangling and visualization](Week_2_Group_Work_Narrative_Walkthrough.md) | Simulation, pivots, keys, grouped summaries, graphs, and paired comparisons | 90–120 minutes | R, tidyr, dplyr, ggplot2 |
+| [Week 3: Visualization and analytics](Week_3_Group_Work_Narrative_Walkthrough.md) | Joins, nonresponse, distributions, regression, diagnostics, and reusable functions | 90–120 minutes | R, dplyr >= 1.1.0 |
 
-Do not publish official prompts, graded solutions, instructor starter scripts, nonpublic data, or contributor work without permission. All execution and coursework submissions belong in a private workspace. General reusable function sheets in [RESOURCES](../06_RESOURCES/) are independent utilities, not course solutions.
+Read the Markdown editions directly on GitHub. Each links to its authoritative `.Rmd` source and the adjacent lesson. Run executable blocks in order in a clean R session; dependency checks explain what is needed and never silently install software.
+
+[Topic companions](../02_Lecture_Notes/README.md) provide additional conceptual reference. [Plot reading](../06_RESOURCES/READING_PLOTS.md) helps connect axes and units to interpretation. For publication controls and outstanding reviews, see the [source policy](../ORIGINALITY_POLICY.md) and [status](../ORIGINALITY_STATUS.md).

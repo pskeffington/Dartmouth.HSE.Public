@@ -7,6 +7,7 @@ Reusable methods, functions, teaching references and templates for health data s
 - [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.
 - [Easy Bash commands](Bash/EASY_COMMAND_SHEET.md): navigate, inspect, select fields and check a script.
 - [Read and explain a plot](READING_PLOTS.md): axes, distributions, groups and statistical annotations.
+- [Weekly lessons](../03_Group_Work/README.md): complete independent R lessons with synthetic examples and exercises.
 - [Follow-along guide](../FOLLOW_ALONG.md): prepare a session and review each week.
 
 ## Choose a resource
@@ -63,7 +64,7 @@ The [APA 7 student manuscript template](LaTeX/) contains a student title page, m
 
 ## Publishing and navigation checks
 
-The [document publishing tools](Presentation/README.md) produce browser-friendly reading editions from editable coursework files. After changing headings, links, or source content, verify the generated editions and local navigation from the repository root:
+The [document publishing tools](Presentation/README.md) produce browser-friendly reading editions from editable study-guide sources. After changing headings, links, or source content, verify the generated editions and local navigation from the repository root:
 
 ```bash
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
@@ -80,7 +81,7 @@ Report sample sizes, missingness, measures, units and statistical assumptions. D
 
 ## Reading and output formats
 
-Editable course sources live in the lecture and group-work folders. Weekly Markdown reading editions are generated from those sources; HTML knitting uses a shared stylesheet. See the [publishing guide](Presentation/README.md) for build and rendering instructions. This tooling does not run analyses or validate scientific conclusions.
+Editable study-guide sources live in the lecture and group-work folders. Weekly Markdown reading editions are generated from those sources; HTML knitting uses a shared stylesheet. See the [publishing guide](Presentation/README.md) for build and rendering instructions. This tooling does not run analyses or validate scientific conclusions.
 
 ## Local-only inputs
 

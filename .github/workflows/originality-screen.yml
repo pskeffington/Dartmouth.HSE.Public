@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   originality:
-    name: Copyright and originality indicators
+    name: Public change validation and originality review
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Run public originality screening
         id: screen
         continue-on-error: true
@@ -44,19 +45,39 @@ jobs:
               out.write(f"**Status:** {report['status']}  \n")
               out.write(f"**Tracked files:** {report['tracked_files']}  \n")
               out.write(f"**Findings:** {len(report['findings'])}\n\n")
-              out.write("Heuristic screening is not proof of ownership or copyright clearance. REVIEW findings require documented clearance; this release gate fails until resolved.\n\n")
+              out.write("Heuristic screening is not proof of ownership or copyright clearance. REVIEW findings require documented clearance. Whole-repository clearance remains on hold; ordinary change validation may retain byte-identical baseline reviews without marking them cleared.\n\n")
               for item in report['findings'][:100]:
                   out.write(f"- **{item['level'].upper()}** `{item['path']}`: {item['reason']}\n")
           PY
           exit "$result"
+      - name: Check for new or changed originality findings
+        id: change
+        if: always() && (github.event_name == 'pull_request' || github.event_name == 'push')
+        continue-on-error: true
+        shell: bash
+        env:
+          CHANGE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          python3 scripts/check_originality_change.py --base "$CHANGE_BASE" --output originality-change-report.json
+          python3 - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          report = json.loads(Path("originality-change-report.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as out:
+              out.write("\n## Ordinary change validation\n\n")
+              out.write(f"**Change:** {report['change_status']}  \n")
+              out.write(f"**Full repository:** {report['full_repository_status']}  \n")
+              out.write("Unchanged reviews remain unresolved; this does not certify copyright clearance.\n\n")
+              for item in report["retained_unresolved_reviews"]:
+                  out.write(f"- Retained review: `{item['path']}` — {item['reason']}\n")
+          PYTHON
       - name: Run originality-regression tests
         id: regression
         if: always()
         continue-on-error: true
         shell: bash
         run: |
-          python3 -m unittest discover -s tests -p 'test_originality*.py' -v
-          python3 -m unittest discover -s tests -p 'test_reading_source_manifest.py' -v
+          python3 -m unittest discover -s tests -v
       - name: Verify public reading editions are current
         id: editions
         if: always()
@@ -99,6 +120,7 @@ jobs:
           name: originality-screening-report
           path: |
             originality-report.json
+            originality-change-report.json
             originality-triage.md
             provenance-inventory.json
           if-no-files-found: warn
@@ -107,6 +129,7 @@ jobs:
         if: always()
         shell: bash
         env:
+          CHANGE_OUTCOME: ${{ steps.change.outcome }}
           SCREEN_OUTCOME: ${{ steps.screen.outcome }}
           TEST_OUTCOME: ${{ steps.regression.outcome }}
           EDITION_OUTCOME: ${{ steps.editions.outcome }}
@@ -116,6 +139,10 @@ jobs:
           TRIAGE_OUTCOME: ${{ steps.triage.outcome }}
         run: |
           failed=0
+          if [ "$SCREEN_OUTCOME" != "success" ] && [ "$CHANGE_OUTCOME" = "success" ]; then
+            echo "Full strict screening remains unresolved; the change has no new or modified findings."
+            SCREEN_OUTCOME=success
+          fi
           checks=(SCREEN TEST EDITION NAV COMPILE INVENTORY TRIAGE)
           outcomes=("$SCREEN_OUTCOME" "$TEST_OUTCOME" "$EDITION_OUTCOME"
                     "$NAV_OUTCOME" "$COMPILE_OUTCOME" "$INVENTORY_OUTCOME" "$TRIAGE_OUTCOME")

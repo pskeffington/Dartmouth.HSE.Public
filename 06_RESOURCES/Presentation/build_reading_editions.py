@@ -63,8 +63,9 @@ def rmarkdown(source: Path) -> str:
     body = re.sub(r'^```\{(r|bash|sh)[^}]*\}', r'```\1', body, flags=re.M)
     body = re.sub(r'^```\{[^}]*\}', '```text', body, flags=re.M)
     body = re.sub(r'`r [^`]+`', '[computed when rendered]', body)
-    course_keyed = source.parent == GROUP_WORK
-    notice = ('**Course-file dependency.** This independent guide is not a substitute for official Geisel prompts and course inputs. Obtain these separately and perform assessed work privately.' if course_keyed else 'Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.')
+    notice = ('Code is displayed, not executed by this converter. '
+              'The weekly teaching guides provide synthetic inputs and expected results; '
+              'see each source for dependencies and execution checks.')
     header = (
         f'# {title}\n\n'
         f'[Section index](README.md) · [Editable R Markdown]({source.name}) · '

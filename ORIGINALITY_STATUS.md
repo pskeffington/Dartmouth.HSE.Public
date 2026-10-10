@@ -101,3 +101,9 @@ The [file-specific findings disposition](ORIGINALITY_FINDINGS_DISPOSITION.md) re
 ## Current executed control status after integration
 
 All 46 tests pass. The strict heuristic scan now returns REVIEW with two PDF provenance findings and zero BLOCK findings; ten cautionary-text false positives were adjudicated by the integrated classifier changes. The installed pre-transfer guard is a separate control and does not waive the two PDF reviews or historical exposure. All 90 tracked paths have intake records. Restricted-source corpus files and configuration remain outside tracked Git.
+
+## Paul's Notes weekly teaching restoration
+
+Weeks 1–3 now provide independent synthetic examples, expected behavior, exercises, and self-assessment, with authoritative R Markdown and generated reading editions. Local execution checks cover 31 R blocks in clean R sessions, including data-structure assertions, missingness, row counts, handled errors, and plot construction. The [follow-along guide](FOLLOW_ALONG.md) documents how to reproduce those checks.
+
+Ordinary change validation distinguishes unchanged baseline PDF reviews from new findings, as described in the [policy](ORIGINALITY_POLICY.md). The full strict screen remains REVIEW for both existing APA PDFs; their rights status is not cleared by this restoration. Retained platform history and other provenance limitations remain separate from current lesson execution.
