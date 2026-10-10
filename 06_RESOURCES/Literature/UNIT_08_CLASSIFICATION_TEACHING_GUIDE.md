@@ -16,6 +16,8 @@ Upon completing this module, independently:
 
 **Prerequisites:** Units 6–7; R data frames, probabilistic regression, confidence intervals, identifiers and splits.
 
+**Evidence review:** [Verified methods-to-objectives matrix](UNIT_08_VERIFIED_METHODS_MATRIX.md) records public-source checks, method extraction, limitations and provisional relevance scores.
+
 ## Research-to-execution evidence matrix
 
 | Source and source type | Reported methods | Our independent teaching adaptation | Limitation |
