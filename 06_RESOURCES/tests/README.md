@@ -12,3 +12,5 @@ Run the appropriate script from the repository root using `Rscript --vanilla` an
 | One-call comparisons | [Comparison check](test_hse_one_call_plots.R) |
 | Figure panels | [Panel check](test_hse_biostat_panels.R) |
 | Annotations | [Annotation check](test_hse_plot_annotations.R) |
+
+| Scientific palettes and gallery contracts | [Palette check](test_hse_scientific_palette.R) |

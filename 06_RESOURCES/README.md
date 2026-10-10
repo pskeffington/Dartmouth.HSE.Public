@@ -16,6 +16,7 @@ Reusable methods, functions, teaching references and templates for health data s
 
 | Need | Guide | Code |
 | --- | --- | --- |
+| Scientific palettes and worked figures | [Visualization gallery](VISUALIZATION_GALLERY.md) | [Palette helpers](R/hse_scientific_palette.R) |
 | Complete descriptive statistics, IQR and narrative | [Summary statistics](SUMMARY_STATISTICS.md) | [R statistics](R/hse_stats_plots.R) |
 | One-call regression and Wilcoxon plots | [Statistical graphics](ONE_CALL_PLOTS.md) | [R plot functions](R/hse_one_call_plots.R) |
 | Faceted panels and clinical biostatistics figures | [Biostatistics panels](BIOSTAT_PLOT_PANELS.md) | [R panel functions](R/hse_biostat_panels.R) |
