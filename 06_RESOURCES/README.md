@@ -30,6 +30,10 @@ Reusable methods, functions, teaching references and templates for health data s
 | Future-course research project intake and data contracts | [Project intake reference](Literature/RESEARCH_PROJECT_INTAKE.md) | [Biomedical coding conventions](Literature/BIOMEDICAL_CODING_STANDARDS.md) |
 | Clinical terminology, units and research metadata | [Interoperability matrix](Literature/INTEROPERABILITY_METADATA_STANDARDS.md) | [Research code quality](Literature/RESEARCH_CODE_QUALITY_MATRIX.md) |
 
+## Program-wide roadmap
+
+The [gated program-wide companion](Literature/PROGRAM_COMPANION_ROADMAP.md) separates current weekly lessons from planned biostatistics, AI ethics, epidemiology, clinical informatics, genomics and research-synthesis resources. Course/domain placeholders are not verified official program requirements.
+
 ## R statistics and visualization
 
 Load modules in dependency order:
