@@ -10,6 +10,10 @@ For survey methodology, Bioconductor, count-based RNA-seq methods, and observati
 
 For laboratory-unit semantics, clinical terminology, FHIR/OMOP mapping, gene identifiers and reproducible research packaging, consult the [biomedical interoperability and metadata standards matrix](INTEROPERABILITY_METADATA_STANDARDS.md).
 
+## Program-wide companion roadmap
+
+The [gated program study-companion roadmap](PROGRAM_COMPANION_ROADMAP.md) indexes confirmed public teaching resources, preliminary future-domain tracks, prerequisite dependencies, publication gates and acceptance evidence. It does not reproduce any protected syllabus or claim an official course sequence.
+
 ## Evidence and usage key
 
 - **Specification/manual:** authoritative source for documented behavior, but not necessarily a recommendation for every project.
