@@ -11,15 +11,37 @@ Public material must be independently authored from general methods and ideas.
 Attribution alone does not authorize reproducing the source. Keep protected
 examples, inputs, results, and distinctive assignment structure private.
 
-Before any public file upload, use the local private-source comparison and
+## Independent public-reference documentation exception
+
+Maintainer authorization (October 10, 2026): purely independent, public-reference
+documentation may be edited and published via the normal reviewed GitHub PR flow,
+without the checkout-local private-source comparison. Eligible changes are limited to
+original bibliographies, public literature/reference matrices, external resource
+indexes, and links to openly available authoritative manuals. No classroom source
+files, lecture- or assignment-derived notes, teaching guides or generated editions,
+restricted/private reference material, comparisons, raw datasets or other source-
+dependent content qualifies. An eligible public-reference change must have no input
+from the private course corpus and must not embed third-party protected passages.
+
+Before claiming this exception, inspect the complete diff and verify every changed
+file is eligible. Mixed changes must use the guarded workflow. If origin or
+eligibility is unclear, default to the guarded workflow. This is a scoped workflow
+exception, not a copyright exemption, and does not authorize access-control
+bypass, copying protected material, or unreviewed publication.
+
+## Source-dependent publication guard
+
+Before any source-dependent public file upload, use the local private-source comparison and
 upload guard. The local corpus configuration lives only under
 `.git/private-source-guard.json`; never copy it into tracked files. Install or
 refresh the checkout-local hook with `scripts/install_source_upload_guard.py`
 using the authorized local folders. If the folders or hook are unavailable,
 stop publication rather than interpreting an unavailable comparison as a pass.
 
-Publish repository file changes through a guarded local Git push. Do not bypass
-the hook with `--no-verify`, a replacement hook path, or GitHub API/UI file writes.
+Publish source-dependent repository changes through a guarded local Git push.
+Do not bypass the hook with `--no-verify`, a replacement hook path, or GitHub
+API/UI file writes. For strictly eligible independent public-reference
+documentation only, the reviewed GitHub PR workflow above is allowed.
 GitHub tools may read repository state and create/merge PRs after the candidate
 commits have passed the local guard. Server CI uses synthetic fixtures only;
 never send restricted inputs to public CI to obtain a check result.
