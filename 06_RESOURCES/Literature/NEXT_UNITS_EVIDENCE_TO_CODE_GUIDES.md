@@ -41,6 +41,8 @@ print(t.test(biomarker_mg_l ~ treatment_group, data = study_data))
 **Mastery:** interpret a coefficient on its correct scale, demonstrate residual checks, and identify a deliberately invalid model.
 
 ## Unit 8 — Biomedical classification and evaluation
+
+**Full teaching edition:** [Unit 8 — Classification, calibration and evaluation](UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md) · [Original base R analysis](../R/examples/unit_08_classification.R). **Status:** literature methods extracted; code committed; R execution pending.
 **Objectives:** define target and index time; prevent temporal and patient leakage; use stratified patient-level splits; distinguish discrimination from calibration; evaluate prevalence dependence and subgroup performance.
 
 **Methods:** create synthetic longitudinal records; freeze holdout patient IDs; fit baseline logistic regression; evaluate sensitivity, specificity, predictive values, Brier score and calibration on untouched holdout; state threshold selection procedure.
