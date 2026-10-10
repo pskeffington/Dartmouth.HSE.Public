@@ -15,6 +15,10 @@ output:
 
 Learn Bash navigation, scripts, pipelines, and responsible file handling.
 
+## Before you start
+
+A Bash shell; the R bridge additionally needs Rscript. PowerShell uses different syntax. Read the [complete Week 4 lesson](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+
 ## 1. Shells, Bash, and computational research
 
 A shell interprets instructions typed at a command line. Bash (Bourne Again SHell) can also run saved sequences of instructions, converting an interactive procedure into a repeatable workflow. Bash belongs to the family of Unix command interpreters.

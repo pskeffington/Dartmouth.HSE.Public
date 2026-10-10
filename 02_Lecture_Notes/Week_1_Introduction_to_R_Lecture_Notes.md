@@ -2,11 +2,12 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_1_Introduction_to_R_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 ## On this page
 
 - [Purpose and learning objectives](#purpose-and-learning-objectives)
+- [Before you start](#before-you-start)
 - [1. Understanding R objects before classifying them](#1-understanding-r-objects-before-classifying-them)
 - [2. Comparing numbers safely, making factors, and locating positions](#2-comparing-numbers-safely-making-factors-and-locating-positions)
 - [3. Importing a gene-by-sample expression table](#3-importing-a-gene-by-sample-expression-table)
@@ -19,6 +20,10 @@
 ## Purpose and learning objectives
 
 Learn R objects, indexing, logical operations, tables, data import, graphics, and reusable functions with independent practice inputs.
+
+## Before you start
+
+Base R; no additional packages. Read the [complete Week 1 lesson](../03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
 
 ## 1. Understanding R objects before classifying them
 

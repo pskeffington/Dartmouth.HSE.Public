@@ -2,11 +2,12 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 ## On this page
 
 - [Purpose and learning objectives](#purpose-and-learning-objectives)
+- [Before you start](#before-you-start)
 - [1. Make random data reproducible](#1-make-random-data-reproducible)
 - [2. Set boundaries and build derived categories](#2-set-boundaries-and-build-derived-categories)
 - [3. Distinguish wide and long data](#3-distinguish-wide-and-long-data)
@@ -19,6 +20,10 @@
 ## Purpose and learning objectives
 
 Learn simulation, tabular transformation, missing-data checks, and visualization principles.
+
+## Before you start
+
+R with tidyr and ggplot2. Install these in your own R library before running the examples. Read the [complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
 
 ## 1. Make random data reproducible
 

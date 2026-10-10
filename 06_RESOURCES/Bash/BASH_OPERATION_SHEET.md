@@ -67,12 +67,15 @@ done
 
 # One function, one purpose; arguments are positional.
 count_rows() {
+  [[ $# -eq 1 ]] || { printf 'Usage: count_rows file\n' >&2; return 2; }
   local input=$1
   [[ -f "$input" ]] || { printf 'Missing: %s\n' "$input" >&2; return 1; }
-  awk 'END {print NR}' "$input"
+  awk 'END {print NR}' < "$input"
 }
 count_rows "metadata.tsv"
 ```
+
+This helper counts physical records including the header. For header-excluded TSV data counts, use `hse_tsv_records` from the helper library.
 
 ```bash
 # Reading TSV rows: IFS prevents tab-delimited fields from being split on spaces.

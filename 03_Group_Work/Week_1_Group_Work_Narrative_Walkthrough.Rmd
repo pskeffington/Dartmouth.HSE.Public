@@ -191,6 +191,17 @@ Explain why a list can store mixed components but an atomic vector coerces types
 
 The practical sequence is **construct → inspect → select → validate → summarize → explain**. Structure, missingness, and explicit assumptions matter more than memorizing function names.
 
+## Ready to move on
+
+Save a script that constructs a small table, inspects its classes and dimensions, selects rows and columns, reports available and missing counts, runs a checked function, and labels a histogram. Add a brief interpretation with units and a denominator. Restart R and rerun your script from the first line.
+
+| Evidence | Completion check |
+| --- | --- |
+| Objects and indexing | Explain atomic vectors, lists, matrices, data frames, `[ ]`, and `[[ ]]`; demonstrate a logical selection that excludes missing values |
+| Categories and control flow | Declare factor levels and trace one conditional, one loop, and one function call |
+| Import and export | Recover the same row count and numeric values; explain what a CSV does not preserve |
+| Interpretation | Report five measured trials of six in the worked example, a mean of 3 m, and why the histogram is descriptive |
+
 ## Next steps and references
 
 [Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [R topic companion](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)

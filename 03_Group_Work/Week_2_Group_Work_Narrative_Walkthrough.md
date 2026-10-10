@@ -2,7 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 This study guide simulates packing-station timings in seconds. The invented values illustrate simulation, reshaping, and plot interpretation rather than empirical or clinical findings.
 
@@ -21,6 +21,7 @@ This study guide simulates packing-station timings in seconds. The invented valu
 - [Common mistakes and debugging](#common-mistakes-and-debugging)
 - [Independent practice](#independent-practice)
 - [Teach-back and summary](#teach-back-and-summary)
+- [Ready to move on](#ready-to-move-on)
 - [Next steps and references](#next-steps-and-references)
 
 ## Learning objectives and setup
@@ -30,7 +31,10 @@ You will explain reproducible random draws, derive ordered categories, reshape r
 ```r
 needed_packages <- c("tidyr", "dplyr", "ggplot2")
 unavailable <- needed_packages[!vapply(needed_packages, requireNamespace, logical(1), quietly = TRUE)]
-if (length(unavailable)) stop(paste("Install these packages in your own R library:", paste(unavailable, collapse = ", ")))
+if (length(unavailable)) {
+  stop("Install these packages in your own R library: ",
+       paste(unavailable, collapse = ", "))
+}
 ```
 
 **Expected:** no output if the three packages are available. If not, use `install.packages(c("tidyr", "dplyr", "ggplot2"))` in your own R environment, then rerun this check. The lesson never installs packages automatically. Namespaced calls such as `tidyr::pivot_longer()` show which package supplies a function.
@@ -83,12 +87,8 @@ stopifnot(length(positive_draws) == 48L, all(positive_draws > 0))
 A threshold translates a numeric measurement into a category. Choose and document it before interpreting differences; do not optimize a cutoff after seeing an attractive plot. Categorization loses within-category information.
 
 ```r
-station_sample$pace <- factor(
-  ifelse(station_sample$seconds < 85, "under target", "at or over target"),
-  levels = c("under target", "at or over target")
-)
 station_sample$seconds[c(5, 32)] <- NA_real_
-# Derive categories again after deliberately marking two measurements missing.
+# Set missing measurements before deriving their categories.
 station_sample$pace <- factor(
   ifelse(station_sample$seconds < 85, "under target", "at or over target"),
   levels = c("under target", "at or over target")
@@ -236,6 +236,17 @@ This test is a mechanics demonstration. A paired t procedure assumes independent
 Why is a seed not a guarantee of valid simulation? What defines a table's row key before and after pivoting? Why does the denominator differ for a paired analysis and an available-case group summary? What can a descriptive graph say without claiming an effect?
 
 The working sequence is **define the observation → simulate transparently → verify keys → reshape → count missingness → summarize → plot → choose inference from the design**.
+
+## Ready to move on
+
+Keep the simulation seed, reshaping script, grouped summary, and labeled plots together. Record the observation key, total and measured counts, and missing-value decisions. Re-run from a clean session before writing conclusions.
+
+| Evidence | Completion check |
+| --- | --- |
+| Simulation and categories | Explain the chosen generator and boundaries; keep unknown measurements out of ordinary categories |
+| Reshaping | Produce 12 station-occasion rows from 6 stations; verify compound-key uniqueness and recover the original values |
+| Summary and figures | Report counts before means; narrate axes, units, groups, and what each graph can show |
+| Comparison design | Identify the 5 complete before/after pairs and explain why treating their 10 measurements as independent would be wrong |
 
 ## Next steps and references
 

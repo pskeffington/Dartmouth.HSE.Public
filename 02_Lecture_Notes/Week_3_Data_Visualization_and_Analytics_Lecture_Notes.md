@@ -2,11 +2,12 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 ## On this page
 
 - [Purpose and learning objectives](#purpose-and-learning-objectives)
+- [Before you start](#before-you-start)
 - [1. Identify the join key before combining tables](#1-identify-the-join-key-before-combining-tables)
 - [2. Understand missingness and survey codes](#2-understand-missingness-and-survey-codes)
 - [3. Explore distributions before fitting models](#3-explore-distributions-before-fitting-models)
@@ -19,6 +20,10 @@
 ## Purpose and learning objectives
 
 Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs.
+
+## Before you start
+
+R with dplyr and ggplot2; ggpubr is optional for combining panels. Read the [complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
 
 ## 1. Identify the join key before combining tables
 

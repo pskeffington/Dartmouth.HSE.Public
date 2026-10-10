@@ -2,7 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_3_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 This study guide connects invented workshop records, interprets coded feedback, and models simulated production times.
 
@@ -23,6 +23,7 @@ This study guide connects invented workshop records, interprets coded feedback, 
 - [Common mistakes and debugging](#common-mistakes-and-debugging)
 - [Independent practice](#independent-practice)
 - [Teach-back and summary](#teach-back-and-summary)
+- [Ready to move on](#ready-to-move-on)
 - [Next steps and references](#next-steps-and-references)
 
 ## Learning objectives and setup
@@ -94,6 +95,9 @@ stopifnot(nrow(expanded_visitors) == 7L)
 Codes need a codebook. Here `1`, `2`, and `3` mean low, medium, and high clarity. Code `9` means declined to answer. Missing after the join means no matching response. Neither nonresponse condition is a numerical rating of nine or zero.
 
 ```r
+known_codes <- c(1L, 2L, 3L, 9L)
+observed_codes <- all_visitors$clarity_code[!is.na(all_visitors$clarity_code)]
+stopifnot(all(observed_codes %in% known_codes))
 all_visitors$response_state <- ifelse(
   is.na(all_visitors$clarity_code), "no matched response",
   ifelse(all_visitors$clarity_code == 9L, "declined", "rated")
@@ -198,6 +202,8 @@ A plotting function should state required columns, reject malformed inputs, coun
 
 ```r
 plot_run_table <- function(tbl, label) {
+  if (!is.character(label) || length(label) != 1L ||
+      is.na(label) || !nzchar(label)) stop("label must be one nonempty string")
   if (!is.data.frame(tbl) || !all(c("items", "minutes") %in% names(tbl))) {
     stop("table needs items and minutes columns")
   }
@@ -266,8 +272,19 @@ What defines join cardinality? How do unmatched rows differ from a declined resp
 
 The sequence is **define keys → audit joins → decode missingness → simulate explicitly → read distributions → fit and diagnose → report with validated functions**. Every graph needs units, a denominator, and a conclusion that stays within the design.
 
+## Ready to move on
+
+Prepare a reproducible script and short methods note covering input keys, join type, unmatched records, codebook, exclusions, distribution views, model formula, units, and diagnostic limits. Keep validation results alongside the plots.
+
+| Evidence | Completion check |
+| --- | --- |
+| Relational data | Demonstrate the 4-row inner and 6-row left joins; detect the repeated key before accepting row multiplication |
+| Codebook and missingness | Separate 3 ratings, 1 declined response, and 2 unmatched records; reject undocumented codes |
+| Model and graphics | Use 30 simulated runs; interpret minutes per item, observed range, residuals, and Q-Q axes |
+| Reuse and reporting | Return measured/excluded counts from a checked function; handle bad inputs and report software versions |
+
 ## Next steps and references
 
-[Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Analytics topic companion](../02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Next topic: Bash](../02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
+[Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Analytics topic companion](../02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Next: Week 4](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
 References: [dplyr join documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html) and [R linear-model documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html). See installed help `?ecdf` and `?density`.
