@@ -88,6 +88,8 @@ flowchart TD
 
 **Figure 1 caption.** Conceptual relationship among sequence, transcription, translation and function; arrows describe processes, not measured correlations. RNA stability and protein turnover also affect abundance. Noncoding transcripts such as MALAT1 do not follow a protein-coding translation route. **Inputs:** independently drawn process schematic; no numerical units. **Sources:** the public NCBI functional records on [ESR1](GENE_CARDS/ESR1.md) and [MALAT1](GENE_CARDS/MALAT1.md); [multi-platform TCGA study](https://pubmed.ncbi.nlm.nih.gov/23000897/).
 
+**Text equivalent:** DNA is transcribed into RNA. Coding RNA can be translated into protein, whose activity depends on regulation, location and partners. Noncoding RNA has a separate RNA-function branch.
+
 ### A worked measurement example
 
 Invent two comparable normalized measurements: 20 units in a simulated tumor preparation and 10 in its simulated comparator. Their ratio is 2, and **log2 fold change** is log2(20/10) = +1. Reversing the comparison yields −1. A value of +2 would describe a fourfold ratio, not two additional molecules. These chosen numbers have no sampling uncertainty, significance or biological discovery attached. Zero denominators require a prospectively specified method; adding a constant changes the estimand and must be disclosed.
@@ -128,6 +130,8 @@ flowchart TD
 ```
 
 **Figure 4 caption.** Conceptual biological themes, not a single-gene decision tree or an exhaustive classification algorithm. HER2-enriched is not identical to clinical HER2-positive; basal-like is not identical to triple-negative. Neither RNA from this catalog nor a theme assigns a person's subtype. **Inputs:** original overview of classifier and multi-platform study concepts; no numerical units. **Sources:** [Parker classifier development](https://pubmed.ncbi.nlm.nih.gov/19204204/) and [TCGA](https://pubmed.ncbi.nlm.nih.gov/23000897/); review extent is recorded in the [evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md).
+
+**Text equivalent:** A specified multi-gene classification connects to four expression themes. A dashed line marks incomplete overlap with separate clinical ER/PR/HER2 assays.
 
 **PAM50** uses a defined multi-gene expression method. Clinical ER, PR and HER2 categories use separate tissue assays. HER2-enriched and HER2-positive overlap incompletely; basal-like and triple-negative also differ. This 60-gene teaching catalog is neither PAM50 nor a validated diagnostic classifier.
 
@@ -214,6 +218,8 @@ flowchart TD
 ```
 
 **Figure 2 caption.** Conceptual, simplified epithelial signaling framework. These are process-level links, not a complete wiring diagram or evidence that every receptor signals identically in every tumor. Ligand, receptor partners, protein activation and cell context matter. **Inputs:** original schematic from the [hormone and growth lessons](GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on [ERBB2](GENE_CARDS/ERBB2.md), [PIK3CA](GENE_CARDS/PIK3CA.md), [AKT1](GENE_CARDS/AKT1.md) and [MTOR](GENE_CARDS/MTOR.md).
+
+**Text equivalent:** Hormone context and FOXA1/chromatin context feed receptor response and transcription. A separate growth-factor branch connects HER-family receptors to PI3K/AKT/mTOR and growth/nutrient responses; this is a process framework.
 
 These processes overlap: a stress response can affect transcription, while tissue composition changes apparent immune or matrix abundance. The original **12 teaching domains** remain available in the [structured domain index](GENE_ATLAS_INDEX.md#by-biological-domain). They are organizational categories, not mutually exclusive pathways. We next examine individual genes using the same distinction between normal function, study findings and measurement limits.
 
@@ -943,6 +949,8 @@ flowchart TD
 
 **Figure 3 caption.** Conceptual gene-to-category teaching network. An undirected line means **category membership**, not direct binding or a molecular interaction. FOXA1 illustrates multiple domain membership. **Inputs:** independently selected categories in the [rubric](REFERENCES/SELECTION_RUBRIC.md) and [domain index](GENE_ATLAS_INDEX.md); no numerical units. **Sources:** linked card annotation records and [FOXA1 primary reading](https://pubmed.ncbi.nlm.nih.gov/21151129/).
 
+**Text equivalent:** ESR1/PGR connect to the hormone category; FOXA1 connects to hormone and transcription categories. Repair, epithelial identity and immune categories group their labeled genes. Lines denote membership only.
+
 **Coexpression** means measurements vary together. A common cell population, shared regulator or batch effect can produce that pattern. A **causal interaction** requires evidence that changing one component affects another under appropriate controls. Binding, regulation and shared category membership are distinct claims. For example, FOXA1 and ESR1 can share a hormone-related teaching category while their regulatory relationship requires chromatin and perturbation evidence in a particular model.
 
 Gene-set analysis asks whether a prespecified group shows a pattern beyond a suitable background. Results depend on the measurement universe, overlapping sets, dependencies among genes and multiple testing. Selecting a few attractive genes after seeing a plot and calling them an enriched pathway ignores that selection process. A pathway score from bulk RNA also inherits cell-mixture ambiguity. The [focused pathway reference](GENE_PATHWAY_OVERVIEW.md) lists useful connections and the assays needed to test them. Moving from a plausible biological connection to a supported finding requires an explicit research workflow.
@@ -974,6 +982,8 @@ flowchart TD
 
 **Figure 5 caption.** Conceptual paired sampling distinguishes one participant from two specimens and multiple assay files. Pairing does not equate tissue composition or make adjacent-normal tissue an unaffected-donor control. **Inputs:** invented sampling structure with no measured values; no numerical units. **Sources:** [measurement guide](GENE_EXPRESSION_INTERPRETATION.md), [tumor single-cell atlas](https://pubmed.ncbi.nlm.nih.gov/34493872/) and [normal breast atlas](https://pubmed.ncbi.nlm.nih.gov/38548988/).
 
+**Text equivalent:** One conceptual participant contributes two tissue specimens. Each undergoes a bulk RNA assay; the within-pair contrast raises a question about cell abundance, cell state or both.
+
 In an invented design, 10 complete pairs comprise 10 independent people and 20 specimens, not 20 independent people. A within-person contrast can control stable person-level differences. It does not remove tissue-composition differences, collection effects or systematic assay differences. A patient-blocked model must represent the pair structure; ignoring it changes the uncertainty calculation.
 
 **Confounding** can arise when sequencing batch or collection setting aligns with the biological group. If every tumor was processed in one batch and every comparator in another, the data cannot separately identify those effects without additional design information. Plotting helps diagnose a problem; it does not repair the design.
@@ -993,6 +1003,7 @@ Read the title, observation unit, axes, scale and legend before interpreting a c
 **Rows:** six invented teaching labels (TeachA–TeachF), not actual gene identities. **Columns:** four simulated tumor-minus-adjacent-normal comparisons (C1–C4), not patient identifiers. **Units:** signed log2 fold change; fixed range −2 to +2, zero-centered. These are chosen demonstration values, with no fitted model, uncertainty or p-values.
 
 ```mermaid
+%%{init: {"flowchart": {"rankSpacing": 16, "nodeSpacing": 16, "padding": 6}}}%%
 flowchart LR
   subgraph C1["C1 simulated contrast"]
     direction TB
@@ -1036,6 +1047,8 @@ flowchart LR
 
 **Figure 6 caption.** Synthetic signed-expression demonstration with deliberately invented labels and values. This is **log2 fold change, not row z-score**. No clustering or subtype interpretation is warranted. **Inputs:** the literal invented matrix in [original R source](FIGURES/gene_companion_heatmap.R); PNG/PDF output is optional and restricted to a directory outside Git. The R contract verifies the numerical diagram labels against that matrix. **Sources:** the repository's [scientific palette](../R/hse_scientific_palette.R), independently authored fold-change arithmetic and [measurement explanation](GENE_EXPRESSION_INTERPRETATION.md).
 
+**Text equivalent:** The six-row numerical table above reproduces every diagram value. On narrow screens, use that table or GitHub's diagram zoom controls; color is never the only carrier of the value.
+
 In the synthetic heatmap, TeachA changes from +2 in C1 to −1 in C4. Those labels specify fourfold and one-half ratios under the stated comparison. A row z-score would answer a different question about deviations from that row's mean; it would not retain these ratio units. The unchanged numerical range across columns allows direct scale comparison. None of these chosen values supports a subtype, cluster, p-value or actual gene result.
 
 For a scatterplot, check whether one dot is a specimen, person or aggregate. For a boxplot, inspect sample sizes and whether repeated observations violate a simple independent-group interpretation. For a model plot, determine whether intervals describe means, predictions or another quantity. Color and ordering can guide attention but cannot substitute for those definitions. The [plot-reading guide](../READING_PLOTS.md) and [visualization gallery](../VISUALIZATION_GALLERY.md) extend these skills. We now gather the remaining inferential limits before working through a complete example.
@@ -1069,6 +1082,8 @@ flowchart TD
 ```
 
 **Figure 7 caption.** Conceptual comparison of evidence questions; branches are not an automatic ladder to clinical use. A controlled experiment can establish an effect in its model without validating a patient test, and prognosis is not necessarily treatment prediction. **Inputs:** original evidence taxonomy; no numerical units. **Sources:** [MALAT1 conflicting model readings](GENE_CARDS/MALAT1.md), [AKT trial context](GENE_CARDS/AKT1.md), [evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md) and [NCI assays](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests).
+
+**Text equivalent:** A study question branches into correlation, functional evidence, prognosis or clinical validation. Every branch requires scrutiny of design, controls, confounding, replication and applicability.
 
 **Statistical and clinical importance:** a precisely estimated small expression difference may have little practical consequence. A large exploratory difference may be unstable. Clinical usefulness requires an appropriate endpoint, validation population and decision context beyond a molecular association.
 

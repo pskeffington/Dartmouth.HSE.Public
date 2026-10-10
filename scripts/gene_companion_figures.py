@@ -19,7 +19,11 @@ FIGURES = [('DNA to protein',
   'protein-coding translation route. **Inputs:** independently drawn process schematic; no '
   'numerical units. **Sources:** the public NCBI functional records on '
   '[ESR1](../GENE_CARDS/ESR1.md) and [MALAT1](../GENE_CARDS/MALAT1.md); [multi-platform TCGA '
-  'study](https://pubmed.ncbi.nlm.nih.gov/23000897/).'),
+  'study](https://pubmed.ncbi.nlm.nih.gov/23000897/).\n'
+  '\n'
+  '**Text equivalent:** DNA is transcribed into RNA. Coding RNA can be translated into protein, '
+  'whose activity depends on regulation, location and partners. Noncoding RNA has a separate '
+  'RNA-function branch.'),
  ('Epithelial signaling',
   '```mermaid\n'
   'flowchart TD\n'
@@ -40,7 +44,11 @@ FIGURES = [('DNA to protein',
   'lessons](../GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional '
   'study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on '
   '[ERBB2](../GENE_CARDS/ERBB2.md), [PIK3CA](../GENE_CARDS/PIK3CA.md), '
-  '[AKT1](../GENE_CARDS/AKT1.md) and [MTOR](../GENE_CARDS/MTOR.md).'),
+  '[AKT1](../GENE_CARDS/AKT1.md) and [MTOR](../GENE_CARDS/MTOR.md).\n'
+  '\n'
+  '**Text equivalent:** Hormone context and FOXA1/chromatin context feed receptor response and '
+  'transcription. A separate growth-factor branch connects HER-family receptors to PI3K/AKT/mTOR '
+  'and growth/nutrient responses; this is a process framework.'),
  ('Category network',
   '```mermaid\n'
   'flowchart TD\n'
@@ -59,7 +67,11 @@ FIGURES = [('DNA to protein',
   'multiple domain membership. **Inputs:** independently selected categories in the '
   '[rubric](../REFERENCES/SELECTION_RUBRIC.md) and [domain index](../GENE_ATLAS_INDEX.md); no '
   'numerical units. **Sources:** linked card annotation records and [FOXA1 primary '
-  'reading](https://pubmed.ncbi.nlm.nih.gov/21151129/).'),
+  'reading](https://pubmed.ncbi.nlm.nih.gov/21151129/).\n'
+  '\n'
+  '**Text equivalent:** ESR1/PGR connect to the hormone category; FOXA1 connects to hormone and '
+  'transcription categories. Repair, epithelial identity and immune categories group their labeled '
+  'genes. Lines denote membership only.'),
  ('Molecular subtype overview',
   '```mermaid\n'
   'flowchart TD\n'
@@ -81,7 +93,10 @@ FIGURES = [('DNA to protein',
   'study concepts; no numerical units. **Sources:** [Parker classifier '
   'development](https://pubmed.ncbi.nlm.nih.gov/19204204/) and '
   '[TCGA](https://pubmed.ncbi.nlm.nih.gov/23000897/); review extent is recorded in the [evidence '
-  'matrix](../REFERENCES/GENE_EVIDENCE_MATRIX.md).'),
+  'matrix](../REFERENCES/GENE_EVIDENCE_MATRIX.md).\n'
+  '\n'
+  '**Text equivalent:** A specified multi-gene classification connects to four expression themes. '
+  'A dashed line marks incomplete overlap with separate clinical ER/PR/HER2 assays.'),
  ('Paired specimens',
   '```mermaid\n'
   'flowchart TD\n'
@@ -103,7 +118,11 @@ FIGURES = [('DNA to protein',
   'with no measured values; no numerical units. **Sources:** [measurement '
   'guide](../GENE_EXPRESSION_INTERPRETATION.md), [tumor single-cell '
   'atlas](https://pubmed.ncbi.nlm.nih.gov/34493872/) and [normal breast '
-  'atlas](https://pubmed.ncbi.nlm.nih.gov/38548988/).'),
+  'atlas](https://pubmed.ncbi.nlm.nih.gov/38548988/).\n'
+  '\n'
+  '**Text equivalent:** One conceptual participant contributes two tissue specimens. Each '
+  'undergoes a bulk RNA assay; the within-pair contrast raises a question about cell abundance, '
+  'cell state or both.'),
  ('Synthetic expression heatmap',
   '**Rows:** six invented teaching labels (TeachA–TeachF), not actual gene identities. '
   '**Columns:** four simulated tumor-minus-adjacent-normal comparisons (C1–C4), not patient '
@@ -111,6 +130,7 @@ FIGURES = [('DNA to protein',
   'chosen demonstration values, with no fitted model, uncertainty or p-values.\n'
   '\n'
   '```mermaid\n'
+  '%%{init: {"flowchart": {"rankSpacing": 16, "nodeSpacing": 16, "padding": 6}}}%%\n'
   'flowchart LR\n'
   '  subgraph C1["C1 simulated contrast"]\n'
   '    direction TB\n'
@@ -165,7 +185,11 @@ FIGURES = [('DNA to protein',
   'outside Git. The R contract verifies the numerical diagram labels against that matrix. '
   "**Sources:** the repository's [scientific palette](../../R/hse_scientific_palette.R), "
   'independently authored fold-change arithmetic and [measurement '
-  'explanation](../GENE_EXPRESSION_INTERPRETATION.md).'),
+  'explanation](../GENE_EXPRESSION_INTERPRETATION.md).\n'
+  '\n'
+  '**Text equivalent:** The six-row numerical table above reproduces every diagram value. On '
+  "narrow screens, use that table or GitHub's diagram zoom controls; color is never the only "
+  'carrier of the value.'),
  ('Interpreting evidence',
   '```mermaid\n'
   'flowchart TD\n'
@@ -187,4 +211,8 @@ FIGURES = [('DNA to protein',
   '**Inputs:** original evidence taxonomy; no numerical units. **Sources:** [MALAT1 conflicting '
   'model readings](../GENE_CARDS/MALAT1.md), [AKT trial context](../GENE_CARDS/AKT1.md), [evidence '
   'matrix](../REFERENCES/GENE_EVIDENCE_MATRIX.md) and [NCI '
-  'assays](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests).')]
+  'assays](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests).\n'
+  '\n'
+  '**Text equivalent:** A study question branches into correlation, functional evidence, prognosis '
+  'or clinical validation. Every branch requires scrutiny of design, controls, confounding, '
+  'replication and applicability.')]
