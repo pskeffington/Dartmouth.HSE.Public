@@ -626,7 +626,7 @@
     },
     {
       "path": "scripts/check_source_upload.py",
-      "observed_sha256": "9c38440affba01fb3a72821741c0f462fca8fdcfd0d39f754b51662da8b2f4c2",
+      "observed_sha256": "a04965ad802f4fe3b5928f85532c93f263b1d9aa927d93cc1c37f13789a61f20",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -710,7 +710,7 @@
     },
     {
       "path": "tests/test_originality_upload_guard.py",
-      "observed_sha256": "79b46e052031fa3817ce72178cdd1c6c648f6c577fdfcbf1e37b5291fd0c2f44",
+      "observed_sha256": "49c4c9efefd5569c886acecd2de40206cd3ef7de8f1dd1891825ef591c386a20",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
