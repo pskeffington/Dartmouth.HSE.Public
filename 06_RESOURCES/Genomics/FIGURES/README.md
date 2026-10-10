@@ -104,6 +104,7 @@ flowchart LR
     direction TB
     C4A["TeachA: -1"] ~~~ C4B["TeachB: -2"] ~~~ C4C["TeachC: 0"] ~~~ C4D["TeachD: +2"] ~~~ C4E["TeachE: +1"] ~~~ C4F["TeachF: 0"]
   end
+  C1 ~~~ C2 ~~~ C3 ~~~ C4
   classDef neg2 fill:#2166AC,stroke:#333333,color:#FFFFFF;
   classDef neg1 fill:#8CAED2,stroke:#333333,color:#111111;
   classDef zero fill:#F7F7F7,stroke:#333333,color:#111111;

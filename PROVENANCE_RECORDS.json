@@ -790,7 +790,7 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "78f774d8e714ecca80cdd3ce05bd76731683ce67544578bf0d3d1b39f031360d"
+      "observed_sha256": "f32623ab1e2989e3867dd02c6aeb2dea0dc4c01133256e4f92a50bfc5132bcca"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
