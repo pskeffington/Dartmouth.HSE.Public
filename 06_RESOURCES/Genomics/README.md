@@ -4,6 +4,8 @@
 
 Start with the people and study design behind a dataset, then learn what a gene measurement can support. These public teaching guides explain breast cancer research concepts and project-level statistics; they contain no patient records or private analysis results.
 
+[60-Gene Breast Cancer Research Companion](BREAST_CANCER_60_GENE_COMPANION.md) — expands the retained 21-gene foundation with 39 public teaching selections, complete cards, learning routes and evidence boundaries.
+
 ## Read in order
 
 1. [Before the Heatmap: The People Behind Breast Cancer Data](BREAST_CANCER_TCGA_BRCA_NARRATIVE.md) — worldwide burden, the TCGA-BRCA resource, case/sample/file distinctions, paired tissue comparisons, molecular subtypes and responsible interpretation.

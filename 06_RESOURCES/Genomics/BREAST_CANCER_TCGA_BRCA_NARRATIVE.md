@@ -4,6 +4,8 @@
 
 *An independently written, public learning narrative | Reviewed 10 October 2026 | Population figures refer to 2024 estimates.*
 
+Continue from people and specimens to biological questions in the [60-Gene Breast Cancer Research Companion](BREAST_CANCER_60_GENE_COMPANION.md).
+
 ## Why begin with people rather than a spreadsheet?
 
 A breast cancer diagnosis begins long before a row appears in a research table. Someone may notice a change, receive a screening result, wait for imaging or a biopsy, and face decisions about surgery, medicines, work, family, and daily life. The experience varies enormously. No one person's course should be assumed from a tumor's molecular measurements.

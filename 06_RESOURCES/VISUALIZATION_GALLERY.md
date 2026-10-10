@@ -4,6 +4,8 @@
 
 Six runnable examples use independently constructed synthetic observations. They illustrate graphics and statistical descriptions, not clinical evidence or institutional course solutions. Run the blocks in order from the repository root in a fresh R session with `ggplot2` installed. `matrixStats` is optional; the gene helpers have a base-R fallback.
 
+The [gene companion figures](Genomics/FIGURES/README.md) add seven original conceptual and synthetic explanations, including a signed-expression heatmap with runnable R source. Their inputs and review scope are separate from the six runnable examples below.
+
 ## Choose a visual encoding
 
 | Quantity | Encoding | Interpretation |

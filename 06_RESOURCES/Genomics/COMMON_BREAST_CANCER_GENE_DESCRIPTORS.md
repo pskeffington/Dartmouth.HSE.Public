@@ -4,6 +4,8 @@
 
 *Independent teaching glossary | Reviewed 10 October 2026 | Gene functions are introductory summaries, not a diagnostic classifier.*
 
+Continue with the [60-Gene Breast Cancer Research Companion](BREAST_CANCER_60_GENE_COMPANION.md), which retains these 21 entries and adds source-checked cards, domain lessons and measurement exercises.
+
 ## Before reading a gene name
 
 A gene is a region of DNA. **Gene expression** generally describes the amount of RNA attributed to that gene by a given assay and workflow. A change in measured RNA is different from a DNA mutation, gene amplification, protein activity, inherited cancer risk, or clinical test result.

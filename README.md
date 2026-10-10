@@ -4,6 +4,8 @@
 
 For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
 
+[60-Gene Breast Cancer Research Companion](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — complete gene cards, three learning routes, evidence register and seven original visual explanations.
+
 ## Start here
 
 | What you want to study | Where to start |
