@@ -20,9 +20,7 @@
 
 ## Purpose: the shell as a reproducible research interface
 
-Learn Bash navigation, scripts, pipelines, and responsible file handling. This independent public study guide is not an official Dartmouth or Geisel publication.
-
-These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
+Learn Bash navigation, scripts, pipelines, and responsible file handling.
 
 ## 1. Shells, Bash, and computational research
 

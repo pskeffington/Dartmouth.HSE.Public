@@ -35,9 +35,9 @@ The builder uses the Python standard library. It does **not** execute R, validat
 
 ## HTML and PDF
 
-For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages. Keep any authorized course inputs out of public source control; public method guides do not require instructor files.
+For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages.
 
-The publishing tool creates Markdown, not HTML. A separate R Markdown renderer creates HTML. Rendering is optional and must not introduce restricted course prompts, outputs, or datasets.
+The publishing tool creates Markdown, not HTML. A separate R Markdown renderer creates HTML. Rendering is optional.
 
 For interpreting figures, use the [plot-reading guide](../READING_PLOTS.md). For guided exercises, see the [follow-along guide](../../FOLLOW_ALONG.md).
 

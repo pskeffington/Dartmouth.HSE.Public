@@ -6,6 +6,6 @@ These resources support clear methods, readable figures, and reproducible report
 - [R summaries and reporting helpers](../06_RESOURCES/R/README.md)
 - [APA 7 manuscript and bibliography examples](../06_RESOURCES/LaTeX/README.md)
 
-Public examples teach methods with practice inputs. Unpublished analysis, private research outputs, and assessed reports remain in authorized private workspaces.
+The examples connect practice inputs, analytical checks, figures, and written interpretation.
 
 [Paul's Notes](../README.md) · [Research planning](../01_Capstone/README.md)

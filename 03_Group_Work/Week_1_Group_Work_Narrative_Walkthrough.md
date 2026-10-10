@@ -4,7 +4,7 @@
 
 > **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
 
-A public study guide with independently constructed examples. This is not an official Dartmouth or Geisel lesson; no course files or assessed work are needed. Our small dataset describes invented paper-glider trials, not health observations.
+This study guide uses invented paper-glider trials to practise R objects, indexing, import, plotting, and functions.
 
 **Study time:** 75–100 minutes, including practice. **Prerequisites:** R installed, a console or script editor, and basic arithmetic. No add-on packages are required. Run the code blocks in order in a fresh R session; the Markdown edition displays code and expected results without executing them.
 
@@ -209,4 +209,4 @@ The practical sequence is **construct → inspect → select → validate → su
 
 [Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [R topic companion](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
-Reference: [R object extraction documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html). See also `?factor`, `?read.table`, and `?hist` in your installed R version. [Source policy](../ORIGINALITY_POLICY.md).
+Reference: [R object extraction documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html). See also `?factor`, `?read.table`, and `?hist` in your installed R version.

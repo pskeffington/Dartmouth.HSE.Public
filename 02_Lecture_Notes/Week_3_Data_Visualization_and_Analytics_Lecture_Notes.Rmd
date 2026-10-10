@@ -13,9 +13,7 @@ output:
 
 ## Purpose and learning objectives
 
-Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. These independent notes are not an official Dartmouth or Geisel publication.
-
-These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
+Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs.
 
 ## 1. Identify the join key before combining tables
 

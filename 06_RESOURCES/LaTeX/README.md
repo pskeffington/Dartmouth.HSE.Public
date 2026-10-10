@@ -4,9 +4,7 @@
 
 [Editable LaTeX manuscript](Example_APA_7_Manuscript.tex) · [Compiled example PDF](Example_APA_7_Manuscript.pdf) · [Example bibliography](Example_References.bib) · [Full source-type guide](Bibliography_Guide.md) · [Practice entry catalogue](Example_Entry_Types.bib)
 
-> **Template provenance:** The contributor identifies the manuscript and companion reference catalogue as custom, independently authored general-purpose APA examples, not Dartmouth/Geisel templates. The recorded compiled PDFs match the local provenance-intake SHA-256 values. This declaration does not by itself verify embedded font/third-party redistribution rights or establish that a fresh isolated build reproduces the current PDFs. The two PDF provenance reviews remain open pending those checks and human sign-off.
-
-This independently authored template demonstrates general APA-style student manuscript preparation. It does not contain a Geisel assignment, submission, or course-data workflow. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures provide layouts for your verified results.
+This template demonstrates general APA-style student manuscript preparation. It provides a title page, an introductory section under the repeated paper title, Method, Results, Discussion, References and a command appendix. Bracketed text explains what to replace. Tables and figures provide layouts for your verified results.
 
 ## Formatting included
 
@@ -172,4 +170,4 @@ bash 06_RESOURCES/LaTeX/compile_manuscript.sh --output-dir /tmp/pauls-apa-review
 bash 06_RESOURCES/LaTeX/compile_manuscript.sh --catalogue --output-dir /tmp/pauls-apa-review
 ```
 
-Invalid arguments fail before tools run. Unresolved citations or references fail the build. Bibliography data-model warnings still require review; a successful build does not certify rights or establish that an existing published PDF matches the new output.
+Invalid arguments fail before tools run. Unresolved citations or references fail the build. Bibliography data-model warnings still require review; check a new PDF before replacing a published example.
