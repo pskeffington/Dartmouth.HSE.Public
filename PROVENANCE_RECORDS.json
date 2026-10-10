@@ -303,11 +303,18 @@
       "next_action": "Verify reference descriptions and author provenance"
     },
     {
+      "path": "06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md",
+      "observed_sha256": "1aa2fa64ab75d41feb9f52683367b6abad4f0edbc8e09aeef70d4c8d0246cc8c",
+      "observed_role": "independently authored public biomedical interoperability and metadata literature reference; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Verify public standards scope, linked source versions and authorship"
+    },
+    {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "29069cfaf3e85a141a9a74169141a5f1d1bf3768a0dcbb1e0b41b822d6d20fed",
+      "observed_sha256": "b4d9ccc0e003db32b497dbafe0ce9c10d8fb2b5d57c0fe87f49a1c48d16fb286",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Verify independent references and index accuracy"
+      "next_action": "Review independent public-reference documentation and link accuracy"
     },
     {
       "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
@@ -437,10 +444,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "79ced05f68311f48ceab2f19c74a530653aceb551e5f88dec38092020a1cc566",
+      "observed_sha256": "8f8573d405e5f031086b17a62c4117f8605ef6324aecb47d17f538a966ecdb11",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Verify independent references and index accuracy"
+      "next_action": "Review independent public-reference documentation and link accuracy"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",

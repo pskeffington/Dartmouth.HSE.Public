@@ -25,6 +25,7 @@ Reusable methods, functions, teaching references and templates for health data s
 | Naming, biomedical coding standards and quality gates | [Extensible coding standards](Literature/BIOMEDICAL_CODING_STANDARDS.md) | [General coding references](Literature/README.md) |
 | Biomedical code review and evidence gates | [Research code quality matrix](Literature/RESEARCH_CODE_QUALITY_MATRIX.md) | [Biomedical methods matrix](Literature/BIOMEDICAL_CODING_METHODS.md) |
 | Future-course research project intake and data contracts | [Project intake reference](Literature/RESEARCH_PROJECT_INTAKE.md) | [Biomedical coding conventions](Literature/BIOMEDICAL_CODING_STANDARDS.md) |
+| Clinical terminology, units and research metadata | [Interoperability matrix](Literature/INTEROPERABILITY_METADATA_STANDARDS.md) | [Research code quality](Literature/RESEARCH_CODE_QUALITY_MATRIX.md) |
 
 ## R statistics and visualization
 
