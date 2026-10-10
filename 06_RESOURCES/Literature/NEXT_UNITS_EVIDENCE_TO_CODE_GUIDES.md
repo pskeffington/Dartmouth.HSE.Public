@@ -2,6 +2,8 @@
 
 **Status:** independent draft; curriculum mapping not verified. **Literature freshness:** foundational sources listed below; a 2024–2026 primary-paper search and DOI verification are required before calling this a refreshed corpus. No paper execution has been independently reproduced here.
 
+**Corpus ingestion:** [Targeted biomedical literature roadmap](BIOMEDICAL_CORPUS_INGESTION_ROADMAP.md) · [Structured candidate inventory](BIOMEDICAL_CORPUS_2026_CANDIDATES.csv). These are intake candidates, not reproduced studies.
+
 ## Common unit contract
 Each unit includes (1) independently phrased measurable learning objectives, (2) research question and evidence matrix with DOI, date, study type and limitations, (3) methods reconstruction distinguishing reported from inferred steps, (4) synthetic runnable example, (5) annotated rationale for every transformation and model, (6) expected outputs and failure modes, (7) checks for leakage, missingness, units and uncertainty, (8) exercises and rubric, (9) reproducibility manifest and (10) rights/provenance review.
 
