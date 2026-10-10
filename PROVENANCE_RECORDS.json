@@ -310,11 +310,18 @@
       "next_action": "Verify public standards scope, linked source versions and authorship"
     },
     {
+      "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
+      "observed_sha256": "81279179ae27db203ab1958fe12609279f707ff3e34b0cbf93940a0aea78ac24",
+      "observed_role": "independently authored public-reference and study-guide resource roadmap; course equivalence unverified",
+      "source_relationship": null,
+      "next_action": "Verify independent authorship and catalog alignment without using private source material"
+    },
+    {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "b4d9ccc0e003db32b497dbafe0ce9c10d8fb2b5d57c0fe87f49a1c48d16fb286",
+      "observed_sha256": "5e8f6d7c49a2dee08f4a9e5ecdf119a86e37844745f2698c4c4c5449fabbd274",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review independent public-reference documentation and link accuracy"
+      "next_action": "Review public resource navigation and independently written references"
     },
     {
       "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
@@ -444,10 +451,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "8f8573d405e5f031086b17a62c4117f8605ef6324aecb47d17f538a966ecdb11",
+      "observed_sha256": "a537d0f5560f53650cb685f461ce47ac2d2b1d76db75c8723bf9c4a7c2039f30",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review independent public-reference documentation and link accuracy"
+      "next_action": "Review public resource navigation and independently written references"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
