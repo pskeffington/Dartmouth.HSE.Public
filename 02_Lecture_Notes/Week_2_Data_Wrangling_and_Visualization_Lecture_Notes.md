@@ -2,7 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed for independent study and has not been executed to generate this page. Check source permissions and locally supplied inputs before running examples.
+> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
 
 ## On this page
 

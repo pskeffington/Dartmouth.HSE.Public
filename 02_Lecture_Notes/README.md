@@ -1,8 +1,8 @@
-# Lecture Notes — original conceptual companions
+# Topic companions — Paul's Notes
 
 [Repository home](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md)
 
-These student-authored notes discuss general methods encountered during graduate data-science study. They are **not official lecture handouts or replacements for Geisel files**. The original lecture and approved local source files are required to establish authoritative tasks, inputs, and expectations.
+These student-authored notes discuss general methods encountered during graduate data-science study. They are **not official lecture handouts or replacements for Geisel files**. For complete independent worked lessons, start with the [weekly teaching guides](../03_Group_Work/README.md). Official course requirements must still come from authorized course channels.
 
 | Week | Independent notes | Additional conceptual reference |
 | --- | --- | --- |
