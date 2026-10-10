@@ -304,10 +304,17 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "14228f82ce06f5fcbbbd8d784c95c014cb6d7f2d267b7ffad713eb2a8225448e",
+      "observed_sha256": "8e1d78c915d466da054ba589e8ca28edd9d505adbb80c1ba963ba21bdfa509cd",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review public-reference authorship and link accuracy"
+      "next_action": "Review public-reference index accuracy and provenance"
+    },
+    {
+      "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
+      "observed_sha256": "d034a26c405193c53b92d7385d7272a5696423ba295c0ff01051847379b07c94",
+      "observed_role": "independent public research code quality literature and review matrix; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Review cited public-source applicability and author provenance"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
@@ -423,10 +430,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "8eb3a564c1c1ea2cf5ac7297ad40276d35d88ca88e6c890257a559006083a10e",
+      "observed_sha256": "61e1f7e6b2d2a218a2115ea9f8fbaafb1026522d21db03edda9f90450c2dac97",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review public-reference authorship and link accuracy"
+      "next_action": "Review public-reference index accuracy and provenance"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
