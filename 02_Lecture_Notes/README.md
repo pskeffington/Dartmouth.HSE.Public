@@ -1,12 +1,14 @@
 # Topic companions — Paul's Notes
 
-[Repository home](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md)
+[Paul's Notes](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md)
 
-These notes introduce general methods for data science and practical computing. For complete worked lessons, start with the [weekly teaching guides](../03_Group_Work/README.md).
+Use these concise conceptual references for definitions, syntax, small original illustrations, interpretation, and common misconceptions. The full teaching lessons provide the complete analysis, detailed code reasoning, figures, debugging, exercises, and mastery checks. Both layers use the same general weekly competencies without duplicating full workflows.
 
-| Week | Independent notes | Published reference URL |
+| Week | Conceptual reference | Complete biomedical lesson |
 | --- | --- | --- |
-| 1 | [Introduction to R](Week_1_Introduction_to_R_Lecture_Notes.md) | — |
-| 2 | [Data wrangling and visualization](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Study reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) |
-| 3 | [Data visualization and analytics](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Study reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) |
-| 4 | [Bash methods](Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Complete worked workflow](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) |
+| 1 | [R objects and expression tables](Week_1_Introduction_to_R_Lecture_Notes.md) | [Synthetic expression foundations](../03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
+| 2 | [Participant data and graphs](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Blood-cell measurements and repeated visits](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
+| 3 | [Health joins and exploratory models](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Epidemiologic integration and panels](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
+| 4 | [Bash and scientific metadata](Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Scientific metadata and R bridge](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) |
+
+Read the Markdown edition on GitHub; its header links to the editable `.Rmd` source. These are independent topic guides, not institution-authored lectures. The [Week 2 reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) and [Week 3 reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) provide additional entry points.

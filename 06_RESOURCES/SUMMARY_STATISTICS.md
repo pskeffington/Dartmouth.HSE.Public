@@ -1,25 +1,27 @@
 # Descriptive statistics, IQR and narrative reporting
+The examples use 48 independently simulated adult participants from `make_teaching_cohort()`. Age is years; creatinine is mg/dL; albumin is g/dL. Recorded sex and site are fictional categories, and the programmed age association is not clinical evidence. Run blocks in order from the repository root. Optional file exports create or replace the named output; choose a deliberate destination.
+
 
 The public library provides a one-call descriptive report that is suitable for lecture notes, assignment write-ups and gene-expression exploratory analysis.
 
 ## Load and run
 
 ```r
+source("06_RESOURCES/R/hse_teaching_data.R")
+health_data <- make_teaching_cohort()
 source("06_RESOURCES/R/hse_stats_plots.R")
-data(mtcars)
 
 # One call generates both the complete table and a written interpretation.
-report <- hse_summary_report(mtcars, value="mpg", unit="miles per gallon")
+report <- hse_summary_report(health_data, value="Creatinine", unit="mg/dL")
 hse_print_summary(report)
 
 # Optional groupwise summary:
-mtcars$cyl <- factor(mtcars$cyl)
-by_cyl <- hse_summary_report(mtcars, "mpg", group="cyl", unit="mpg")
-hse_print_summary(by_cyl)
+by_site <- hse_summary_report(health_data, "Creatinine", group="Site", unit="Creatinine")
+hse_print_summary(by_site)
 
 # Reuse the quantitative results directly in charts and documents:
-table <- by_cyl$statistics
-paragraphs <- by_cyl$narrative
+table <- by_site$statistics
+paragraphs <- by_site$narrative
 write.csv(table, "summary_statistics.csv", row.names=FALSE)
 ```
 

@@ -33,7 +33,7 @@ class PresentationTests(unittest.TestCase):
         self.assertEqual(validator.chunks(source), [('first', 'x <- 3'), ('second', 'stopifnot(x == 3)')])
 
     def test_incomplete_or_unsupported_blocks_fail_closed(self):
-        for source in ('no executable blocks', '```{r first}\nx <- 2', '```{r first, eval=FALSE}\nx <- 2\n```'):
+        for source in ('no executable blocks', '```{r first}\nx <- 2', '```{r first, eval=FALSE}\nx <- 2\n```', '```{r first}\nx <- 2\n```text'):
             with self.subTest(source=source), self.assertRaises(ValueError):
                 validator.chunks(source)
 

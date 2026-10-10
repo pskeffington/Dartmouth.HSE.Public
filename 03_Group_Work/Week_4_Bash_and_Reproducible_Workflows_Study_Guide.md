@@ -4,14 +4,17 @@
 
 > **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
-Use Bash to organize files, inspect a small table, validate and filter records, automate repeated work, and pass explicit arguments to R. The invented data describe workshop assembly runs in minutes. Every input needed for this lesson is created below.
+Use Bash to organize files, inspect a small table, validate and filter records, automate repeated work, and pass explicit arguments to R. The invented data describe adult participant blood-sample metadata and synthetic creatinine measurements in mg/dL. Every input needed for this lesson is created below.
 
-**Study time:** 90–120 minutes. **Prerequisites:** Weeks 1–3 data checks and summaries. Use a Bash shell, not a PowerShell prompt. The examples work with Bash 3.2 or newer and standard `awk`, `grep`, `head`, `wc`, `mktemp`, and file utilities. The final bridge needs `Rscript` with base R; no add-on R packages are required. Python is needed only for the optional automated lesson check.
+**Study time:** 90–120 minutes. **Prerequisites:** Weeks 1–3 data checks and summaries. Use a Bash shell, not a PowerShell prompt. The examples work with Bash 3.2 or newer and standard `awk`, `grep`, `head`, `tail`, `wc`, `sort`, `uniq`, `mktemp`, and file utilities. The final bridge needs `Rscript` with base R; no add-on R packages are required. Python is needed only for the optional automated lesson check.
 
 Copy the blocks into one Bash session in order, or save them in a script. The `.Rmd` is the editable lesson; read its Markdown edition directly on GitHub. The named Bash chunks are for the validation tool and are not instructions to knit shell commands in RStudio.
 
+[Previous: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [Topic companion](../02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) · [Paul's Notes](../README.md)
+
 ## On this page
 
+- [Scientific motivation](#scientific-motivation)
 - [Learning objectives](#learning-objectives)
 - [1. Check tools and create a practice workspace](#1-check-tools-and-create-a-practice-workspace)
 - [2. Create and inspect known data](#2-create-and-inspect-known-data)
@@ -26,6 +29,10 @@ Copy the blocks into one Bash session in order, or save them in a script. The `.
 - [Ready to move on](#ready-to-move-on)
 - [Next steps and references](#next-steps-and-references)
 
+## Scientific motivation
+
+Research workflows connect a specimen identifier to its metadata, transformation commands, and numerical output. File operations can break that connection by changing headers, losing records, or replacing inputs. Validate the row unit and schema before computing summaries. The age bounds and category vocabulary here are a toy adult-data contract, not eligibility rules for a real study.
+
 ## Learning objectives
 
 By the end, you should be able to explain relative paths and quoting, distinguish line counts from record counts, validate a simple delimiter-separated table, write a script with positional arguments and clear errors, handle expected no-match results, loop over files safely, and separate shell orchestration from R calculations.
@@ -36,7 +43,7 @@ A shell interprets commands; a directory determines how relative paths resolve. 
 
 ```bash
 set -euo pipefail
-for tool in awk grep head wc sort uniq mktemp Rscript; do
+for tool in awk grep head tail wc sort uniq mktemp cp mv rm ls Rscript; do
   command -v "$tool" >/dev/null 2>&1 || {
     printf 'Required command unavailable: %s\n' "$tool" >&2
     exit 1
@@ -52,32 +59,63 @@ printf 'Practice workspace: %s\n' "$PWD"
 
 On Windows, use a Bash environment and ensure Rscript is visible within that environment. If `command -v Rscript` prints nothing, fix its installation or PATH before continuing. Do not confuse the R console prompt with a shell prompt.
 
-## 2. Create and inspect known data
+### Location awareness and disposable file operations
 
-The row unit is one assembly run. `run_id` is its unique key; `bench` is A or B; `minutes` is a nonnegative number or the literal `NA`. This lesson uses simple comma-delimited records with no quoted commas or embedded newlines. General CSV needs a CSV-aware parser such as R's `read.csv()`.
+An absolute path begins at the filesystem root; a relative path starts at the current directory. Inspect both before copying, moving, or deleting. Only the tiny note created in this block is removed; inputs and results remain available.
 
 ```bash
-cat > "input/run times.csv" <<'CSV'
-run_id,bench,minutes
-b01,A,8
-b02,B,15
-b03,A,NA
-b04,B,21
-b05,A,12
-CSV
-head -n 3 "input/run times.csv"
-wc -l < "input/run times.csv"
-awk 'END {print (NR > 0 ? NR - 1 : 0)}' < "input/run times.csv"
+pwd
+ls -lh
+absolute_input_dir="$PWD/input"
+[[ -d "$absolute_input_dir" ]]
+printf 'Disposable practice note\n' > logs/practice_note.tmp
+cp -- logs/practice_note.tmp logs/note_copy.tmp
+mv -- logs/note_copy.tmp logs/note_renamed.tmp
+[[ -f logs/note_renamed.tmp ]]
+rm -- logs/practice_note.tmp logs/note_renamed.tmp
+[[ ! -e logs/note_renamed.tmp ]]
 ```
 
-**Expected:** the header and first two runs; then `6` lines and `5` data records. `wc -l` counts newline characters, including the header here. A missing final newline can affect it. The quoted heredoc delimiter (`'CSV'`) keeps its contents literal rather than expanding shell variables.
+**Expected:** the absolute workspace and its directories are printed; the two disposable notes are absent afterward. `cp` copies, `mv` moves or renames, and `rm` removes. Deletion is immediate; inspect exact paths first, keep raw data, and avoid broad recursive patterns. `--` ends option parsing for these utilities on the supported macOS/Linux environments.
+
+## 2. Create and inspect known data
+
+The row unit is one blood specimen from one invented participant; this example has only one specimen per participant. `Participant_ID` is its unique key. `Sex` is a simplified fictional recorded Female/Male category; `Age` is integer years; `Sample_Type` is Plasma or Serum; `Measurement` is synthetic creatinine in mg/dL or literal `NA`. Plasma and serum name specimen types, not treatment groups. Repeated specimens would need a participant-plus-specimen key. This lesson uses simple comma-delimited records with no quoted commas or embedded newlines. General CSV needs a CSV-aware parser such as R's `read.csv()`.
+
+```bash
+cat > "input/sample metadata.csv" <<'CSV'
+Participant_ID,Sex,Age,Sample_Type,Measurement
+M01,Female,41,Plasma,0.8
+M02,Male,52,Serum,1.1
+M03,Female,36,Plasma,NA
+M04,Male,64,Serum,1.3
+M05,Female,47,Plasma,1.2
+CSV
+head -n 3 "input/sample metadata.csv"
+tail -n 1 "input/sample metadata.csv"
+wc -l < "input/sample metadata.csv"
+awk 'END {print (NR > 0 ? NR - 1 : 0)}' < "input/sample metadata.csv"
+```
+
+**Expected:** the header and first two sample records, followed by the final M05 record; then `6` lines and `5` data records. `wc -l` counts newline characters, including the header here. A missing final newline can affect it. The quoted heredoc delimiter (`'CSV'`) keeps its contents literal rather than expanding shell variables.
+
+Select participant identifiers and measurements by field position into a new file, keeping a new explicit header:
+
+```bash
+awk -F ',' 'BEGIN {print "Participant_ID,Measurement"}
+            NR > 1 {print $1 "," $5}' < "input/sample metadata.csv" > output/measurements_only.csv
+head -n 3 output/measurements_only.csv
+[[ $(awk 'END {print NR}' < output/measurements_only.csv) -eq 6 ]]
+```
+
+**Expected:** the two-column header, M01/0.8 and M02/1.1, and six physical records including the header. Field 5 is Measurement; verify the schema before extracting. The unavailable value stays NA. This projection is for inspection, not the five-column input expected by the checked filter below.
 
 Before calculating a mean, count unavailable values:
 
 ```bash
-awk -F ',' 'NR > 1 && $3 == "NA" {missing++}
-            END {print "Missing measurements:", missing + 0}' < "input/run times.csv"
-if grep -Fq 'unknown-marker' "input/run times.csv"; then
+awk -F ',' 'NR > 1 && $5 == "NA" {missing++}
+            END {print "Missing measurements:", missing + 0}' < "input/sample metadata.csv"
+if grep -Fq 'unknown-marker' "input/sample metadata.csv"; then
   printf 'Marker found\n'
 else
   search_status=$?
@@ -91,35 +129,35 @@ fi
 
 **Expected:** one missing measurement and `Marker absent`. Grep status `1` means no match; a larger status indicates an error. A no-match result is useful evidence, whereas an unreadable file is a failure to inspect it. Text search is not the same as selecting rows by a specific field.
 
-A pipeline connects standard output from one command to standard input of the next. Count runs per bench by extracting field 2, sorting labels, and counting adjacent repetitions:
+A pipeline connects standard output from one command to standard input of the next. Count specimens per type by extracting field 4, sorting labels, and counting adjacent repetitions:
 
 ```bash
-awk -F ',' 'NR > 1 {print $2}' < "input/run times.csv" | sort | uniq -c
+awk -F ',' 'NR > 1 {print $4}' < "input/sample metadata.csv" | sort | uniq -c
 ```
 
-**Expected:** three A labels and two B labels. `uniq` counts adjacent repeats, so sorting first matters. `pipefail` makes a pipeline report a failed earlier command instead of relying only on its last command. This is still a text-format calculation, not a general CSV parser.
+**Expected:** three Plasma labels and two Serum labels. `uniq` counts adjacent repeats, so sorting first matters. `pipefail` makes a pipeline report a failed earlier command instead of relying only on its last command. This is still a text-format calculation, not a general CSV parser.
 
 ## 3. Make a reusable filter with validation
 
-A script receives arguments through `$1`, `$2`, and `$3`. Validate the argument count before reading those variables when `set -u` is enabled. The script below takes an input file, an output file, and one bench label. It validates every row, including rows that are not selected.
+A script receives arguments through `$1`, `$2`, and `$3`. Validate the argument count before reading those variables when `set -u` is enabled. The script below takes an input file, an output file, and one specimen-type label. It validates every row, including rows that are not selected.
 
 ```bash
-cat > scripts/filter_runs.sh <<'BASH'
+cat > scripts/filter_samples.sh <<'BASH'
 #!/usr/bin/env bash
 set -euo pipefail
 if [[ $# -ne 3 ]]; then
-  printf 'Usage: filter_runs.sh input.csv output.csv A|B\n' >&2
+  printf 'Usage: filter_samples.sh input.csv output.csv Plasma|Serum\n' >&2
   exit 2
 fi
 input_file=$1
 output_file=$2
-bench=$3
+sample_type=$3
 [[ -r "$input_file" && -f "$input_file" ]] || {
   printf 'Unreadable input: %s\n' "$input_file" >&2
   exit 1
 }
-[[ "$bench" == A || "$bench" == B ]] || {
-  printf 'Bench must be A or B\n' >&2
+[[ "$sample_type" == Plasma || "$sample_type" == Serum ]] || {
+  printf 'Sample type must be Plasma or Serum\n' >&2
   exit 2
 }
 if [[ "$input_file" == "$output_file" || "$input_file" -ef "$output_file" ]]; then
@@ -129,39 +167,42 @@ fi
 # Build a temporary output beside its destination; publish only after validation.
 temp_file=$(mktemp "${output_file}.XXXXXX")
 trap 'rm -f -- "$temp_file"' EXIT
-awk -F ',' -v wanted="$bench" '
+awk -F ',' -v wanted="$sample_type" '
   NR == 1 {
-    if ($0 != "run_id,bench,minutes") exit 1
+    if ($0 != "Participant_ID,Sex,Age,Sample_Type,Measurement") exit 1
     print
     next
   }
-  $0 ~ /"/ || NF != 3 || $1 == "" || seen[$1]++ || ($2 != "A" && $2 != "B") {exit 1}
-  $3 != "NA" && $3 !~ /^[0-9]+([.][0-9]+)?$/ {exit 1}
-  $2 == wanted {print}
+  $0 ~ /"/ || NF != 5 || $1 == "" || seen[$1]++ {exit 1}
+  $2 != "Female" && $2 != "Male" {exit 1}
+  $3 !~ /^[0-9]+$/ || $3 < 18 || $3 > 100 {exit 1}
+  $4 != "Plasma" && $4 != "Serum" {exit 1}
+  $5 != "NA" && $5 !~ /^[0-9]+([.][0-9]+)?$/ {exit 1}
+  $4 == wanted {print}
   END {if (NR == 0) exit 1}
 ' < "$input_file" > "$temp_file" || {
-  printf 'Invalid input: check header, fields, unique IDs, bench, and minutes\n' >&2
+  printf 'Invalid input: check header, fields, unique IDs, recorded sex, adult age, type, and measurement\n' >&2
   exit 1
 }
 mv -- "$temp_file" "$output_file"
 BASH
-bash -n scripts/filter_runs.sh
-bash scripts/filter_runs.sh "input/run times.csv" output/selected_a.csv A
-cat output/selected_a.csv
+bash -n scripts/filter_samples.sh
+bash scripts/filter_samples.sh "input/sample metadata.csv" output/selected_plasma.csv Plasma
+cat output/selected_plasma.csv
 ```
 
-**Expected:** a header plus `b01,A,8`, `b03,A,NA`, and `b05,A,12`. The missing row is retained so the denominator remains visible. `bash -n` checks syntax without running the script. Explicit `bash script` does not require execute permission; a shebang plus `chmod +x` allows direct execution if desired.
+**Expected:** a header plus `M01,Female,41,Plasma,0.8`, `M03,Female,36,Plasma,NA`, and `M05,Female,47,Plasma,1.2`. The missing row is retained so the denominator remains visible. `bash -n` checks syntax without running the script. Explicit `bash script` does not require execute permission; a shebang plus `chmod +x` allows direct execution if desired.
 
-The awk record checks reject duplicate IDs, missing fields, unknown benches, negative values, quoted fields, and undocumented measurement strings. They do not establish scientific validity. This deliberately small format excludes full CSV quoting and CRLF line endings; use R's CSV parser for other formats rather than weakening checks blindly. Temporary output prevents a failed validation from replacing an existing result. Reusing the output path in a successful call replaces that output intentionally.
+The awk record checks reject duplicate IDs, missing fields, unknown specimen types, negative values, quoted fields, and undocumented measurement strings. They do not establish scientific validity. This deliberately small format excludes full CSV quoting and CRLF line endings; use R's CSV parser for other formats rather than weakening checks blindly. Temporary output prevents a failed validation from replacing an existing result. Reusing the output path in a successful call replaces that output intentionally.
 
 ## 4. Check an expected failure
 
 A robust workflow demonstrates its failure behavior, not only its successful path. Duplicate the first data row in a separate practice file and confirm that no final output is created.
 
 ```bash
-cp -- "input/run times.csv" input/duplicate.csv
-printf 'b01,A,8\n' >> input/duplicate.csv
-if bash scripts/filter_runs.sh input/duplicate.csv output/rejected.csv A; then
+cp -- "input/sample metadata.csv" input/duplicate.csv
+printf 'M01,Female,41,Plasma,0.8\n' >> input/duplicate.csv
+if bash scripts/filter_samples.sh input/duplicate.csv output/rejected.csv Plasma; then
   printf 'Unexpected success for duplicate IDs\n' >&2
   exit 1
 else
@@ -184,34 +225,34 @@ count_data_records() {
   [[ -r "$1" && -f "$1" ]] || { printf 'Unreadable: %s\n' "$1" >&2; return 1; }
   awk 'END {print (NR > 0 ? NR - 1 : 0)}' < "$1"
 }
-for bench in A B; do
-  bash scripts/filter_runs.sh "input/run times.csv" "output/bench_${bench}.csv" "$bench"
-  printf 'Bench %s: %s records\n' "$bench" "$(count_data_records "output/bench_${bench}.csv")"
+for sample_type in Plasma Serum; do
+  bash scripts/filter_samples.sh "input/sample metadata.csv" "output/type_${sample_type}.csv" "$sample_type"
+  printf 'Sample type %s: %s records\n' "$sample_type" "$(count_data_records "output/type_${sample_type}.csv")"
 done
-[[ $(count_data_records output/bench_A.csv) -eq 3 ]]
-[[ $(count_data_records output/bench_B.csv) -eq 2 ]]
+[[ $(count_data_records output/type_Plasma.csv) -eq 3 ]]
+[[ $(count_data_records output/type_Serum.csv) -eq 2 ]]
 ```
 
-**Expected:** A has three runs, B has two. Filtering does not imply dropping missing measurements. The loop writes two clearly named outputs; a filename alone is not proof that the record count is correct.
+**Expected:** Plasma has three specimens, Serum has two. Filtering does not imply dropping missing measurements. The loop writes two clearly named outputs; a filename alone is not proof that the record count is correct.
 
 To process discovered files, use a quoted glob loop rather than splitting `ls` output:
 
 ```bash
-for file in output/bench_*.csv; do
+for file in output/type_*.csv; do
   [[ -f "$file" ]] || continue
   printf 'Inspecting %s\n' "$file"
   head -n 2 "$file"
 done
 ```
 
-**Expected:** the two `bench_A.csv` and `bench_B.csv` files are inspected separately. The explicit file test handles a pattern with no matches. All paths inside the loop remain quoted.
+**Expected:** the two `type_Plasma.csv` and `type_Serum.csv` files are inspected separately. The explicit file test handles a pattern with no matches. All paths inside the loop remain quoted.
 
 ## 6. Write an R script with a clear argument contract
 
-Bash should manage paths and execution; R should parse CSV and calculate numerical summaries. This script takes an input CSV, an output CSV, and the minimum measured count needed to report a mean. It keeps total, measured, and missing counts separate.
+Bash should manage paths and execution; R should parse CSV and calculate numerical summaries. This script takes an input CSV, an output CSV, and the minimum observed count needed to report a descriptive mean. This is a practice reporting rule, not a study-design calculation. It keeps total, measured, and missing counts separate.
 
 ```bash
-cat > scripts/summarize_runs.R <<'RSCRIPT'
+cat > scripts/summarize_samples.R <<'RSCRIPT'
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) != 3L) stop("Provide input.csv output.csv minimum_count")
 minimum_count <- suppressWarnings(as.numeric(args[3]))
@@ -223,61 +264,66 @@ if (!file.exists(args[1])) stop("Input file is missing")
 if (normalizePath(args[1]) == normalizePath(args[2], mustWork = FALSE)) {
   stop("Input and output must differ")
 }
-run_data <- read.csv(args[1], na.strings = "NA", stringsAsFactors = FALSE)
-if (!identical(names(run_data), c("run_id", "bench", "minutes"))) {
-  stop("Expected run_id, bench, minutes columns")
+sample_data <- read.csv(args[1], na.strings = "NA", stringsAsFactors = FALSE,
+  colClasses = c(Participant_ID = "character", Sex = "character", Sample_Type = "character"))
+if (!identical(names(sample_data), c("Participant_ID", "Sex", "Age", "Sample_Type", "Measurement"))) {
+  stop("Expected Participant_ID, Sex, Age, Sample_Type, Measurement columns")
 }
-if (nrow(run_data) == 0L || anyNA(run_data$run_id) ||
-    any(run_data$run_id == "") || anyDuplicated(run_data$run_id)) {
-  stop("Need nonempty, unique run IDs")
+if (nrow(sample_data) == 0L || anyNA(sample_data$Participant_ID) ||
+    any(sample_data$Participant_ID == "") || anyDuplicated(sample_data$Participant_ID)) {
+  stop("Need nonempty, unique participant IDs")
 }
-if (anyNA(run_data$bench) || !all(run_data$bench %in% c("A", "B"))) {
-  stop("Bench must be A or B")
+if (anyNA(sample_data$Sample_Type) || !all(sample_data$Sample_Type %in% c("Plasma", "Serum"))) {
+  stop("Sample type must be Plasma or Serum")
 }
+if (anyNA(sample_data$Sex) || !all(sample_data$Sex %in% c("Female", "Male"))) stop("Unknown recorded sex label")
+if (!is.numeric(sample_data$Age) || anyNA(sample_data$Age) ||
+    any(!is.finite(sample_data$Age)) || any(sample_data$Age != floor(sample_data$Age)) ||
+    any(sample_data$Age < 18 | sample_data$Age > 100)) stop("Age must be integer years from 18 to 100")
 # CSV may infer an entirely missing column as logical; retain numeric NA.
-if (is.logical(run_data$minutes) && all(is.na(run_data$minutes))) {
-  run_data$minutes <- as.numeric(run_data$minutes)
+if (is.logical(sample_data$Measurement) && all(is.na(sample_data$Measurement))) {
+  sample_data$Measurement <- as.numeric(sample_data$Measurement)
 }
-if (!is.numeric(run_data$minutes) ||
-    any(!is.finite(run_data$minutes[!is.na(run_data$minutes)])) ||
-    any(run_data$minutes < 0, na.rm = TRUE)) {
-  stop("Minutes must be finite nonnegative numbers or NA")
+if (!is.numeric(sample_data$Measurement) || any(is.nan(sample_data$Measurement)) ||
+    any(!is.finite(sample_data$Measurement[!is.na(sample_data$Measurement)])) ||
+    any(sample_data$Measurement < 0, na.rm = TRUE)) {
+  stop("Measurement must be finite nonnegative mg/dL or NA")
 }
-summary_rows <- lapply(sort(unique(run_data$bench)), function(bench_name) {
-  values <- run_data$minutes[run_data$bench == bench_name]
+summary_rows <- lapply(sort(unique(sample_data$Sample_Type)), function(type_name) {
+  values <- sample_data$Measurement[sample_data$Sample_Type == type_name]
   n_measured <- sum(!is.na(values))
   data.frame(
-    bench = bench_name, n_total = length(values), n_measured = n_measured,
+    Sample_Type = type_name, n_total = length(values), n_measured = n_measured,
     n_missing = sum(is.na(values)), eligible = n_measured >= minimum_count,
-    mean_minutes = if (n_measured >= minimum_count) mean(values, na.rm = TRUE) else NA_real_
+    mean_mg_dL = if (n_measured >= minimum_count) mean(values, na.rm = TRUE) else NA_real_
   )
 })
-bench_summary <- do.call(rbind, summary_rows)
-write.csv(bench_summary, args[2], row.names = FALSE, na = "NA")
-print(bench_summary)
+sample_summary <- do.call(rbind, summary_rows)
+write.csv(sample_summary, args[2], row.names = FALSE, na = "NA")
+print(sample_summary)
 RSCRIPT
 ```
 
-**Expected:** the script file exists; writing it does not run R. The quoted heredoc preserves `$` in R column references. A base-R script does not require RStudio. Values such as `two`, zero, a negative number, or `2.5` are invalid minimum-count arguments.
+**Expected:** the script file exists; writing it does not run R. The quoted heredoc preserves `$` in R column references. Identifier and categorical columns are explicitly imported as character, preserving leading zeros. A base-R script does not require RStudio. Values such as `two`, zero, a negative number, or `2.5` are invalid minimum-count arguments.
 
 ## 7. Run the bridge, record logs, and check results
 
 ```bash
-Rscript --vanilla scripts/summarize_runs.R "input/run times.csv" output/summary.csv 2 \
+Rscript --vanilla scripts/summarize_samples.R "input/sample metadata.csv" output/summary.csv 2 \
   > logs/summary.log 2>&1
 cat logs/summary.log
 cat output/summary.csv
 ```
 
-**Expected:** A has total `3`, measured `2`, missing `1`, and mean `10` minutes. B has total `2`, measured `2`, missing `0`, and mean `18` minutes. Both meet the minimum of two measured values. `2>&1` sends standard error to the same log destination as standard output; check the exit status as well as the log.
+**Expected:** Plasma has total `3`, measured `2`, missing `1`, and mean `1.0` mg/dL. Serum has total `2`, measured `2`, missing `0`, and mean `1.2` mg/dL. Both meet the minimum of two measured values. `2>&1` sends standard error to the same log destination as standard output; check the exit status as well as the log.
 
 With a minimum of three measurements, both means should be withheld rather than presented as zero:
 
 ```bash
-Rscript --vanilla scripts/summarize_runs.R "input/run times.csv" output/minimum_three.csv 3
+Rscript --vanilla scripts/summarize_samples.R "input/sample metadata.csv" output/minimum_three.csv 3
 ```
 
-**Expected:** both `eligible` values are FALSE and both means are `NA`; record counts are unchanged. A threshold is a reporting rule, not a substitute for study design, uncertainty, or a clinically justified sample size. These summaries describe invented runs and do not support a population claim.
+**Expected:** both `eligible` values are FALSE and both means are `NA`; record counts are unchanged. A threshold is a reporting rule, not a substitute for study design, uncertainty, or a clinically justified sample size. These invented values do not establish clinical status, specimen equivalence, or a population difference. Real assay comparisons need method validation and a suitable design.
 
 ## 8. What to keep and how to rerun
 
@@ -299,17 +345,17 @@ It requires the same tools as the lesson, including Rscript, and writes logs out
 | `No such file` | Run `pwd`; compare relative paths with the current directory; keep spaces quoted |
 | `$1` is unbound | Validate argument count before accessing positional arguments |
 | Search exits with 1 | Distinguish an expected no-match from an error; handle the status in an `if` |
-| Filter rejects input | Check the exact header, three-field layout, unique IDs, bench labels, and numeric/NA convention |
-| R sees text minutes | Inspect the imported column and undocumented values; do not convert bad text to zero |
+| Filter rejects input | Check the exact header, five-field layout, unique IDs, recorded categories, integer ages, and numeric/NA convention |
+| R sees text measurements | Inspect the imported column and undocumented values; do not convert bad text to zero |
 | Output count seems too large | Account for the header and any duplicate records; compare selected and original counts |
 | Mean differs | Check the minimum measured count, missingness, units, and actual input file |
 
 ## Independent practice
 
-1. Add bench A runs with one observed value and one unavailable value. Predict total, measured, missing, and the new mean before executing.
-2. Supply an invalid bench, a duplicate ID, a negative duration, and an input/output collision. Show that each fails without replacing a valid output.
+1. Add Plasma specimens from new participants, one observed and one unavailable. Predict total, measured, missing, and the new mean before executing.
+2. Supply an invalid specimen type, a duplicate ID, a negative measurement, and an input/output collision. Show that each fails without replacing a valid output.
 3. Rename the input with spaces and rerun both scripts without changing their calculations.
-4. Adapt the output loop to a third bench. Identify every schema check and argument contract that must change together.
+4. Adapt the output loop to a third specimen type. Identify every schema check and argument contract that must change together.
 5. Explain the difference between matching text with grep, selecting a field with awk, and parsing general CSV with R.
 
 ## Ready to move on
@@ -317,9 +363,9 @@ It requires the same tools as the lesson, including Rscript, and writes logs out
 | Evidence | Completion check |
 | --- | --- |
 | Workspace | Four deliberate subdirectories; explain every relative path and quoted argument |
-| Inputs and filter | Five known runs; three A and two B; one missing measurement; duplicate input rejected |
+| Inputs and filter | Five known specimens; three Plasma and two Serum; one missing measurement; duplicate input rejected |
 | Scripts and control flow | Trace positional arguments, one conditional, one loop, one function, and a nonzero status |
-| R bridge | Report A = 10 min and B = 18 min with measured counts of two; explain the withheld means at minimum three |
+| R bridge | Report Plasma = 1.0 mg/dL and Serum = 1.2 mg/dL with measured counts of two; explain the withheld means at minimum three |
 | Reproducibility | Rerun from a fresh workspace and compare structures and counts; keep a methods note and log |
 
 Explain which commands create, inspect, transform, or replace files. Why must a missing measurement stay in the total count? What evidence shows the script failed safely rather than merely printed an error?

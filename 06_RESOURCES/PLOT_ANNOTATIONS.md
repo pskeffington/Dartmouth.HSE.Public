@@ -1,8 +1,12 @@
 # Automatic downstream plot annotations
+The examples use 48 independently simulated adult participants from `make_teaching_cohort()`. Age is years; creatinine is mg/dL; albumin is g/dL. Recorded sex and site are fictional categories, and the programmed age association is not clinical evidence. Run blocks in order from the repository root. Optional file exports create or replace the named output; choose a deliberate destination.
+
 
 Source **after** the core R plotting modules:
 
 ```r
+source("06_RESOURCES/R/hse_teaching_data.R")
+health_data <- make_teaching_cohort()
 source("06_RESOURCES/R/hse_stats_plots.R")
 source("06_RESOURCES/R/hse_one_call_plots.R")
 source("06_RESOURCES/R/hse_biostat_panels.R")
@@ -14,7 +18,8 @@ The annotation module decorates the existing plotting functions so a normal **on
 ## One-call examples
 
 ```r
-p <- hse_plot_test(mtcars, "wt", "mpg", method="pearson", fit=TRUE)
+p <- hse_plot_test(health_data, "Age", "Creatinine", method="pearson", fit=TRUE)
+p <- p + ggplot2::labs(x = "Age (years)", y = "Creatinine (mg/dL)")
 print(p)
 hse_plot_annotation(p)              # machine-readable annotation fields
 hse_plot_audit(p)                   # missing-label and caption check
@@ -22,12 +27,12 @@ hse_plot_audit(p)                   # missing-label and caption check
 # Add figure-specific publication provenance without changing the test:
 p <- hse_annotation(
   p,
-  title="Vehicle weight and fuel efficiency",
-  x="Weight (1000 lb)", y="Miles per gallon",
-  source="R datasets::mtcars",
+  title="Synthetic age and creatinine",
+  x="Age (years)", y="Creatinine (mg/dL)",
+  source="make_teaching_cohort(): independently simulated data",
   note="Exploratory association; not causal"
 )
-hse_save_annotated(p, "figures/weight_mpg.pdf", require_source=TRUE)
+hse_save_annotated(p, "figures/age_creatinine.pdf", require_source=TRUE)
 ```
 
 `hse_save_annotated()` creates the figure and a neighboring `.annotations.R` manifest containing annotation fields, units, and export size. The manifest is a base-R `dput` file readable with `dget`.

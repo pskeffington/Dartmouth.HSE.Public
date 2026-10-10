@@ -88,16 +88,16 @@ done < simple_two_column.tsv
 
 ## 5. Independent data-processing examples
 
-For a **synthetic, simple** comma-delimited table without quoted commas, the following illustrates filtering by a categorical field. It is not an assigned exercise or a solution to one:
+For a **synthetic, simple** comma-delimited table without quoted commas, the following illustrates filtering a synthetic specimen-type field (Participant_ID, Sample_Type, Measurement), with Measurement in mg/dL. It is not an assigned exercise or a solution to one:
 
 ```bash
 awk -F ',' '
   NR == 1 { print; next }
-  tolower($2) == "group_a" { print }
-' example_people.csv > selected_group.csv
+  $2 == "Serum" { print }
+' sample_metadata.csv > selected_serum.csv
 ```
 
-**Verify the column number first.** The above assumes the example category is in column 2 and no values contain quoted commas. If either assumption is false, use R's `read.csv()` or a CSV-aware tool instead. To exclude a malformed row, audit the file rather than silently guessing its meaning.
+**Verify the column number first.** The above assumes Sample_Type is in column 2 and no values contain quoted commas. If either assumption is false, use R's `read.csv()` or a CSV-aware tool instead. To exclude a malformed row, audit the file rather than silently guessing its meaning.
 
 ```bash
 # Efficient exploratory summary for a simple TSV with gene in column 1.

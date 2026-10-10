@@ -1,8 +1,12 @@
 # Biostatistics plotting panels — one-call guide
+The examples use 48 independently simulated adult participants from `make_teaching_cohort()`. Age is years; creatinine is mg/dL; albumin is g/dL. Recorded sex and site are fictional categories, and the programmed age association is not clinical evidence. Run blocks in order from the repository root. Optional file exports create or replace the named output; choose a deliberate destination.
+
 
 **Source order:**
 
 ```r
+source("06_RESOURCES/R/hse_teaching_data.R")
+health_data <- make_teaching_cohort()
 source("06_RESOURCES/R/hse_stats_plots.R")
 source("06_RESOURCES/R/hse_one_call_plots.R")
 source("06_RESOURCES/R/hse_biostat_panels.R")
@@ -27,31 +31,34 @@ The module uses native `ggplot2::facet_wrap` and `ggplot2::facet_grid`, often ca
 ## Single-call examples
 
 ```r
-data(mtcars)
-mtcars$am <- factor(mtcars$am)
-mtcars$cyl <- factor(mtcars$cyl)
 # Ready-made faceted boxplots:
-p <- hse_plot_panel_box(mtcars, "mpg", "am", "cyl")
+p <- hse_plot_panel_box(health_data, "Creatinine", "Sex", "Site")
+p <- p + ggplot2::labs(y = "Creatinine (mg/dL)")
 print(p)
 
 # Distinct tests in each panel with BH-adjusted p-values:
-p <- hse_plot_panel_wilcox(mtcars, "mpg", "am", "cyl")
+p <- hse_plot_panel_wilcox(health_data, "Creatinine", "Sex", "Site")
+p <- p + ggplot2::labs(y = "Creatinine (mg/dL)")
 print(p)
 attr(p, "hse_tests")
 
 # Model diagnostics without refitting:
-p <- hse_plot_lm_diagnostics(lm(mpg ~ wt + hp, data=mtcars))
+p <- hse_plot_lm_diagnostics(lm(Creatinine ~ Age + Albumin, data=health_data))
 print(p)
 
 # Means and pointwise CIs in groups:
-p <- hse_plot_mean_ci(mtcars, "cyl", "mpg", "am")
+p <- hse_plot_mean_ci(health_data, "Site", "Creatinine", "Sex")
+p <- p + ggplot2::labs(x = "Fictional collection site", y = "Creatinine (mg/dL)")
 print(p)
 attr(p, "hse_summary")
 
-# Forest plot uses existing estimates (example only):
-effects <- data.frame(term=c("A","B"), effect=c(.3,-.1),
-                      low=c(.1,-.3), high=c(.5,.1))
-p <- hse_plot_forest(effects,"term","effect","low","high")
+# Forest display uses coefficients computed from this synthetic model:
+exploratory_model <- lm(Creatinine ~ Age + Albumin, data = health_data)
+intervals <- confint(exploratory_model)[-1, , drop = FALSE]
+effects <- data.frame(term = c("Age (per year)", "Albumin (per g/dL)"),
+  effect = unname(coef(exploratory_model)[-1]), low = intervals[, 1], high = intervals[, 2])
+p <- hse_plot_forest(effects, "term", "effect", "low", "high",
+  x_label = "Coefficient (mg/dL per listed predictor unit)")
 print(p)
 
 # ROC needs pROC and an explicit positive class:

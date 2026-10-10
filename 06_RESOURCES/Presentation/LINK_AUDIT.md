@@ -4,6 +4,12 @@
 
 Checked October 8, 2026 (America/New_York). Repository navigation is checked against the local files and heading fragments. External destinations are checked separately; a timeout, access gate or retrieval failure does not establish that a link is broken for a human reader.
 
+## Biomedical curriculum update: October 10, 2026
+
+New biomedical and installation references were checked through their primary publishers: MedlinePlus RBC/WBC and albumin/creatinine pages, CRAN, Posit's RStudio documentation, Microsoft's WSL guide, dplyr joins, and ggplot2 density/violin/interval documentation. Posit's older download URL redirected to its current documentation; the setup guide now uses the documented installation-links section. These are links for factual background and installation, not imported teaching text or datasets.
+
+The local checker separately validates current relative paths and fragments. The historical external inventory below remains a dated record; it is not a claim that every current destination was rechecked.
+
 ## Repeat the repository checks
 
 ```bash

@@ -1,4 +1,6 @@
 # Resources
+The examples use 48 independently simulated adult participants from `make_teaching_cohort()`. Age is years; creatinine is mg/dL; albumin is g/dL. Recorded sex and site are fictional categories, and the programmed age association is not clinical evidence. Run blocks in order from the repository root. Optional file exports create or replace the named output; choose a deliberate destination.
+
 
 Reusable methods, functions, teaching references and templates for health data science. All code is educational, **not clinical decision software**.
 
@@ -7,7 +9,7 @@ Reusable methods, functions, teaching references and templates for health data s
 - [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.
 - [Easy Bash commands](Bash/EASY_COMMAND_SHEET.md): navigate, inspect, select fields and check a script.
 - [Read and explain a plot](READING_PLOTS.md): axes, distributions, groups and statistical annotations.
-- [Weekly lessons](../03_Group_Work/README.md): complete independent R lessons with synthetic examples and exercises.
+- [Weekly lessons](../03_Group_Work/README.md): complete independent R and Bash lessons with synthetic examples and exercises.
 - [Follow-along guide](../FOLLOW_ALONG.md): prepare a session and review each week.
 
 ## Choose a resource
@@ -21,7 +23,8 @@ Reusable methods, functions, teaching references and templates for health data s
 | Gene-expression heatmaps, PCA and volcano plots | [Gene graphics](R/hse_gene_visuals.R) | [R source](R/hse_gene_visuals.R) |
 | Bash syntax, operations and safe scripting | [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) | [Bash helpers](Bash/bash_functions.sh) |
 | APA 7 student manuscript example | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/Example_APA_7_Manuscript.tex) |
-| Coding practices and reproducibility literature | [Best-practices reference matrix](Literature/README.md) | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) |\n| Biomedical research computing and reporting | [Biomedical methods matrix](Literature/BIOMEDICAL_CODING_METHODS.md) | [R resources](R/README.md) |
+| Coding practices and reproducibility literature | [Best-practices reference matrix](Literature/README.md) | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) |
+| Biomedical research computing and reporting | [Biomedical methods matrix](Literature/BIOMEDICAL_CODING_METHODS.md) | [R resources](R/README.md) |
 | Naming, biomedical coding standards and quality gates | [Extensible coding standards](Literature/BIOMEDICAL_CODING_STANDARDS.md) | [General coding references](Literature/README.md) |
 | Biomedical code review and evidence gates | [Research code quality matrix](Literature/RESEARCH_CODE_QUALITY_MATRIX.md) | [Biomedical methods matrix](Literature/BIOMEDICAL_CODING_METHODS.md) |
 | Future-course research project intake and data contracts | [Project intake reference](Literature/RESEARCH_PROJECT_INTAKE.md) | [Biomedical coding conventions](Literature/BIOMEDICAL_CODING_STANDARDS.md) |
@@ -32,6 +35,8 @@ Reusable methods, functions, teaching references and templates for health data s
 Load modules in dependency order:
 
 ```r
+source("06_RESOURCES/R/hse_teaching_data.R")
+health_data <- make_teaching_cohort()
 source("06_RESOURCES/R/hse_stats_plots.R")
 source("06_RESOURCES/R/hse_gene_visuals.R")
 source("06_RESOURCES/R/hse_one_call_plots.R")
@@ -42,15 +47,15 @@ source("06_RESOURCES/R/hse_plot_annotations.R")
 **Descriptive report:**
 
 ```r
-data(mtcars)
-report <- hse_summary_report(mtcars, "mpg", unit = "miles per gallon")
+report <- hse_summary_report(health_data, "Creatinine", unit = "mg/dL")
 hse_print_summary(report)
 ```
 
 **Annotated visualization:**
 
 ```r
-plot <- hse_plot_test(mtcars, "wt", "mpg")
+plot <- hse_plot_test(health_data, "Age", "Creatinine")
+plot <- plot + ggplot2::labs(x = "Age (years)", y = "Creatinine (mg/dL)")
 hse_plot_audit(plot)
 print(plot)
 ```

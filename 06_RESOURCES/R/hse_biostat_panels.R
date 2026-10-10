@@ -163,8 +163,8 @@ hse_plot_forest <- function(data, label, estimate, lower, upper,
   ggplot2::ggplot(d, ggplot2::aes(x = .data$estimate, y = .data$term)) +
     ggplot2::geom_vline(xintercept = reference, linetype = "dashed",
                         color = "grey55") +
-    ggplot2::geom_errorbarh(ggplot2::aes(xmin = .data$low,
-                                       xmax = .data$high), height = .18) +
+    ggplot2::geom_errorbar(ggplot2::aes(xmin = .data$low,
+                                      xmax = .data$high), width = .18, orientation = "y") +
     ggplot2::geom_point(size = 2.1) +
     ggplot2::labs(x = x_label, y = NULL, title = "Effect estimates and intervals") +
     hse_theme()

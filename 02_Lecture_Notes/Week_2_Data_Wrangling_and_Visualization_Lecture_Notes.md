@@ -1,4 +1,4 @@
-# Paul's Notes — Week 2: Data wrangling and visualization
+# Paul's Notes · Week 2: Participant Data, Reshaping, and Graphs
 
 [Section index](README.md) · [Editable R Markdown](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
@@ -6,168 +6,77 @@
 
 ## On this page
 
-- [Purpose and learning objectives](#purpose-and-learning-objectives)
-- [Before you start](#before-you-start)
-- [1. Make random data reproducible](#1-make-random-data-reproducible)
-- [2. Set boundaries and build derived categories](#2-set-boundaries-and-build-derived-categories)
-- [3. Distinguish wide and long data](#3-distinguish-wide-and-long-data)
-- [4. Build a plot by mapping data to axes](#4-build-a-plot-by-mapping-data-to-axes)
-- [5. Inspect paired measurements with scatter plots](#5-inspect-paired-measurements-with-scatter-plots)
-- [6. Summarize, audit missingness, and check visualization](#6-summarize-audit-missingness-and-check-visualization)
-- [7. Explain each method in your own words](#7-explain-each-method-in-your-own-words)
-- [8. Final self-check: what Week 2 mastery requires](#8-final-self-check-what-week-2-mastery-requires)
+- [Purpose and dependencies](#purpose-and-dependencies)
+- [Simulation parameters and scientific limits](#simulation-parameters-and-scientific-limits)
+- [Missingness, derived fields, and factors](#missingness-derived-fields-and-factors)
+- [Wide and long are layouts, not new participants](#wide-and-long-are-layouts-not-new-participants)
+- [Choosing and reading a graph](#choosing-and-reading-a-graph)
+- [Misconceptions and self-check](#misconceptions-and-self-check)
 
-## Purpose and learning objectives
+## Purpose and dependencies
 
-Learn simulation, tabular transformation, missing-data checks, and visualization principles.
+Use this reference with the [complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md). **Study time:** 30–40 minutes. **Prerequisites:** Week 1; R and tidyr for the examples below. The full lesson also uses dplyr and ggplot2. Explain the participant key, measurement units, and repeated-observation structure.
 
-## Before you start
+## Simulation parameters and scientific limits
 
-R with tidyr and ggplot2. Install these in your own R library before running the examples. Read the [complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
-
-## 1. Make random data reproducible
-
-**Core concept:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.
+A pseudorandom seed controls a compatible generator's starting state. Sample size determines the number of draws; distribution parameters describe a mechanism, not exact sample moments. A normal generator is unbounded. Clipping creates boundary piles; rejection samples within a bound and changes the resulting distribution. None of these choices validates a clinical model.
 
 ```r
-set.seed(246)
-n_samp <- 12L
-practice_df <- data.frame(
-  participant_id = sprintf("P%03d", seq_len(n_samp)),
-  age = round(rnorm(n_samp, mean = 45, sd = 8)),
-  group = sample(c("A", "B"), n_samp, replace = TRUE)
-)
-head(practice_df)
-stopifnot(nrow(practice_df) == n_samp)
+set.seed(77201)
+reference_WBC <- runif(8, min = 4.8, max = 9.6)
+set.seed(77201)
+stopifnot(identical(reference_WBC, runif(8, 4.8, 9.6)))
+stopifnot(length(reference_WBC) == 8L, all(reference_WBC >= 4.8 & reference_WBC <= 9.6))
+print(round(reference_WBC, 2))
 ```
 
-**Why it works:** `set.seed()` makes the sequence reproducible for compatible R versions and settings. `rnorm()` makes numeric observations; `sample()` draws labels; `data.frame()` places equal-length vectors into columns.
+**Expected:** eight repeatable invented WBC values in 10^9 cells/L. Uniform limits are chosen for practice and are not a laboratory reference interval. RBC is commonly expressed in 10^12 cells/L; do not combine the two fields into one unqualified numeric axis.
 
-**Mastery checkpoint:** Change the seed and explain what changes; change only the sample size and verify row count and unique IDs.
+## Missingness, derived fields, and factors
 
-## 2. Set boundaries and build derived categories
-
-Categorization tools include `cut()`, `factor()`, and `case_when()`. A derived category must be calculated *after* its source columns exist. If you clip values with `pmax()` and `pmin()`, values accumulate at boundaries; **clipping is not the same as sampling from a truncated normal distribution**.
+Participant identifiers remain stable across visits. Factors encode categories with declared levels. A derived category must follow the source measurement's creation and missingness decision; an unknown value must stay unknown. A simulation-centre split is not a diagnostic cutoff.
 
 ```r
-practice_df$score <- pmax(0, pmin(100, round(rnorm(n_samp, 65, 18))))
-practice_df$score_group <- factor(
-  ifelse(practice_df$score >= 70, "Higher", "Lower"),
-  levels = c("Lower", "Higher")
-)
-
-table(practice_df$score_group, useNA = "ifany")
-stopifnot(all(practice_df$score >= 0 & practice_df$score <= 100))
+reference_WBC[3] <- NA_real_
+reference_status <- factor(ifelse(is.na(reference_WBC), "Missing", "Observed"),
+                           levels = c("Observed", "Missing"))
+print(table(reference_status))
+stopifnot(sum(reference_status == "Observed") == 7L)
 ```
 
-**Why it works:** Comparisons produce logical values. `ifelse()` chooses labels row by row, and `factor()` specifies the category order. For more than two categories, try `dplyr::case_when()`.
+**Expected:** seven observed, one missing of eight. Available-case means need this denominator. A separate reason field, if known, provides information that NA alone cannot.
 
-**Mastery checkpoint:** Articulate the exact inclusive or exclusive boundary and test a value equal to the threshold.
-
-## 3. Distinguish wide and long data
-
-**Core concept:** One person can occupy one row in wide form, with several measurement columns. Long form holds one measurement per row. The change reorganizes observations; it does not generate new participants.
+## Wide and long are layouts, not new participants
 
 ```r
-# Requires tidyr. Install separately if it is not already available.
-library(tidyr)
-
-practice_df$reading_a <- seq_len(n_samp) + 10
-practice_df$reading_b <- seq_len(n_samp) + 20
-
-reading_long <- pivot_longer(
-  practice_df,
-  cols = c(reading_a, reading_b),
-  names_to = "reading_type",
-  values_to = "reading_value"
-)
-
-stopifnot(nrow(reading_long) == 2L * nrow(practice_df))
-head(reading_long)
-
-reading_wide <- pivot_wider(
-  reading_long,
-  names_from = reading_type,
-  values_from = reading_value
-)
-stopifnot(nrow(reading_wide) == nrow(practice_df))
+if (!requireNamespace("tidyr", quietly = TRUE)) stop("Install tidyr in your own R library")
+reference_wide <- data.frame(Participant_ID = c("Q01", "Q02", "Q03"),
+                             WBC_Baseline = c(6.1, 7.2, 5.9), WBC_FollowUp = c(6.4, NA, 6.0))
+reference_long <- tidyr::pivot_longer(reference_wide, tidyr::starts_with("WBC_"),
+  names_to = "Visit", names_prefix = "WBC_", values_to = "WBC_Count")
+stopifnot(nrow(reference_long) == 6L, !anyDuplicated(reference_long[c("Participant_ID", "Visit")]))
+reference_recovered <- tidyr::pivot_wider(reference_long, names_from = Visit,
+  names_prefix = "WBC_", values_from = WBC_Count)
+stopifnot(isTRUE(all.equal(as.data.frame(reference_recovered), reference_wide, check.attributes = FALSE)))
+print(reference_long)
 ```
 
-**Why it works:** Each original participant contributes two long-form measurement rows. `pivot_wider()` can reverse the transformation if the identifier and measurement-type combinations are unique.
+**Expected:** six participant–visit rows for three people; one missing measurement; unchanged values after recovery. The compound key is Participant_ID plus Visit. Visit-specific fields belong to measurements, not participant-level identifiers. Duplicate keys can produce list-columns in `pivot_wider()`.
 
-**Mastery checkpoint:** Identify which columns must remain as stable participant identifiers, then explain why long-form row count increases.
+## Choosing and reading a graph
 
-## 4. Build a plot by mapping data to axes
+| Graph | Reading rule and limitation |
+| --- | --- |
+| Histogram | Bars count measured observations in bins; bin choice changes appearance |
+| Density | A smoothed distribution with approximately unit area; height is not probability at a point |
+| Scatter | Each point pairs two fields on one observation unit; association is not causation |
+| Box with points | Shows center/spread and individual observations; tiny groups give unstable summaries |
+| Repeated-visit display | Link the same participant across visits; rows remain dependent |
 
-A `ggplot()` call specifies the data and the visual mapping. A geometry determines how the values appear. For grouped boxes, the x position holds the measurement category, y holds a numeric value, and the fill indicates a grouping variable.
+In ggplot2, data define observations, `aes()` maps fields to visual properties, and a geometry specifies marks. Label axes with the precise field and unit. Summaries need total, measured, and missing counts. Repeated visits are paired because of participant identity, not because rows happen to be adjacent. Complete-pair changes and available-case visit means can use different subsets.
 
-```r
-library(ggplot2)
+## Misconceptions and self-check
 
-ggplot(
-  reading_long,
-  aes(x = reading_type, y = reading_value, fill = group)
-) +
-  geom_boxplot() +
-  labs(
-    title = "Illustrative measurements by group",
-    x = "Measurement type",
-    y = "Illustrative units",
-    fill = "Group"
-  ) +
-  theme_minimal()
-```
+Reproduce a seeded sample, explain its bounds, preserve missingness in a derived variable, and reverse a pivot without changing values. Explain why six long rows above are not six people, and why a density curve or a visually separated group does not establish clinical significance. The full lesson supplies labeled graphs, paired changes, debugging, and independent exercises.
 
-**Why it works:** Each box summarizes the central distribution and spread of one combination of variables. With very small groups, box shapes can be unstable. Compare histograms, jitter plots, and scatter plots for different analytical questions.
-
-**Mastery checkpoint:** Explain the mapping and each axis in plain language without claiming that a group difference is statistically significant.
-
-## 5. Inspect paired measurements with scatter plots
-
-A scatter plot displays two values measured on the same observational unit. It can reveal direction, curvature, clusters, or outlying values, but does not establish a causal relationship.
-
-```r
-ggplot(practice_df, aes(x = reading_a, y = reading_b)) +
-  geom_point() +
-  labs(
-    title = "Relationship between two practice measurements",
-    x = "Reading A (illustrative units)",
-    y = "Reading B (illustrative units)"
-  ) +
-  theme_minimal()
-```
-
-**Mastery checkpoint:** Explain why the input for this comparison is the wide-form table and why a plot alone cannot establish causality.
-
-## 6. Summarize, audit missingness, and check visualization
-
-```r
-summary(practice_df$age)
-sum(is.na(practice_df$age))
-aggregate(score ~ group, data = practice_df, FUN = mean)
-```
-
-**Why it works:** Summaries describe values by group, while `is.na()` identifies missing data. Means calculated from available cases must say how missing observations were handled. Anscombe's quartet demonstrates that similar summary statistics can conceal very different patterns.
-
-**Mastery checkpoint:** Describe the denominator for a missingness rate, then state one limitation of the displayed plot.
-
-## 7. Explain each method in your own words
-
-For every analysis, identify its input, operation, output, validation, and interpretation. Do not merely state that the command ran. Document thresholds and required fields for your own analysis; rehearse the logic with independent practice variables first.
-
-## 8. Final self-check: what Week 2 mastery requires
-
-Mark each objective only when you can **perform and explain it without copying a solution**.
-
-- [ ] **Simulation:** Create a labeled table with a fixed seed, correct number of rows, reproducible IDs, and documented distributions.
-- [ ] **Rules and factors:** Produce categorical variables from explicit conditions; test boundary values and account for missing values.
-- [ ] **Reshaping:** Convert two numeric columns to long form, verify the expected row count, and recover wide form using identifiers.
-- [ ] **Plot design:** Build and label grouped box, histogram, and scatter plots from the appropriate data representation.
-- [ ] **Interpretation:** Describe shape, spread, grouping, and outliers without confusing descriptive patterns with inference or causation.
-- [ ] **Quality assurance:** Re-run from a clean session; verify dimensions, classes, factor levels, missingness, and required packages.
-
-**Mastery standard:** All six objectives demonstrated with a fresh toy dataset; each plot must have a defensible interpretation, and the workflow must run in order without relying on undeclared objects. If any step fails, revisit the corresponding section and repeat that checkpoint.
-
-**Related:** [Week 2 study reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) · [Complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) · [Topic index](README.md)
-
-[Previous topic](Week_1_Introduction_to_R_Lecture_Notes.md) · [Next topic](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Paul's Notes](../README.md)
+[Previous topic](Week_1_Introduction_to_R_Lecture_Notes.md) · [Next topic](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Topic index](README.md) · [tidyr pivots](https://tidyr.tidyverse.org/reference/pivot_longer.html)

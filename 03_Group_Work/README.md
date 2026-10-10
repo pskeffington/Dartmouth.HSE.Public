@@ -2,14 +2,14 @@
 
 [Paul's Notes](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md) · [R resources](../06_RESOURCES/R/README.md)
 
-Start here for complete independent lessons with synthetic inputs, worked examples, expected results, debugging guidance, practice, and teach-back questions.
+Start here for complete biomedical teaching lessons with synthetic inputs, worked examples, expected results, debugging guidance, practice, and teach-back questions.
 
 | Lesson | What you will learn | Study time | Dependencies |
 | --- | --- | --- | --- |
-| [Week 1: R foundations](Week_1_Group_Work_Narrative_Walkthrough.md) | Objects, indexing, missing values, functions, tables, import/export, and histograms | 75–100 minutes | Base R |
-| [Week 2: Wrangling and visualization](Week_2_Group_Work_Narrative_Walkthrough.md) | Simulation, pivots, keys, grouped summaries, graphs, and paired comparisons | 90–120 minutes | R, tidyr, dplyr, ggplot2 |
-| [Week 3: Visualization and analytics](Week_3_Group_Work_Narrative_Walkthrough.md) | Joins, nonresponse, distributions, regression, diagnostics, and reusable functions | 90–120 minutes | R, dplyr >= 1.1.0 |
-| [Week 4: Bash and reproducible workflows](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) | Files, quoting, validation, filtering, scripts, loops, exit status, and a Bash-to-R bridge | 90–120 minutes | Bash 3.2+, standard utilities, base Rscript |
+| [Week 1: R foundations](Week_1_Group_Work_Narrative_Walkthrough.md) | Synthetic expression, objects, indexing, missingness, functions, import/export, and histograms | 90–120 minutes | Base R |
+| [Week 2: Wrangling and visualization](Week_2_Group_Work_Narrative_Walkthrough.md) | Participant RBC/WBC simulation, visits, pivots, summaries, density and paired comparisons | 100–140 minutes | R, tidyr, dplyr, ggplot2 |
+| [Week 3: Visualization and analytics](Week_3_Group_Work_Narrative_Walkthrough.md) | Health-table imports, joins, survey coding, inclusion, models, diagnostics, and panels | 120–160 minutes | R, dplyr >= 1.1.0, ggplot2 |
+| [Week 4: Bash and reproducible workflows](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) | Scientific metadata, files, quoting, validation, filtering, scripts, logs, and a Bash-to-R bridge | 90–120 minutes | Bash 3.2+, standard utilities, base Rscript |
 
 Read the Markdown editions directly on GitHub. Each links to its authoritative `.Rmd` source and the adjacent lesson. Run executable blocks in order in a clean R or Bash session, as specified by the lesson; dependency checks explain what is needed and never silently install software.
 

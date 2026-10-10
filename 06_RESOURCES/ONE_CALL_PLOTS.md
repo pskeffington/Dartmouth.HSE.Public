@@ -1,26 +1,30 @@
 # One-call statistical plots — R
+The examples use 48 independently simulated adult participants from `make_teaching_cohort()`. Age is years; creatinine is mg/dL; albumin is g/dL. Recorded sex and site are fictional categories, and the programmed age association is not clinical evidence. Run blocks in order from the repository root. Optional file exports create or replace the named output; choose a deliberate destination.
+
 
 Load these files **in order** from the repository root:
 
 ```r
+source("06_RESOURCES/R/hse_teaching_data.R")
+health_data <- make_teaching_cohort()
 source("06_RESOURCES/R/hse_stats_plots.R")
 source("06_RESOURCES/R/hse_one_call_plots.R")
 ```
 
 These functions run the test, build a ready-to-print `ggplot2` visualization, and put the full `htest` result in `attr(p, "hse_test")`. No external plot-annotation package is required. The functions use **complete observations** and never infer pairing.
 
-## Ready-to-deploy examples
+## Runnable synthetic examples
 
 ```r
 # Linear best-fit line + confidence band + Pearson correlation p-value
-p <- hse_plot_test(mtcars, "wt", "mpg", method="pearson", fit=TRUE)
+p <- hse_plot_test(health_data, "Age", "Creatinine", method="pearson", fit=TRUE)
+p <- p + ggplot2::labs(x = "Age (years)", y = "Creatinine (mg/dL)")
 print(p)
 attr(p, "hse_test")
 
 # Independent groups: Wilcoxon rank-sum p-value
-data(mtcars)
-mtcars$am <- factor(mtcars$am)
-p <- hse_plot_wilcox(mtcars, "mpg", "am")
+p <- hse_plot_wilcox(health_data, "Creatinine", "Sex")
+p <- p + ggplot2::labs(y = "Creatinine (mg/dL)")
 print(p)
 
 # Repeated measurements: subject IDs are required
@@ -28,8 +32,8 @@ print(p)
 #                      paired=TRUE, id="Participant")
 
 # Three or more groups: omnibus Kruskal-Wallis and BH pairwise comparisons
-mtcars$cyl <- factor(mtcars$cyl)
-p <- hse_plot_multigroup(mtcars,"mpg","cyl",p_adjust="BH")
+p <- hse_plot_multigroup(health_data,"Creatinine","Site",p_adjust="BH")
+p <- p + ggplot2::labs(y = "Creatinine (mg/dL)")
 print(p)
 attr(p, "hse_posthoc")$p.value
 

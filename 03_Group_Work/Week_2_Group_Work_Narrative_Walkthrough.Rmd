@@ -1,239 +1,245 @@
 ---
-title: "Paul's Notes · Week 2: Data Wrangling and Visualization"
+title: "Paul's Notes · Week 2: Participant Measurements and Visualization"
 author: "Paul Skeffington"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    css: ../06_RESOURCES/Presentation/reading.css
 ---
 
-This study guide simulates packing-station timings in seconds. The invented values illustrate simulation, reshaping, and plot interpretation rather than empirical or clinical findings.
+Simulate an adult participant table with red and white blood-cell measurements, then reshape repeated visits and interpret graphs. All people, values, and sampling mechanisms are invented. The simulation teaches data structure; it is not a clinical reference population or a diagnostic model.
 
-**Study time:** 90–120 minutes. **Prerequisites:** Week 1 vectors, data frames, factors, and missingness. **Dependencies:** R plus `tidyr`, `dplyr`, and `ggplot2`. Run blocks in order in a clean session. The reading edition includes expected results but does not execute R.
+**Study time:** 100–140 minutes. **Prerequisites:** Week 1 objects, indexing, factors, and missingness. **Dependencies:** R, tidyr, dplyr, ggplot2. Run blocks in order in a fresh session.
 
-## Learning objectives and setup
+[Previous: Week 1](Week_1_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [Topic companion](../02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Next: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md)
 
-You will explain reproducible random draws, derive ordered categories, reshape repeated observations without losing identifiers, summarize denominators, create three kinds of graph, and distinguish paired comparisons from independent-group inference.
+## Learning objectives
+
+Simulate reproducible participant measurements; validate IDs, types, ranges, and factors; derive categories without erasing missingness; pivot wide/long tables and recover values; summarize denominators; draw histograms, densities, scatter and grouped plots; distinguish repeated observations from independent participants.
+
+## Scientific motivation and data dictionary
+
+A participant may provide multiple specimens or attend several visits. A study's row count depends on its layout. A valid summary therefore needs both the measurement units and the number of contributing participants.
+
+| Field | Meaning in this simulation |
+| --- | --- |
+| Participant_ID | Unique invented adult participant; one row per baseline participant |
+| Age | Integer years, sampled uniformly from 20–75 |
+| Sex | Fictional recorded female/male category, sampled independently; this simplified field is not a model of sex or gender diversity |
+| RBC_Count | Red blood cells, in 10^12 cells/L (equivalent to millions/µL) |
+| WBC_Count | White blood cells, in 10^9 cells/L (equivalent to thousands/µL) |
+| Visit | Baseline or FollowUp in the repeated-measurement example |
+| Measurement_Status | Observed or Missing for the selected measurement |
+
+Cell-count units follow standard laboratory reporting conventions; see [MedlinePlus RBC](https://medlineplus.gov/ency/article/003644.htm) and [WBC](https://medlineplus.gov/ency/article/003643.htm) background. The simulation bounds below are chosen for plausible-scale practice, **not diagnostic thresholds or reference intervals**. Laboratory interpretation depends on the population, specimen, method, and clinical context.
+
+## 1. Check dependencies and define a bounded generator
 
 ```{r dependencies}
 needed_packages <- c("tidyr", "dplyr", "ggplot2")
 unavailable <- needed_packages[!vapply(needed_packages, requireNamespace, logical(1), quietly = TRUE)]
-if (length(unavailable)) {
-  stop("Install these packages in your own R library: ",
-       paste(unavailable, collapse = ", "))
+if (length(unavailable)) stop("Install in your own R library: ", paste(unavailable, collapse = ", "))
+bounded_normal <- function(n, centre, spread, lower, upper) {
+  if (length(n) != 1L || !is.finite(n) || n < 1 || n != floor(n)) stop("n must be a positive integer")
+  if (!all(is.finite(c(centre, spread, lower, upper))) || spread <= 0 || lower >= upper) {
+    stop("Need finite parameters, positive spread, and ordered bounds")
+  }
+  values <- numeric(0)
+  for (attempt in seq_len(1000L)) {
+    batch <- rnorm(max(20L, n), mean = centre, sd = spread)
+    values <- c(values, batch[batch >= lower & batch <= upper])
+    if (length(values) >= n) return(values[seq_len(n)])
+  }
+  stop("Bounds rejected too many draws; reconsider the generator")
 }
 ```
 
-**Expected:** no output if the three packages are available. If not, use `install.packages(c("tidyr", "dplyr", "ggplot2"))` in your own R environment, then rerun this check. The lesson never installs packages automatically. Namespaced calls such as `tidyr::pivot_longer()` show which package supplies a function.
+**Expected:** no output when dependencies are available. Install them separately with `install.packages(c("tidyr", "dplyr", "ggplot2"))`. The function rejects draws outside bounds rather than changing them into boundary values. Its attempt limit avoids an endless loop for impractical parameters.
 
-## 1. A reproducible simulated population of observations
+Clipping with `pmax(lower, pmin(upper, x))` creates piles at boundaries; rejection samples conditionally inside the interval. Neither method creates empirical biological validity. The centre/spread describe the original normal generator; truncation changes its resulting moments.
 
-A random-number seed fixes the generator's starting state. It makes a specified sequence reproducible in a compatible R environment; it does not make simulated values real. Changing the number or order of random draws changes later values, even if the seed stays the same.
+## 2. Construct reproducible participant observations
 
-```{r station-simulation}
-set.seed(8216)
-station_seconds <- rnorm(48, mean = 85, sd = 9)
-set.seed(8216)
-repeat_seconds <- rnorm(48, mean = 85, sd = 9)
-stopifnot(identical(station_seconds, repeat_seconds), length(station_seconds) == 48L)
-station_sample <- data.frame(
-  station = sprintf("p%02d", seq_along(station_seconds)),
-  lane = factor(rep(c("north", "south"), each = 24), levels = c("north", "south")),
-  seconds = station_seconds
-)
-print(round(c(sample_mean = mean(station_seconds), sample_sd = sd(station_seconds)), 2))
-```
-
-**Observable behavior:** 48 numeric draws, two lanes of 24 unique station identifiers, and identical repeated draws. The sample mean and sample standard deviation are near the generating values `85` and `9`, not guaranteed equal to them. Normal-distribution parameters describe the generator; sample size controls how many observations are drawn. Normal draws have unbounded support, so they are not automatically suitable for quantities that must be positive.
-
-Increasing sample size usually stabilizes estimates of the generating distribution; it does not repair a badly chosen distribution or an incorrect design. The lane labels here were assigned without a simulated lane effect. Any lane difference is random variation in this construction.
-
-## 2. Clipping is not truncated sampling
-
-Clipping replaces values below a boundary with the boundary. It creates a pile of identical values at that boundary. A truncated distribution instead samples conditional on being inside the allowed range: out-of-range draws are rejected and replaced.
-
-```{r clipping-versus-rejection}
-illustrative_draws <- c(-2, -0.5, 0.4, 1.8)
-clipped_draws <- pmax(illustrative_draws, 0)
-print(clipped_draws)
-set.seed(9123)
-positive_draws <- numeric(0)
-while (length(positive_draws) < 48L) {
-  batch <- rnorm(80, mean = 1, sd = 1)
-  positive_draws <- c(positive_draws, batch[batch > 0])
+```{r participant-simulation}
+simulate_cohort <- function(seed) {
+  set.seed(seed)
+  n <- 36L
+  data.frame(
+    Participant_ID = sprintf("B%03d", seq_len(n)),
+    Age = sample(20:75, n, replace = TRUE),
+    Sex = factor(sample(c("Female", "Male"), n, replace = TRUE), levels = c("Female", "Male")),
+    RBC_Count = bounded_normal(n, 4.8, 0.4, 3.6, 6.2),
+    WBC_Count = bounded_normal(n, 7, 1.5, 3.5, 12)
+  )
 }
-positive_draws <- positive_draws[seq_len(48L)]
-stopifnot(identical(clipped_draws, c(0, 0, 0.4, 1.8)))
-stopifnot(length(positive_draws) == 48L, all(positive_draws > 0))
+participants <- simulate_cohort(68104L)
+stopifnot(identical(participants, simulate_cohort(68104L)))
+stopifnot(nrow(participants) == 36L, !anyDuplicated(participants$Participant_ID))
+stopifnot(all(participants$Age >= 20 & participants$Age <= 75))
+stopifnot(all(participants$RBC_Count >= 3.6 & participants$RBC_Count <= 6.2))
+stopifnot(all(participants$WBC_Count >= 3.5 & participants$WBC_Count <= 12))
+print(head(participants))
+print(round(c(RBC_mean = mean(participants$RBC_Count), WBC_mean = mean(participants$WBC_Count)), 3))
 ```
 
-**Expected:** clipping produces `0, 0, 0.4, 1.8`; rejection yields 48 strictly positive draws and no replacement zeros. Rejecting negative draws changes the distribution's mean and spread: the parameters of the untruncated normal are not the resulting truncated sample's moments. This simple loop is reasonable for this acceptance rate; specialized sampling is preferable for extreme truncation.
+**Expected:** 36 unique participants, documented numeric ranges, two declared Sex levels, and identical repeated generation with the same seed. Printed means are computed by your run; they need not equal 4.8 and 7. The generator has no age or sex effects and samples the two counts independently. An apparent correlation or category difference is random variation here, not biological evidence.
 
-## 3. Derived categories and missing-value summaries
+A pseudorandom seed fixes a starting state for a compatible generator. Changing the number or order of random draws changes subsequent values. Larger samples stabilize a specified mechanism; they do not repair an unrealistic mechanism or sampling bias.
 
-A threshold translates a numeric measurement into a category. Choose and document it before interpreting differences; do not optimize a cutoff after seeing an attractive plot. Categorization loses within-category information.
+## 3. Missing measurements and derived categories
 
 ```{r categories-and-missingness}
-station_sample$seconds[c(5, 32)] <- NA_real_
-# Set missing measurements before deriving their categories.
-station_sample$pace <- factor(
-  ifelse(station_sample$seconds < 85, "under target", "at or over target"),
-  levels = c("under target", "at or over target")
+participants$RBC_Count[c(4, 27)] <- NA_real_
+participants$Measurement_Status <- factor(
+  ifelse(is.na(participants$RBC_Count), "Missing", "Observed"),
+  levels = c("Observed", "Missing")
 )
-print(table(station_sample$pace, useNA = "ifany"))
-stopifnot(sum(is.na(station_sample$seconds)) == 2L)
-stopifnot(sum(is.na(station_sample$pace)) == 2L)
-stopifnot(identical(levels(station_sample$pace), c("under target", "at or over target")))
+participants$RBC_Band <- factor(
+  ifelse(is.na(participants$RBC_Count), NA_character_,
+         ifelse(participants$RBC_Count < 4.8, "Below simulation centre", "At/above simulation centre")),
+  levels = c("Below simulation centre", "At/above simulation centre")
+)
+print(table(participants$Measurement_Status))
+print(table(participants$RBC_Band, useNA = "ifany"))
+stopifnot(sum(is.na(participants$RBC_Count)) == 2L, sum(is.na(participants$RBC_Band)) == 2L)
 ```
 
-**Expected:** category counts total 46 known timings plus two unknown categories. An unknown timing must not become an ordinary "slow" or "fast" category. Factor levels set the display order and remain present even if a category has no observations.
+**Expected:** 34 observed and two missing RBC values; band counts total 34 known plus two unknown. The 4.8 split describes a chosen simulation centre, not low/high clinical status. Derive categories after their source values exist and missingness has been assigned. A missing value must not be classified as an ordinary category. In real data, record the reason for missingness when known instead of inferring it from NA.
 
-## 4. Wide and long tables describe the same repeated readings
+## 4. Wide and long repeated visits
 
-Wide data have separate columns for repeated measurements. Long data put the measurement label in one column and the value in another. Neither representation is universally best. A reshape should change layout, not identifiers, values, or the meaning of one observation.
+Use a separate small deterministic table to see every value. One wide row is a participant with two visits; one long row is a participant–visit measurement.
 
-```{r repeated-readings}
-packing_wide <- data.frame(
-  station = c("p01", "p02", "p03", "p04", "p05", "p06"),
-  lane = factor(c("north", "north", "north", "south", "south", "south")),
-  before_s = c(84, 91, 88, 95, 87, 90),
-  after_s = c(80, 86, NA, 92, 82, 89)
+```{r repeated-measurements}
+visits_wide <- data.frame(
+  Participant_ID = sprintf("V%02d", 1:6),
+  Sex = factor(c("Female", "Male", "Female", "Male", "Female", "Male")),
+  RBC_Baseline = c(4.4, 5.1, 4.8, 5.5, 4.7, 5.0),
+  RBC_FollowUp = c(4.5, 5.0, NA, 5.2, 4.8, 5.1)
 )
-stopifnot(!anyDuplicated(packing_wide$station))
-packing_long <- tidyr::pivot_longer(
-  packing_wide, cols = c(before_s, after_s),
-  names_to = "occasion", values_to = "seconds"
-)
-packing_long$occasion <- factor(packing_long$occasion, levels = c("before_s", "after_s"))
-print(packing_long)
-stopifnot(nrow(packing_long) == 12L, sum(is.na(packing_long$seconds)) == 1L)
-stopifnot(!anyDuplicated(packing_long[c("station", "occasion")]))
+stopifnot(!anyDuplicated(visits_wide$Participant_ID))
+visits_long <- tidyr::pivot_longer(visits_wide, cols = c(RBC_Baseline, RBC_FollowUp),
+                                  names_to = "Visit", names_prefix = "RBC_", values_to = "RBC_Count")
+visits_long$Visit <- factor(visits_long$Visit, levels = c("Baseline", "FollowUp"))
+visits_long$Measurement_Status <- ifelse(is.na(visits_long$RBC_Count), "Missing", "Observed")
+print(visits_long)
+stopifnot(nrow(visits_long) == 12L, sum(is.na(visits_long$RBC_Count)) == 1L)
+stopifnot(!anyDuplicated(visits_long[c("Participant_ID", "Visit")]))
 ```
 
-**Expected:** twelve rows: one per station and occasion. `p03` has `88` before and `NA` after. The row key is now the combination of station and occasion; station alone appropriately repeats. `values_drop_na` is not used: keeping the missing row preserves the intended observation structure.
+**Expected:** 12 rows, six unique participants, and one unavailable follow-up. The key is Participant_ID plus Visit. Repeating an identifier is appropriate in long form; repeating that compound key would require investigation.
 
 ```{r reshape-round-trip}
-packing_again <- tidyr::pivot_wider(
-  packing_long, id_cols = c(station, lane),
-  names_from = occasion, values_from = seconds
-)
-stopifnot(nrow(packing_again) == 6L)
-stopifnot(identical(packing_again$station, packing_wide$station))
-stopifnot(isTRUE(all.equal(packing_again$before_s, packing_wide$before_s)))
-stopifnot(isTRUE(all.equal(packing_again$after_s, packing_wide$after_s)))
+recovered <- tidyr::pivot_wider(visits_long[c("Participant_ID", "Sex", "Visit", "RBC_Count")],
+                                names_from = Visit, names_prefix = "RBC_", values_from = RBC_Count)
+recovered <- recovered[match(visits_wide$Participant_ID, recovered$Participant_ID), names(visits_wide)]
+stopifnot(nrow(recovered) == 6L)
+stopifnot(isTRUE(all.equal(as.data.frame(recovered), visits_wide, check.attributes = FALSE)))
 ```
 
-**Expected:** six rows with the original before/after values and missingness. If widening produces list columns, check for duplicate station–occasion keys. Do not silently average duplicates: first determine whether they are legitimate repeated observations or a data error.
+**Expected:** the original six participants and values, including NA, are recovered. Exclude the visit-specific status field from the participant identifier set when widening; otherwise it can split one participant into several rows. Verify values and keys, not only row count. Duplicate combinations can create list-columns instead of a single numeric value.
 
-## 5. Grouped summaries need explicit denominators
-
-A mean without an available count can conceal missing observations. Summarize total, available, and unavailable counts alongside mean and standard deviation. A group's standard deviation needs at least two measured values.
+## 5. Group summaries and denominators
 
 ```{r grouped-summaries}
-lane_summary <- dplyr::summarise(
-  dplyr::group_by(packing_long, lane, occasion),
-  rows = dplyr::n(),
-  measured = sum(!is.na(seconds)),
-  missing = sum(is.na(seconds)),
-  mean_s = mean(seconds, na.rm = TRUE),
-  sd_s = sd(seconds, na.rm = TRUE),
-  .groups = "drop"
-)
-print(lane_summary)
-stopifnot(nrow(lane_summary) == 4L, sum(lane_summary$measured) == 11L)
-stopifnot(isTRUE(all.equal(lane_summary$mean_s, c(263/3, 83, 272/3, 263/3))))
+visit_summary <- dplyr::summarise(dplyr::group_by(visits_long, Visit),
+  n_total = dplyr::n(), n_measured = sum(!is.na(RBC_Count)), n_missing = sum(is.na(RBC_Count)),
+  mean_RBC = if (all(is.na(RBC_Count))) NA_real_ else mean(RBC_Count, na.rm = TRUE), .groups = "drop")
+print(visit_summary)
+stopifnot(identical(visit_summary$n_total, c(6L, 6L)))
+stopifnot(identical(visit_summary$n_measured, c(6L, 5L)))
+stopifnot(isTRUE(all.equal(visit_summary$mean_RBC, c(29.5/6, 4.92))))
 ```
 
-**Expected:** four lane–occasion groups. North before has mean `87.67` from three readings, north after `83` from two; south before `90.67` and after `87.67`, each from three. `.groups = "drop"` avoids accidentally carrying grouping into later operations. These descriptive differences are not evidence of an intervention effect.
+**Expected:** baseline uses six measurements, mean about 4.917; follow-up uses five, mean 4.92, in 10^12 cells/L. These available-case means compare different contributing sets. Report total, measured, and missing counts; an entirely unavailable group should return NA, not a misleading zero.
 
-## 6. Three plots answer different questions
+## 6. Histogram, density, and scatter plots
 
-All plotted timings below are synthetic. The code explicitly excludes missing values so the denominator is clear.
+Exclude unavailable values explicitly and preserve the exclusion count. A histogram summarizes bins; density estimates smooth shape; scatter compares two numeric fields from the same participant.
 
-```{r histogram-and-scatter}
-known_timings <- station_sample[!is.na(station_sample$seconds), ]
-timing_histogram <- ggplot2::ggplot(known_timings, ggplot2::aes(x = seconds)) +
-  ggplot2::geom_histogram(binwidth = 5, boundary = 0, colour = "white", fill = "steelblue") +
-  ggplot2::labs(title = "46 simulated station timings", x = "Packing time (s)", y = "Stations")
-print(timing_histogram)
-paired_timings <- packing_wide[complete.cases(packing_wide[c("before_s", "after_s")]), ]
-paired_scatter <- ggplot2::ggplot(paired_timings, ggplot2::aes(x = before_s, y = after_s, colour = lane)) +
-  ggplot2::geom_point(size = 3) +
-  ggplot2::geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
-  ggplot2::coord_equal() +
-  ggplot2::labs(x = "Before timing (s)", y = "After timing (s)", colour = "Lane")
-print(paired_scatter)
-stopifnot(nrow(known_timings) == 46L, nrow(paired_timings) == 5L)
+```{r distribution-and-scatter}
+observed_RBC <- participants[!is.na(participants$RBC_Count), ]
+stopifnot(nrow(observed_RBC) == 34L)
+print(ggplot2::ggplot(observed_RBC, ggplot2::aes(RBC_Count)) +
+  ggplot2::geom_histogram(binwidth = 0.2, boundary = 0, fill = "steelblue", colour = "white") +
+  ggplot2::labs(title = "Synthetic baseline RBC: 34 measured of 36 participants",
+                x = "RBC count (10^12 cells/L)", y = "Measured participants") + ggplot2::theme_minimal())
 ```
 
-**Histogram:** the horizontal axis is time in seconds; the vertical axis counts stations in five-second bins. It shows simulated spread and concentration, not a clinical distribution. Changing bin width changes apparent smoothness.
+**Histogram check:** 34 measured participants, with bin width 0.2 in the stated RBC units.
 
-**Scatter plot:** each point is one of five stations with both readings. The horizontal axis is before time and the vertical axis is after time. The dashed equality line marks no change; all five points are below it, showing lower after times in this invented set. Colour identifies lane through a legend. Equal coordinate scaling makes distance from equality interpretable, but the plot alone does not establish a cause.
-
-```{r boxplot-with-points}
-known_repeats <- packing_long[!is.na(packing_long$seconds), ]
-repeat_boxplot <- ggplot2::ggplot(known_repeats, ggplot2::aes(x = occasion, y = seconds, fill = occasion)) +
-  ggplot2::geom_boxplot(outlier.shape = NA, width = 0.45) +
-  ggplot2::geom_jitter(width = 0.06, height = 0, size = 2) +
-  ggplot2::labs(x = "Measurement occasion", y = "Packing time (s)", fill = "Occasion")
-print(repeat_boxplot)
-stopifnot(nrow(known_repeats) == 11L)
+```{r density-and-scatter}
+print(ggplot2::ggplot(observed_RBC, ggplot2::aes(RBC_Count)) +
+  ggplot2::geom_density(fill = "lightblue", alpha = 0.5) +
+  ggplot2::labs(x = "RBC count (10^12 cells/L)", y = "Density (per 10^12 cells/L)",
+                title = "Smoothed synthetic RBC distribution") + ggplot2::theme_minimal())
+print(ggplot2::ggplot(observed_RBC, ggplot2::aes(Age, RBC_Count, colour = Sex)) +
+  ggplot2::geom_point() + ggplot2::labs(x = "Age (years)", y = "RBC count (10^12 cells/L)",
+    title = "No age or sex effect was built into this simulation") + ggplot2::theme_minimal())
 ```
 
-**Box plot:** the horizontal axis identifies occasion; the vertical axis is seconds. Boxes summarize medians and quartiles, while jitter exposes the small number of readings. Horizontal jitter separates overlaps and is not another measurement. The groups have six before and five after readings; their boxes do not display pairing or a matched comparison. Colour or fill belongs inside `aes()` when it maps data to a legend; a fixed style belongs outside `aes()`.
+**Expected:** three figures based on 34 observed participants. Histogram bars count participants within intervals. A density curve has approximately unit area; its height is not a point probability, and bandwidth changes smoothness. It may extend beyond generator bounds. Each scatter point pairs one participant's age with RBC count; colors show recorded categories, not causal groups.
 
-## 7. Paired and independent comparisons
+```{r repeated-visit-plot}
+observed_visits <- visits_long[!is.na(visits_long$RBC_Count), ]
+print(ggplot2::ggplot(observed_visits, ggplot2::aes(Visit, RBC_Count)) +
+  ggplot2::geom_boxplot(width = 0.4, outlier.shape = NA) +
+  ggplot2::geom_line(ggplot2::aes(group = Participant_ID), alpha = 0.4) +
+  ggplot2::geom_point() + ggplot2::labs(x = "Visit", y = "RBC count (10^12 cells/L)",
+    title = "Six invented participants; 11 observed participant-visits") + ggplot2::theme_minimal())
+```
 
-Paired readings come from the same station. Analyze within-station differences, not twelve supposedly independent rows. An independent-group comparison instead requires distinct independent observational units in each group. This distinction follows the design, not the appearance of the table.
+**Expected:** six baseline and five follow-up points. Lines link repeated observations from the same participant; the participant with no follow-up has one point. With tiny samples, boxes are unstable; inspect individual values. The display does not establish an intervention effect.
+
+## 7. Paired observations and interpretation
 
 ```{r paired-differences}
-change_s <- paired_timings$after_s - paired_timings$before_s
-print(change_s)
-print(mean(change_s))
-paired_check <- t.test(paired_timings$after_s, paired_timings$before_s, paired = TRUE)
-print(paired_check$estimate)
-stopifnot(identical(change_s, c(-4, -5, -3, -5, -1)))
-stopifnot(isTRUE(all.equal(mean(change_s), -3.6)))
+complete_pairs <- complete.cases(visits_wide[c("RBC_Baseline", "RBC_FollowUp")])
+paired_changes <- with(visits_wide[complete_pairs, ], RBC_FollowUp - RBC_Baseline)
+print(paired_changes)
+print(mean(paired_changes))
+stopifnot(sum(complete_pairs) == 5L)
+stopifnot(isTRUE(all.equal(paired_changes, c(0.1, -0.1, -0.3, 0.1, 0.1))))
+stopifnot(isTRUE(all.equal(mean(paired_changes), -0.02)))
 ```
 
-**Expected:** five differences `-4, -5, -3, -5, -1` seconds, averaging `-3.6` seconds. The paired test uses those five complete pairs. Its estimated mean difference is after minus before; the sign must match the question being asked.
-
-This test is a mechanics demonstration. A paired t procedure assumes independent pairs and, for exact small-sample inference, normally distributed differences. Check design, outliers, measurement consistency, missingness, and whether the sampling process supports inference. A normality test with five values cannot establish that assumptions hold. Independent-group t procedures require independent units; the default Welch version does not assume equal variances. Repeated trials within one station may need a hierarchical model. Neither a p-value nor a lower mean establishes causality, especially in an invented example.
+**Expected:** five paired changes, average −0.02 in 10^12 cells/L. This compares within-person changes among complete pairs. Treating their ten measurements as independent ignores pairing. A paired test would assess participant differences under its assumptions; independent-group tests require independently sampled groups. Neither test makes missing follow-up ignorable. This small fixed exercise is descriptive and does not demonstrate clinical improvement or harm.
 
 ## Common mistakes and debugging
 
-- **A seed appears ineffective:** reset it immediately before the same random calls; check R version and RNG settings.
-- **Clipped values called truncated:** inspect exact boundary counts and explain the generating mechanism.
-- **Widening creates list columns:** inspect duplicate compound keys before aggregating.
-- **Missing values disappear:** report intended rows and measured rows separately; avoid implicit dropping during reshaping.
-- **Categories reorder:** declare levels explicitly rather than relying on alphabetical defaults.
-- **A plot has a mysterious legend:** distinguish mapped aesthetics from fixed colours and label axes with units.
-- **Paired data analyzed as independent:** recover the identifier and compute matched differences first.
+| Symptom | Check and repair |
+| --- | --- |
+| Function unavailable | Run dependency checks; use the correct package namespace |
+| Many boundary values | Determine whether values were clipped instead of rejection-sampled |
+| Missing value assigned a band | Define missingness before categories and test NA explicitly |
+| Pivot creates list-columns | Audit the participant–visit key before widening |
+| Too many wide rows | Remove visit-specific fields from identifier columns |
+| Plot drops rows silently | Select observed values explicitly and report exclusions |
+| 12 rows called 12 people | Count unique participant identifiers as well as measurements |
 
 ## Independent practice
 
-1. Generate 80 invented positive timings using a documented mechanism. Explain whether you rejected, clipped, or used a positive-support distribution.
-2. Add a third occasion to the six-station table, introduce two missing readings, and verify an eighteen-row long representation with a unique compound key.
-3. Report counts, mean, and standard deviation for each occasion. Explain when a mean would be undefined.
-4. Compare two histogram bin widths. Describe what changes and what stays fixed.
-5. Draw connecting lines for station pairs, using `group = station`. Explain what those lines add beyond two box plots.
-
-## Teach-back and summary
-
-Why is a seed not a guarantee of valid simulation? What defines a table's row key before and after pivoting? Why does the denominator differ for a paired analysis and an available-case group summary? What can a descriptive graph say without claiming an effect?
-
-The working sequence is **define the observation → simulate transparently → verify keys → reshape → count missingness → summarize → plot → choose inference from the design**.
+1. Simulate 50 adults with a new seed and document units, bounds, IDs, and the absence or presence of programmed associations.
+2. Add three unavailable WBC values and derive a clearly labeled nonclinical simulation category. Count unknown values separately.
+3. Add a third visit to the deterministic table. Predict long rows, validate the compound key, and recover wide values.
+4. Vary histogram bins and density bandwidth. Explain which features are stable and which are display-dependent.
+5. Remove a follow-up deliberately and compare available-case visit means with complete-pair changes. Explain their denominators.
 
 ## Ready to move on
 
-Keep the simulation seed, reshaping script, grouped summary, and labeled plots together. Record the observation key, total and measured counts, and missing-value decisions. Re-run from a clean session before writing conclusions.
-
-| Evidence | Completion check |
+| Evidence | Mastery check |
 | --- | --- |
-| Simulation and categories | Explain the chosen generator and boundaries; keep unknown measurements out of ordinary categories |
-| Reshaping | Produce 12 station-occasion rows from 6 stations; verify compound-key uniqueness and recover the original values |
-| Summary and figures | Report counts before means; narrate axes, units, groups, and what each graph can show |
-| Comparison design | Identify the 5 complete before/after pairs and explain why treating their 10 measurements as independent would be wrong |
+| Simulation | Reproduce 36 unique participants; explain parameters, bounds, units, and synthetic limitations |
+| Missingness | Account for 34 measured RBC values and two unavailable values |
+| Reshaping | Recover six participants from 12 participant–visit rows without changing values |
+| Figures | Explain histogram, density, scatter, and paired display axes and denominators |
+| Design | Identify five complete pairs and interpret −0.02 as a descriptive within-pair mean change |
 
-## Next steps and references
+Keep the seed, data dictionary, script, summaries, labeled figures, and an explanation of selection. Rerun in a clean session.
 
-[Previous: Week 1](Week_1_Group_Work_Narrative_Walkthrough.md) · [Next: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Wrangling topic companion](../02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Paul's Notes](../README.md)
+## Further learning
 
-References: [tidyr pivot documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html), [ggplot2 reference](https://ggplot2.tidyverse.org/reference/), and installed R help `?rnorm` and `?t.test`.
+[Previous: Week 1](Week_1_Group_Work_Narrative_Walkthrough.md) · [Next: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md) · [Plot reading](../06_RESOURCES/READING_PLOTS.md) · [Paul's Notes](../README.md)
+
+References: [tidyr pivots](https://tidyr.tidyverse.org/reference/pivot_longer.html), [ggplot2 density](https://ggplot2.tidyverse.org/reference/geom_density.html), and installed R help `?rnorm`, `?set.seed`, `?t.test`.

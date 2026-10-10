@@ -13,6 +13,12 @@ import shutil
 import subprocess
 from pathlib import Path
 
+COMPANIONS = (
+    "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
+    "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
+    "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = tuple(f'03_Group_Work/Week_{week}_Group_Work_Narrative_Walkthrough.Rmd' for week in (1, 2, 3))
 
@@ -25,6 +31,8 @@ def chunks(text: str) -> list[tuple[str, str]]:
     for line in text.splitlines():
         if line.startswith('```'):
             if fenced:
+                if line != "```":
+                    raise ValueError("Expected closing code fence")
                 if active is not None:
                     result.append((active, '\n'.join(body)))
                 active, body, fenced = None, [], False
@@ -62,6 +70,7 @@ def driver(blocks: list[tuple[str, str]]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument("--include-companions", action="store_true", help="Also execute the three R topic companions")
     args = parser.parse_args()
     destination = args.output_dir.resolve()
     if destination.is_relative_to(ROOT):
@@ -72,9 +81,11 @@ def main() -> int:
     destination.mkdir(parents=True, exist_ok=True)
     results = []
     try:
-        for week, name in enumerate(SOURCES, 1):
+        for index, name in enumerate(SOURCES + (COMPANIONS if args.include_companions else ()), 1):
+            week = (index - 1) % 3 + 1
+            label = ("companion-" if index > 3 else "") + f"week-{week}"
             blocks = chunks((ROOT / name).read_text())
-            folder = destination / f'week-{week}'
+            folder = destination / label
             folder.mkdir(exist_ok=True)
             (folder / 'validate.R').write_text(driver(blocks))
             run = subprocess.run([rscript, '--vanilla', 'validate.R'], cwd=folder,
@@ -82,7 +93,7 @@ def main() -> int:
             (folder / 'execution.log').write_text(run.stdout + run.stderr)
             result = {'source': name, 'blocks': len(blocks), 'status': 'PASS' if run.returncode == 0 else 'FAIL'}
             results.append(result)
-            print(f"Week {week}: {len(blocks)} blocks — {result['status']}")
+            print(f"{label}: {len(blocks)} blocks — {result['status']}")
             if run.returncode:
                 print((run.stdout + run.stderr)[-3000:])
     except (OSError, ValueError, subprocess.TimeoutExpired) as exc:

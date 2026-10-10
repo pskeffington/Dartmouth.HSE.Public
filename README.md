@@ -2,6 +2,8 @@
 
 **A free, public study guide for health data science, research methods, and practical computing.** Independently maintained by Paul, this project covers R, Bash, reproducible research, and academic writing; **it is not an official Dartmouth or Geisel site.**
 
+For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
+
 ## Start here
 
 | What you want to study | Where to start |
@@ -22,10 +24,14 @@ Week numbers organize the topics. The teaching guides include runnable synthetic
 
 | Week | Concept/topic guide | Complete teaching lesson |
 | --- | --- | --- |
-| 1 | [R objects, data types, and indexing](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [R foundations and reproducible practice](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
-| 2 | [Data wrangling and visualization](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Simulation, reshaping, and plot interpretation](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
-| 3 | [Visualization and analytical reasoning](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Joins, regression, and reusable functions](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
-| 4 | [Bash and shell workflows](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Bash-to-R worked workflow](03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) |
+| 1 | [R objects, data types, and indexing](02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) | [R foundations with synthetic expression](03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) |
+| 2 | [Data wrangling and visualization](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Participant blood-cell data and repeated visits](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
+| 3 | [Visualization and analytical reasoning](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Health-data joins, models, and figure panels](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
+| 4 | [Bash and shell workflows](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Scientific metadata and Bash-to-R workflow](03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) |
+
+## Technical prerequisites
+
+Weeks 1–3 use R; Week 2 needs tidyr, dplyr, and ggplot2, while Week 3 needs dplyr >= 1.1.0 and ggplot2. Week 4 needs Bash 3.2+, standard shell utilities, and Rscript. RStudio is optional. Start with the [installation and session guide](FOLLOW_ALONG.md#set-up-once); no classroom dataset is required.
 
 ## How I learned through games
 
@@ -41,6 +47,6 @@ The [research-planning](01_Capstone/README.md), [reporting](04_Final_Project/REA
 
 ## License and feedback
 
-See the [MIT license](LICENSE).
+See the [MIT license](LICENSE) for material distributed under this repository’s license. Linked third-party resources retain their own ownership and terms; this license does not grant rights to institutional instructional material. The guide supplies independent practice, not official lectures, restricted datasets, or assessed solutions.
 
-To report an error or suggest an improvement, [open an issue](https://github.com/pskeffington/Dartmouth.HSE.Public/issues/new) with the relevant public file paths and a brief description.
+To report an error or suggest an improvement, [open an issue](https://github.com/pskeffington/Dartmouth.HSE.Public/issues/new) with relevant public file paths and a brief description. Do not reproduce protected instructional material or personal data in a report.
