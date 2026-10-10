@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           for unit in 06 07 08; do
-            Rscript "06_RESOURCES/R/examples/unit_${unit}_*.R" 2>&1 | tee "unit_${unit}_run.log"
+            Rscript "06_RESOURCES/R/examples/unit_${unit}_$(case "$unit" in 06) echo inference;; 07) echo regression;; 08) echo classification;; esac).R" 2>&1 | tee "unit_${unit}_run.log"
           done
       - name: Preserve diagnostic logs
         if: always()
