@@ -1,14 +1,8 @@
-# Gene biology learning guide
+# Focused biological-domain lessons
 
-[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Index](GENE_ATLAS_INDEX.md) · [Measurement and glossary](GENE_EXPRESSION_INTERPRETATION.md)
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md) · [Index](GENE_ATLAS_INDEX.md)
 
-## Choose a route
-
-- **Beginner:** Read [the people behind the data](BREAST_CANCER_TCGA_BRCA_NARRATIVE.md), then [DNA to protein](FIGURES/README.md#dna-to-protein), the [measurement guide](GENE_EXPRESSION_INTERPRETATION.md), and the ESR1, KRT8 and CD8A cards. Finish with the synthetic heatmap. Goal: explain what was measured before interpreting a value.
-- **Biological:** Work through hormone, growth, proliferation, repair, basal and immune domains below. Use the [pathway overview](GENE_PATHWAY_OVERVIEW.md) to connect processes. Goal: distinguish normal function, altered regulation and cell composition.
-- **Research:** Start with the [annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md) and [selection rubric](REFERENCES/SELECTION_RUBRIC.md), then measurement, study design, multiple testing and the [evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md). Compare MALAT1 and PTEN evidence. Goal: formulate a narrow claim and identify the experiment needed to test it.
-
-All worked examples are conceptual or invented. They describe no real participant. The biological framework uses the linked genes’ authoritative normal-function records; specific cancer findings retain the review boundaries on each card.
+These 12 category exercises supplement the continuous guide; begin with its [three learning routes](BREAST_CANCER_60_GENE_COMPANION.md#guided-learning-routes) and [connected biology chapter](BREAST_CANCER_60_GENE_COMPANION.md#chapter-5-the-biology-behind-the-60-genes). Categories overlap and do not establish direct interactions. All examples below are conceptual or invented.
 
 <a id="hormone"></a>
 

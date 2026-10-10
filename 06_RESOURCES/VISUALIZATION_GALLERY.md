@@ -1,5 +1,7 @@
 # Scientific Visualization Gallery — Paul's Notes
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](Genomics/BREAST_CANCER_60_GENE_COMPANION.md) connects these methods to synthetic genomics interpretation. Continue to [the research walkthrough](Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question).
+
 [Home](../README.md) · [R functions](R/README.md) · [Figure interpretation](READING_PLOTS.md)
 
 Six runnable examples use independently constructed synthetic observations. They illustrate graphics and statistical descriptions, not clinical evidence or institutional course solutions. Run the blocks in order from the repository root in a fresh R session with `ggplot2` installed. `matrixStats` is optional; the gene helpers have a base-R fallback.

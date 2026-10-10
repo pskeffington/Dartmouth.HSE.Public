@@ -4,6 +4,8 @@ import argparse
 from pathlib import Path
 import gene_companion_content as content
 from gene_companion_domains import DOMAINS
+import gene_companion_chapters as editorial
+from gene_companion_figures import FIGURES, FIGURE_INTRO
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path('06_RESOURCES/Genomics')
@@ -85,8 +87,84 @@ def card(gene):
     return f"# {symbol} — {gene['name']}\n\n[Companion](../BREAST_CANCER_60_GENE_COMPANION.md) · [Alphabetical index](../GENE_ATLAS_INDEX.md) · [Glossary](../GENE_EXPRESSION_INTERPRETATION.md#glossary)\n\n" + '\n\n'.join(f'## {h}\n\n{body}' for h, body in zip(HEADINGS, sections)) + '\n'
 
 
+
+def chapter_anchor(number):
+    import re
+    title = f"Chapter {number}: {editorial.CHAPTERS[number-1][0]}"
+    return re.sub(r"[^\w\- ]", "", title.lower()).replace(" ", "-")
+
+
+def figure_at(number):
+    """Rebase the shared figure's relative links for its in-guide presentation."""
+    import re
+    title, body = FIGURES[number-1]
+    def rebase(match):
+        target = match[1]
+        if target.startswith('../'):
+            target = target[3:]
+        elif not target.startswith(('http:', 'https:', '#')):
+            target = 'FIGURES/' + target
+        return '](' + target + ')'
+    body = re.sub(r'\]\(([^)]+)\)', rebase, body)
+    return f"#### Figure {number}: {title}\n\n{body}"
+
+
+def integrated_profile(gene):
+    """One audited claim source supplies both the short profile and detailed card."""
+    symbol = gene['symbol']
+    paragraphs = [f"**{gene['name']}**. The encoded product is {gene['product']}. {gene['normal']}",
+        'Research focus: ' + gene['research'] + f" Study context: {gene['model']}. " + gene['finding'],
+        gene['measurement'] + ' ' + gene['limitation'] + ' ' + gene['claim_limit']]
+    if symbol == 'MALAT1':
+        paragraphs.append('Opposing model findings remain visible: ' + study_link('MALAT1_2016') +
+            ' reports reduced metastasis after loss or knockdown, whereas the 2018 add-back study reports suppression by MALAT1. ' +
+            study_link('MALAT1_2024') + ' examines metastatic reactivation and immune evasion. Compare interventions and disease stage before assigning a universal effect.')
+    paragraphs.append(f"**Evidence:** {study_link(gene['study'])}; `ABSTRACT_ONLY`. "
+        f"[Normal-function record](https://www.ncbi.nlm.nih.gov/gene/{gene['entrez_id']}). "
+        f"[Complete {symbol} card](GENE_CARDS/{symbol}.md) records identity, design and review scope.")
+    return f"#### {symbol}\n\n" + '\n\n'.join(paragraphs)
+
+
+def render_atlas():
+    table = '| Gene | Biological role |\n|---|---|\n'
+    for gene in content.GENES:
+        table += f"| [{gene['symbol']}](#{gene['symbol'].lower()}) | {gene['product']} |\n"
+    # First domain assigns a single presentation location, not exclusive biological membership.
+    for key, domain in DOMAINS.items():
+        genes = [gene for gene in content.GENES if gene['domains'][0] == key]
+        if genes:
+            table += f"\n### Atlas: {domain[0]}\n\n"
+            table += '\n\n'.join(integrated_profile(gene) for gene in genes) + '\n'
+    return table
+
+
+def render_canonical():
+    text = f"# {editorial.LABEL}\n\n[Paul's Notes](../../README.md) · [Resources](../README.md) · [Focused references](README.md)\n\n"
+    text += f"Original educational guide · Editorial version `{editorial.EDITORIAL_VERSION}` · Annotation and literature snapshot 2026-10-10.\n\n"
+    text += 'Read continuously below, or choose a route into this same guide. Every numerical example is invented; conceptual diagrams carry no patient measurements.\n\n## Contents\n\n'
+    text += '\n'.join(f"{n}. [{title}](#{chapter_anchor(n)})" for n,(title,_) in enumerate(editorial.CHAPTERS,1))
+    text += '\n\n## Guided learning routes\n\n'
+    for label, numbers in [('Beginner',[1,2,3,5,11]),('Biology-focused reader',[4,5,6,7,10]),('Research-focused reader',[2,3,8,9,10,12])]:
+        text += f"- **{label}:** " + ' → '.join(f"[{editorial.CHAPTERS[n-1][0]}](#{chapter_anchor(n)})" for n in numbers) + '.\n'
+    biology = '\n\n'.join(f"### {name}\n\n{prose}\n\nStarting profiles: " + ' · '.join(f'[{symbol}](#{symbol.lower()})' for symbol in symbols.split()) + '.' for name,symbols,prose in editorial.BIOLOGY_LESSONS)
+    for number,(title,prose) in enumerate(editorial.CHAPTERS,1):
+        prose = prose.replace('{{BIOLOGY}}',biology).replace('{{ATLAS}}',render_atlas())
+        for figure in range(1,8):
+            prose = prose.replace('{{FIGURE_'+str(figure)+'}}',figure_at(figure))
+        text += f'\n## Chapter {number}: {title}\n\n{prose}\n\n'
+        navigation = ['[Return to contents](#contents)']
+        if number > 1:
+            navigation.insert(0,f'[Previous chapter](#{chapter_anchor(number-1)})')
+        if number < 12:
+            navigation.append(f'[Next chapter](#{chapter_anchor(number+1)})')
+        text += ' · '.join(navigation) + '\n'
+    return text
+
+
 def render_outputs():
     outputs = {BASE/'GENE_CARDS'/f"{g['symbol']}.md":card(g) for g in content.GENES}
+    outputs[Path(editorial.CANONICAL)] = render_canonical()
+    outputs[BASE/'FIGURES'/'README.md'] = FIGURE_INTRO + '\n\n' + '\n\n'.join('## '+title+'\n\n'+body for title,body in FIGURES)
     index = '# Gene atlas index\n\n[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Learning routes](GENE_BIOLOGY_LEARNING_GUIDE.md)\n\nExactly 60 approved human genes; 21 retained foundation entries and 39 additions. This alphabetical catalog is not a ranked signature. Use your browser’s find command to search symbols or domains. Aliases are search aids, not join keys.\n\n## Alphabetical\n\n'
     index += '\n'.join(f"- [{g['symbol']} — {g['name']}](GENE_CARDS/{g['symbol']}.md)" for g in content.GENES)
     index += '\n\n## By biological domain\n\n'
@@ -104,12 +182,12 @@ def render_outputs():
         matrix += f"- {study_link(key)} — DOI [{s['doi']}](https://doi.org/{s['doi']}); PMID {s['pmid']}; `ABSTRACT_ONLY`; accessed {s['access_date']}. "
         matrix += {'PAM50':'Multi-gene classifier development and testing; does not justify single-gene subtype rules.','WU':'Single-cell and spatial tumor atlas; supports cell-composition context, not a classifier for this catalog.','NORMAL':'Single-cell atlas from 55 adult breast tissue donors; reduction/risk-reduction tissue is not tumor-adjacent tissue.','MALAT1_2016':'Mouse loss/knockdown and organoid experiments; metastasis direction differs from the 2018 account.','MALAT1_2024':'Metastatic initiation/reactivation and immune-evasion models; stage and intervention limit transport.'}[key]+'\n'
     outputs[BASE/'REFERENCES'/'GENE_EVIDENCE_MATRIX.md'] = matrix
-    register = '# Annotation source register\n\n[Selection rubric](SELECTION_RUBRIC.md) · [Evidence matrix](GENE_EVIDENCE_MATRIX.md)\n\n## Method and release boundary\n\nAccess date: **2026-10-10**. HGNC complete-set records were restricted to approved human symbols, then cross-checked by stable ID against NCBI Gene (human taxid 9606; approved symbol) and Ensembl human gene records (same stable ID and display name). All 60 mappings agreed; no withdrawn or ambiguous primary symbol was accepted. No ambiguous alias was used to join records. This is a dated access snapshot, not a claim of a named immutable Ensembl release. Recheck identities before combining with a future assay annotation.\n\nSources: [HGNC complete set](https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt), [HGNC license (CC0)](https://www.genenames.org/about/license/), [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene/), [NCBI E-utilities](https://www.ncbi.nlm.nih.gov/books/NBK25501/), [Ensembl REST](https://rest.ensembl.org/). Only selected public identity facts are retained in the documented Python content source. Descriptions and study interpretations are independently written. Aliases and former symbols appear on each card and can denote older nomenclature or overlapping searches; stable primary IDs govern identity.\n\n## Verified identities\n\n| Symbol | HGNC | NCBI Gene | Ensembl | State |\n|---|---|---|---|---|\n'
+    register = '# Annotation source register\n\n[Complete guide](../BREAST_CANCER_60_GENE_COMPANION.md) · [Selection rubric](SELECTION_RUBRIC.md) · [Evidence matrix](GENE_EVIDENCE_MATRIX.md)\n\n## Method and release boundary\n\nAccess date: **2026-10-10**. HGNC complete-set records were restricted to approved human symbols, then cross-checked by stable ID against NCBI Gene (human taxid 9606; approved symbol) and Ensembl human gene records (same stable ID and display name). All 60 mappings agreed; no withdrawn or ambiguous primary symbol was accepted. No ambiguous alias was used to join records. This is a dated access snapshot, not a claim of a named immutable Ensembl release. Recheck identities before combining with a future assay annotation.\n\nSources: [HGNC complete set](https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt), [HGNC license (CC0)](https://www.genenames.org/about/license/), [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene/), [NCBI E-utilities](https://www.ncbi.nlm.nih.gov/books/NBK25501/), [Ensembl REST](https://rest.ensembl.org/). Only selected public identity facts are retained in the documented Python content source. Descriptions and study interpretations are independently written. Aliases and former symbols appear on each card and can denote older nomenclature or overlapping searches; stable primary IDs govern identity.\n\n## Verified identities\n\n| Symbol | HGNC | NCBI Gene | Ensembl | State |\n|---|---|---|---|---|\n'
     for g in content.GENES:
         register += f"| [{g['symbol']}](../GENE_CARDS/{g['symbol']}.md) | {g['hgnc_id']} | [{g['entrez_id']}](https://www.ncbi.nlm.nih.gov/gene/{g['entrez_id']}) | [{g['ensembl_gene_id']}](https://www.ensembl.org/Homo_sapiens/Gene/Summary?g={g['ensembl_gene_id']}) | ANNOTATION_VERIFIED |\n"
     register += '\n## Reproduction and future updates\n\nThe content source records the selected facts, access date, aliases, cross-check extent and original prose. Run `python3 scripts/build_gene_companion.py --check` to compare every generated artifact with that source; run `python3 scripts/validate_gene_companion.py` for identity, completeness and evidence-boundary checks. These offline checks establish consistency with the reviewed snapshot, not fresh online verification. A future annotation update must explicitly repeat the three-source cross-check and refresh the date, facts, evidence and publication checks.\n'
     outputs[BASE/'REFERENCES'/'ANNOTATION_SOURCE_REGISTER.md'] = register
-    guide = '# Gene biology learning guide\n\n[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Index](GENE_ATLAS_INDEX.md) · [Measurement and glossary](GENE_EXPRESSION_INTERPRETATION.md)\n\n## Choose a route\n\n- **Beginner:** Read [the people behind the data](BREAST_CANCER_TCGA_BRCA_NARRATIVE.md), then [DNA to protein](FIGURES/README.md#dna-to-protein), the [measurement guide](GENE_EXPRESSION_INTERPRETATION.md), and the ESR1, KRT8 and CD8A cards. Finish with the synthetic heatmap. Goal: explain what was measured before interpreting a value.\n- **Biological:** Work through hormone, growth, proliferation, repair, basal and immune domains below. Use the [pathway overview](GENE_PATHWAY_OVERVIEW.md) to connect processes. Goal: distinguish normal function, altered regulation and cell composition.\n- **Research:** Start with the [annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md) and [selection rubric](REFERENCES/SELECTION_RUBRIC.md), then measurement, study design, multiple testing and the [evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md). Compare MALAT1 and PTEN evidence. Goal: formulate a narrow claim and identify the experiment needed to test it.\n\nAll worked examples are conceptual or invented. They describe no real participant. The biological framework uses the linked genes’ authoritative normal-function records; specific cancer findings retain the review boundaries on each card.\n\n'
+    guide = '# Focused biological-domain lessons\n\n[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md) · [Index](GENE_ATLAS_INDEX.md)\n\nThese 12 category exercises supplement the continuous guide; begin with its [three learning routes](BREAST_CANCER_60_GENE_COMPANION.md#guided-learning-routes) and [connected biology chapter](BREAST_CANCER_60_GENE_COMPANION.md#chapter-5-the-biology-behind-the-60-genes). Categories overlap and do not establish direct interactions. All examples below are conceptual or invented.\n\n'
     for key, (name, normal, altered, example, questions, answer) in DOMAINS.items():
         links = ' · '.join(f"[{g['symbol']}](GENE_CARDS/{g['symbol']}.md)" for g in content.GENES if key in g['domains'])
         guide += f'<a id="{key}"></a>\n\n## {name}\n\n**Learning objectives:** Explain the normal process; distinguish an abundance measurement from a functional assay; identify an alternative explanation for a tissue-level signal.\n\n**Normal function:** {normal}\n\n**Cancer and measurement:** {altered} Read the linked cards for RNA, protein and activity distinctions. Measurements can combine different cell types and mechanisms, so each inference needs a specified specimen and assay.\n\n**Selected genes:** {links}\n\n**Worked conceptual example:** {example}\n\n**Interpretation questions / mastery check:** {questions}\n\n<details>\n<summary>Check your reasoning</summary>\n\n{answer}\n\n</details>\n\n**Evidence boundary:** Normal molecular functions are distinct from model-specific cancer findings. Shared membership is a teaching relationship, not proof of binding, causality, individual prognosis or treatment benefit. Use the evidence matrix to identify what remains a hypothesis.\n\n'

@@ -1,5 +1,7 @@
 # Common Breast Cancer Genes: A Reader's Descriptor Guide
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Paul's Notes](../../README.md) · [Genomics companion](README.md) · [Why the dataset matters](BREAST_CANCER_TCGA_BRCA_NARRATIVE.md)
 
 *Independent teaching glossary | Reviewed 10 October 2026 | Gene functions are introductory summaries, not a diagnostic classifier.*

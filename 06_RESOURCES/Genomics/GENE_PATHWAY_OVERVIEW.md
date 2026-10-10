@@ -1,5 +1,7 @@
 # How the biological domains connect
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Domain lessons](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Gene index](GENE_ATLAS_INDEX.md)
 
 A cell coordinates information, growth, repair and survival while interacting with its surroundings. The 12 domains are a teaching map of that coordination. They are not mutually exclusive modules or a reconstructed molecular interaction network. Gene-specific normal-function records are linked on the cards; the [category network figure](FIGURES/README.md#category-network) illustrates membership rather than binding.

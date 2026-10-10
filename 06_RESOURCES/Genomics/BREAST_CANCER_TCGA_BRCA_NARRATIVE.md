@@ -1,5 +1,7 @@
 # Before the Heatmap: The People Behind Breast Cancer Data
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Paul's Notes](../../README.md) · [Genomics companion](README.md) · [Common gene descriptors](COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md)
 
 *An independently written, public learning narrative | Reviewed 10 October 2026 | Population figures refer to 2024 estimates.*

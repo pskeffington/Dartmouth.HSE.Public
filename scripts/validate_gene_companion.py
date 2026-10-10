@@ -11,9 +11,13 @@ import re
 import gene_companion_content as content
 from gene_companion_domains import DOMAINS
 import build_gene_companion as builder
+import gene_companion_chapters as editorial
+from urllib.parse import urlsplit, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 # Sealed only over public approved identity facts; refresh after a new source audit.
+EDITORIAL_SOURCE_SEALS = {'gene_companion_chapters.py': '50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981', 'gene_companion_figures.py': 'aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9'}
+
 IDENTITY_SNAPSHOT_SHA256 = '74bf65f70d34dafa55dc2994222c960b7ee644dcc860c3e406e076f4d4b9f6b0'
 
 
@@ -77,8 +81,99 @@ def validate_content(genes, studies):
     return errors
 
 
+
+def heading_anchors(text):
+    """Match GitHub headings, including suffixes for duplicate headings."""
+    counts = {}; anchors = set(); fenced = False
+    for line in text.splitlines():
+        if line.startswith('```'):
+            fenced = not fenced
+        if fenced:
+            continue
+        match = re.match(r'^#{1,6}\s+(.+)$', line)
+        if match:
+            label = re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', match[1])
+            slug = re.sub(r'[^\w\- ]', '', label.lower()).replace(' ', '-')
+            count = counts.get(slug,0); counts[slug] = count+1
+            anchors.add(slug + (f'-{count}' if count else ''))
+    return anchors
+
+
+def validate_guide(root):
+    errors = []
+    if editorial.EDITORIAL_VERSION != 'UNIFIED_GUIDE_V1':
+        errors.append('Editorial source version not accepted')
+    for name, seal in EDITORIAL_SOURCE_SEALS.items():
+        path = root/'scripts'/name
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != seal:
+            errors.append('Editorial source seal differs: ' + name)
+    canonical = root/editorial.CANONICAL
+    if not canonical.is_file():
+        return errors + ['Canonical guide missing']
+    text = canonical.read_text()
+    expected_chapters = [f'Chapter {n}: {title}' for n,(title,_) in enumerate(editorial.CHAPTERS,1)]
+    chapters = re.findall(r'^## (Chapter .+)$',text,re.M)
+    if len(expected_chapters) != 12 or chapters != expected_chapters:
+        errors.append('Twelve chapters absent or out of instructional order')
+    symbols = re.findall(r'^#### ([A-Z][A-Z0-9]*)$',text,re.M)
+    expected = [g['symbol'] for g in content.GENES]
+    if len(symbols) != 60 or sorted(symbols) != sorted(expected):
+        errors.append('Integrated atlas must contain exactly 60 distinct genes')
+    for symbol in expected:
+        if f'| [{symbol}](#{symbol.lower()}) |' not in text:
+            errors.append('Alphabetical gene jump missing: ' + symbol)
+        if f'[Complete {symbol} card](GENE_CARDS/{symbol}.md)' not in text:
+            errors.append('Orphaned complete card: ' + symbol)
+        section = text.split('#### '+symbol+'\n\n',1)[-1].split('\n###',1)[0]
+        if len(section.split()) < 100 or '`ABSTRACT_ONLY`' not in section:
+            errors.append('Substantive profile or review state missing: ' + symbol)
+    table = text.split('### Alphabetical gene lookup',1)[-1].split('\n### Atlas:',1)[0]
+    lookup = re.findall(r'^\| \[([A-Z][A-Z0-9]*)\]',table,re.M)
+    if lookup != sorted(expected):
+        errors.append('Alphabetical lookup missing, duplicated or reordered')
+    if text.count('```mermaid\n') != 7 or text.count('[Return to contents](#contents)') != 12:
+        errors.append('Integrated figures or chapter return navigation incomplete')
+    for label in ('Beginner','Biology-focused reader','Research-focused reader'):
+        if f'**{label}:**' not in text:
+            errors.append('Learning route missing: ' + label)
+    for n in range(1,13):
+        chapter = text.split('## '+expected_chapters[n-1]+'\n',1)[-1].split('\n## Chapter ',1)[0]
+        for label, adjacent in [('Previous chapter',n-1),('Next chapter',n+1)]:
+            if 1 <= adjacent <= 12 and f'[{label}](#{builder.chapter_anchor(adjacent)})' not in chapter:
+                errors.append('Broken adjacent chapter navigation: ' + str(n))
+    for filename,prefix in [('README.md','06_RESOURCES/Genomics/'),('06_RESOURCES/README.md','Genomics/')]:
+        path = root/filename
+        if not path.is_file():
+            errors.append('Canonical entrypoint missing: ' + filename); continue
+        document = path.read_text()
+        entry = f'[{editorial.LABEL}]({prefix}BREAST_CANCER_60_GENE_COMPANION.md)'
+        if document.count(entry) != 1:
+            errors.append('Exactly one labeled canonical entry required: ' + filename)
+        if filename == 'README.md' and re.search(r'\]\([^)]*Genomics/(?:README|BREAST_CANCER_TCGA_BRCA_NARRATIVE|COMMON_BREAST_CANCER_GENE_DESCRIPTORS)\.md',document):
+            errors.append('Competing root genomics entrypoint')
+    # Validate focused backlinks and every local link, including rebased figure paths.
+    for source in (root/builder.BASE).rglob('*.md'):
+        document = source.read_text()
+        if source != canonical and 'BREAST_CANCER_60_GENE_COMPANION.md' not in document:
+            errors.append('Supporting page lacks canonical backlink: ' + str(source.relative_to(root)))
+        for target in re.findall(r'\]\(([^)]+)\)',document):
+            url = urlsplit(target)
+            if url.scheme or url.netloc:
+                continue
+            destination = (source.parent/unquote(url.path)).resolve() if url.path else source.resolve()
+            if not destination.is_relative_to(root.resolve()):
+                errors.append('Supporting link escapes repository: ' + target); continue
+            if destination.is_dir():
+                destination = destination/'README.md'
+            if not destination.is_file():
+                errors.append('Broken supporting link: ' + target)
+            elif url.fragment and destination.suffix in ('.md','.Rmd') and unquote(url.fragment) not in heading_anchors(destination.read_text()):
+                errors.append('Broken chapter/supporting anchor: ' + target)
+    return errors
+
+
 def validate_tree(root):
-    errors = validate_content(content.GENES, content.STUDIES)
+    errors = validate_content(content.GENES, content.STUDIES) + validate_guide(root)
     base = root/builder.BASE
     paths = {p.stem for p in (base/'GENE_CARDS').glob('*.md') if p.name != 'README.md'}
     expected = {g['symbol'] for g in content.GENES}

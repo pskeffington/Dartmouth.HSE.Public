@@ -31,7 +31,7 @@
     },
     {
       "path": "01_Capstone/README.md",
-      "observed_sha256": "e8cadebda67251216d11a7d2005f36b0068c911770cf8b76ef225c598a109858",
+      "observed_sha256": "68e690f02a7260c737e8d1b3f9bb0eb0f753e0ca2655ece0b3b851e49453616c",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -237,21 +237,21 @@
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "5f3cd831012e8b3706e9dd17a47037417e086c6d1f4cc399a6385945e30652dd"
+      "observed_sha256": "3ca3c6ddcba9d37a863cd795f6e6ac1e99b0b623d8db6a3f24f137fb99200844"
     },
     {
       "path": "06_RESOURCES/Genomics/COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md",
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "80d6dcbab4b33ab39c15bb000ab96146f9cd2640ad0ee6554cbe1708da24f855"
+      "observed_sha256": "43bddd4fd7498aef91b67bcdf78e3c417d8ba525d30e7bbfb3f252f39c9592b7"
     },
     {
       "path": "06_RESOURCES/Genomics/README.md",
       "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
       "source_relationship": null,
       "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "855efc5d519be65e16b8acd21ae0ee2a5a9dea9afe196a62e2739bb757748bd3"
+      "observed_sha256": "4b92d3563ba5dfca718ead2c38e98ec380ec1c285216014073eb6beaa97ad67f"
     },
     {
       "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
@@ -346,7 +346,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "c4162b690edfff93da1304a75eb2449c9553bca8a8c4c6cf51a23c3d5a28a5d4",
+      "observed_sha256": "063abd950df52e1ee3fb75d2967d03303d6bea23d93bd33f1bbb1d323f72e91e",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -437,7 +437,7 @@
     },
     {
       "path": "06_RESOURCES/R/README.md",
-      "observed_sha256": "018396a2cf08dfc2795e3bc3a4c2afe3fbd194cd5f4d365afb8f67432a729a9d",
+      "observed_sha256": "524e53a794492c9d33cd4488bb03b7330cde8e10c7b81bae4cb71cb9e3a69c6a",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
@@ -507,7 +507,7 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "8160bdf3309a0e841658de38801388615cebf46dfc8f27e674a111c8f2c71f02",
+      "observed_sha256": "1959cc8a3d4ddad323fbee51cadac9f252b78cc8662f2564406702533469a27a",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -524,7 +524,7 @@
       "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "dede6c14820da97ac25a678c248cf11ea476c67af6382a9b2713e1d47e47f58a"
+      "observed_sha256": "98b277c422f6742fdd1bcd3e8eebfbbc66da4cee89b34c6dfd53b50d16ec8f55"
     },
     {
       "path": "06_RESOURCES/tests/README.md",
@@ -598,7 +598,7 @@
     },
     {
       "path": "FOLLOW_ALONG.md",
-      "observed_sha256": "ae38b48361d0328d0d005130754f0a31c856f18280560483340e31e1805a7581",
+      "observed_sha256": "6a7d3a1f374ada82ab7d8f3bbf3dbf5457365a58f93615df7736a9ddb4909594",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -619,7 +619,7 @@
     },
     {
       "path": "README.md",
-      "observed_sha256": "17410a91c0c8fcaa7ea9df912d488afeea06d2e6d0b262b460bdff2fd6d971e3",
+      "observed_sha256": "ba2897081ab5b65587972bdf458b55234ffbfca794dfd17fcf3d09cdca2b76db",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -783,14 +783,14 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "e285ef5759919804ce3fc974f0d35a6c5d880fb18e9420093c6e77f22a601168"
+      "observed_sha256": "ed7da09fe73e4c440bfe237e4ae70b74e156a03169aa1437bef384f202ef12fb"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/README.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "f32623ab1e2989e3867dd02c6aeb2dea0dc4c01133256e4f92a50bfc5132bcca"
+      "observed_sha256": "03d3292a3c0c5303a1b7d5ad121f691770b1067b175f207845e4de2a474a3b49"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
@@ -811,7 +811,7 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "92d849683fbf5325fe3672525d68101e2792117073c4d962c4746c45c31683ff"
+      "observed_sha256": "2069a2277178ab5a13129e8a16fdc03f61ac4ea0353eb486319c764b8cf9430a"
     },
     {
       "path": "06_RESOURCES/Genomics/GENE_CARDS/AKT1.md",
@@ -1245,21 +1245,21 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "6dffbe04d9459ac6bc4f6ac166601a4009349211e487337be9b84bfef14fb327"
+      "observed_sha256": "525ed6fce6439ab488bedd6de8109050033cbdab4eeb8198d34d64922c1f3fe3"
     },
     {
       "path": "06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "5251f2df1826ee4128bce9a2c6e63278cf3a59971259bea2231b03df87f45616"
+      "observed_sha256": "8566e2dc1277ce6887d3927a46515fef75077774fcfa88383b679f85f09cd357"
     },
     {
       "path": "06_RESOURCES/Genomics/REFERENCES/ANNOTATION_SOURCE_REGISTER.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "474bd52e8c5401d1b1d4b634db82c0c3402b65fe345a541ec2a4af05ab9396e8"
+      "observed_sha256": "5f746b1f667afd1fb64c2d6287cf6718be23b9b6c1862ac6b39addc92c797cd8"
     },
     {
       "path": "06_RESOURCES/Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md",
@@ -1273,21 +1273,21 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "37d4b79ddafa1698e6057021b69c0df08af76092b90d58ae5be6c7da516f080c"
+      "observed_sha256": "5110f6aec3b356e86078936344ba503e5a05be626c125c015b8837971b69a5af"
     },
     {
       "path": "06_RESOURCES/tests/test_gene_companion_heatmap.R",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "12552b316d14bd91400f6dd1af1fe218fbdd6efe7c4c8b5721c5846070fe868f"
+      "observed_sha256": "d53821cb1d5d393230c8de89d658686cce415c3abb5ad24d5869e6351473e0a2"
     },
     {
       "path": "scripts/build_gene_companion.py",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "bcf7dee94817cb0ae93be8e05a3ccca3932f45cb73ba50838c0f5cdc9d43c44d"
+      "observed_sha256": "95cdb2e7395bd4cea8399c4a1349fe317791bbb9948f72a60b9c527b7dcf9cea"
     },
     {
       "path": "scripts/gene_companion_content.py",
@@ -1308,21 +1308,56 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "3ab69378335c7c88462b3a70f9d18b432a25200f50175d0c4b2a0bd13f9f5313"
+      "observed_sha256": "ce454e09a90f5a53c89a3b081b3576623752484865a34046f619aa35e21dfdba"
     },
     {
       "path": "tests/test_gene_companion.py",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "1064280683cefbfae78fe5b0c014c17f35315bd1c819d0565c7ebe643449a473"
+      "observed_sha256": "8464cbab0d9d00816489de7915463a310fc7fac61e5fce371579621bf75606bf"
     },
     {
       "path": "06_RESOURCES/Genomics/REFERENCES/COMPANION_VALIDATION_REVIEW_2026-10-10.md",
       "observed_role": "independently authored public teaching validation report; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal guarded publication checks; not blanket rights clearance",
-      "observed_sha256": "8141e18a60420a62d3df043cbc737a17e490e444db2dc8f595a82378a0b39969"
+      "observed_sha256": "e2f82ac49cb54affdf74b90d4adf1fa4d27cbed7d54ae0d3427ec6abc1b24a38"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "72af738eb4f37aa1c9f20c1640de2cbf3b5ffb99aebbb45ceebde86bda61debe"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_gene_companion_walkthrough.R",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "d20b7335d5cb4e65acedc7a66f06f12afcd4951a9ced5b55584cbf40e3359ceb"
+    },
+    {
+      "path": "scripts/gene_companion_chapters.py",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981"
+    },
+    {
+      "path": "scripts/gene_companion_figures.py",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/REFERENCES/UNIFIED_GUIDE_EDITORIAL_REVIEW_2026-10-10.md",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "7dc868b23c78039a16b3cfbf6eba6ab0268c9815e3165ffc41feb430b634cff7"
     }
   ]
 }

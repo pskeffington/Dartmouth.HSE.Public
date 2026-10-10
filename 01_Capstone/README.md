@@ -1,5 +1,7 @@
 # Research planning
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) connects these methods to synthetic genomics interpretation. Continue to [the research walkthrough](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question).
+
 Use these public resources to plan a reproducible study: define a question, identify the observational unit, document measurements, and explain the limits of the design.
 
 - [Research methods and references](../06_RESOURCES/Literature/README.md)

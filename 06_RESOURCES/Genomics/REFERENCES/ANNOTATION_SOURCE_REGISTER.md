@@ -1,6 +1,6 @@
 # Annotation source register
 
-[Selection rubric](SELECTION_RUBRIC.md) · [Evidence matrix](GENE_EVIDENCE_MATRIX.md)
+[Complete guide](../BREAST_CANCER_60_GENE_COMPANION.md) · [Selection rubric](SELECTION_RUBRIC.md) · [Evidence matrix](GENE_EVIDENCE_MATRIX.md)
 
 ## Method and release boundary
 

@@ -1,5 +1,7 @@
 # Selection rubric for the 60-gene teaching catalog
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](../BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Companion](../BREAST_CANCER_60_GENE_COMPANION.md) · [Source register](ANNOTATION_SOURCE_REGISTER.md)
 
 Selection recorded: 10 October 2026, before adding the 39 new entries. This
