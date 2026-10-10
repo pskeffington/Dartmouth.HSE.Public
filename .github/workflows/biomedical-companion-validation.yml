@@ -1,0 +1,38 @@
+name: Biomedical Study Companion Validation
+on:
+  pull_request:
+    paths:
+      - '06_RESOURCES/Literature/**'
+      - '06_RESOURCES/R/examples/unit_0*.R'
+      - '06_RESOURCES/tests/**'
+      - '.github/workflows/biomedical-companion-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  corpus-and-r:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+      - name: Validate corpus structure
+        run: python3 06_RESOURCES/tests/validate_biomedical_corpus.py
+      - name: Run independent synthetic analysis units
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in 06 07 08; do
+            Rscript "06_RESOURCES/R/examples/unit_${unit}_*.R" 2>&1 | tee "unit_${unit}_run.log"
+          done
+      - name: Preserve diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: biomedical-companion-r-logs
+          path: unit_*_run.log
+          if-no-files-found: ignore
