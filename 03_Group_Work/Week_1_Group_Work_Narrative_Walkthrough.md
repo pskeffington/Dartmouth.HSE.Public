@@ -24,6 +24,7 @@ Learn R by building a small synthetic expression study. A sample is a collected 
 - [Independent practice](#independent-practice)
 - [Ready to move on](#ready-to-move-on)
 - [Further learning](#further-learning)
+- [Weekly Learning Objectives & Mastery Assessment](#weekly-learning-objectives--mastery-assessment)
 
 ## Learning objectives
 
@@ -233,3 +234,17 @@ Keep a runnable script and a short data dictionary. Restart R and rerun everythi
 [Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
 References: [R extraction](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html), [data import/export manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html), and installed help `?factor`, `?hist`, `?getwd`.
+
+## Weekly Learning Objectives & Mastery Assessment
+
+Assess your own new synthetic specimen example after completing the lesson. These criteria describe this independent study guide; they are not institutional marking criteria.
+
+| Measurable objective | Evidence of competency | Independent mastery criterion |
+| --- | --- | --- |
+| Choose and inspect R containers | A script using a vector, list, matrix, factor, and data frame; recorded type, class, and dimensions | Explain each choice and predict the result of one coercion before running it |
+| Select observations without losing structure or missingness | Positional, named, and logical selections with printed identifiers and measured/missing counts | Reconcile selected IDs against the input and preserve table dimensions when selecting one column |
+| Implement checked computation | One function plus a conditional and loop; valid and invalid input trials | Predict each return or error, reject invalid values, and handle an all-missing input deliberately |
+| Recover a tabular export | CSV round trip, data dictionary, and explicit reconstruction of category levels | Verify identifiers and numeric values; explain which factor metadata the CSV does not retain |
+| Interpret a distribution | Two labeled histograms and a measured-count summary with units | Explain how breaks affect the display, distinguish specimens from gene–sample cells, and make no population or clinical claim from the synthetic values |
+
+**Mastery decision:** meet every row using fresh invented inputs and a clean-session rerun, with your own script and explanation rather than copied outputs. Keep predictions, observed checks, and any corrections. If a criterion fails, revisit that topic and demonstrate it again before progressing.

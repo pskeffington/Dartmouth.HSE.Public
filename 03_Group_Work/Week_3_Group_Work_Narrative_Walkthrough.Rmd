@@ -308,3 +308,17 @@ Rerun from a clean session and keep the dictionary, code, figures, counts, and m
 [Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Next: Week 4](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
 References: [dplyr joins](https://dplyr.tidyverse.org/reference/mutate-joins.html), [ggplot2 violins](https://ggplot2.tidyverse.org/reference/geom_violin.html), [R linear models](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html), and installed help `?density`, `?ecdf`, `?grid.layout`.
+
+## Weekly Learning Objectives & Mastery Assessment
+
+Use independently invented health tables and record your decisions before interpreting the outputs. This is a self-assessment for the public guide, not an institutional rubric.
+
+| Measurable objective | Evidence of competency | Independent mastery criterion |
+| --- | --- | --- |
+| Enforce import and join contracts | Typed imports, schema checks, unique-key audits, unmatched-ID lists, and predicted join sizes | Observed counts match predictions; a deliberately duplicated key fails the intended relationship check |
+| Decode categorical information explicitly | A toy dictionary with observed, refused, unsure, and absent states plus counts | Reject an undocumented code and distinguish an absent record from a recorded response |
+| Define an analytic sample | Inclusion fields, exclusion counts, model formula, and coefficient units | Reconcile total, measured, and modeled counts; fit only the declared sample without silent row removal |
+| Interpret models and diagnostic figures | Labeled distribution, relationship, residual, and Q-Q plots with a method note | Describe the fitted association on its scale and identify an assumption concern without claiming causation or clinical validity |
+| Build reusable audited figures | Plot function returning its figure and inclusion counts; invalid-column and unit-contract checks | Invalid inputs fail deliberately; each panel has its own denominator and a caption explaining any sample difference |
+
+**Mastery decision:** meet all rows using fresh synthetic inputs in a clean session. Keep your predictions, dictionary, code, audit counts, model record, and figures. Explain the decisions in your own words and correct any failed check before treating the analysis as ready to communicate.

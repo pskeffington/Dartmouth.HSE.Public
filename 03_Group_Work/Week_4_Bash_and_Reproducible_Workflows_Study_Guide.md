@@ -28,6 +28,7 @@ Copy the blocks into one Bash session in order, or save them in a script. The `.
 - [Independent practice](#independent-practice)
 - [Ready to move on](#ready-to-move-on)
 - [Next steps and references](#next-steps-and-references)
+- [Weekly Learning Objectives & Mastery Assessment](#weekly-learning-objectives--mastery-assessment)
 
 ## Scientific motivation
 
@@ -375,3 +376,17 @@ Explain which commands create, inspect, transform, or replace files. Why must a 
 [Previous: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Bash topic companion](../02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) · [Command sheet](../06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) · [Operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) · [Paul's Notes](../README.md)
 
 References: [GNU Bash manual](https://www.gnu.org/software/bash/manual/bash.html), [GNU awk manual](https://www.gnu.org/software/gawk/manual/gawk.html), and [Rscript documentation](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/Rscript.html). Consult the manuals for your installed versions when options differ.
+
+## Weekly Learning Objectives & Mastery Assessment
+
+Work in a disposable practice directory with new invented specimen records. These criteria assess this independent guide and do not reproduce institutional taskings.
+
+| Measurable objective | Evidence of competency | Independent mastery criterion |
+| --- | --- | --- |
+| Navigate and quote paths deliberately | Directory map, relative-path explanation, and successful run with spaces in a filename | Explain the working directory and every argument boundary; keep outputs inside the intended practice workspace |
+| Validate input before transformation | Schema, unique-ID, category, numeric-value, and input/output collision trials | Each invalid case exits nonzero and leaves the previously valid output intact |
+| Trace a reusable shell program | Documented arguments, conditional, loop, function, and captured status | Predict each branch and distinguish an expected no-match from an execution error |
+| Connect Bash filtering to R summaries | Filtered records, total/measured/missing counts, unitful summaries, and minimum-count trials | Counts reconcile with the original records; missing values stay in totals and inadequate measured counts withhold the summary as specified |
+| Reproduce and explain the workflow | Fresh-workspace rerun, logs, data dictionary, and short methods note | Recover the expected structures and counts, identify which commands can replace files, and demonstrate safe failure with a recorded status |
+
+**Mastery decision:** satisfy every row on fresh invented inputs, including the failure trials, before calling the workflow reproducible. Keep commands, outputs, status checks, and your explanation; revise and rerun any unmet criterion. Never substitute private coursework or protected data for these public synthetic exercises.
