@@ -563,10 +563,17 @@
     },
     {
       "path": "AGENTS.md",
-      "observed_sha256": "9fe5a6f99c9d79d33892dafc99ed6f0d5aa73eaeddff354438c60aa5b079a945",
+      "observed_sha256": "ec1fdb67dc0cf283ee7f364f5600cc064155244bd9f772d596c814a8b887393c",
       "observed_role": "public repository publication policy; maintainer-approved scoped exception, rights unverified",
       "source_relationship": null,
       "next_action": "Review public-reference authorship and upstream license/attribution as applicable"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "observed_role": "original-work publication workflow documentation or software; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
+      "observed_sha256": "907e9e54d5b15a59da384a24ab695a82e33c8dc61643d351b58acb7a5e30aab3"
     },
     {
       "path": "FOLLOW_ALONG.md",
@@ -626,7 +633,7 @@
     },
     {
       "path": "scripts/check_source_upload.py",
-      "observed_sha256": "a04965ad802f4fe3b5928f85532c93f263b1d9aa927d93cc1c37f13789a61f20",
+      "observed_sha256": "ac9f29d868ae87f92c8ec5cefd81b7b9e22193fd2230c4eb595cfdcbd2ccef8b",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -646,11 +653,18 @@
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
+      "path": "scripts/record_original_work.py",
+      "observed_role": "original-work publication workflow documentation or software; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
+      "observed_sha256": "1ba83d07ed1f97f88e23f866df8a4715aae5a06f114e844cf2e6653c6264d5a1"
+    },
+    {
       "path": "scripts/source_origin.py",
       "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "02e6b92be509ec38c66ccc11825be2dfe656ac54289e3d690a8be29a0c076505"
+      "observed_sha256": "1997f9476d876856930846f27addd3c839af495f3612e914943fff15e8475937"
     },
     {
       "path": "scripts/validate_visualization_gallery.py",
@@ -710,7 +724,7 @@
     },
     {
       "path": "tests/test_originality_upload_guard.py",
-      "observed_sha256": "49c4c9efefd5569c886acecd2de40206cd3ef7de8f1dd1891825ef591c386a20",
+      "observed_sha256": "aabb006b9d7738e56d06cb2c8cb0b8b956bea9519e226c508f4de5750fae518b",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"

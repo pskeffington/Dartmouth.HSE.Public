@@ -61,6 +61,189 @@ class UploadGuardTests(unittest.TestCase):
             'input_scope': 'Synthetic fixtures only', **extra}
         p.write_text(json.dumps(records))
 
+    def evidence(self):
+        return {'method': 'Authored the explanation independently from an invented example and verified its counts with a fresh script.',
+                'inputs': [{'kind': 'own-work', 'reference': 'New invented specimen example composed in this test',
+                            'use': 'independently-written'}]}
+
+    def record_original(self, *names, evidence=None, category='documentation'):
+        path = Path(self.tmp.name) / 'authoring-evidence.json'
+        path.write_text(json.dumps(self.evidence() if evidence is None else evidence))
+        return subprocess.run(['python3', str(SCRIPTS / 'record_original_work.py'), '--category', category,
+                               '--evidence', str(path), *names], cwd=self.root, capture_output=True, text=True)
+
+    def manifest(self, name, evidence=None, category='documentation'):
+        evidence = self.evidence() if evidence is None else evidence
+        entry = {'path': name, 'sha256': hashlib.sha256((self.root / name).read_bytes()).hexdigest(),
+                 'source_category': category, 'author': 'Fixture contributor', 'recorded_on': '2026-10-10',
+                 'authoring_evidence': evidence,
+                 'evidence_sha256': hashlib.sha256(json.dumps(evidence, sort_keys=True).encode()).hexdigest()}
+        (self.root / '.git/original-work-manifest.json').write_text(json.dumps(
+            {'schema': 'original-work-v1', 'entries': {name: [entry]}}))
+
+    def test_original_markdown_publishes_without_manual_rights_record(self):
+        self.commit('# Specimen counting\nReport observed and absent measurements separately.')
+        result = self.record_original('notes.md')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.root / '.git/source-rights-reviews.json').exists())
+        payload = json.loads((self.root / '.git/original-work-manifest.json').read_text())
+        entry = payload['entries']['notes.md'][0]
+        self.assertEqual(entry['source_category'], 'documentation')
+        self.assertEqual(entry['path'], 'notes.md')
+        self.assertEqual(guard.origin.verified_original_work((self.root/'notes.md').read_bytes(), 'notes.md', payload), entry)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_original_revision_refreshes_automatically_without_human_approval(self):
+        self.commit('New explanation about plotting observed specimen counts.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+        self.commit('Revised explanation about units and observed specimen counts.')
+        self.assertNotEqual(self.push().returncode, 0)  # stale digest is not inherited
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_original_manifest_retains_new_intermediate_versions(self):
+        self.commit('Original draft of a unitful synthetic summary.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.commit('Revised original draft of a unitful synthetic summary.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_original_academic_folder_and_source_name_are_not_conclusive(self):
+        name = '02_Lecture_Notes/protected.rmd'
+        (self.root / name).parent.mkdir()
+        self.commit('An independent explanation of invented participant summaries.', name)
+        self.assertEqual(self.record_original(name).returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_original_rename_needs_automated_path_binding_not_human_review(self):
+        self.commit('An original specimen-counting explanation.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+        self.git('mv', 'notes.md', 'new.md'); self.git('commit', '-qm', 'rename')
+        self.assertNotEqual(self.push().returncode, 0)
+        self.assertEqual(self.record_original('new.md').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_declaration_only_is_not_authoring_evidence(self):
+        self.commit('Unattributed original-looking words.')
+        self.assertNotEqual(self.record_original('notes.md', evidence={'original': True}).returncode, 0)
+        self.manifest('notes.md', evidence={'original': True})
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_original_manifest_never_overrides_exact_or_embedded_copy(self):
+        for content in (self.text, 'An invented introduction. ' + self.text.upper().replace(' ', ', ') + ' Ending.'):
+            with self.subTest(content=content[:20]):
+                self.commit(content)
+                self.manifest('notes.md')
+                self.assertNotEqual(self.record_original('notes.md').returncode, 0)
+                self.assertNotEqual(self.push().returncode, 0)
+
+    def test_original_similarity_still_requires_review(self):
+        words = [f'distinctive{i}' for i in range(60)]
+        (self.sources / 'instruction.txt').write_text(' '.join(words))
+        self.commit(' '.join(word for i in range(0, 60, 4) for word in reversed(words[i:i+4])))
+        self.manifest('notes.md')
+        self.assertNotEqual(self.record_original('notes.md').returncode, 0)
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_original_pathway_rejects_license_uncertainty_and_restrictions(self):
+        for content in ('License' + ': unknown', 'All rights ' + 'reserved'):
+            with self.subTest(content=content):
+                self.commit(content)
+                self.manifest('notes.md')
+                self.assertNotEqual(self.record_original('notes.md').returncode, 0)
+                self.assertNotEqual(self.push().returncode, 0)
+
+    def test_contradictory_license_or_review_record_cannot_be_relabelled_original(self):
+        self.commit('An external explanation of unrelated concepts.')
+        self.manifest('notes.md')
+        self.review('notes.md', origin='licensed')  # license missing
+        self.assertNotEqual(self.push().returncode, 0)
+        self.review('notes.md', decision='REVIEW')
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_protected_or_reused_authoring_inputs_need_review(self):
+        self.commit('Independent-looking summary.')
+        evidence = self.evidence()
+        evidence['inputs'][0]['reference'] = str(self.sources / 'protected.rmd')
+        self.manifest('notes.md', evidence)
+        self.assertNotEqual(self.record_original('notes.md', evidence=evidence).returncode, 0)
+        self.assertNotEqual(self.push().returncode, 0)
+        evidence['inputs'][0] = {'kind': 'public-concept-reference', 'reference': 'https://example.invalid', 'use': 'reproduced'}
+        self.assertNotEqual(self.record_original('notes.md', evidence=evidence).returncode, 0)
+
+    def test_original_missing_live_corpus_is_not_a_proof_of_independence(self):
+        self.commit('Original explanation with documented inputs.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        (self.sources / 'protected.rmd').unlink(); self.sources.rmdir()
+        self.assertNotEqual(self.push().returncode, 0)
+        (self.root / '.git/source-protection-inventory.json').unlink()
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_original_metadata_does_not_hide_protected_intermediate_commit(self):
+        self.commit(self.text)
+        self.commit('New independent replacement with an authoring record.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_original_media_and_symlink_manifest_remain_blocked(self):
+        self.commit('<svg>unverified external figure</svg>', 'figure.svg')
+        self.manifest('figure.svg')
+        self.assertNotEqual(self.push().returncode, 0)
+        self.assertNotEqual(self.record_original('figure.svg').returncode, 0)
+        p = self.root / '.git/original-work-manifest.json'
+        p.unlink(); p.symlink_to(Path(self.tmp.name)/'untrusted.json')
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_batch_recording_is_atomic_and_preserves_existing_manifest(self):
+        self.commit('Original baseline document.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        p = self.root / '.git/original-work-manifest.json'
+        before = p.read_bytes()
+        self.commit('Another independently composed explanation.', 'safe.md')
+        self.commit(self.text, 'copy.md')
+        self.assertNotEqual(self.record_original('safe.md', 'copy.md').returncode, 0)
+        self.assertEqual(p.read_bytes(), before)
+
+    def test_original_software_and_documented_synthetic_example(self):
+        self.commit('hse_count <- function(x) sum(!is.na(x))', 'count.R')
+        self.assertEqual(self.record_original('count.R', category='research-software').returncode, 0)
+        self.commit('Specimen,Value\nInvented01,2.5\n', 'synthetic.csv')
+        self.assertNotEqual(self.record_original('synthetic.csv', category='synthetic-example').returncode, 0)
+        evidence = self.evidence()
+        evidence['inputs'].append({'kind': 'synthetic-generation', 'reference': 'Invented01 and 2.5 constructed directly for this test', 'use': 'simulated-data'})
+        self.assertEqual(self.record_original('synthetic.csv', evidence=evidence, category='synthetic-example').returncode, 0)
+        self.assertEqual(self.push().returncode, 0)
+
+    def test_previous_manifest_record_cannot_mask_contradictory_evidence(self):
+        self.commit('An independent explanation with an authoring record.')
+        self.assertEqual(self.record_original('notes.md').returncode, 0)
+        p = self.root / '.git/original-work-manifest.json'
+        payload = json.loads(p.read_text())
+        conflict = self.evidence()
+        conflict['inputs'][0]['reference'] = str(self.sources / 'protected.rmd')
+        self.assertNotEqual(self.record_original('notes.md', evidence=conflict).returncode, 0)
+        second = dict(payload['entries']['notes.md'][0])
+        second['authoring_evidence'] = conflict
+        second['evidence_sha256'] = hashlib.sha256(json.dumps(conflict, sort_keys=True).encode()).hexdigest()
+        payload['entries']['notes.md'].append(second)
+        p.write_text(json.dumps(payload))
+        self.assertNotEqual(self.push().returncode, 0)
+
+    def test_tampered_evidence_digest_and_non_utf8_cannot_use_original_path(self):
+        self.commit('A new original explanation.')
+        self.manifest('notes.md')
+        p = self.root / '.git/original-work-manifest.json'
+        payload = json.loads(p.read_text())
+        payload['entries']['notes.md'][0]['evidence_sha256'] = '0' * 64
+        p.write_text(json.dumps(payload))
+        self.assertNotEqual(self.push().returncode, 0)
+        (self.root / 'notes.md').write_bytes(b'opaque invalid text \xff')
+        self.git('add', 'notes.md'); self.git('commit', '-qm', 'invalid encoding')
+        self.manifest('notes.md')
+        self.assertNotEqual(self.push().returncode, 0)
+
     def test_human_verified_independent_work_uses_private_signatures_without_live_corpus(self):
         self.commit('Human-reviewed original utility with no classroom source input.')
         self.review('notes.md', reviewer_kind='human', corpus_independent_review=True)

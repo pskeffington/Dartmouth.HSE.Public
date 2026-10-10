@@ -48,10 +48,11 @@ def load_corpus(root, directories):
                 text = comparison.extract(path)
                 index.update(origin.window_fingerprints(text, comparison.windows))
                 spans.extend(origin.segments(text))
-    return {"hashes": hashes, "names": names, "windows": index, "segments": spans}
+    return {"hashes": hashes, "names": names, "windows": index, "segments": spans,
+            "source_dirs": [str(Path(p).resolve()) for p in directories]}
 
 
-def check_push(root, directories, updates, remote_name, reviews=None):
+def check_push(root, directories, updates, remote_name, reviews=None, original_work=None):
     root = root.resolve()
     if reviews is None:
         git_dir = Path(git(root, 'rev-parse', '--absolute-git-dir').decode().strip())
@@ -61,6 +62,12 @@ def check_push(root, directories, updates, remote_name, reviews=None):
         reviews = json.loads(review_file.read_text()).get('entries', {}) if review_file.exists() else {}
     if not isinstance(reviews, dict):
         raise ValueError('Invalid local review register')
+    if original_work is None:
+        git_dir = Path(git(root, 'rev-parse', '--absolute-git-dir').decode().strip())
+        manifest_file = git_dir / 'original-work-manifest.json'
+        if manifest_file.is_symlink():
+            raise ValueError('Unsafe original-work manifest')
+        original_work = json.loads(manifest_file.read_text()) if manifest_file.exists() else {}
     cached_only = False
     try:
         corpus = load_corpus(root, directories)
@@ -82,6 +89,7 @@ def check_push(root, directories, updates, remote_name, reviews=None):
             raise ValueError('No validated protected signature inventory')
         corpus = {k: set(saved[k]) for k in ('hashes', 'names', 'windows')}
         corpus['segments'] = [set(span) for span in saved['segments']]
+        corpus['source_dirs'] = saved['source_dirs']
         cached_only = True
     # Already-uploaded byte-identical paths may retain unresolved reviews. This
     # does not clear them, and cannot exempt substantive protected-source hits.
@@ -138,7 +146,7 @@ def check_push(root, directories, updates, remote_name, reviews=None):
             elif b'\0' not in data[:8192]:
                 text = data.decode('utf-8', 'replace')
         for path in sorted(paths):
-            classification, reason = origin.classify(data, path, corpus, comparison.windows, text, reviews)
+            classification, reason = origin.classify(data, path, corpus, comparison.windows, text, reviews, original_work)
             if cached_only and (sha, path) not in inherited and classification != origin.PROTECTED:
                 r = origin.verified_review(data, path, reviews)
                 if not (r and r['origin'] == 'independent' and r.get('reviewer_kind') == 'human'
