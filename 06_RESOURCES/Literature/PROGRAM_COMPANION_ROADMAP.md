@@ -6,7 +6,7 @@
 
 ## Goal and coverage boundaries
 
-The public companion should eventually help a student navigate an entire health-science research education: prepare prerequisites, learn concepts independently, run original synthetic examples, critique statistical assumptions, apply reproducibility standards, and create professionally communicated research outputs. It does **not** publish protected classroom exercises, notes copied from lectures, answer keys, source-derived similarity reports or restricted datasets.
+The public companion should eventually help a student navigate an entire health-science research education: prepare prerequisites, learn concepts independently, run original synthetic examples, critique statistical assumptions, apply reproducibility standards, and create professionally communicated research outputs. It does **not** publish protected classroom exercises, lecture-derived notes, answer keys, source-derived similarity reports or restricted datasets.
 
 **Status meanings:** `DELIVERED` = the public resource exists (not necessarily pedagogically or scientifically approved); `REVIEW_REQUIRED` = existing content needs scope/originality/scientific review; `PLANNED` = no complete guide; `BLOCKED` = cannot proceed without permissions, approved source access or other external dependency; `NOT_VERIFIED` = curriculum fact or alignment has not been established. Never call a course `COMPLETE` solely because a page or CI run exists.
 
