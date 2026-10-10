@@ -15,6 +15,10 @@ output:
 
 Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs.
 
+## Before you start
+
+R with dplyr and ggplot2; ggpubr is optional for combining panels. Read the [complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+
 ## 1. Identify the join key before combining tables
 
 `haven::read_xpt()` reads SAS transport files. For this standalone demonstration, create two small tables directly in R and join them by a stable participant ID.

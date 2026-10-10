@@ -2,11 +2,12 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 ## On this page
 
 - [Purpose: the shell as a reproducible research interface](#purpose-the-shell-as-a-reproducible-research-interface)
+- [Before you start](#before-you-start)
 - [1. Shells, Bash, and computational research](#1-shells-bash-and-computational-research)
 - [2. Navigating and organizing a filesystem](#2-navigating-and-organizing-a-filesystem)
 - [3. Inspecting research files without loading everything](#3-inspecting-research-files-without-loading-everything)
@@ -21,6 +22,10 @@
 ## Purpose: the shell as a reproducible research interface
 
 Learn Bash navigation, scripts, pipelines, and responsible file handling.
+
+## Before you start
+
+A Bash shell; the R bridge additionally needs Rscript. PowerShell uses different syntax. Read the [complete Week 4 lesson](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
 
 ## 1. Shells, Bash, and computational research
 

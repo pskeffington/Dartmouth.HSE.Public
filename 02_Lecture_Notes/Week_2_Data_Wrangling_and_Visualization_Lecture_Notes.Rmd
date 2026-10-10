@@ -15,6 +15,10 @@ output:
 
 Learn simulation, tabular transformation, missing-data checks, and visualization principles.
 
+## Before you start
+
+R with tidyr and ggplot2. Install these in your own R library before running the examples. Read the [complete Week 2 lesson](../03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+
 ## 1. Make random data reproducible
 
 **Core concept:** A pseudorandom sample is controlled by a seed, sample size, and distribution parameters. The mean and standard deviation describe the requested normal distribution, not the guaranteed mean and spread of a small simulated sample.

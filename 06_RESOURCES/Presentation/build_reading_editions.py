@@ -19,6 +19,7 @@ REQUIRED_SOURCES = (
     "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
     "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
     "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
+    "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
 )
 
 def verify_required_sources(root: Path, sources: list[Path]) -> list[str]:
@@ -64,7 +65,7 @@ def rmarkdown(source: Path) -> str:
     body = re.sub(r'^```\{[^}]*\}', '```text', body, flags=re.M)
     body = re.sub(r'`r [^`]+`', '[computed when rendered]', body)
     notice = ('Code is displayed, not executed by this converter. '
-              'The weekly teaching guides provide synthetic inputs and expected results; '
+              'The teaching guides provide known practice inputs and expected results; '
               'see each source for dependencies and execution checks.')
     header = (
         f'# {title}\n\n'

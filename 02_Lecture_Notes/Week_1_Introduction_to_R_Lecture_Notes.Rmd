@@ -15,6 +15,10 @@ output:
 
 Learn R objects, indexing, logical operations, tables, data import, graphics, and reusable functions with independent practice inputs.
 
+## Before you start
+
+Base R; no additional packages. Read the [complete Week 1 lesson](../03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+
 ## 1. Understanding R objects before classifying them
 
 **Core concept:** R stores values inside named objects. `<-` assigns a value; `class()` describes an object's class. A list can contain different classes in separate elements, unlike an atomic vector.

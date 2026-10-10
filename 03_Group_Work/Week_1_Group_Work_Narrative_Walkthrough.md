@@ -2,7 +2,7 @@
 
 [Section index](README.md) · [Editable R Markdown](Week_1_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
 
-> **Reading edition.** Code is displayed, not executed by this converter. The weekly teaching guides provide synthetic inputs and expected results; see each source for dependencies and execution checks.
+> **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
 This study guide uses invented paper-glider trials to practise R objects, indexing, import, plotting, and functions.
 
@@ -20,6 +20,7 @@ This study guide uses invented paper-glider trials to practise R objects, indexi
 - [Common mistakes and debugging](#common-mistakes-and-debugging)
 - [Independent practice](#independent-practice)
 - [Teach-back and summary](#teach-back-and-summary)
+- [Ready to move on](#ready-to-move-on)
 - [Next steps and references](#next-steps-and-references)
 
 ## Learning objectives
@@ -204,6 +205,17 @@ stopifnot(identical(glide_hist$counts, c(1L, 1L, 2L, 1L)))
 Explain why a list can store mixed components but an atomic vector coerces types. Why does `NA` differ from zero? What information does a CSV round trip lose? What would you check before treating a graph as evidence?
 
 The practical sequence is **construct → inspect → select → validate → summarize → explain**. Structure, missingness, and explicit assumptions matter more than memorizing function names.
+
+## Ready to move on
+
+Save a script that constructs a small table, inspects its classes and dimensions, selects rows and columns, reports available and missing counts, runs a checked function, and labels a histogram. Add a brief interpretation with units and a denominator. Restart R and rerun your script from the first line.
+
+| Evidence | Completion check |
+| --- | --- |
+| Objects and indexing | Explain atomic vectors, lists, matrices, data frames, `[ ]`, and `[[ ]]`; demonstrate a logical selection that excludes missing values |
+| Categories and control flow | Declare factor levels and trace one conditional, one loop, and one function call |
+| Import and export | Recover the same row count and numeric values; explain what a CSV does not preserve |
+| Interpretation | Report five measured trials of six in the worked example, a mean of 3 m, and why the histogram is descriptive |
 
 ## Next steps and references
 

@@ -15,9 +15,9 @@ Use a Bash terminal. Quoted paths preserve spaces. Read a command before running
 | Inspect the end | `tail -n 5 data/example_table.csv` | Last five lines |
 | Count lines | `wc -l data/example_table.csv` | Includes the header; counts newline characters |
 | Inspect interactively | `less data/example_table.csv` | Press `q` to leave |
-| Search literal text | `grep -n 'sample' data/example_table.csv` | Matching lines with line numbers; text search, not a field filter |
+| Search literal text | `grep -Fn 'sample' data/example_table.csv` | Matching lines with line numbers; text search, not a field filter |
 
-## Practice without course files
+## Self-contained practice
 
 Run this complete block. It creates a temporary directory, prints its location, and leaves the two practice files there for inspection.
 
