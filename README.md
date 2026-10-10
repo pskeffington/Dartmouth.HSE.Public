@@ -4,14 +4,13 @@
 
 For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
 
-[60-Gene Breast Cancer Research Companion](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — complete gene cards, three learning routes, evidence register and seven original visual explanations.
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — one continuous guide from people and datasets through biology, all 60 genes and synthetic research practice.
 
 ## Start here
 
 | What you want to study | Where to start |
 | --- | --- |
 | Scientific figure styles and worked examples | [Visualization gallery](06_RESOURCES/VISUALIZATION_GALLERY.md) |
-| Breast cancer datasets and common gene biology | [Genomics companion](06_RESOURCES/Genomics/README.md), [dataset narrative](06_RESOURCES/Genomics/BREAST_CANCER_TCGA_BRCA_NARRATIVE.md) and [21-gene guide](06_RESOURCES/Genomics/COMMON_BREAST_CANCER_GENE_DESCRIPTORS.md) |
 | Concepts and topic notes | [Study guides](02_Lecture_Notes/README.md) |
 | Introduction to Data Science (Weeks 1–5) | [Course learning hub](03_Group_Work/README.md) |
 | R functions, summaries, and plots | [R resources](06_RESOURCES/R/README.md) and [function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md) |

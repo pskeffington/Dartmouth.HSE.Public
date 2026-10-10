@@ -1,5 +1,7 @@
 # Gene expression: measurement before interpretation
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Learning routes](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Figures](FIGURES/README.md)
 
 ## What was measured?

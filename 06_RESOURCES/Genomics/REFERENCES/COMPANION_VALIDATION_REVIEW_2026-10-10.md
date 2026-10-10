@@ -1,5 +1,7 @@
 # Companion validation review — 10 October 2026
 
+Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](../BREAST_CANCER_60_GENE_COMPANION.md).
+
 [Companion](../BREAST_CANCER_60_GENE_COMPANION.md) · [Selection rubric](SELECTION_RUBRIC.md) · [Evidence matrix](GENE_EVIDENCE_MATRIX.md)
 
 ## Scientific scope reviewed
