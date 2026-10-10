@@ -304,10 +304,10 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "8e1d78c915d466da054ba589e8ca28edd9d505adbb80c1ba963ba21bdfa509cd",
+      "observed_sha256": "29069cfaf3e85a141a9a74169141a5f1d1bf3768a0dcbb1e0b41b822d6d20fed",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review public-reference index accuracy and provenance"
+      "next_action": "Verify independent references and index accuracy"
     },
     {
       "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
@@ -315,6 +315,13 @@
       "observed_role": "independent public research code quality literature and review matrix; human rights review pending",
       "source_relationship": null,
       "next_action": "Review cited public-source applicability and author provenance"
+    },
+    {
+      "path": "06_RESOURCES/Literature/RESEARCH_PROJECT_INTAKE.md",
+      "observed_sha256": "0008231b23de8b56752cc619c4d768fa390dc8746affa4eb14ca9f11e3f955f4",
+      "observed_role": "independent public-reference research project intake and scientific-code planning framework; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Review independent authorship, public references and rights status"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
@@ -430,10 +437,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "61e1f7e6b2d2a218a2115ea9f8fbaafb1026522d21db03edda9f90450c2dac97",
+      "observed_sha256": "79ced05f68311f48ceab2f19c74a530653aceb551e5f88dec38092020a1cc566",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review public-reference index accuracy and provenance"
+      "next_action": "Verify independent references and index accuracy"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
