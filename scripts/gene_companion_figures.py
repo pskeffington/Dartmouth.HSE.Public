@@ -4,6 +4,7 @@ FIGURE_INTRO = "# Seven visual explanations\n\n[Companion](../BREAST_CANCER_60_G
 
 FIGURES = [('DNA to protein',
   '```mermaid\n'
+  '%%{init: {"flowchart": {"htmlLabels": false, "rankSpacing": 24, "nodeSpacing": 24}}}%%\n'
   'flowchart TD\n'
   '  D["DNA sequence and copy number"] -->|transcription| R["RNA production and abundance"]\n'
   '  R -->|translation for coding transcripts| P["Protein abundance"]\n'

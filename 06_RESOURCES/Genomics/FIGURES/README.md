@@ -7,6 +7,7 @@ These original Mermaid diagrams render directly on GitHub. Every schematic is **
 ## DNA to protein
 
 ```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "rankSpacing": 24, "nodeSpacing": 24}}}%%
 flowchart TD
   D["DNA sequence and copy number"] -->|transcription| R["RNA production and abundance"]
   R -->|translation for coding transcripts| P["Protein abundance"]

@@ -77,6 +77,7 @@ RNA sequencing samples fragments derived from RNA. A **raw count** records assig
 #### Figure 1: DNA to protein
 
 ```mermaid
+%%{init: {"flowchart": {"htmlLabels": false, "rankSpacing": 24, "nodeSpacing": 24}}}%%
 flowchart TD
   D["DNA sequence and copy number"] -->|transcription| R["RNA production and abundance"]
   R -->|translation for coding transcripts| P["Protein abundance"]

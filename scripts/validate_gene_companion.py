@@ -16,7 +16,7 @@ from urllib.parse import urlsplit, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 # Sealed only over public approved identity facts; refresh after a new source audit.
-EDITORIAL_SOURCE_SEALS = {'gene_companion_chapters.py': '50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981', 'gene_companion_figures.py': '667aa150657fb7d886d2c42ed9f6d22204e994c6fdee1b4fca7804edb49d9e81'}
+EDITORIAL_SOURCE_SEALS = {'gene_companion_chapters.py': '50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981', 'gene_companion_figures.py': 'aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9'}
 
 IDENTITY_SNAPSHOT_SHA256 = '74bf65f70d34dafa55dc2994222c960b7ee644dcc860c3e406e076f4d4b9f6b0'
 

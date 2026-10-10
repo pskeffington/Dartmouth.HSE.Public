@@ -783,14 +783,14 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "ef2da8f14bf0516f52a4c647a64231e345fe01bd2f206b8678436724ff22b0e1"
+      "observed_sha256": "ed7da09fe73e4c440bfe237e4ae70b74e156a03169aa1437bef384f202ef12fb"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/README.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "e88eca65e4fc7f8499c4583372bb7d394ea76b190d2e5292558eaae79de0b092"
+      "observed_sha256": "03d3292a3c0c5303a1b7d5ad121f691770b1067b175f207845e4de2a474a3b49"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
@@ -1308,7 +1308,7 @@
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "e03b4592a08eac3306b011ebef73f563839e4dc141094b94f297b8c6080302ab"
+      "observed_sha256": "ce454e09a90f5a53c89a3b081b3576623752484865a34046f619aa35e21dfdba"
     },
     {
       "path": "tests/test_gene_companion.py",
@@ -1350,7 +1350,7 @@
       "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
       "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "667aa150657fb7d886d2c42ed9f6d22204e994c6fdee1b4fca7804edb49d9e81"
+      "observed_sha256": "aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9"
     },
     {
       "path": "06_RESOURCES/Genomics/REFERENCES/UNIFIED_GUIDE_EDITORIAL_REVIEW_2026-10-10.md",
