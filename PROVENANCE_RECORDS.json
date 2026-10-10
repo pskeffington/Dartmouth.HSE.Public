@@ -311,7 +311,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
-      "observed_sha256": "81279179ae27db203ab1958fe12609279f707ff3e34b0cbf93940a0aea78ac24",
+      "observed_sha256": "fbb98522de7030610f3b474fc25ae1b6dc999aa75a0dc1ec12dc76eed90d29e4",
       "observed_role": "independently authored public-reference and study-guide resource roadmap; course equivalence unverified",
       "source_relationship": null,
       "next_action": "Verify independent authorship and catalog alignment without private source materials"
