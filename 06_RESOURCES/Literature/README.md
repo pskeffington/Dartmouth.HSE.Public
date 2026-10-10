@@ -4,7 +4,7 @@
 
 This curated matrix connects openly available programming documentation, research-software guidance, and reproducibility resources to independently authored health-data science exercises. It is a **narrative teaching bibliography**, not a systematic literature review or validation of a clinical model. All descriptions below are original summaries of general public guidance. Consult the linked primary sources for exact syntax and version-specific behavior.
 
-## Biomedical research computing
+## Week 5 machine learning literature\n\n[Week 5 independent biomedical machine-learning literature review](WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) collects primary ML manuals, prediction-reporting guidance, model-bias assessment, leakage controls, evaluation concepts and gated follow-on code validation. It is a focused public bibliography, not a verified institutional syllabus.\n\n## Biomedical research computing
 
 For survey methodology, Bioconductor, count-based RNA-seq methods, and observational-research reporting, use the [biomedical research computing matrix](BIOMEDICAL_CODING_METHODS.md). For naming conventions, scientific data dictionaries, longitudinal identifier rules, research-code testing, and future-course quality gates, use the [biomedical coding standards framework](BIOMEDICAL_CODING_STANDARDS.md). These documents are original public-reference syntheses. For an actionable evidence-to-code review and quality-gate matrix covering NIH, FDA, CDISC, R testing and reproducibility, see the [research code quality matrix](RESEARCH_CODE_QUALITY_MATRIX.md). To plan a new course or research project, consult the [project intake, schema and reproducibility contracts](RESEARCH_PROJECT_INTAKE.md).
 
