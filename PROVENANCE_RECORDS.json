@@ -1,7 +1,7 @@
 {
   "schema": "public-provenance-records-v1",
   "observation_date": "2026-10-10",
-  "snapshot_base_commit": "e5a73f434b756ef6f8fa9d0b8abb888f859ad5fb",
+  "snapshot_base_commit": "a2016d0843b48f8cea9f0c14cc544a6f30216e78",
   "observer": "Codex automated intake; not a human rights reviewer",
   "common_rights_state": "UNVERIFIED",
   "common_human_review": "PENDING",
@@ -343,6 +343,13 @@
       "observed_role": "independent public-reference research project intake and scientific-code planning framework; human rights review pending",
       "source_relationship": null,
       "next_action": "Review independent authorship, public references and rights status"
+    },
+    {
+      "path": "06_RESOURCES/Literature/VALIDATED_CODE_CORPUS.md",
+      "observed_role": "concurrent public reference document; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "d998e8e3e6e801cc53753aed0740ca70f7cd34fce81827784cdc1cc974de2ad0"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
