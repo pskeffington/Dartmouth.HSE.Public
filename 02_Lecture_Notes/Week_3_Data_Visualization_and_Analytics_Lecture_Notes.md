@@ -1,4 +1,4 @@
-# HSE 711 — Week 3: Data Visualization and Analytics Lecture Notes
+# Paul's Notes — Week 3: Visualization and analytics
 
 [Section index](README.md) · [Editable R Markdown](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
@@ -18,13 +18,13 @@
 
 ## Purpose and learning objectives
 
-These independent notes discuss joining tables, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. They do not reproduce the official survey exercise, required deliverables, or lecture sequence. Consult authorized Geisel files for all course-specific requirements.
+Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs. These independent notes are not an official Dartmouth or Geisel publication.
 
-**Required source boundary:** Readers need separately distributed Geisel instructional files to know the real assessed questions, schemas, and deliverables. Public sample code demonstrates general methods only.
+These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
 
 ## 1. Identify the join key before combining tables
 
-The lecture uses `haven::read_xpt()` to read SAS transport files. For this standalone demonstration, create two small tables directly in R and join them by a stable participant ID.
+`haven::read_xpt()` reads SAS transport files. For this standalone demonstration, create two small tables directly in R and join them by a stable participant ID.
 
 ```r
 library(dplyr)
@@ -78,7 +78,7 @@ sum(is.na(survey_df$response_label))
 
 ## 3. Explore distributions before fitting models
 
-The lecture compares histograms, violin plots, and empirical cumulative distribution functions. Each represents the same numeric variable differently: frequency by interval, smoothed distribution shape, and cumulative proportion at or below a value.
+Compare histograms, violin plots, and empirical cumulative distribution functions. Each represents the same numeric variable differently: frequency by interval, smoothed distribution shape, and cumulative proportion at or below a value.
 
 ```r
 library(ggplot2)
@@ -105,7 +105,7 @@ ggplot(toy_df, aes(x = measurement)) +
 
 ## 4. Read a scatter plot and fit a linear model
 
-The lecture uses `lm()` and `geom_smooth(method = "lm")` to illustrate linear association. A linear slope has units of **outcome units per predictor unit**. A confidence band around a fitted mean is not an individual prediction interval.
+Use `lm()` and `geom_smooth(method = "lm")` to explore linear association. A linear slope has units of **outcome units per predictor unit**. A confidence band around a fitted mean is not an individual prediction interval.
 
 ```r
 fit <- lm(measurement ~ age, data = toy_df)
@@ -153,10 +153,15 @@ plot_distribution(toy_df, "measurement")
 
 ## 6. Import multiple files without losing track of them
 
-The lecture's `list.files()` and `for` loop examples generalize to reading multiple records. Use a strict CSV extension pattern, explicit paths, and a named list to avoid overwriting previous imports.
+`list.files()` and iteration help read multiple records. Use a strict CSV extension pattern, explicit paths, and a named list to avoid overwriting previous imports.
 
 ```r
-data_path <- "data/authorized_practice_files"
+data_path <- tempfile("practice_tables_")
+dir.create(data_path)
+write.csv(data.frame(item = c("u", "v"), value = c(4, 8)),
+          file.path(data_path, "first.csv"), row.names = FALSE)
+write.csv(data.frame(item = c("w", "x"), value = c(6, 9)),
+          file.path(data_path, "second.csv"), row.names = FALSE)
 file_paths <- list.files(
   data_path,
   pattern = "\\.csv$",
@@ -167,15 +172,17 @@ stopifnot(length(file_paths) > 0L)
 tables <- lapply(file_paths, read.csv)
 names(tables) <- basename(file_paths)
 lapply(tables, dim)
+stopifnot(length(tables) == 2L, all(vapply(tables, nrow, integer(1)) == 2L))
+unlink(data_path, recursive = TRUE)
 ```
 
-**Why it works:** `lapply()` returns one object per file; naming the list helps match later output to its input. The chunk is not executed because its input folder must be supplied separately.
+**Why it works:** `lapply()` returns one object per file; naming the list helps match later output to its input. The example creates two temporary practice tables and removes only its own temporary directory afterward.
 
 **Mastery checkpoint:** Verify that every loaded table has the expected columns before combining or graphing it.
 
 ## 7. Build a publication-readable figure panel
 
-For each figure, define the scientific question first. A violin summarizes a distribution, a scatter plot shows a paired numeric relationship, and a density curve estimates its shape. The lecture's `ggpubr::ggarrange()` can combine independently built `ggplot` objects. Units, sample sizes, category labels, and missingness must be evaluated separately for each panel.
+For each figure, define the scientific question first. A violin summarizes a distribution, a scatter plot shows a paired numeric relationship, and a density curve estimates its shape. `ggpubr::ggarrange()` can combine independently built `ggplot` objects. Units, sample sizes, category labels, and missingness must be evaluated separately for each panel.
 
 ```r
 p_hist <- plot_distribution(toy_df, "measurement")
@@ -207,4 +214,6 @@ if (requireNamespace("ggpubr", quietly = TRUE)) {
 
 **Mastery standard:** All eight objectives demonstrated on a new dataset with correctly checked join cardinality and missing-value handling. The student can defend every plot's purpose and limitations and repeat the code without untracked manual steps.
 
-**Related:** [Week 3 lecture chunk reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) · [Week 3 group work](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) · [Lecture index](README.md)
+**Related:** [Week 3 study reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) · [Complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) · [Topic index](README.md)
+
+[Previous topic](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Next topic](Week_4_Introduction_to_Bash_Lecture_Notes.md) · [Paul's Notes](../README.md)

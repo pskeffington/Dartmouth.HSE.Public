@@ -113,7 +113,7 @@ hse_summary_report <- function(data, value, group = NULL, unit = NULL,
   list(statistics=tab, narrative=narrative)
 }
 
-# Print a report in a compact form suitable for a course worksheet.
+# Print a report in a compact form suitable for an exploratory report.
 hse_print_summary <- function(report) {
   if (!is.list(report) || is.null(report$statistics) ||
       is.null(report$narrative)) stop("Expected hse_summary_report output")
@@ -135,7 +135,7 @@ hse_wilcox_independent <- function(data, value, group, conf_int = FALSE) {
   if (any(table(as.character(d[[group]])) < 1L)) stop("Each group needs observations.")
   d[[group]] <- factor(d[[group]], levels = sort(groups))
   stats::wilcox.test(stats::reformulate(group, response = value),
-                     data = d, paired = FALSE, exact = FALSE,
+                     data = d, exact = FALSE,
                      conf.int = conf_int)
 }
 
@@ -158,7 +158,7 @@ hse_wilcox_paired <- function(data, value, group, id) {
                      paired = TRUE, exact = FALSE)
 }
 
-# Basic assumption-free Pearson or Spearman association.
+# Pearson or Spearman association; assumptions depend on method and design.
 # Report correlation alongside sample size and avoid causal interpretation.
 hse_cor <- function(data, x, y, method = "spearman") {
   hse_check_cols(data, c(x, y))

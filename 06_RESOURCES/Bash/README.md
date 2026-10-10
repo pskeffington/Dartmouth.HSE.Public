@@ -9,4 +9,4 @@
 | [Reusable helpers](bash_functions.sh) | File checks, TSV inspection and checksums |
 | [Bash references](BASH_LITERATURE_REVIEW.md) | Manuals and coding guidance |
 
-The easy example needs no course data. The lab requires the six-field classroom CSV. Run commands from the repository root unless the example states otherwise.
+The easy example needs no external dataset. The operation sheet distinguishes runnable practice from templates requiring your own inputs. Run commands from the repository root unless the example states otherwise.

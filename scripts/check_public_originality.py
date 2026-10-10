@@ -68,6 +68,9 @@ def scan(root: Path) -> dict:
         rel = path.relative_to(root).as_posix()
         if any(part in SKIP for part in path.parts):
             continue
+        if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+            findings.append({"path": rel, "level": "block", "reason": "unsafe tracked symlink or path outside checkout"})
+            continue
         if not path.is_file():
             findings.append({"path": rel, "level": "review", "reason": "tracked path not present in working tree"})
             continue
