@@ -27,8 +27,15 @@ if (!requireNamespace("ggplot2",quietly=TRUE)) {
   stopifnot(inherits(hse_plot_mean_ci(d,"time","value","group"),"ggplot"))
   e <- data.frame(term=c("A","B"),est=c(.2,-.3),
                   low=c(.1,-.5), high=c(.4,-.1))
-  stopifnot(inherits(hse_plot_forest(e,"term","est","low","high"),"ggplot"))
-  fit <- stats::lm(mpg ~ wt, data=mtcars)
+  old_warn <- getOption("warn")
+  options(warn = 2)
+  forest_plot <- hse_plot_forest(e, "term", "est", "low", "high")
+  forest_layers <- ggplot2::ggplot_build(forest_plot)$data
+  options(warn = old_warn)
+  stopifnot(inherits(forest_plot, "ggplot"),
+            isTRUE(all.equal(forest_layers[[2]]$xmin, e$low)),
+            isTRUE(all.equal(forest_layers[[2]]$xmax, e$high)))
+  fit <- stats::lm(value ~ group, data=b)
   stopifnot(inherits(hse_plot_lm_diagnostics(fit),"ggplot"))
   if (requireNamespace("pROC",quietly=TRUE)) {
     roc <- data.frame(outcome=rep(c("Control","Case"),each=25),

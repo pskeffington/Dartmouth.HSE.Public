@@ -35,7 +35,7 @@ The builder uses the Python standard library. It does **not** execute R, validat
 
 ## HTML and PDF
 
-For an HTML version, open the corresponding `.Rmd` in RStudio and knit to HTML. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages.
+For an optional HTML version of an R lesson, open its `.Rmd` in RStudio and knit to HTML. For Week 4, read the Markdown and run Bash blocks in the specified shell; do not treat shell chunks as R-console commands. The [shared stylesheet](reading.css) affects HTML only; it has no effect on PDF output. Install required R packages.
 
 The publishing tool creates Markdown, not HTML. A separate R Markdown renderer creates HTML. Rendering is optional.
 

@@ -24,19 +24,19 @@ Run this complete block. It creates a temporary directory, prints its location, 
 ```bash
 practice_dir=$(mktemp -d)
 printf 'Practice files: %s\n' "$practice_dir"
-printf 'row_id,category,value\nR01,A,35\nR02,B,42\nR03,A,51\n' \
+printf 'Participant_ID,Sample_Type,Measurement\nR01,Serum,0.9\nR02,Plasma,1.2\nR03,Serum,1.1\n' \
   > "$practice_dir/metadata.csv"
 
-# Retain the header and select category A records from field 2.
-awk -F ',' 'NR == 1 || $2 == "A"' "$practice_dir/metadata.csv" \
-  > "$practice_dir/category_a.txt"
-cat "$practice_dir/category_a.txt"
+# Retain the header and select Serum records from field 2.
+awk -F ',' 'NR == 1 || $2 == "Serum"' "$practice_dir/metadata.csv" \
+  > "$practice_dir/serum.csv"
+cat "$practice_dir/serum.csv"
 
 # Count selected records after excluding the header.
-awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/category_a.txt"
+awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/serum.csv"
 ```
 
-**Expected:** the header, R01 and R03, followed by a record count of `2`. This practice file has three simple fields and no quoted commas or multiline values.
+**Expected:** the header, R01 and R03, followed by a record count of `2`. Measurement is synthetic creatinine in mg/dL, not a clinical finding. This practice file has three simple fields and no quoted commas or multiline values.
 
 ## Load reusable helpers
 

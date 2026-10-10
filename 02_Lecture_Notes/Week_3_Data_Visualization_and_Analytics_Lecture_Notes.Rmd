@@ -1,216 +1,72 @@
 ---
-title: "Paul's Notes — Week 3: Visualization and analytics"
-author: "Independent public study guide"
+title: "Paul's Notes · Week 3: Health-Data Joins and Exploratory Models"
+author: "Paul Skeffington"
 output:
   html_document:
     toc: true
     toc_depth: 2
-    toc_float:
-      collapsed: false
-    code_folding: show
     css: ../06_RESOURCES/Presentation/reading.css
 ---
 
-## Purpose and learning objectives
+## Purpose and dependencies
 
-Learn joins, analytical selection, reusable plotting functions, and descriptive models with illustrative practice inputs.
+Use this reference with the [complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md). **Study time:** 30–40 minutes. **Prerequisites:** Weeks 1–2; R and dplyr >= 1.1.0. The full lesson additionally uses ggplot2. Explain joining populations, analytic inclusion, and exploratory model limits.
 
-## Before you start
+## Dictionaries and keys before joins
 
-R with dplyr and ggplot2; ggpubr is optional for combining panels. Read the [complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+A dictionary states field meaning, types, units, codes, and missing conventions. Serum albumin (g/dL) and creatinine (mg/dL) are biomarker concentrations; age is years; a kidney-health response is self-reported information. A self-report is not a diagnosis. Character identifiers preserve formatting; row position is not a stable key.
 
-## 1. Identify the join key before combining tables
-
-`haven::read_xpt()` reads SAS transport files. For this standalone demonstration, create two small tables directly in R and join them by a stable participant ID.
-
-```{r week3-join}
-library(dplyr)
-
-measure_df <- data.frame(
-  participant_id = c(101L, 102L, 103L),
-  measurement = c(5.2, 6.8, NA_real_)
-)
-profile_df <- data.frame(
-  participant_id = c(101L, 102L, 104L),
-  age = c(38, 51, 44)
-)
-
-stopifnot(!anyDuplicated(measure_df$participant_id))
-stopifnot(!anyDuplicated(profile_df$participant_id))
-
-matched_df <- inner_join(measure_df, profile_df, by = "participant_id")
-retained_df <- left_join(measure_df, profile_df, by = "participant_id")
-
-nrow(matched_df)
-nrow(retained_df)
-```
-
-**Why it works:** An inner join keeps IDs found in both tables; a left join retains all rows of the left table and inserts `NA` when a partner is absent. When a join key repeats, the output can multiply rows. Join type is an analytical choice, not only a syntax choice.
-
-**Mastery checkpoint:** Identify the unmatched IDs and explain why the two joins have different row counts.
-
-## 2. Understand missingness and survey codes
-
-`NA` means no value is present in the data field. A coded response such as "Don't Know" is an **observed category**, not the same thing as `NA`. Do not drop rows simply because one variable has a missing value; define the exclusion separately for each intended analysis.
-
-```{r week3-missing}
-survey_df <- data.frame(
-  participant_id = 1:5,
-  response = c(1, 2, 9, NA, 7)
-)
-
-survey_df$response_label <- factor(
-  survey_df$response,
-  levels = c(1, 2, 7, 9),
-  labels = c("Yes", "No", "Refused", "Don't Know")
-)
-
-table(survey_df$response_label, useNA = "always")
-sum(is.na(survey_df$response_label))
-```
-
-**Why it works:** `factor()` maps source codes to readable labels while preserving missing values. The reason for an `NA` cannot be inferred from the value alone.
-
-**Mastery checkpoint:** Distinguish an explicit refusal, an explicit unknown response, and a missing field; state which should be retained for a frequency table.
-
-## 3. Explore distributions before fitting models
-
-Compare histograms, violin plots, and empirical cumulative distribution functions. Each represents the same numeric variable differently: frequency by interval, smoothed distribution shape, and cumulative proportion at or below a value.
-
-```{r week3-distributions}
-library(ggplot2)
-
-set.seed(31)
-toy_df <- data.frame(
-  age = seq(25, 65, length.out = 25),
-  measurement = 12 + seq(25, 65, length.out = 25) * 0.3 +
-    rnorm(25, sd = 3)
-)
-
-ggplot(toy_df, aes(x = measurement)) +
-  geom_histogram(bins = 8) +
-  labs(x = "Measurement (illustrative units)", y = "Frequency") +
-  theme_minimal()
-
-ggplot(toy_df, aes(x = measurement)) +
-  stat_ecdf(geom = "step") +
-  labs(x = "Measurement (illustrative units)", y = "Cumulative proportion") +
-  theme_minimal()
-```
-
-**Mastery checkpoint:** Explain how to read an ECDF at a given threshold and why changing histogram bins changes the display.
-
-## 4. Read a scatter plot and fit a linear model
-
-Use `lm()` and `geom_smooth(method = "lm")` to explore linear association. A linear slope has units of **outcome units per predictor unit**. A confidence band around a fitted mean is not an individual prediction interval.
-
-```{r week3-linear}
-fit <- lm(measurement ~ age, data = toy_df)
-coef(fit)
-
-ggplot(toy_df, aes(x = age, y = measurement)) +
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", formula = y ~ x, se = TRUE) +
-  labs(
-    x = "Age (years)",
-    y = "Measurement (illustrative units)",
-    title = "Illustrative linear relationship"
-  ) +
-  theme_minimal()
-```
-
-**Mastery checkpoint:** Identify the intercept and slope, state the slope's units, and name one reason an apparent trend may not be causal.
-
-## 5. Package repeated plots into one function
-
-A function reduces repeated editing across variables. It must accept the dataset and requested column, and should fail clearly when the column does not exist or cannot be plotted.
-
-```{r week3-function}
-plot_distribution <- function(data, variable) {
-  stopifnot(is.character(variable), length(variable) == 1L)
-  if (!variable %in% names(data)) {
-    stop("Missing column: ", variable)
-  }
-  if (!is.numeric(data[[variable]])) {
-    stop("Column must be numeric: ", variable)
-  }
-
-  ggplot(data, aes(x = .data[[variable]])) +
-    geom_histogram(bins = 8) +
-    labs(x = variable, y = "Frequency") +
-    theme_minimal()
+```{r reference-joins}
+if (!requireNamespace("dplyr", quietly = TRUE) || utils::packageVersion("dplyr") < "1.1.0") {
+  stop("Need dplyr >= 1.1.0")
 }
-
-plot_distribution(toy_df, "measurement")
+reference_profile <- data.frame(Subject_ID = c("T01", "T02", "T03"), Age = c(29, 48, 65))
+reference_lab <- data.frame(Subject_ID = c("T01", "T03", "T04"), Creatinine = c(0.8, 1.2, 0.9))
+stopifnot(!anyDuplicated(reference_profile$Subject_ID), !anyDuplicated(reference_lab$Subject_ID))
+reference_inner <- dplyr::inner_join(reference_profile, reference_lab, by = "Subject_ID", relationship = "one-to-one")
+reference_left <- dplyr::left_join(reference_profile, reference_lab, by = "Subject_ID", relationship = "one-to-one")
+stopifnot(nrow(reference_inner) == 2L, nrow(reference_left) == 3L)
+print(dplyr::anti_join(reference_lab, reference_profile, by = "Subject_ID"))
 ```
 
-**Why it works:** `.data[[variable]]` selects a column named by a character parameter in the plotting mapping. Reusing a function is safer than copying and changing multiple nearly identical blocks.
+**Expected:** two inner matches, three left rows, and T04 in the unmatched-laboratory audit. An inner join restricts to matched keys; a left join retains its left population; a full join retains the union. Cardinality declares permitted matching multiplicity. A duplicate can multiply records; declare and check the intended relationship rather than silently deduplicating conflicting values.
 
-**Mastery checkpoint:** Run the function with a valid column and predict the error with an invalid column.
+## Codes and analysis-specific inclusion
 
-## 6. Import multiple files without losing track of them
-
-`list.files()` and iteration help read multiple records. Use a strict CSV extension pattern, explicit paths, and a named list to avoid overwriting previous imports.
-
-```{r week3-files}
-data_path <- tempfile("practice_tables_")
-dir.create(data_path)
-write.csv(data.frame(item = c("u", "v"), value = c(4, 8)),
-          file.path(data_path, "first.csv"), row.names = FALSE)
-write.csv(data.frame(item = c("w", "x"), value = c(6, 9)),
-          file.path(data_path, "second.csv"), row.names = FALSE)
-file_paths <- list.files(
-  data_path,
-  pattern = "\\.csv$",
-  full.names = TRUE
-)
-stopifnot(length(file_paths) > 0L)
-
-tables <- lapply(file_paths, read.csv)
-names(tables) <- basename(file_paths)
-lapply(tables, dim)
-stopifnot(length(tables) == 2L, all(vapply(tables, nrow, integer(1)) == 2L))
-unlink(data_path, recursive = TRUE)
+```{r reference-codes}
+reference_codes <- c(1L, 2L, 7L, 9L, NA_integer_)
+stopifnot(all(reference_codes[!is.na(reference_codes)] %in% c(1L, 2L, 7L, 9L)))
+reference_response <- factor(reference_codes, levels = c(1L, 2L, 7L, 9L),
+  labels = c("Reported yes", "Reported no", "Refused", "Unsure"))
+print(table(reference_response, useNA = "ifany"))
 ```
 
-**Why it works:** `lapply()` returns one object per file; naming the list helps match later output to its input. The example creates two temporary practice tables and removes only its own temporary directory afterward.
+**Expected:** one of each toy response and one missing field. These codes apply only to the invented example. Refusal, uncertainty, a missing field, and an absent joined record carry different information. Audit dictionary codes before factor conversion or an unknown code may silently become NA.
 
-**Mastery checkpoint:** Verify that every loaded table has the expected columns before combining or graphing it.
+Define inclusion for the specific analysis. An age–creatinine model needs those two finite fields, not complete information in every unrelated column. Report total, included, and excluded counts; complete cases alone do not solve informative missingness.
 
-## 7. Build a publication-readable figure panel
+## Exploratory linear models
 
-For each figure, define the scientific question first. A violin summarizes a distribution, a scatter plot shows a paired numeric relationship, and a density curve estimates its shape. `ggpubr::ggarrange()` can combine independently built `ggplot` objects. Units, sample sizes, category labels, and missingness must be evaluated separately for each panel.
-
-```{r week3-panel}
-p_hist <- plot_distribution(toy_df, "measurement")
-p_scatter <- ggplot(toy_df, aes(age, measurement)) +
-  geom_point() +
-  labs(x = "Age (years)", y = "Illustrative units") +
-  theme_minimal()
-
-if (requireNamespace("ggpubr", quietly = TRUE)) {
-  ggpubr::ggarrange(p_hist, p_scatter, ncol = 2)
-} else {
-  print(p_hist)
-  print(p_scatter)
-}
+```{r reference-model}
+reference_model_data <- data.frame(Age = c(25, 35, 45, 55, 65, 75),
+  Creatinine = c(0.75, 0.92, 0.89, 1.11, 1.09, 1.28))
+reference_fit <- lm(Creatinine ~ Age, data = reference_model_data, na.action = na.fail)
+print(coef(reference_fit))
+stopifnot(nobs(reference_fit) == 6L, coef(reference_fit)["Age"] > 0)
 ```
 
-**Mastery checkpoint:** Describe what each panel reveals, why the two plots answer different questions, and whether any analyses are inferential.
+**Expected:** six modeled observations and a positive fitted slope, computed from these invented values. Its unit is mg/dL per year. The intercept predicts age zero outside the observed range. A mean-response confidence band differs from an individual prediction interval. R-squared is sample fit, not causal strength or predictive validation.
 
-## 8. Final self-check: what Week 3 mastery requires
+Residual-versus-fitted plots can flag curvature and changing spread. Normal Q-Q plots compare residual shape to a normal reference. Neither establishes independent sampling, eliminates confounding, or diagnoses disease. A repeated-visit design needs methods that account for dependence.
 
-- [ ] **Data provenance:** Read or simulate two tables and document file paths, key columns, row counts, data types, and missingness.
-- [ ] **Join logic:** Demonstrate inner versus left joins, inspect duplicate keys, and account for retained or excluded records.
-- [ ] **Categorical data:** Recode numeric survey responses correctly without treating refusal, "Don't Know", and `NA` as identical.
-- [ ] **Visual analysis:** Produce clearly labeled frequency, cumulative, grouped distribution, and paired scatter views as appropriate.
-- [ ] **Regression:** Fit and annotate a linear model; explain slope, intercept, uncertainty, and causal limitations.
-- [ ] **Reusable analysis:** Write a plotting function, handle invalid inputs, and process multiple named files without accidental overwrites.
-- [ ] **Publication quality:** Build a coherent multi-panel display with labels and units; account for the sample used in each plot.
-- [ ] **Reproducibility:** Re-run the full workflow in order; inspect errors and verify output rather than accepting an attractive plot uncritically.
+## Figures, functions, and panels
 
-**Mastery standard:** All eight objectives demonstrated on a new dataset with correctly checked join cardinality and missing-value handling. The student can defend every plot's purpose and limitations and repeat the code without untracked manual steps.
+Histograms show bins, densities smooth shape, and ECDFs give the proportion at or below a value. Violin width represents a density scaling choice; it is not automatically a count. Boxes summarize middle values under a plotting convention; they do not define clinical boundaries. Scatter plots preserve the pair of measurements on each subject.
 
-**Related:** [Week 3 study reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) · [Complete Week 3 lesson](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) · [Topic index](README.md)
+A plotting function should validate requested numeric fields, finite values, and unit labels, and return measured/excluded counts. Name imported file lists so outputs can be traced back to inputs. A multi-panel figure needs a scientific question and separate denominator for every panel. The full lesson demonstrates a 58-measurement distribution beside a 57-pair association; its caption explains the difference.
 
-[Previous topic](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Next topic](Week_4_Introduction_to_Bash_Lecture_Notes.md) · [Paul's Notes](../README.md)
+## Misconceptions and self-check
+
+Predict join sizes before running them, detect a duplicate key, decode the toy responses, and state the fields defining your model sample. Explain slope units, residual axes, and why a pleasing violin or fitted line is not biological evidence. Use the full tutorial for CSV import, complete audits, diagnostics, functions, multi-panel construction, and practice.
+
+[Previous topic](Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Next topic](Week_4_Introduction_to_Bash_Lecture_Notes.md) · [Topic index](README.md) · [dplyr joins](https://dplyr.tidyverse.org/reference/mutate-joins.html) · [R linear models](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html)

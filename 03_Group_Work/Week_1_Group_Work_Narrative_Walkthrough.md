@@ -1,224 +1,235 @@
-# Paul's Notes · Week 1: R Foundations
+# Paul's Notes · Week 1: R for Biomedical Observations
 
 [Section index](README.md) · [Editable R Markdown](Week_1_Group_Work_Narrative_Walkthrough.Rmd) · [Repository home](../README.md)
 
 > **Reading edition.** Code is displayed, not executed by this converter. The teaching guides provide known practice inputs and expected results; see each source for dependencies and execution checks.
 
-This study guide uses invented paper-glider trials to practise R objects, indexing, import, plotting, and functions.
+Learn R by building a small synthetic expression study. A sample is a collected specimen; a gene is a biological feature; an expression value describes a gene in a sample. Here the gene labels and values are invented. **Expression is in arbitrary simulated units, not raw sequencing counts, normalized RNA-seq output, or patient evidence.**
 
-**Study time:** 75–100 minutes, including practice. **Prerequisites:** R installed, a console or script editor, and basic arithmetic. No add-on packages are required. Run the code blocks in order in a fresh R session; the Markdown edition displays code and expected results without executing them.
+**Study time:** 90–120 minutes. **Prerequisites:** basic arithmetic and an installed R console or script editor. **Dependencies:** base R only. Run the named blocks in order in a fresh session. The reading edition shows code without executing it.
+
+[Weekly index](README.md) · [Topic companion](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) · [Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md)
 
 ## On this page
 
 - [Learning objectives](#learning-objectives)
-- [1. Names, assignment, and atomic vectors](#1-names-assignment-and-atomic-vectors)
-- [2. Selection and missing values](#2-selection-and-missing-values)
-- [3. Lists, matrices, data frames, and factors](#3-lists-matrices-data-frames-and-factors)
-- [4. Decisions, iteration, and functions](#4-decisions-iteration-and-functions)
-- [5. Import, export, and reproducibility](#5-import-export-and-reproducibility)
-- [6. A histogram is a distribution summary](#6-a-histogram-is-a-distribution-summary)
+- [Scientific motivation and a reproducible session](#scientific-motivation-and-a-reproducible-session)
+- [1. Assignment, vectors, and coercion](#1-assignment-vectors-and-coercion)
+- [2. Indexing, logic, and missingness](#2-indexing-logic-and-missingness)
+- [3. Containers, factors, and observation units](#3-containers-factors-and-observation-units)
+- [4. Decisions, loops, and checked functions](#4-decisions-loops-and-checked-functions)
+- [5. Structured import and export](#5-structured-import-and-export)
+- [6. A labeled distribution](#6-a-labeled-distribution)
 - [Common mistakes and debugging](#common-mistakes-and-debugging)
 - [Independent practice](#independent-practice)
-- [Teach-back and summary](#teach-back-and-summary)
 - [Ready to move on](#ready-to-move-on)
-- [Next steps and references](#next-steps-and-references)
+- [Further learning](#further-learning)
 
 ## Learning objectives
 
-By the end, you should be able to choose an object structure, inspect its type and dimensions, select values safely, handle missingness, write a checked function, and explain a histogram. You will also import and export a small table without needing an external dataset.
+Construct and inspect vectors, matrices, lists, factors, and data frames; explain coercion; select observations with logical operators; count missingness; trace a conditional, loop, and function; import/export a table; validate a labeled histogram.
 
-## 1. Names, assignment, and atomic vectors
+## Scientific motivation and a reproducible session
 
-R evaluates an expression and returns a value. Assignment with `<-` gives that value a reusable name. Names are case-sensitive: `glide_m` and `Glide_m` would be different objects. A comment starts with `#`; it explains the script without changing the calculation.
+Biomedical analysis depends on matching values to the correct specimen and measurement definition. A calculation can run successfully on the wrong column. Begin with the row unit, identifier, units, and expected structure rather than a statistical command.
+
+The console evaluates one expression at a time. A saved `.R` script records a repeatable sequence; `.Rmd` combines explanations with executable chunks. Do not type the console's `>` prompt into a script. Use `getwd()` to inspect the working directory: relative paths resolve there. An absolute path identifies a location from the filesystem root. Prefer a project directory and documented relative paths over repeated `setwd()` calls tied to one computer.
+
+Run `R.version.string` to record your version. Save your practice code, restart R, and run it from the first line. Temporary files in this lesson keep existing data unchanged.
+
+## 1. Assignment, vectors, and coercion
+
+Assignment with `<-` names a value. Names are case-sensitive. An atomic vector has one shared storage type; a comment beginning with `#` explains the code without executing it.
 
 ```r
-glide_m <- c(2.4, 3.1, NA_real_, 2.8, 3.7, 3.0)
-trial_id <- paste0("g", seq_along(glide_m))
-length(glide_m)
-typeof(glide_m)
-class(glide_m)
-stopifnot(length(glide_m) == 6L, is.double(glide_m))
+expression_values <- c(24, 31, NA_real_, 28, 37, 30)
+sample_ids <- sprintf("S%02d", seq_along(expression_values))
+print(length(expression_values))
+print(typeof(expression_values))
+print(class(expression_values))
+stopifnot(length(expression_values) == 6L, is.double(expression_values))
 ```
 
-**Expected:** length `6`, storage type `"double"`, and class `"numeric"`. `c()` combines values. `NA_real_` marks an unavailable numeric measurement; it is not zero. Storage type describes representation, while class helps determine how R handles an object.
-
-An atomic vector has one common type. Common types include logical (`TRUE`/`FALSE`), integer (`4L`), double (`4.2`), and character (`"paper"`). Combining numbers with text coerces them to characters rather than creating mixed numeric/text elements:
+**Expected:** `6`, `"double"`, and `"numeric"`. `c()` combines values; `NA_real_` marks an unavailable numeric value. Missing expression is not zero expression. Storage type concerns representation; class controls how many R operations treat the object.
 
 ```r
-mixed_vector <- c(2.4, "unrecorded")
+mixed_vector <- c(24, "unavailable")
 print(mixed_vector)
 stopifnot(is.character(mixed_vector))
 ```
 
-**Expected:** `"2.4" "unrecorded"`. A mathematical summary now needs a deliberate cleaning decision, not blind conversion. `as.numeric("unrecorded")` cannot recover a measurement and produces missingness with a warning. Store missing numeric values as `NA`, and explanations in a separate column.
+**Expected:** `"24" "unavailable"`. Text coerces this whole atomic vector to character. Common atomic types are logical (`TRUE`), integer (`24L`), double (`24.5`), and character (`"S01"`). Conversion cannot recover an unknown measurement: `as.numeric("unavailable")` warns and produces `NA`. Keep explanations in a separate field.
 
-## 2. Selection and missing values
+## 2. Indexing, logic, and missingness
 
-R positions begin at one. Brackets select by position, logical condition, or name. A logical selection asks one yes/no question per element. An unknown answer can propagate into the selection, so test missingness explicitly.
+Positions start at one. Brackets select by position, name, or a logical vector. `&` and `|` compare elements; `!` negates a condition. Missing comparisons are unknown, so explicitly exclude missing values when selecting observed measurements.
 
 ```r
-names(glide_m) <- trial_id
-print(glide_m[c(1, 4)])
-print(glide_m["g5"])
-usable <- !is.na(glide_m)
-long_glides <- glide_m[usable & glide_m > 3]
-print(long_glides)
-print(glide_m[0])
-stopifnot(identical(unname(long_glides), c(3.1, 3.7)))
-stopifnot(length(glide_m[0]) == 0L, sum(is.na(glide_m)) == 1L)
+names(expression_values) <- sample_ids
+print(expression_values[c(1, 4)])
+print(expression_values["S05"])
+measured <- !is.na(expression_values)
+above_30 <- expression_values[measured & expression_values > 30]
+print(above_30)
+print(which(measured & expression_values > 30))
+stopifnot(identical(unname(above_30), c(31, 37)))
+stopifnot(length(expression_values[0]) == 0L, sum(!measured) == 1L)
 ```
 
-**Expected:** positions 1 and 4 give `2.4` and `2.8`; named selection `g5` gives `3.7`. The filtered values are `3.1` and `3.7`. Index zero returns an empty selection, not the first value. Missing values are tested with `is.na()`, never `x == NA`, which itself gives unknown comparisons.
+**Expected:** positions 1 and 4 return `24, 28`; S05 returns `37`; selection above 30 returns `31, 37`, at positions `2, 5`. Index zero selects nothing. Use `is.na(x)`, never `x == NA`.
 
 ```r
-print(mean(glide_m))
-print(mean(glide_m, na.rm = TRUE))
-stopifnot(is.na(mean(glide_m)))
-stopifnot(isTRUE(all.equal(mean(glide_m, na.rm = TRUE), 3)))
+print(mean(expression_values))
+print(mean(expression_values, na.rm = TRUE))
+print(c(total = length(expression_values), measured = sum(measured), missing = sum(!measured)))
+stopifnot(is.na(mean(expression_values)))
+stopifnot(isTRUE(all.equal(mean(expression_values, na.rm = TRUE), 30)))
 ```
 
-**Expected:** the unqualified mean is `NA`; the available-case mean is `3` metres from five measured trials. Removing missing values changes the denominator. Report both the total number of trials and the number measured, and investigate why a measurement was unavailable.
+**Expected:** `NA`, then `30`; total 6, measured 5, missing 1. The available-case mean is 30 arbitrary units from five specimens. A missing specimen remains in the study denominator. Removing unavailable values from a summary does not explain why they were missing or eliminate selection bias.
 
-## 3. Lists, matrices, data frames, and factors
+## 3. Containers, factors, and observation units
 
-A list can hold heterogeneous components. Single brackets retain a list; double brackets extract one component. A matrix is a rectangular atomic object with a shared type. A data frame stores columns of different types, with the same number of rows in each column.
+A list holds heterogeneous components; `[ ]` retains a list and `[[ ]]` extracts one component. A matrix is rectangular with one shared type. A data frame can have differently typed columns of equal length.
 
 ```r
-trial_bundle <- list(label = "paper glider", distance = glide_m, measured = usable)
-stopifnot(is.list(trial_bundle["distance"]))
-stopifnot(is.numeric(trial_bundle[["distance"]]))
-launch_grid <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)
-print(launch_grid)
-trials <- data.frame(
-  trial = trial_id,
-  fold = factor(c("wide", "narrow", "wide", "narrow", "wide", "narrow"),
-                levels = c("narrow", "wide")),
-  metres = unname(glide_m)
+study_bundle <- list(gene = "Marker_A", expression = expression_values, observed = measured)
+stopifnot(is.list(study_bundle["expression"]), is.numeric(study_bundle[["expression"]]))
+expression_matrix <- rbind(Marker_A = c(24, 31, NA, 28, 37, 30),
+                           Marker_B = c(8, 10, 9, 11, 7, 12))
+colnames(expression_matrix) <- sample_ids
+print(dim(expression_matrix))
+expression_data <- data.frame(
+  Sample_ID = sample_ids,
+  Gene = rep("Marker_A", 6),
+  Group = factor(rep(c("Reference", "Comparison"), 3),
+                 levels = c("Reference", "Comparison")),
+  Expression = unname(expression_values)
 )
-str(trials)
-print(dim(trials))
-stopifnot(nrow(trials) == 6L, ncol(trials) == 3L)
-stopifnot(identical(levels(trials$fold), c("narrow", "wide")))
+str(expression_data)
+stopifnot(identical(dim(expression_matrix), c(2L, 6L)))
+stopifnot(nrow(expression_data) == 6L, ncol(expression_data) == 4L)
+stopifnot(!anyDuplicated(expression_data[c("Sample_ID", "Gene")]))
 ```
 
-**Expected:** a 2-by-3 matrix with first row `1 2 3`; a six-row, three-column data frame containing character identifiers, a two-level factor, and numeric distances. `str()` shows classes and representative values; `dim()`, `nrow()`, and `ncol()` show shape. `names(trials)` shows column names.
+**Expected:** a 2-gene by 6-sample matrix and a six-row, four-column data frame. The matrix row is a gene and column is a specimen. In the long table, one row is one **gene–sample measurement**. A larger long table with two genes per specimen would have 12 rows but only six specimens; those rows are not 12 independent people. Sample identifiers need not identify people in every study.
 
-A factor represents a category with declared levels. Level order controls display order; it does not mean the labels have a numeric distance between them. `as.numeric(trials$fold)` yields internal codes, not measured fold widths. Use meaningful labels, and check for unexpected labels before converting: labels outside supplied levels become `NA`.
+Group is a fictional category assigned for practice, not a treatment assignment or diagnosis. Factor levels determine display order. `as.numeric(Group)` would give internal codes, not a biological measurement. Labels outside declared levels become missing; check them before conversion.
 
 ```r
-print(trials[1:2, c("trial", "metres")])
-metres_column <- trials[, "metres"]
-metres_table <- trials[, "metres", drop = FALSE]
-stopifnot(is.numeric(metres_column), is.data.frame(metres_table))
-stopifnot(identical(dim(metres_table), c(6L, 1L)))
+print(expression_data[1:2, c("Sample_ID", "Expression")])
+one_column <- expression_data[, "Expression"]
+one_column_table <- expression_data[, "Expression", drop = FALSE]
+print(expression_matrix["Marker_B", c("S01", "S02")])
+stopifnot(is.numeric(one_column), is.data.frame(one_column_table))
+stopifnot(identical(dim(one_column_table), c(6L, 1L)))
 ```
 
-**Expected:** the first two trial-distance pairs are `g1, 2.4` and `g2, 3.1`. Selecting a single column normally drops the table structure; `drop = FALSE` preserves a six-by-one data frame. In `table[rows, columns]`, the comma separates row and column selection; `table[columns]` selects columns as a data frame.
+**Expected:** S01 = 24, S02 = 31; Marker_B values for these specimens = 8 and 10. In `data[rows, columns]`, the comma separates axes. `drop = FALSE` preserves dimensions. Inspect `names()`, `rownames()`, `colnames()`, `str()`, and `dim()` before deciding which axis to summarize.
 
-## 4. Decisions, iteration, and functions
+## 4. Decisions, loops, and checked functions
 
-`if` chooses a branch using one nonmissing logical value. A vector comparison is not a suitable `if` condition; summarize it first, or use vector operations. A loop repeats an action and is useful when you need a clearly controlled sequence.
+An `if` needs one nonmissing logical value. `&&` is a scalar short-circuit operator, useful for checking a scalar input before testing its value. A loop repeats an operation; `seq_along()` also behaves safely for an empty vector.
 
 ```r
-if (sum(usable) >= 4L) {
-  message("Enough available trials for this descriptive exercise")
+if (sum(measured) >= 4L) {
+  message("Enough observed values for this descriptive practice")
 } else {
-  message("Collect more practice measurements")
+  message("Too few observed values for this practice rule")
 }
-centred_m <- numeric(length(glide_m))
-for (j in seq_along(glide_m)) {
-  centred_m[j] <- glide_m[j] - mean(glide_m, na.rm = TRUE)
+centred_expression <- numeric(length(expression_values))
+for (j in seq_along(expression_values)) {
+  centred_expression[j] <- expression_values[j] - mean(expression_values, na.rm = TRUE)
 }
-stopifnot(isTRUE(all.equal(unname(centred_m), unname(glide_m - 3))))
-print(round(centred_m, 1))
+print(centred_expression)
+stopifnot(isTRUE(all.equal(unname(centred_expression), c(-6, 1, NA, -2, 7, 0))))
 ```
 
-**Expected:** the first message, then deviations `-0.6, 0.1, NA, -0.2, 0.7, 0.0`. Subtraction propagates missingness. The vectorized expression `glide_m - 3` does the same work here with less code. `seq_along()` safely produces an empty sequence for an empty vector; `1:length(x)` does not.
-
-A function turns a calculation into a named operation with explicit inputs and a return value. Validation makes errors understandable at the boundary. Returning a value allows later use; printing alone should not be your data interface.
+**Expected:** the first message and deviations `-6, 1, NA, -2, 7, 0` arbitrary units. A vectorized subtraction gives the same result. The threshold of four is a practice rule, not a clinically justified sample size.
 
 ```r
 measured_mean <- function(values) {
   if (!is.numeric(values)) stop("values must be numeric")
+  if (any(!is.finite(values[!is.na(values)]))) stop("observed values must be finite")
   if (all(is.na(values))) stop("at least one measurement is needed")
-  return(mean(values, na.rm = TRUE))
+  mean(values, na.rm = TRUE)
 }
-print(measured_mean(glide_m))
-rejected_text <- tryCatch(measured_mean("far"), error = function(e) conditionMessage(e))
-print(rejected_text)
-stopifnot(measured_mean(glide_m) == 3)
+print(measured_mean(expression_values))
+rejected_text <- tryCatch(measured_mean("unknown"), error = function(e) conditionMessage(e))
+rejected_empty <- tryCatch(measured_mean(c(NA_real_, NA_real_)), error = function(e) conditionMessage(e))
+stopifnot(measured_mean(expression_values) == 30)
 stopifnot(identical(rejected_text, "values must be numeric"))
+stopifnot(identical(rejected_empty, "at least one measurement is needed"))
 ```
 
-**Expected:** `3`, then `"values must be numeric"`. The caught error is an intentional demonstration, not an unsuccessful lesson run. Before generalizing this function, decide how to handle infinite values, units, and a minimum sample size.
+**Expected:** mean 30 and two caught validation errors. A function accepts inputs, makes a calculation, and returns a reusable value. `tryCatch()` here demonstrates errors deliberately; it does not turn invalid data into valid results. This function is numeric rather than expression-specific: a scientific workflow must separately validate the measurement definition and units.
 
-## 5. Import, export, and reproducibility
+## 5. Structured import and export
 
-A text table needs a separator, column names, missing-value conventions, and a known row unit. Inspect those choices after import. This exercise writes only a temporary file created from the synthetic table and deletes it after reading.
+CSV uses comma-separated fields and may quote text; TSV uses tabs. The separator, header, missing-value convention, and row unit form an input contract. This temporary CSV is constructed entirely from the practice objects.
 
 ```r
-glider_file <- tempfile(fileext = ".csv")
-write.csv(trials, glider_file, row.names = FALSE, na = "NA")
-reloaded <- read.csv(glider_file, na.strings = "NA", stringsAsFactors = FALSE)
-unlink(glider_file)
-stopifnot(identical(names(reloaded), names(trials)))
-stopifnot(nrow(reloaded) == 6L, sum(is.na(reloaded$metres)) == 1L)
-stopifnot(isTRUE(all.equal(reloaded$metres, trials$metres)))
+expression_file <- tempfile(fileext = ".csv")
+write.csv(expression_data, expression_file, row.names = FALSE, na = "NA")
+reloaded <- read.csv(expression_file, na.strings = "NA", stringsAsFactors = FALSE)
+unlink(expression_file)
+stopifnot(identical(names(reloaded), names(expression_data)), nrow(reloaded) == 6L)
+stopifnot(is.numeric(reloaded$Expression), sum(is.na(reloaded$Expression)) == 1L)
+stopifnot(isTRUE(all.equal(reloaded$Expression, expression_data$Expression)))
 print(sapply(reloaded, class))
 ```
 
-**Expected:** `trial` and `fold` are characters; `metres` is numeric. CSV does not preserve R factor levels, so explicitly recreate them when needed. `row.names = FALSE` avoids an unintended extra index column. In real work, use a documented relative path, keep raw data unchanged, check units and schema, and record software versions.
+**Expected:** Sample_ID, Gene, and Group import as character; Expression is numeric. CSV does not preserve factor levels. `row.names = FALSE` prevents an extra index column. In real work, retain raw files and their dictionary, validate unique gene–sample pairs, and record units and software versions before analysis.
 
-## 6. A histogram is a distribution summary
+## 6. A labeled distribution
 
-A histogram groups measurements into intervals. Its horizontal axis has measurement units; its vertical axis here counts measured trials, not percentages or people. Break choices can change the visual impression, especially with five observations.
+A histogram counts measurements in intervals. Its horizontal units and vertical denominator must be explicit. It describes this invented set, not an expression assay's biological distribution.
 
 ```r
-glide_hist <- hist(trials$metres, breaks = c(2, 2.5, 3, 3.5, 4),
-                   main = "Five invented glider measurements",
-                   xlab = "Flight distance (m)", ylab = "Measured trials",
-                   col = "lightblue", right = FALSE)
-print(glide_hist$counts)
-stopifnot(identical(glide_hist$counts, c(1L, 1L, 2L, 1L)))
+expression_hist <- hist(expression_data$Expression, breaks = c(20, 25, 30, 35, 40),
+                        main = "Marker_A: five synthetic observed specimens",
+                        xlab = "Expression (arbitrary simulated units)", ylab = "Observed specimens",
+                        col = "lightblue", right = FALSE)
+print(expression_hist$counts)
+stopifnot(identical(expression_hist$counts, c(1L, 1L, 2L, 1L)))
 ```
 
-**Expected:** counts `1, 1, 2, 1`. With these left-closed intervals, a value of `3.0` belongs to the interval starting at `3.0`. The plot shows where this tiny set of invented values falls; it does not demonstrate a population distribution or evidence that one fold design is better.
+**Expected:** counts `1, 1, 2, 1`, totaling five. Left-closed bins place 30 in the bin starting at 30. Different breaks change appearance, not the measurements. Five observations cannot establish a population distribution, a treatment effect, or differential expression.
 
 ## Common mistakes and debugging
 
-- **Object not found:** run the defining block first; check capitalization and spelling.
-- **Arithmetic on text:** inspect `str()` before calculating; do not replace unparseable text with zero.
-- **Unexpected missing result:** count `is.na()` and state the denominator before using `na.rm`.
-- **Subscript out of bounds:** inspect dimensions; remember one-based positions and the row/column comma.
-- **A table became a vector:** preserve dimensions with `drop = FALSE` when later code expects a table.
-- **An `if` condition is missing or has several values:** decide whether you need one summary decision or a vectorized calculation.
+| Symptom | Cause and correction |
+| --- | --- |
+| Object not found | Run its defining block and check case-sensitive spelling |
+| Arithmetic on text | Inspect types; separate invalid strings from missing numeric values |
+| Mean is NA | Count missingness and choose a documented available-case rule |
+| Wrong observations selected | Confirm gene/sample axes and the row–column comma |
+| Table becomes a vector | Preserve dimensions with `drop = FALSE` |
+| Invalid conditional | Reduce a vector to one decision, or use elementwise operations |
+| Import has an extra column | Check header/separator and whether row names were exported |
 
 ## Independent practice
 
-1. Create eight invented distances with two missing values. Select values above a threshold without including unknown entries, and report the available count.
-2. Add a launch-category factor with three explicit levels. Show a two-column data frame without dropping dimensions.
-3. Extend `measured_mean()` to reject infinite values. Test a valid vector, all-missing input, and text input using `tryCatch()`.
-4. Draw the same measurements with two different break sets. Explain why the bars change while the data do not.
-
-## Teach-back and summary
-
-Explain why a list can store mixed components but an atomic vector coerces types. Why does `NA` differ from zero? What information does a CSV round trip lose? What would you check before treating a graph as evidence?
-
-The practical sequence is **construct → inspect → select → validate → summarize → explain**. Structure, missingness, and explicit assumptions matter more than memorizing function names.
+1. Construct an eight-specimen table for an invented gene with two unavailable values. Report total and measured counts and select above a stated arbitrary-unit threshold.
+2. Create a two-gene matrix for those specimens. Explain why it contains 16 gene–sample cells rather than 16 people.
+3. Test `measured_mean()` with a finite vector, text, all missing values, and infinity. Predict each outcome first.
+4. Export/import your table and recreate Group's levels explicitly. Validate identifiers and values.
+5. Draw two histogram break sets; explain what changes and what remains fixed.
 
 ## Ready to move on
 
-Save a script that constructs a small table, inspects its classes and dimensions, selects rows and columns, reports available and missing counts, runs a checked function, and labels a histogram. Add a brief interpretation with units and a denominator. Restart R and rerun your script from the first line.
+Keep a runnable script and a short data dictionary. Restart R and rerun everything before interpreting the outputs.
 
-| Evidence | Completion check |
+| Evidence | Mastery check |
 | --- | --- |
-| Objects and indexing | Explain atomic vectors, lists, matrices, data frames, `[ ]`, and `[[ ]]`; demonstrate a logical selection that excludes missing values |
-| Categories and control flow | Declare factor levels and trace one conditional, one loop, and one function call |
-| Import and export | Recover the same row count and numeric values; explain what a CSV does not preserve |
-| Interpretation | Report five measured trials of six in the worked example, a mean of 3 m, and why the histogram is descriptive |
+| Objects | Inspect and explain all five containers and coercion |
+| Selection | Select gene/sample fields and observed values using logic |
+| Control flow | Trace one conditional, loop, and checked function |
+| Import/export | Recover six rows and numeric values; explain lost factor metadata |
+| Scientific interpretation | Mean 30 arbitrary units from 5 of 6 specimens; distinguish gene, sample, and observation unit |
 
-## Next steps and references
+## Further learning
 
-[Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [R topic companion](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
+[Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
-Reference: [R object extraction documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html). See also `?factor`, `?read.table`, and `?hist` in your installed R version.
+References: [R extraction](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html), [data import/export manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html), and installed help `?factor`, `?hist`, `?getwd`.

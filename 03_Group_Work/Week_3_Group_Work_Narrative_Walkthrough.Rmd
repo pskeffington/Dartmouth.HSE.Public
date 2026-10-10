@@ -1,272 +1,310 @@
 ---
-title: "Paul's Notes · Week 3: Data Visualization and Analytics"
+title: "Paul's Notes · Week 3: Epidemiologic Integration and Exploration"
 author: "Paul Skeffington"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    css: ../06_RESOURCES/Presentation/reading.css
 ---
 
-This study guide connects invented workshop records, interprets coded feedback, and models simulated production times.
+Combine synthetic demographic, laboratory, and survey tables, then explore an independently simulated biomarker cohort. These invented records demonstrate epidemiologic data handling. Serum albumin and creatinine are measured biomarkers; a coded kidney-health response is self-reported information. **Neither an invented value nor a self-report establishes a clinical diagnosis.**
 
-**Study time:** 90–120 minutes. **Prerequisites:** Weeks 1–2 object checks, missingness, reshaping, and plot axes. **Dependencies:** base R and `dplyr` (version 1.1.0 or newer for explicit join relationships). Run blocks in order in a clean session.
+**Study time:** 120–160 minutes. **Prerequisites:** Weeks 1–2 data frames, keys, factors, missingness, distributions, and units. **Dependencies:** base R, dplyr >= 1.1.0, and ggplot2. Run blocks in order in a clean session.
 
-## Learning objectives and setup
+[Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [Topic companion](../02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Next: Week 4](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md)
 
-You will define row units and keys, choose joins intentionally, detect row multiplication, separate nonresponse from valid categories, read cumulative distributions, interpret a linear model cautiously, and validate reusable plotting functions.
+## Learning objectives
 
-```{r join-dependency}
-if (!requireNamespace("dplyr", quietly = TRUE)) stop("Install dplyr in your own R library")
-if (utils::packageVersion("dplyr") < "1.1.0") stop("This lesson needs dplyr >= 1.1.0")
+Import typed tables; read a data dictionary; validate unique keys and join cardinality; audit matched/unmatched records; distinguish absent measurements from coded responses; define an analytic sample; draw distribution and association views; fit and diagnose an exploratory linear model; create checked plotting functions and multi-panel figures.
+
+## Scientific motivation and dictionary
+
+Health studies often store demographic information, assays, and questionnaire responses separately. Joining them changes which records are visible and which fields are missing. Decide what each row means before combining tables; retaining a row does not guarantee it is eligible for every analysis.
+
+| Field | Definition and type |
+| --- | --- |
+| Subject_ID | Character participant key, retained exactly across files |
+| Age | Numeric years in invented adult participants |
+| Sex | Fictional recorded female/male category; not a comprehensive representation of sex or gender |
+| Albumin | Synthetic serum albumin concentration, g/dL |
+| Creatinine | Synthetic serum creatinine concentration, mg/dL |
+| Weak_Kidney | Toy survey code: 1 reported yes, 2 reported no, 7 refused, 9 unsure; NA is an unavailable response |
+
+The survey label abbreviates a fictional self-report item and its codes belong only to this example. It is not a validated disease definition or an institutional/public survey codebook. Laboratory definitions and units can be checked in [albumin background](https://medlineplus.gov/lab-tests/albumin-blood-test/) and [creatinine background](https://medlineplus.gov/lab-tests/creatinine-test/). The values below are synthetic, with no diagnostic classification.
+
+## 1. Dependency check and structured import
+
+```{r dependencies}
+for (package in c("dplyr", "ggplot2")) {
+  if (!requireNamespace(package, quietly = TRUE)) stop("Install in your own R library: ", package)
+}
+if (utils::packageVersion("dplyr") < "1.1.0") stop("Need dplyr >= 1.1.0 for relationship checks")
 ```
 
-**Expected:** no output in a compatible environment. Check `packageVersion("dplyr")` if `relationship` is reported as unused. The lesson does not install or update shared packages automatically.
+**Expected:** no output. Install missing packages separately; the lesson never silently changes your package library.
 
-## 1. Relational tables and unique identifiers
-
-Each table must have a clear row meaning. One table records a workshop visitor; a second records at most one feedback response per visitor. A key identifies that row. Matching row positions is unsafe because rows may be reordered or absent.
-
-```{r relational-inputs}
-visitors <- data.frame(
-  visitor = c("vA", "vB", "vC", "vD", "vE", "vF"),
-  bench = c("oak", "elm", "oak", "elm", "oak", "elm"),
-  sessions = c(1L, 2L, 1L, 3L, 2L, 4L)
+```{r synthetic-file-import}
+demographics_input <- data.frame(
+  Subject_ID = sprintf("E%03d", 701:706),
+  Age = c(31, 46, 54, 63, 40, 72),
+  Sex = c("Female", "Male", "Female", "Male", "Male", "Female")
 )
-feedback <- data.frame(
-  visitor = c("vA", "vB", "vD", "vF", "vZ"),
-  clarity_code = c(1L, 2L, 9L, 3L, 2L)
+lab_input <- data.frame(
+  Subject_ID = sprintf("E%03d", c(701, 702, 704, 706, 799)),
+  Albumin = c(4.1, 4.3, 3.9, 4.6, 4.2),
+  Creatinine = c(1.1, 0.9, 1.3, 0.8, 1.0)
 )
-stopifnot(!anyNA(visitors$visitor), !anyDuplicated(visitors$visitor))
-stopifnot(!anyNA(feedback$visitor), !anyDuplicated(feedback$visitor))
-print(dim(visitors))
-print(dim(feedback))
+survey_input <- data.frame(Subject_ID = demographics_input$Subject_ID,
+                           Weak_Kidney = c(1L, 2L, 7L, 9L, NA_integer_, 2L))
+practice_folder <- tempfile("epidemiology_")
+dir.create(practice_folder)
+inputs <- list(demographics = demographics_input, laboratory = lab_input, survey = survey_input)
+for (name in names(inputs)) {
+  write.csv(inputs[[name]], file.path(practice_folder, paste0(name, ".csv")), row.names = FALSE, na = "NA")
+}
+file_paths <- list.files(practice_folder, pattern = "\\.csv$", full.names = TRUE)
+stopifnot(length(file_paths) == 3L)
+# Explicit types keep identifiers from being coerced or losing leading zeros.
+demographics <- read.csv(file.path(practice_folder, "demographics.csv"),
+  colClasses = c("character", "numeric", "character"), na.strings = "NA")
+laboratory <- read.csv(file.path(practice_folder, "laboratory.csv"),
+  colClasses = c("character", "numeric", "numeric"), na.strings = "NA")
+survey <- read.csv(file.path(practice_folder, "survey.csv"),
+  colClasses = c("character", "integer"), na.strings = "NA")
+unlink(practice_folder, recursive = TRUE)
+stopifnot(identical(names(demographics), c("Subject_ID", "Age", "Sex")))
+stopifnot(identical(names(laboratory), c("Subject_ID", "Albumin", "Creatinine")))
+stopifnot(identical(names(survey), c("Subject_ID", "Weak_Kidney")))
+stopifnot(is.numeric(laboratory$Albumin), is.numeric(laboratory$Creatinine))
+print(lapply(list(demographics, laboratory, survey), dim))
 ```
 
-**Expected:** visitors has six rows and three columns; feedback has five rows and two columns. `vZ` has feedback but no visitor record. Missing keys and duplicate keys need resolution before claiming a one-to-one join.
+**Expected:** demographic 6×3, laboratory 5×3, and survey 6×2 tables. E799 has laboratory data but no demographic row. Temporary files demonstrate import without external data; cleanup removes only the directory created here. In a real study, keep source files unchanged and retain their dictionary and import decisions.
 
-## 2. Inner and left joins, cardinality, and missingness
+## 2. Unique keys and join choices
 
-An inner join keeps matched keys only. A left join keeps every row of its left input and adds matching fields from the right. It may introduce missing fields when there is no match. Cardinality describes how many rows may match on each side: one-to-one, one-to-many, or many-to-many.
+Missing or repeated keys violate an intended one-row-per-person contract. Repeated visits require a compound key; they are not necessarily data errors.
 
-```{r matched-and-retained}
-matched_feedback <- dplyr::inner_join(visitors, feedback, by = "visitor", relationship = "one-to-one")
-all_visitors <- dplyr::left_join(visitors, feedback, by = "visitor", relationship = "one-to-one")
-print(all_visitors)
-stopifnot(nrow(matched_feedback) == 4L, nrow(all_visitors) == 6L)
-stopifnot(sum(is.na(all_visitors$clarity_code)) == 2L)
-stopifnot(identical(all_visitors$visitor[is.na(all_visitors$clarity_code)], c("vC", "vE")))
-stopifnot(identical(dplyr::anti_join(feedback, visitors, by = "visitor")$visitor, "vZ"))
+```{r join-audits}
+for (table in list(demographics, laboratory, survey)) {
+  stopifnot(is.character(table$Subject_ID), !anyNA(table$Subject_ID),
+            all(nzchar(table$Subject_ID)), !anyDuplicated(table$Subject_ID))
+}
+matched <- dplyr::inner_join(demographics, laboratory, by = "Subject_ID", relationship = "one-to-one")
+retained <- dplyr::left_join(demographics, laboratory, by = "Subject_ID", relationship = "one-to-one")
+all_keys <- dplyr::full_join(demographics, laboratory, by = "Subject_ID", relationship = "one-to-one")
+unmatched_demographic <- dplyr::anti_join(demographics, laboratory, by = "Subject_ID")
+unmatched_lab <- dplyr::anti_join(laboratory, demographics, by = "Subject_ID")
+print(retained)
+stopifnot(nrow(matched) == 4L, nrow(retained) == 6L, nrow(all_keys) == 7L)
+stopifnot(identical(unmatched_demographic$Subject_ID, c("E703", "E705")))
+stopifnot(identical(unmatched_lab$Subject_ID, "E799"))
 ```
 
-**Expected:** four matched visitors. The left join keeps all six, with missing feedback fields for `vC` and `vE`. `vZ` appears in the unmatched-right audit, not in the left result. Before removing missing rows, distinguish unavailable feedback from an import error or a failed key match.
-
-Duplicate keys can multiply rows rather than merely fill a column. Explicit relationship checks turn unintended duplication into an error. Multiple feedback events may be valid, but then the row unit and aggregation plan must change.
+**Expected:** inner = four matched participants; left = all six demographic participants; full = seven distinct keys. E703 and E705 have absent laboratory fields in the left result; E799 is unmatched on the laboratory side. A right join retains all right-input rows; reversing the input order and using a left join gives the equivalent retention choice. Join type expresses an analysis population, not just syntax.
 
 ```{r duplicate-key-demonstration}
-feedback_repeated <- rbind(feedback, feedback[1, ])
-relationship_error <- tryCatch(
-  dplyr::left_join(visitors, feedback_repeated, by = "visitor", relationship = "one-to-one"),
-  error = function(e) conditionMessage(e)
-)
-stopifnot(is.character(relationship_error), length(relationship_error) == 1L)
-expanded_visitors <- dplyr::left_join(visitors, feedback_repeated, by = "visitor", relationship = "one-to-many")
-stopifnot(nrow(expanded_visitors) == 7L)
+repeated_lab <- rbind(laboratory, laboratory[1, ])
+join_error <- tryCatch(dplyr::left_join(demographics, repeated_lab,
+  by = "Subject_ID", relationship = "one-to-one"), error = function(e) conditionMessage(e))
+stopifnot(is.character(join_error), length(join_error) == 1L)
+expanded <- dplyr::left_join(demographics, repeated_lab, by = "Subject_ID", relationship = "one-to-many")
+stopifnot(nrow(expanded) == 7L)
 ```
 
-**Observable behavior:** the one-to-one declaration rejects the repeated key; allowing one-to-many produces seven rows because `vA` now has two matches. Do not apply `distinct()` indiscriminately: conflicting responses require a documented decision, not arbitrary deletion. For joins with missing keys, decide whether missing-to-missing matches are sensible; dplyr's `na_matches = "never"` can prevent them.
+**Expected:** the one-to-one join rejects the duplicate; one-to-many yields seven rows because E701 matches twice. Resolve whether this represents an accidental duplicate, a second specimen, or a repeat visit before summarizing. Arbitrary `distinct()` can hide conflicting measurements. Many-to-many matches may multiply rows further. `na_matches = "never"` prevents missing-to-missing matches when that is appropriate; this example rejects missing keys earlier.
 
-## 3. Coded feedback and nonresponse
+## 3. Decode self-report without creating a diagnosis
 
-Codes need a codebook. Here `1`, `2`, and `3` mean low, medium, and high clarity. Code `9` means declined to answer. Missing after the join means no matching response. Neither nonresponse condition is a numerical rating of nine or zero.
-
-```{r decode-feedback}
-known_codes <- c(1L, 2L, 3L, 9L)
-observed_codes <- all_visitors$clarity_code[!is.na(all_visitors$clarity_code)]
-stopifnot(all(observed_codes %in% known_codes))
-all_visitors$response_state <- ifelse(
-  is.na(all_visitors$clarity_code), "no matched response",
-  ifelse(all_visitors$clarity_code == 9L, "declined", "rated")
-)
-all_visitors$clarity <- factor(
-  all_visitors$clarity_code, levels = c(1L, 2L, 3L),
-  labels = c("low", "medium", "high"), ordered = TRUE
-)
-print(table(all_visitors$response_state))
-clarity_frequency <- table(all_visitors$clarity)
-print(clarity_frequency)
-print(cumsum(clarity_frequency))
-stopifnot(sum(all_visitors$response_state == "rated") == 3L)
-stopifnot(sum(is.na(all_visitors$clarity)) == 3L)
-stopifnot(identical(as.integer(clarity_frequency), c(1L, 1L, 1L)))
+```{r survey-codes}
+health_data <- dplyr::left_join(retained, survey, by = "Subject_ID", relationship = "one-to-one")
+known_codes <- c(1L, 2L, 7L, 9L)
+stopifnot(all(health_data$Weak_Kidney[!is.na(health_data$Weak_Kidney)] %in% known_codes))
+health_data$Kidney_Response <- factor(health_data$Weak_Kidney, levels = known_codes,
+  labels = c("Reported yes", "Reported no", "Refused", "Unsure"))
+health_data$Lab_Available <- !is.na(health_data$Creatinine)
+print(table(health_data$Kidney_Response, useNA = "ifany"))
+stopifnot(sum(health_data$Weak_Kidney %in% c(1L, 2L)) == 3L)
+stopifnot(sum(is.na(health_data$Kidney_Response)) == 1L)
+stopifnot(sum(!health_data$Lab_Available) == 2L)
 ```
 
-**Expected:** three rated responses, one declined, and two unmatched. Low, medium, and high each have count one; cumulative counts are `1, 2, 3`. The rated-response denominator is three, while the visitor denominator is six. Report both when describing response coverage. Ordered factors support ordered displays, but do not imply equally spaced numerical scores. Averaging raw category codes is not automatically meaningful.
+**Expected:** yes 1, no 2, refused 1, unsure 1, missing 1 among six participants. There are four observed creatinine values. Refusal and uncertainty are observed responses; NA alone does not reveal a reason. Missing lab fields caused by no matched record differ from an unavailable measurement inside a matched record. Do not average survey codes, or label a yes response as diagnosed kidney disease.
 
-## 4. Simulate a relationship transparently
+## 4. Construct an exploratory cohort and explicit analytic sample
 
-A simulation specifies a mechanism before drawing values. This one makes time increase with the number of items, plus independent normal noise. The seed reproduces the example, and the generating slope is known because we chose it.
+Use a separate larger cohort to make plotting and model mechanics visible. This generator creates an age–creatinine association by design; it does not estimate an actual epidemiologic relationship.
 
-```{r production-simulation}
-set.seed(4308)
-item_count <- rep(seq(4, 22, by = 2), each = 3)
-assembly_runs <- data.frame(
-  run = sprintf("a%02d", seq_along(item_count)),
-  items = item_count,
-  minutes = 6 + 1.4 * item_count + rnorm(length(item_count), mean = 0, sd = 2)
+```{r cohort-simulation}
+set.seed(90417)
+n <- 60L
+cohort <- data.frame(
+  Subject_ID = sprintf("C%03d", seq_len(n)),
+  Age = rep(seq(25, 70, by = 5), each = 6),
+  Sex = factor(rep(c("Female", "Male"), length.out = n), levels = c("Female", "Male"))
 )
-stopifnot(nrow(assembly_runs) == 30L, !anyDuplicated(assembly_runs$run))
-stopifnot(is.numeric(assembly_runs$minutes), !anyNA(assembly_runs))
-print(range(assembly_runs$items))
+cohort$Albumin <- 4.3 - 0.007 * (cohort$Age - 50) + rnorm(n, 0, 0.15)
+cohort$Creatinine <- 0.85 + 0.008 * (cohort$Age - 50) + rnorm(n, 0, 0.10)
+stopifnot(nrow(cohort) == 60L, !anyDuplicated(cohort$Subject_ID))
+stopifnot(all(cohort$Albumin > 0), all(cohort$Creatinine > 0))
+cohort$Creatinine[c(3, 42)] <- NA_real_
+cohort$Age[7] <- NA_real_
+# This model requires finite age AND creatinine; unrelated fields do not define exclusion.
+included <- is.finite(cohort$Age) & is.finite(cohort$Creatinine)
+analytic <- cohort[included, , drop = FALSE]
+print(c(total = nrow(cohort), included = sum(included), excluded = sum(!included)))
+stopifnot(nrow(analytic) == 57L, sum(is.na(cohort$Creatinine)) == 2L)
+print(summary(analytic[c("Age", "Albumin", "Creatinine")]))
 ```
 
-**Expected:** 30 unique runs, numeric times with no missing values, and item counts from `4` to `22`. The intercept is six minutes and the generating slope is 1.4 minutes per item. The fitted estimates below need not equal those generating values because the sample has noise. This is not observed evidence about a real production line.
+**Expected:** 60 simulated participants, 57 included, three excluded for the specified model. Age ranges from 25–70 years among observed participants. Albumin is in g/dL, creatinine in mg/dL. The model's generating slope is 0.008 mg/dL per year, with independent normal noise. Sex has no programmed effect. Rounding or differences in printing do not change the input contract.
 
-## 5. Frequency, density, and cumulative views
+Complete cases are specific to the analysis fields. A missing unrelated survey response should not automatically exclude a participant from an age–creatinine plot. Available-case analysis can still be biased if missingness relates to outcomes; recording counts is necessary but does not resolve that problem.
 
-A histogram counts observations within intervals. A density estimate smooths the distribution and has area approximately one; density height is not the probability at an exact point. An empirical cumulative distribution function (ECDF) instead reports the fraction of observations at or below a threshold.
+## 5. Frequency, density, cumulative, violin, and box views
 
-```{r distributions}
-assembly_hist <- hist(assembly_runs$minutes, breaks = 6, probability = TRUE,
-                      main = "30 simulated assembly runs", xlab = "Assembly time (min)",
-                      ylab = "Density (per min)", col = "grey85")
-lines(density(assembly_runs$minutes), col = "navy", lwd = 2)
-stopifnot(sum(assembly_hist$counts) == 30L)
-assembly_ecdf <- ecdf(assembly_runs$minutes)
-plot(assembly_ecdf, main = "Cumulative assembly times", xlab = "Assembly time (min)",
-     ylab = "Fraction of runs at or below time", verticals = TRUE)
-print(assembly_ecdf(30))
-stopifnot(assembly_ecdf(30) == mean(assembly_runs$minutes <= 30))
+```{r distribution-views}
+creatinine_values <- cohort$Creatinine[is.finite(cohort$Creatinine)]
+creatinine_hist <- hist(creatinine_values, breaks = 8, probability = TRUE,
+  main = "Synthetic creatinine: 58 measured of 60 participants",
+  xlab = "Creatinine (mg/dL)", ylab = "Density (per mg/dL)", col = "grey85")
+lines(density(creatinine_values), col = "navy", lwd = 2)
+stopifnot(sum(creatinine_hist$counts) == 58L)
+creatinine_ecdf <- ecdf(creatinine_values)
+plot(creatinine_ecdf, xlab = "Creatinine (mg/dL)", ylab = "Fraction at or below value",
+     main = "Empirical cumulative distribution", verticals = TRUE)
+print(creatinine_ecdf(1))
+stopifnot(creatinine_ecdf(1) == mean(creatinine_values <= 1))
+observed_lab <- cohort[is.finite(cohort$Creatinine), ]
+p_distribution <- ggplot2::ggplot(observed_lab, ggplot2::aes(Sex, Creatinine)) +
+  ggplot2::geom_violin(fill = "lightblue", trim = TRUE) +
+  ggplot2::geom_boxplot(width = 0.15, outlier.shape = NA) +
+  ggplot2::geom_point(position = ggplot2::position_jitter(width = 0.06, seed = 12), alpha = 0.5) +
+  ggplot2::labs(title = "A: synthetic distributions (n = 58)", x = "Recorded sex category",
+                y = "Creatinine (mg/dL)") + ggplot2::theme_minimal()
+print(p_distribution)
 ```
 
-**Histogram and density:** the horizontal axis is minutes and the vertical axis is density per minute. With unequal-width bins, compare areas rather than heights; this density-scaled histogram supports a density overlay. Kernel bandwidth changes smoothing, and smooth tails may extend beyond the observed range. Thirty simulated runs are insufficient to establish a real-world distribution.
+**Expected:** histogram/density, ECDF, and violin/box views from 58 measured participants. The ECDF at 1 mg/dL is the measured proportion at or below that illustrative value; it is not a diagnostic proportion. Histogram areas represent proportions when scaled to density. Curve height is not probability at a point. Violin width reflects a smoothed distribution under its scaling rule, not automatically sample count. The box shows median and middle half; whiskers/outliers follow the plotting rule, not disease boundaries. Points make individual observations visible.
 
-**ECDF:** the horizontal axis is minutes; the vertical axis ranges from zero to one. At 30 minutes it gives exactly the observed fraction of runs with times at most 30. Steps represent accumulated observations, not abrupt changes in an underlying population probability. This view avoids selecting histogram bins.
-
-## 6. Regression, units, and legitimate conclusions
-
-Linear regression summarizes a conditional mean relationship. In this simple model, the outcome is minutes and the predictor is item count. The fitted slope has units of minutes per additional item.
+## 6. Exploratory regression and units
 
 ```{r regression-fit}
-assembly_model <- lm(minutes ~ items, data = assembly_runs)
-print(round(coef(assembly_model), 3))
-print(summary(assembly_model)$r.squared)
-plot(assembly_runs$items, assembly_runs$minutes,
-     xlab = "Items in run (count)", ylab = "Assembly time (min)",
-     main = "Synthetic item count and assembly time", pch = 19)
-abline(assembly_model, col = "firebrick", lwd = 2)
-stopifnot(nobs(assembly_model) == 30L)
-stopifnot(identical(names(coef(assembly_model)), c("(Intercept)", "items")))
-stopifnot(abs(coef(assembly_model)["items"] - 1.4) < 0.3)
+creatinine_model <- lm(Creatinine ~ Age, data = analytic, na.action = na.fail)
+print(round(coef(creatinine_model), 4))
+print(summary(creatinine_model)$r.squared)
+stopifnot(nobs(creatinine_model) == 57L)
+stopifnot(identical(names(coef(creatinine_model)), c("(Intercept)", "Age")))
+stopifnot(abs(coef(creatinine_model)["Age"] - 0.008) < 0.004)
+p_relationship <- ggplot2::ggplot(analytic, ggplot2::aes(Age, Creatinine)) +
+  ggplot2::geom_point() + ggplot2::geom_smooth(method = "lm", formula = y ~ x, se = TRUE) +
+  ggplot2::labs(title = "B: synthetic age association (n = 57)", x = "Age (years)",
+                y = "Creatinine (mg/dL)") + ggplot2::theme_minimal()
+print(p_relationship)
 ```
 
-**Expected behavior:** 30 observations used and a fitted slope near the generating value 1.4, within 0.3 in this seeded example. The intercept predicts time at zero items, outside the simulated range; do not claim it was observed. R-squared describes the share of sample outcome variation explained by this fitted linear relationship, not causal strength or external accuracy.
+**Expected:** 57 modeled observations and a slope near 0.008, within 0.004 for this seeded example. Interpret the fitted slope as the model's mean creatinine difference in mg/dL per additional year. The intercept predicts age zero, outside this adult sample. R-squared describes explained sample variation, not causal strength or out-of-sample accuracy.
 
-**Scatter plot:** the horizontal axis counts items and the vertical axis measures minutes. The line shows the fitted mean trend, not each run's exact duration. The association was built into the simulation. An association in observational data could arise from confounding, selection, measurement error, or reverse causation; regression alone does not establish causality. Extrapolation beyond 4–22 items needs additional justification.
+The line estimates a mean trend; its confidence band is not an individual prediction interval. In observational studies, confounding, selection, measurement error, and reverse causation may contribute to associations. These synthetic data encode the association explicitly and provide no evidence about patients.
 
-## 7. Assumptions and diagnostic views
-
-Check the study design before reading diagnostics. Ordinary least squares interpretation relies on an appropriate mean relationship; familiar standard errors additionally assume independent errors with constant variance. Normal errors support exact small-sample tests and intervals. A fitted line or a large R-squared does not verify those conditions.
+## 7. Model diagnostics and study assumptions
 
 ```{r diagnostic-plots}
-plot(fitted(assembly_model), resid(assembly_model),
-     xlab = "Fitted assembly time (min)", ylab = "Residual (min)",
-     main = "Residuals versus fitted values", pch = 19)
+plot(fitted(creatinine_model), resid(creatinine_model), pch = 19,
+  xlab = "Fitted creatinine (mg/dL)", ylab = "Residual (mg/dL)", main = "Residuals versus fitted")
 abline(h = 0, lty = 2)
-qqnorm(resid(assembly_model), main = "Normal Q-Q view of residuals")
-qqline(resid(assembly_model), col = "firebrick")
-stopifnot(length(resid(assembly_model)) == 30L)
+qqnorm(resid(creatinine_model), main = "Normal Q-Q plot of creatinine residuals",
+       xlab = "Theoretical normal quantile", ylab = "Residual (mg/dL)")
+qqline(resid(creatinine_model), col = "firebrick")
+stopifnot(length(resid(creatinine_model)) == 57L)
 ```
 
-**Residual plot:** horizontal values are model-fitted minutes; vertical values are observed minus fitted minutes. Look for curvature, a widening spread, or unusual points. A structure-free cloud would be compatible with the simple specification, not proof of correctness or independence.
+**Expected:** two diagnostic views. Residuals are observed minus fitted values in mg/dL. Curvature suggests a mean specification issue; widening spread suggests nonconstant variance. The Q-Q horizontal axis gives theoretical normal quantiles and the vertical axis ordered residuals. Normal errors support conventional exact small-sample inference; independence comes from study design and cannot be established by a pleasing residual plot. Repeated visits, influential points, and unmeasured variables need additional checks. Diagnostics flag concerns rather than certifying a model.
 
-**Q-Q plot:** the horizontal axis contains theoretical normal quantiles; the vertical axis contains ordered residuals in minutes. Departures from the reference line flag shape or tail differences. With 30 runs it is a limited diagnostic. Neither plot can reveal unrecorded dependence or fix a flawed sampling design; influential points and repeated measurements need their own checks.
+## 8. Reusable plotting and a multi-panel figure
 
-## 8. Reusable functions and iteration
-
-A plotting function should state required columns, reject malformed inputs, count usable rows, and label units. This function returns a small reporting record as well as drawing the plot, so later code can use the checks rather than scraping printed output.
-
-```{r reusable-plot}
-plot_run_table <- function(tbl, label) {
-  if (!is.character(label) || length(label) != 1L ||
-      is.na(label) || !nzchar(label)) stop("label must be one nonempty string")
-  if (!is.data.frame(tbl) || !all(c("items", "minutes") %in% names(tbl))) {
-    stop("table needs items and minutes columns")
+```{r checked-plot-function}
+plot_biomarker <- function(tbl, variable, unit) {
+  if (!is.data.frame(tbl)) stop("tbl must be a data frame")
+  if (!is.character(variable) || length(variable) != 1L || is.na(variable) || !nzchar(variable)) {
+    stop("variable must be one column name")
   }
-  if (!is.numeric(tbl$items) || !is.numeric(tbl$minutes)) stop("plot columns must be numeric")
-  valid <- is.finite(tbl$items) & is.finite(tbl$minutes)
-  if (sum(valid) < 3L) stop("need at least three finite pairs")
-  observed <- tbl[valid, c("items", "minutes"), drop = FALSE]
-  plot(observed$items, observed$minutes, main = label,
-       xlab = "Items in run (count)", ylab = "Assembly time (min)", pch = 19)
-  return(list(label = label, measured = nrow(observed), excluded = sum(!valid)))
+  if (!is.character(unit) || length(unit) != 1L || is.na(unit) || !nzchar(unit)) stop("unit must be one label")
+  if (!variable %in% names(tbl) || !is.numeric(tbl[[variable]])) stop("Need the requested numeric column")
+  valid <- is.finite(tbl[[variable]])
+  if (sum(valid) < 3L) stop("Need three finite measurements")
+  graph <- ggplot2::ggplot(tbl[valid, , drop = FALSE], ggplot2::aes(x = .data[[variable]])) +
+    ggplot2::geom_histogram(bins = 8, fill = "steelblue", colour = "white") +
+    ggplot2::labs(x = paste0(variable, " (", unit, ")"), y = "Measured participants") + ggplot2::theme_minimal()
+  list(plot = graph, measured = sum(valid), excluded = sum(!valid))
 }
-run_tables <- list(first_half = assembly_runs[1:15, ], second_half = assembly_runs[16:30, ])
-plot_records <- lapply(names(run_tables), function(nm) plot_run_table(run_tables[[nm]], nm))
-print(vapply(plot_records, function(record) record$measured, integer(1)))
-invalid_table_error <- tryCatch(plot_run_table(data.frame(items = 1:4), "bad table"),
-                               error = function(e) conditionMessage(e))
-stopifnot(identical(vapply(plot_records, function(record) record$measured, integer(1)), c(15L, 15L)))
-stopifnot(identical(invalid_table_error, "table needs items and minutes columns"))
-with_gap <- assembly_runs
-with_gap$minutes[1] <- NA_real_
-gap_record <- plot_run_table(with_gap, "One unavailable timing")
-stopifnot(gap_record$measured == 29L, gap_record$excluded == 1L)
+units <- c(Albumin = "g/dL", Creatinine = "mg/dL")
+plot_records <- lapply(names(units), function(variable) plot_biomarker(cohort, variable, units[[variable]]))
+for (record in plot_records) print(record$plot)
+stopifnot(identical(vapply(plot_records, function(x) x$measured, integer(1)), c(60L, 58L)))
+stopifnot(identical(vapply(plot_records, function(x) x$excluded, integer(1)), c(0L, 2L)))
+invalid_plot <- tryCatch(plot_biomarker(cohort, "missing_column", "mg/dL"), error = function(e) conditionMessage(e))
+stopifnot(identical(invalid_plot, "Need the requested numeric column"))
+# grid ships with R; each ggplot is drawn in its own panel without ggpubr.
+grid::grid.newpage()
+grid::pushViewport(grid::viewport(layout = grid::grid.layout(1, 2)))
+print(p_distribution, vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_relationship, vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 2))
+grid::popViewport()
 ```
 
-**Expected:** two returned measured counts of `15`; malformed input yields the caught validation message; the missing-value example reports 29 usable pairs and one exclusion. Each generated plot uses item count horizontally and minutes vertically. Splitting a table for demonstration does not create independent replications or evidence of different mechanisms. `lapply()` returns one result per table; `vapply()` checks the requested return type while collecting counts.
+**Expected:** two reusable histogram records with measured/excluded counts 60/0 and 58/2, a caught invalid-column error, and a two-panel figure. Panel A uses 58 measured creatinine values; Panel B additionally requires known age and uses 57. Captions must explain this difference. A function should return its audit counts as well as its plot, and validate schema and labels rather than silently accepting arbitrary columns.
 
-## 9. Reproducible reporting
-
-A useful report includes the simulation mechanism, seed, input row unit, join decisions, exclusions, plot definitions, model formula, units, and software versions. Compute numeric results directly from the analysis objects so the report describes its actual run.
+## 9. Record the analysis decisions
 
 ```{r reporting-record}
-analysis_record <- list(
-  observations = nobs(assembly_model),
-  slope_minutes_per_item = unname(coef(assembly_model)["items"]),
-  seed = 4308L,
-  r_version = R.version.string,
-  dplyr_version = as.character(utils::packageVersion("dplyr"))
-)
+analysis_record <- list(row_unit = "one synthetic participant", total = nrow(cohort),
+  modeled = nobs(creatinine_model), excluded = sum(!included),
+  slope_mg_dL_per_year = unname(coef(creatinine_model)["Age"]), seed = 90417L,
+  r_version = R.version.string, dplyr_version = as.character(utils::packageVersion("dplyr")),
+  ggplot2_version = as.character(utils::packageVersion("ggplot2")))
 print(analysis_record)
-stopifnot(analysis_record$observations == 30L)
+stopifnot(analysis_record$modeled == 57L, analysis_record$excluded == 3L)
 ```
 
-**Expected:** a 30-observation record with the fitted slope and your installed software versions. Different environments may change presentation; check structure and tolerances rather than assuming all printed digits are portable. No lesson output needs to be committed as a dataset.
+**Expected:** the computed slope, seed, counts, and installed versions. Report the dictionary, joining population, unmatched IDs, inclusion fields, denominators, formula, units, diagnostics, and limitations. Generate numerical claims from analysis objects rather than copying values from a previous run.
 
 ## Common mistakes and debugging
 
-- **A join unexpectedly adds rows:** inspect duplicate keys and the declared relationship on both sides.
-- **Many fields become missing:** check key formatting and unmatched keys before assuming nonresponse.
-- **A response code is treated as a measurement:** consult the codebook and separate valid categories from declined and unmatched cases.
-- **Density height called probability:** probability corresponds to area over an interval, not a point's height.
-- **A slope has no units:** identify outcome units per predictor unit and state the observed range.
-- **An association called causal:** discuss the design and alternative explanations.
-- **A function silently drops values:** return usable and excluded counts, and reject invalid schemas early.
+| Symptom | Check and repair |
+| --- | --- |
+| Join adds unexpected rows | Audit key uniqueness and relationship on both sides |
+| Many fields become NA | Check key types, whitespace, and unmatched IDs before calling it nonresponse |
+| Survey code treated as a measurement | Decode the toy dictionary; keep refusals/unknowns distinct |
+| Model silently loses rows | Construct its analytic sample explicitly and use `na.action = na.fail` |
+| Violin looks convincing with tiny n | Inspect points and counts; smoothing is display, not evidence |
+| Function drops data invisibly | Return measured/excluded counts and check finite values |
+| Panel denominators differ | Explain each panel's inclusion fields in its caption |
 
 ## Independent practice
 
-1. Add a seventh visitor without feedback and a feedback record with no matching visitor. Predict inner/left sizes and audit unmatched keys before running joins.
-2. Change one code to an undocumented value. Add a validation rule that rejects unknown codes rather than silently treating them as normal nonresponse.
-3. Generate a second time dataset with noise that increases with item count. Describe the expected residual-plot pattern before fitting it.
-4. Add a minimum distinct-item requirement to `plot_run_table()`. Test constant predictors, text columns, and all-missing pairs.
-5. Compare histogram and ECDF statements about the same threshold. Identify which statement depends on bin choices.
-
-## Teach-back and summary
-
-What defines join cardinality? How do unmatched rows differ from a declined response? Why can a density exceed one? What does a slope mean when both axes have units? Which regression assumptions cannot be checked from residual plots alone?
-
-The sequence is **define keys → audit joins → decode missingness → simulate explicitly → read distributions → fit and diagnose → report with validated functions**. Every graph needs units, a denominator, and a conclusion that stays within the design.
+1. Add an unmatched subject and a repeated specimen key. Predict join sizes and demonstrate that an inappropriate one-to-one declaration fails.
+2. Insert an undocumented survey code; reject it before factor conversion. Distinguish refusal, uncertainty, and an absent record.
+3. Make noise increase with age in a new synthetic cohort. Predict and inspect the residual pattern without making clinical claims.
+4. Extend the function to reject a unit mismatch using a supplied data dictionary; test text, all-missing, and nonexistent columns.
+5. Create a third panel for albumin and state its separate measured count. Write a caption that explains why panel samples differ.
 
 ## Ready to move on
 
-Prepare a reproducible script and short methods note covering input keys, join type, unmatched records, codebook, exclusions, distribution views, model formula, units, and diagnostic limits. Keep validation results alongside the plots.
-
-| Evidence | Completion check |
+| Evidence | Mastery check |
 | --- | --- |
-| Relational data | Demonstrate the 4-row inner and 6-row left joins; detect the repeated key before accepting row multiplication |
-| Codebook and missingness | Separate 3 ratings, 1 declined response, and 2 unmatched records; reject undocumented codes |
-| Model and graphics | Use 30 simulated runs; interpret minutes per item, observed range, residuals, and Q-Q axes |
-| Reuse and reporting | Return measured/excluded counts from a checked function; handle bad inputs and report software versions |
+| Input contracts | Typed CSV imports, exact schema, keys, dictionary, and units |
+| Joins | Explain inner 4, left 6, full 7; detect duplicate-induced multiplication |
+| Survey | Account for yes/no/refused/unsure/missing without diagnosing disease |
+| Analytic sample | Explain 60 total, 58 measured creatinine, and 57 model pairs |
+| Figures/model | Interpret violin, box, ECDF, scatter, slope units, residuals, and Q-Q axes |
+| Reuse/reporting | Return plot/count records and reproduce a panel with a defensible caption |
 
-## Next steps and references
+Rerun from a clean session and keep the dictionary, code, figures, counts, and method record.
 
-[Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Analytics topic companion](../02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Next: Week 4](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
+## Further learning
 
-References: [dplyr join documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html) and [R linear-model documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html). See installed help `?ecdf` and `?density`.
+[Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Next: Week 4](Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
+
+References: [dplyr joins](https://dplyr.tidyverse.org/reference/mutate-joins.html), [ggplot2 violins](https://ggplot2.tidyverse.org/reference/geom_violin.html), [R linear models](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html), and installed help `?density`, `?ecdf`, `?grid.layout`.

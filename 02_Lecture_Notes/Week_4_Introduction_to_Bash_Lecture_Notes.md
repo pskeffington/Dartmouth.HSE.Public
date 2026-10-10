@@ -1,4 +1,4 @@
-# Paul's Notes — Week 4: Introduction to Bash
+# Paul's Notes · Week 4: Bash and Scientific Metadata
 
 [Section index](README.md) · [Editable R Markdown](Week_4_Introduction_to_Bash_Lecture_Notes.Rmd) · [Repository home](../README.md)
 
@@ -6,195 +6,71 @@
 
 ## On this page
 
-- [Purpose: the shell as a reproducible research interface](#purpose-the-shell-as-a-reproducible-research-interface)
-- [Before you start](#before-you-start)
-- [1. Shells, Bash, and computational research](#1-shells-bash-and-computational-research)
-- [2. Navigating and organizing a filesystem](#2-navigating-and-organizing-a-filesystem)
-- [3. Inspecting research files without loading everything](#3-inspecting-research-files-without-loading-everything)
-- [4. Scripts, shebangs, and reproducibility](#4-scripts-shebangs-and-reproducibility)
-- [5. Pipes, redirection, and columns](#5-pipes-redirection-and-columns)
-- [6. Conditionals and loops](#6-conditionals-and-loops)
-- [7. Bash and R: division of responsibility](#7-bash-and-r-division-of-responsibility)
-- [Scholarly synthesis](#scholarly-synthesis)
-- [8. General-purpose shell workflow and verification](#8-general-purpose-shell-workflow-and-verification)
-- [9. Final self-check: what Week 4 mastery requires](#9-final-self-check-what-week-4-mastery-requires)
+- [Purpose and dependencies](#purpose-and-dependencies)
+- [Terminal, shell, and location](#terminal-shell-and-location)
+- [Small scientific metadata illustration](#small-scientific-metadata-illustration)
+- [Search, fields, and failure status](#search-fields-and-failure-status)
+- [Automation and the R bridge](#automation-and-the-r-bridge)
+- [Misconceptions and self-check](#misconceptions-and-self-check)
 
-## Purpose: the shell as a reproducible research interface
+## Purpose and dependencies
 
-Learn Bash navigation, scripts, pipelines, and responsible file handling.
+Use this conceptual reference with the [complete Week 4 lesson](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md). **Study time:** 25–35 minutes. **Prerequisites:** file paths and Week 1 data checks. **Dependencies:** Bash 3.2+ and standard utilities; the full workflow also needs base Rscript. PowerShell is a different command language.
 
-## Before you start
+## Terminal, shell, and location
 
-A Bash shell; the R bridge additionally needs Rscript. PowerShell uses different syntax. Read the [complete Week 4 lesson](../03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) for setup, a worked workflow, expected results, and a readiness checklist. Run dependent examples in order; commands naming external files are templates until you supply those files.
+A terminal is an interface; a shell interprets commands. Bash executes interactive commands or saved scripts. Rscript launches a separate R process. A working directory gives meaning to relative paths; an absolute path begins at the filesystem root. Do not paste R console prompts into Bash or Bash prompts into R.
 
-## 1. Shells, Bash, and computational research
+| Command | Research use |
+| --- | --- |
+| `pwd`, `cd`, `ls` | Inspect/change location and list files |
+| `mkdir -p` | Create deliberate input/output directories |
+| `head`, `tail`, `cat` | Inspect the beginning, end, or complete text |
+| `wc -l` | Count newline characters, usually including a header |
+| `cp`, `mv` | Copy or relocate; inspect destinations for overwrite risk |
+| `rm` | Remove an exact disposable file after checking its path |
 
-A shell interprets instructions typed at a command line. Bash (Bourne Again SHell) can also run saved sequences of instructions, converting an interactive procedure into a repeatable workflow. Bash belongs to the family of Unix command interpreters.
+Quoting `"$path"` preserves spaces and argument boundaries. `>` creates/replaces output, `>>` appends, and `|` connects standard output to standard input. `2>&1` sends errors to the same destination as output when ordered appropriately.
 
-For data science, shell operations are especially useful when dozens of study files need the same organization or when scripts must launch an R analysis on a cluster. Schedulers such as SLURM manage jobs on computing clusters. Bash coordinates tasks and paths; the scientific model remains the responsibility of the analysis language and its validated inputs.
+## Small scientific metadata illustration
 
-## 2. Navigating and organizing a filesystem
-
-The central idea is *location awareness*: every relative path is interpreted against a working directory. This explains why a command may run correctly from one directory but fail elsewhere.
-
-```bash
-pwd                          # Print the current directory
-current_dir=$(pwd)            # Store command output in a variable
-printf 'Working in %s\n' "$current_dir"
-ls -lah                       # Include hidden files and human-readable sizes
-cd "$HOME"                    # Return home
-cd ..                         # Move to parent directory
-mkdir -p my_project/data      # Create nested directories
-```
-
-`cp` duplicates files, `mv` relocates or renames them, `cat` displays complete text, and `rm` deletes entries. These operations are important for source provenance: a renamed or overwritten file can break the connection between analysis and input. **Practice check:** work inside a disposable exercise directory and check the target before any recursive deletion.
-
-**Optional game-based reinforcement:** [Terminus](https://terminus-global.vercel.app/) introduces terminal navigation through a command-line adventure; [Hack RUN](https://store.steampowered.com/app/378110/Hack_RUN/) uses simulated DOS/UNIX-style command prompts to make inspecting files and moving through a system part of solving puzzles; [Hacknet](https://store.steampowered.com/app/365450/Hacknet/) introduces simulated remote-system exploration. Requiring a player to recall and apply navigation commands repeatedly can encourage retrieval practice and make basic operations more familiar than passive reading alone. These games use simplified interfaces, so they supplement rather than replace practice in a real, authorized terminal.
-
-**Mastery transfer:** Without following a game walkthrough, open a local terminal and demonstrate `pwd`, `ls`, `cd`, and `head` on a disposable exercise directory. Explain the working directory and relative path at each step.
-
-## 3. Inspecting research files without loading everything
-
-A hypothetical gene-by-sample table, `data.csv`, illustrates `head`, `tail`, `less`, and `wc`. In this example, rows are genes and columns are samples; displaying a header is therefore a preliminary schema check, not a statistical analysis.
+This block creates a fresh temporary directory with a two-participant, one-specimen-per-person CSV. Measurements are invented creatinine values in mg/dL; the labels describe specimen type, not treatment.
 
 ```bash
-head -n 5 data.csv            # Preview the header and first observations
-tail -n 5 data.csv            # Inspect the end of the file
-wc -l data.csv                # Count newline-terminated lines
-less data.csv                 # Search interactively; press q to exit
+reference_dir=$(mktemp -d "${TMPDIR:-/tmp}/pauls-bash-reference.XXXXXX")
+printf 'Participant_ID,Sample_Type,Measurement
+Z01,Serum,0.9
+Z02,Plasma,1.1
+' > "$reference_dir/samples.csv"
+head -n 3 "$reference_dir/samples.csv"
+awk -F ',' 'NR == 1 || $2 == "Serum"' < "$reference_dir/samples.csv" > "$reference_dir/serum.csv"
+awk 'END {print (NR > 0 ? NR - 1 : 0)}' < "$reference_dir/serum.csv"
+printf 'Practice directory: %s
+' "$reference_dir"
 ```
 
-The printed line count usually includes a header. A file without a final newline may require additional care when interpreting `wc -l`. The commands reveal file shape and superficial structure; they do not establish whether sample IDs, gene identifiers, or counts are valid.
+**Expected:** the header and two input records, then selected record count `1`. The header stays in the output. This is a simple delimiter-separated format; quoted commas, embedded newlines, or a different separator need a real parser. The full lesson validates schema, keys, categories, ages, and measurement strings before publishing a filtered file.
 
-## 4. Scripts, shebangs, and reproducibility
+## Search, fields, and failure status
 
-A saved Bash script converts a list of manual commands into repeatable instructions. The shebang identifies the interpreter, while execute permissions allow direct invocation.
+`grep -F` finds literal text anywhere in a line; `awk -F ','` addresses fields in this simple format. Text search does not establish which field matched. Pipelines report the last command's status by default; `set -o pipefail` also exposes earlier failures. Grep status 1 is an expected no-match, whereas an error means inspection failed. Handle known failure cases in `if` rather than assuming every nonzero status means absent data.
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
+`set -euo pipefail` helps expose command failures and unset variables but does not validate scientific data. A script should check argument count before `$1`, validate readable input and distinct output, build a temporary result, and move it into place only after success. A trap cleans temporary output on exit. Retain raw inputs and verify selected record counts.
 
-# Paths are relative to the directory from which this script is executed.
-input="data.csv"
-[[ -f "$input" ]] || { printf 'Missing: %s\n' "$input" >&2; exit 1; }
-mkdir -p my_project/data
-cp "$input" my_project/data/rnaseq_dat.csv
-touch my_project/notes.txt
-ls -l my_project/data
+## Automation and the R bridge
+
+A `for` loop applies one operation to known labels or quoted file paths. A glob with no matches needs an explicit file test. Avoid parsing `ls` output to build a file list. `$@` preserves positional argument boundaries when quoted; functions should return meaningful exit status.
+
+The following is an invocation pattern, requiring a saved script and valid paths rather than an additional runnable example:
+
+```text
+Rscript --vanilla summarize_samples.R input.csv output.csv 2 > run.log 2>&1
 ```
 
-```bash
-bash -n my_first_bash_script.sh  # Check syntax
-bash my_first_bash_script.sh     # Run explicitly
-# chmod +x my_first_bash_script.sh  # Optional direct-execution setup
-```
+The R script reads `commandArgs(trailingOnly = TRUE)`, checks its argument contract, parses CSV, validates fields, and computes summaries. Bash manages paths and logging; R manages numerical analysis. The full lesson supplies both scripts and checks their actual outputs, including withheld means when observed counts are insufficient.
 
-**Practice check:** quoting variables, checking files, and using `set -euo pipefail` improve reliability but do not guarantee correctness. Treat script outputs as evidence only after validating inputs and confirming the intended transformations.
+## Misconceptions and self-check
 
-## 5. Pipes, redirection, and columns
+Explain relative paths, quoting, headers, and the difference between physical lines and data records. Predict what a missing file, wrong delimiter, invalid category, or duplicate identifier should do. Distinguish a printed error from a failed process and a partial output from a validated result. Demonstrate filesystem operations only in a disposable workspace; never apply broad deletion patterns to study inputs.
 
-A pipe connects one program's output to the next program's input. Redirection writes output to a file: `>` replaces an existing file, whereas `>>` appends. Use `grep`, `awk`, and `cut` for small inspection and extraction tasks.
-
-```bash
-grep -F 'ESR1' gene_list.txt          # Literal search
-awk -F ',' 'NR == 1 {print $2}' data.csv
-cut -d ',' -f 1,3 data.csv
-```
-
-**Practice check:** the `awk -F ','` and `cut -d ','` examples assume simple delimiter-separated records. They do not correctly parse arbitrary quoted CSV, particularly cells containing commas or newlines. Use a CSV-aware parser in R or Python for such data. For listing CSV files, globbing (`*.csv`) is generally safer than parsing `ls` output.
-
-## 6. Conditionals and loops
-
-Conditional statements let a script branch according to a test; loops repeat the same operation across files or records. The `if ... then ... else ... fi`, `for`, and `while` examples demonstrate decision-making and iteration.
-
-```bash
-if [[ -f "data.csv" ]]; then
-  printf 'data.csv exists\n'
-else
-  printf 'data.csv is missing\n'
-fi
-
-for file in ./*.csv; do
-  [[ -f "$file" ]] || continue
-  printf 'Previewing %s\n' "$file"
-  head -n 5 "$file"
-done
-
-count=5
-while [[ "$count" -gt 0 ]]; do
-  printf '%s\n' "$count"
-  count=$((count - 1))
-done
-```
-
-The loop body is one analytical rule applied repeatedly; changing that rule changes every processed file. That is why one validated function is generally preferable to many manually edited commands.
-
-## 7. Bash and R: division of responsibility
-
-Bash can launch R scripts and pass arguments. This is a useful research pattern because data locations and job scheduling can be managed without embedding them throughout an R model.
-
-```bash
-Rscript --vanilla analysis.R input.csv output.csv 10
-```
-
-```r
-args <- commandArgs(trailingOnly = TRUE)
-stopifnot(length(args) == 3L)
-input_file <- args[1]
-output_file <- args[2]
-n <- as.numeric(args[3])
-if (is.na(n)) stop("n must be numeric")
-# read, validate, analyze and write within a deliberate R workflow
-```
-
-Bash can pass arguments and redirect console output, but it cannot establish biological validity or inferential confidence. The [Bash operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) and [function library](../06_RESOURCES/Bash/bash_functions.sh) provide further practice.
-
-## Scholarly synthesis
-
-The methodological progression is from *where the data reside*, to *what the data contain*, to *how operations are repeated and documented*. Students should be able to explain which commands inspect data, which transform it, and which may permanently alter it. They should also be able to show that the shell's orchestration logic is distinct from substantive R statistical analysis.
-
-**Execution boundary:** Commands using external paths are illustrative templates requiring your own inputs. Section 8 supplies a self-contained practice session with known text output.
-
-## 8. General-purpose shell workflow and verification
-
-The workflow moves from finding files to inspecting content, automating repeated operations, and invoking R. Practise that complete sequence in a disposable folder before applying it to coursework. The following is a **self-contained practice example**, not an assignment solution.
-
-```bash
-# Run within a disposable directory created for this exercise.
-mkdir -p week4_practice
-cd week4_practice
-printf 'sample,value\na,4\nb,9\n' > measurements.csv
-
-pwd
-head -n 3 measurements.csv
-wc -l measurements.csv
-
-# Check for a valid input before processing it.
-if [[ -f measurements.csv ]]; then
-  printf 'Input exists\n'
-fi
-```
-
-**Why it works:** `mkdir` establishes an explicit working location; `printf` writes known practice content; `head` and `wc` inspect text without loading R; `[[ -f ... ]]` confirms a file is present. The count includes the header. The practice command uses `>`, which overwrites the file if it already exists: run it only in a disposable location.
-
-**Mastery checkpoint:** Describe which lines create files, which inspect them, and which conditionally branch. Identify the exact working directory that determines where `measurements.csv` is found.
-
-## 9. Final self-check: what Week 4 mastery requires
-
-Mark an objective only when you can demonstrate it in a clean practice directory and explain its effect.
-
-- [ ] **Shell model:** Distinguish an interactive shell, a script, and the R process it launches.
-- [ ] **Navigation:** Use `pwd`, `ls`, and `cd` to resolve relative versus absolute paths and recover from a wrong directory.
-- [ ] **File inspection:** Use `head`, `tail`, `wc`, and `less` to inspect a text dataset without confusing line counts with data-record counts.
-- [ ] **Safe file operations:** Demonstrate `mkdir`, `cp`, and `mv` in a disposable directory; explain overwrites and why `rm` requires explicit care.
-- [ ] **Reproducible scripts:** Create a shebang-based Bash script, quote variable expansions, check syntax with `bash -n`, and run it.
-- [ ] **Pipes and columns:** Explain standard input/output, `|`, `>`, and `>>`; demonstrate a safe text extraction and identify cases where naive CSV splitting is invalid.
-- [ ] **Control flow:** Write an `if` condition and a file loop that do not fail when optional inputs are absent.
-- [ ] **Bash-to-R bridge:** Explain and demonstrate how `Rscript` receives positional arguments through `commandArgs(trailingOnly = TRUE)`.
-- [ ] **Reproducibility boundary:** Record inputs, commands, validation evidence, and outputs; distinguish a script that completes from a scientifically valid result.
-
-**Mastery standard:** All nine objectives demonstrated in an authorized practice workspace. A peer can follow your script from a clean directory, identify each file operation and argument, and reproduce the expected text output without guessing hidden paths.
-
-**Related:** [Bash operation sheet](../06_RESOURCES/Bash/BASH_OPERATION_SHEET.md) · [Bash utility examples](../06_RESOURCES/Bash/bash_functions.sh) · [Topic index](README.md)
-
-[Previous topic](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Paul's Notes](../README.md)
+[Previous topic](Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Topic index](README.md) · [Command sheet](../06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) · [GNU Bash manual](https://www.gnu.org/software/bash/manual/bash.html)
