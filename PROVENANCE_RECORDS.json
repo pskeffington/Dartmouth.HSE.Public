@@ -1,7 +1,7 @@
 {
   "schema": "public-provenance-records-v1",
   "observation_date": "2026-10-10",
-  "snapshot_base_commit": "a2016d0843b48f8cea9f0c14cc544a6f30216e78",
+  "snapshot_base_commit": "1a71110467fb854019699d65ebf0aeda60d0e404",
   "observer": "Codex automated intake; not a human rights reviewer",
   "common_rights_state": "UNVERIFIED",
   "common_human_review": "PENDING",
@@ -325,7 +325,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "87c4e4e285d24d70e6b050f5c957c07d692c86a86a1baead04288f4bdc55577b",
+      "observed_sha256": "c4162b690edfff93da1304a75eb2449c9553bca8a8c4c6cf51a23c3d5a28a5d4",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -350,6 +350,13 @@
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
       "observed_sha256": "d998e8e3e6e801cc53753aed0740ca70f7cd34fce81827784cdc1cc974de2ad0"
+    },
+    {
+      "path": "06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md",
+      "observed_role": "concurrent public reference document; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "9b2067b49e7723c6eb4c9710315536c1a6071db2107a41f612222cd87d547813"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
