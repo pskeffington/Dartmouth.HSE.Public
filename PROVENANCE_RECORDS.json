@@ -38,7 +38,7 @@
     },
     {
       "path": "02_Lecture_Notes/README.md",
-      "observed_sha256": "6099aec8f671e6b9eb03f51b05c564c1c52e1ceca4dcafb92d61affc345f87d9",
+      "observed_sha256": "72b9dea79efe52781ae0783fa9630892144916c66a96c50074f6ace3542feaf8",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -115,7 +115,7 @@
     },
     {
       "path": "03_Group_Work/README.md",
-      "observed_sha256": "e85c4f1c88cf879016843abdd1dd57f58cd5601b5dc2d48f1404e4e7c838de74",
+      "observed_sha256": "4331bfb691aa89fd55f25c938e14536a91550ba77bb2834b67a77eca1aba0b30",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -591,7 +591,7 @@
     },
     {
       "path": "README.md",
-      "observed_sha256": "066b7a30f384bb72cb14ff0115a53bafe32ae1c499cdb92a385137672e32312e",
+      "observed_sha256": "d7631fccf015b62a27b0135e4efe59a9750a01601a168cb501beca803ed2d404",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
