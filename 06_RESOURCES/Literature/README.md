@@ -4,6 +4,10 @@
 
 This curated matrix connects openly available programming documentation, research-software guidance, and reproducibility resources to independently authored health-data science exercises. It is a **narrative teaching bibliography**, not a systematic literature review or validation of a clinical model. All descriptions below are original summaries of general public guidance. Consult the linked primary sources for exact syntax and version-specific behavior.
 
+## Biomedical research computing
+
+For survey methodology, Bioconductor, count-based RNA-seq methods, and observational-research reporting, use the [biomedical research computing matrix](BIOMEDICAL_CODING_METHODS.md). This companion covers domain-specific methods without copying classroom material.
+
 ## Evidence and usage key
 
 - **Specification/manual:** authoritative source for documented behavior, but not necessarily a recommendation for every project.

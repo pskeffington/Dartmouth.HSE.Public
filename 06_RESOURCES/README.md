@@ -21,7 +21,7 @@ Reusable methods, functions, teaching references and templates for health data s
 | Gene-expression heatmaps, PCA and volcano plots | [Gene graphics](R/hse_gene_visuals.R) | [R source](R/hse_gene_visuals.R) |
 | Bash syntax, operations and safe scripting | [Bash operation sheet](Bash/BASH_OPERATION_SHEET.md) | [Bash helpers](Bash/bash_functions.sh) |
 | APA 7 student manuscript example | [LaTeX guide](LaTeX/) | [Editable TeX](LaTeX/Example_APA_7_Manuscript.tex) |
-| Coding practices and reproducibility literature | [Best-practices reference matrix](Literature/README.md) | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) |
+| Coding practices and reproducibility literature | [Best-practices reference matrix](Literature/README.md) | [Bash literature](Bash/BASH_LITERATURE_REVIEW.md) |\n| Biomedical research computing and reporting | [Biomedical methods matrix](Literature/BIOMEDICAL_CODING_METHODS.md) | [R resources](R/README.md) |
 
 ## R statistics and visualization
 
