@@ -4,6 +4,8 @@
 
 **Corpus ingestion:** [Targeted biomedical literature roadmap](BIOMEDICAL_CORPUS_INGESTION_ROADMAP.md) · [Structured candidate inventory](BIOMEDICAL_CORPUS_2026_CANDIDATES.csv). These are intake candidates, not reproduced studies.
 
+**Validation evidence:** [2026-10-10 GitHub R run, numerical outputs and release blockers](BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md). Synthetic examples passed; originality and provenance release gates remain blocked.
+
 ## Common unit contract
 Each unit includes (1) independently phrased measurable learning objectives, (2) research question and evidence matrix with DOI, date, study type and limitations, (3) methods reconstruction distinguishing reported from inferred steps, (4) synthetic runnable example, (5) annotated rationale for every transformation and model, (6) expected outputs and failure modes, (7) checks for leakage, missingness, units and uncertainty, (8) exercises and rubric, (9) reproducibility manifest and (10) rights/provenance review.
 
