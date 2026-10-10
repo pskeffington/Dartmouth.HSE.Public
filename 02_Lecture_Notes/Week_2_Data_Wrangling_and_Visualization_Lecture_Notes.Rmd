@@ -13,9 +13,7 @@ output:
 
 ## Purpose and learning objectives
 
-Learn simulation, tabular transformation, missing-data checks, and visualization principles. These independent notes are not an official Dartmouth or Geisel publication.
-
-These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
+Learn simulation, tabular transformation, missing-data checks, and visualization principles.
 
 ## 1. Make random data reproducible
 

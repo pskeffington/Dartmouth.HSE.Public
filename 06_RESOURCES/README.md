@@ -85,4 +85,4 @@ Editable study-guide sources live in the lecture and group-work folders. Weekly 
 
 ## Local-only inputs
 
-`/data/` and `/week4_practice/` are excluded by `.gitignore`. Do not use `git add -f` to publish them. Avoid committing sensitive data, restricted classroom files or identifiable patient records.
+`/data/` and `/week4_practice/` are excluded by `.gitignore`. Do not use `git add -f` to publish them. Avoid committing sensitive data or identifiable patient records.

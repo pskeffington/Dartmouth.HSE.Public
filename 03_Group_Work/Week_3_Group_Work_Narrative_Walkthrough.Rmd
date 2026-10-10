@@ -4,7 +4,7 @@ author: "Paul Skeffington"
 output: html_document
 ---
 
-A public study guide using independent synthetic examples, not an official Dartmouth or Geisel lesson. We connect invented workshop records, interpret coded feedback, and model simulated production times. No private inputs or assessed solutions are needed.
+This study guide connects invented workshop records, interprets coded feedback, and models simulated production times.
 
 **Study time:** 90–120 minutes. **Prerequisites:** Weeks 1–2 object checks, missingness, reshaping, and plot axes. **Dependencies:** base R and `dplyr` (version 1.1.0 or newer for explicit join relationships). Run blocks in order in a clean session.
 
@@ -253,4 +253,4 @@ The sequence is **define keys → audit joins → decode missingness → simulat
 
 [Previous: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Analytics topic companion](../02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) · [Next topic: Bash](../02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
-References: [dplyr join documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html) and [R linear-model documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html). See installed help `?ecdf` and `?density`. [Source policy](../ORIGINALITY_POLICY.md).
+References: [dplyr join documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html) and [R linear-model documentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html). See installed help `?ecdf` and `?density`.

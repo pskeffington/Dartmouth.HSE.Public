@@ -2,7 +2,7 @@
 
 [Paul's Notes](../README.md) · [Follow-along guide](../FOLLOW_ALONG.md) · [R resources](../06_RESOURCES/R/README.md)
 
-Start here for complete independent lessons with synthetic inputs, worked examples, expected results, debugging guidance, practice, and teach-back questions. No official course files are required. These are public study guides, not Dartmouth or Geisel teaching materials or assessed solutions.
+Start here for complete independent lessons with synthetic inputs, worked examples, expected results, debugging guidance, practice, and teach-back questions.
 
 | Lesson | What you will learn | Study time | Dependencies |
 | --- | --- | --- | --- |
@@ -12,4 +12,4 @@ Start here for complete independent lessons with synthetic inputs, worked exampl
 
 Read the Markdown editions directly on GitHub. Each links to its authoritative `.Rmd` source and the adjacent lesson. Run executable blocks in order in a clean R session; dependency checks explain what is needed and never silently install software.
 
-[Topic companions](../02_Lecture_Notes/README.md) provide additional conceptual reference. [Plot reading](../06_RESOURCES/READING_PLOTS.md) helps connect axes and units to interpretation. For publication controls and outstanding reviews, see the [source policy](../ORIGINALITY_POLICY.md) and [status](../ORIGINALITY_STATUS.md).
+[Topic companions](../02_Lecture_Notes/README.md) provide additional conceptual reference. [Plot reading](../06_RESOURCES/READING_PLOTS.md) helps connect axes and units to interpretation.

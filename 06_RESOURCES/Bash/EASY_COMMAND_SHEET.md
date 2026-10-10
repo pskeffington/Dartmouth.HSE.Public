@@ -2,7 +2,7 @@
 
 [Resource index](../README.md) · [Follow-along guide](../../FOLLOW_ALONG.md) · [Full operation sheet](BASH_OPERATION_SHEET.md) · [Helper source](bash_functions.sh)
 
-Use a Bash terminal. All examples use independently prepared or user-authorized inputs; no original course files are included. Quoted paths preserve spaces. Read a command before running it; `>` creates or overwrites a destination file.
+Use a Bash terminal. Quoted paths preserve spaces. Read a command before running it; `>` creates or overwrites a destination file.
 
 ## Find your place and inspect a file
 

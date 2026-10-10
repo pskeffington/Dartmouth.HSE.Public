@@ -2,8 +2,6 @@
 
 **A free, public study guide for health data science, research methods, and practical computing.** Independently maintained by Paul, this project covers R, Bash, reproducible research, and academic writing; **it is not an official Dartmouth or Geisel site.**
 
-This public study guide contains no official lectures, assignments, restricted datasets, or assessed solutions. Its notes explain general concepts and methods; they do not replace authorized course materials or provide answers to assessed work.
-
 ## Start here
 
 | What you want to study | Where to start |
@@ -20,7 +18,7 @@ Read the Markdown editions directly in GitHub. Their linked `.Rmd` files are edi
 
 ## Weeks 1–4: concept and topic study guides
 
-Week numbers organize the topics. These are independent conceptual study guides, not reproductions of official lectures or an official syllabus. The weekly teaching guides include runnable synthetic examples, expected results, practice, and self-assessment; they do not reproduce assigned questions or assessed solutions.
+Week numbers organize the topics. The teaching guides include runnable synthetic examples, expected results, practice, and self-assessment.
 
 | Week | Concept/topic guide | Complete teaching lesson |
 | --- | --- | --- |
@@ -39,12 +37,10 @@ Those fictional environments sparked curiosity. I then practiced real commands f
 
 Use the examples to learn methods, not to establish health findings. Statistical interpretation depends on study design, sample size, missingness, measurement units, and assumptions. Distinguish exploratory plots from statistical inference, and follow the attribution and collaboration rules that apply to your work.
 
-The [capstone](01_Capstone/README.md), [final-project](04_Final_Project/README.md), and [assignment](05_Assignments/README.md) sections explain the public-sharing boundary; assessed work stays private.
+The [research-planning](01_Capstone/README.md), [reporting](04_Final_Project/README.md), and [practice](05_Assignments/README.md) sections connect these skills to a complete study workflow.
 
-## Provenance, rights, and reporting
+## License and feedback
 
-See the [originality policy](ORIGINALITY_POLICY.md), [current status](ORIGINALITY_STATUS.md), [provenance register](PROVENANCE_REGISTER.md), and [history exposure review](HISTORY_EXPOSURE_REVIEW.md) for technical checks and outstanding reviews. **Passing technical checks does not certify copyright clearance.** Retained pull-request history may still contain earlier material even after ordinary branch history has been cleaned; current-tree statements are not a claim that all historical copies have disappeared.
+See the [MIT license](LICENSE).
 
-The [MIT license](LICENSE) applies only to material the contributor has the right to license and does not override third-party terms.
-
-To report a problem, [open an issue](https://github.com/pskeffington/Dartmouth.HSE.Public/issues/new) with only public file paths and a brief description. **Never reproduce or attach protected instructional material, private datasets, or assessed work.**
+To report an error or suggest an improvement, [open an issue](https://github.com/pskeffington/Dartmouth.HSE.Public/issues/new) with the relevant public file paths and a brief description.

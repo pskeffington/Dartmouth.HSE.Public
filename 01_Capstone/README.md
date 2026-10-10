@@ -6,6 +6,6 @@ Use these public resources to plan a reproducible study: define a question, iden
 - [Join checks and analytical reasoning](../03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md)
 - [Scientific writing and APA 7](../06_RESOURCES/LaTeX/README.md)
 
-Private capstone research, participant data, and assessed deliverables stay in authorized private workspaces. This section indexes general learning resources; it does not publish a capstone study or its results.
+This section indexes resources for study design, analysis planning, and clear methods writing.
 
 [Paul's Notes](../README.md) · [Follow along](../FOLLOW_ALONG.md)

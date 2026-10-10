@@ -13,9 +13,7 @@ output:
 
 ## Purpose and learning objectives
 
-Learn R objects, indexing, logical operations, tables, data import, graphics, and reusable functions with independent practice inputs. These notes are not an official Dartmouth or Geisel publication.
-
-These public examples require no official instructional files. Course-specific requirements belong to authorized course channels.
+Learn R objects, indexing, logical operations, tables, data import, graphics, and reusable functions with independent practice inputs.
 
 ## 1. Understanding R objects before classifying them
 
@@ -195,7 +193,7 @@ str(practice_result)
 
 For each independent practice activity, write one or two sentences answering: **What object did I start with? What did this function, loop, or index operation do? How did I check the result?** Distinguish a descriptive graph from an inferential result.
 
-A useful repeatable workflow is: inspect the data, choose the operation, run a small test, verify dimensions or positions, and only then apply the method to the full input. Keep your own solutions and any classroom-restricted data in the appropriate private or submission location.
+A useful repeatable workflow is: inspect the data, choose the operation, run a small test, verify dimensions or positions, and only then apply the method to the full input.
 
 ## 8. Final self-check
 

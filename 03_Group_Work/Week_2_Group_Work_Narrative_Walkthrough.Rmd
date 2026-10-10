@@ -4,7 +4,7 @@ author: "Paul Skeffington"
 output: html_document
 ---
 
-A public study guide with independent synthetic examples, not an official Dartmouth or Geisel lesson. We simulate packing-station timings in seconds. They are invented values for learning, not empirical or clinical findings; no course datasets are required.
+This study guide simulates packing-station timings in seconds. The invented values illustrate simulation, reshaping, and plot interpretation rather than empirical or clinical findings.
 
 **Study time:** 90–120 minutes. **Prerequisites:** Week 1 vectors, data frames, factors, and missingness. **Dependencies:** R plus `tidyr`, `dplyr`, and `ggplot2`. Run blocks in order in a clean session. The reading edition includes expected results but does not execute R.
 
@@ -226,4 +226,4 @@ The working sequence is **define the observation → simulate transparently → 
 
 [Previous: Week 1](Week_1_Group_Work_Narrative_Walkthrough.md) · [Next: Week 3](Week_3_Group_Work_Narrative_Walkthrough.md) · [Weekly lessons](README.md) · [Wrangling topic companion](../02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) · [Plot-reading guide](../06_RESOURCES/READING_PLOTS.md) · [Paul's Notes](../README.md)
 
-References: [tidyr pivot documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html), [ggplot2 reference](https://ggplot2.tidyverse.org/reference/), and installed R help `?rnorm` and `?t.test`. [Source policy](../ORIGINALITY_POLICY.md).
+References: [tidyr pivot documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html), [ggplot2 reference](https://ggplot2.tidyverse.org/reference/), and installed R help `?rnorm` and `?t.test`.

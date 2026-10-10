@@ -2,7 +2,7 @@
 
 [Paul's Notes](README.md) · [Weekly lessons](03_Group_Work/README.md) · [Topic companions](02_Lecture_Notes/README.md)
 
-These public lessons use independently constructed examples and synthetic inputs. You can read them on GitHub without installing R. To run the examples, use your own R session; no official Dartmouth or Geisel materials are required.
+These public lessons use independently constructed examples and synthetic inputs. You can read them on GitHub without installing R. To run the examples, use your own R session.
 
 ## Prepare a study session
 
@@ -32,7 +32,3 @@ python3 scripts/validate_weekly_r.py --output-dir /tmp/pauls-notes-r-checks
 Check spelling and object availability first, then inspect `str()`, `names()`, and `dim()`. A missing package is a dependency problem, not a data result. Seeded examples still require a compatible R and package environment; printed rounding may differ. Keep raw inputs unchanged and record exclusions rather than deleting rows without explanation.
 
 For short reminders, use the [R function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md), [plot-reading guide](06_RESOURCES/READING_PLOTS.md), and [APA 7 LaTeX guide](06_RESOURCES/LaTeX/README.md).
-
-## Public source boundary
-
-Official instructional files, private datasets, and assessed work stay in authorized private workspaces. The [source policy](ORIGINALITY_POLICY.md), [provenance register](PROVENANCE_REGISTER.md), and [history review](HISTORY_EXPOSURE_REVIEW.md) describe publication controls and remaining reviews. Technical validation is not a copyright certificate.
