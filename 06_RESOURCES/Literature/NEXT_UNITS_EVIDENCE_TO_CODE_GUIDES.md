@@ -30,6 +30,8 @@ print(t.test(biomarker_mg_l ~ treatment_group, data = study_data))
 **Mastery:** reproduce summary, explain CI, assess independence and plausible distribution assumptions, and describe why causal interpretation is unwarranted.
 
 ## Unit 7 — Regression and diagnostics
+
+**Full teaching edition:** [Unit 7 — Biomedical regression, diagnostics and interpretation](UNIT_07_REGRESSION_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_07_regression.R). **Status:** independently authored draft; local runtime verification pending.
 **Objectives:** specify outcome and predictors; distinguish linear and logistic links; interpret coefficient units; diagnose collinearity, influential observations and misspecification; avoid causal claims from association.
 
 **Methods:** define a synthetic cohort with age, treatment and outcome; fit `lm()` and `glm(family = binomial())`; inspect residuals, separation and confidence intervals; compare prespecified alternatives. Split at patient level before any learned preprocessing.
