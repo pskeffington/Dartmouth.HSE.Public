@@ -2,12 +2,19 @@
   "schema": "public-provenance-records-v1",
   "observation_date": "2026-10-10",
   "snapshot_base_commit": "1a71110467fb854019699d65ebf0aeda60d0e404",
-  "observer": "Codex automated intake; not a human rights reviewer",
+  "observer": "AI-assisted SHA-256 file observation; not a human rights reviewer",
   "common_rights_state": "UNVERIFIED",
   "common_human_review": "PENDING",
   "common_disposition": "HOLD_CLEARANCE",
   "limitations": "Role descriptions are intake classifications, not original-authorship claims. Source relationships identify local counterparts, not verified licenses. All paths still require author/source/license/reviewer evidence. The records file omits its own digest to avoid recursion.",
   "entries": [
+    {
+      "path": ".github/workflows/biomedical-companion-validation.yml",
+      "observed_sha256": "569b227c958a1687d2e304541d7f562feb30bd2b3d4e9e1bfe702a92cf4a1e99",
+      "observed_role": "repository CI automation; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
     {
       "path": ".github/workflows/originality-screen.yml",
       "observed_sha256": "96073d2f191124ca1f700e47aac1c4207f73f62a5a94c66ec7dfeb23cf5e34fc",
@@ -44,13 +51,6 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
-      "observed_sha256": "490db1ae6c29480713b991ccb9612cb94bfa92fadee0d26cc5961c0c7bf5e08e",
-      "observed_role": "course-adjacent commentary; originality unverified",
-      "source_relationship": null,
-      "next_action": "Authorized source comparison and contributor provenance"
-    },
-    {
       "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md",
       "observed_sha256": "83f40a34cd4f79532e795e73878ed232c948c3e7d362466afb3b58ff8319ae77",
       "observed_role": "course-adjacent commentary; originality unverified",
@@ -58,8 +58,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
-      "observed_sha256": "e274d8913c501cd9456d707b986f52fc4c8ce0b1ab5dac536f24873eca861bc2",
+      "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
+      "observed_sha256": "490db1ae6c29480713b991ccb9612cb94bfa92fadee0d26cc5961c0c7bf5e08e",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -72,16 +72,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md",
-      "observed_sha256": "2de9c02ca4b654b3e6704dbcdcc7a8a281321f4badf4d976bfa433fe9e0daa7e",
-      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
+      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
+      "observed_sha256": "e274d8913c501cd9456d707b986f52fc4c8ce0b1ab5dac536f24873eca861bc2",
+      "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
-      "observed_sha256": "295b5336575bdcaaa4c30b35c9b834bb46c4963399045f44eab7d8d284697caa",
-      "observed_role": "course-adjacent commentary; originality unverified",
+      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md",
+      "observed_sha256": "2de9c02ca4b654b3e6704dbcdcc7a8a281321f4badf4d976bfa433fe9e0daa7e",
+      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -93,16 +93,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md",
-      "observed_sha256": "e688a7135a2a75c568224af6a89a9d5c5dedf34b0b33c5148e6993fd84b0f606",
-      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
+      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
+      "observed_sha256": "295b5336575bdcaaa4c30b35c9b834bb46c4963399045f44eab7d8d284697caa",
+      "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.Rmd",
-      "observed_sha256": "521c10ddeaf51ba63811763d512e0fd3e87c7e5eaac39dcc20373be95072bb87",
-      "observed_role": "course-adjacent commentary; originality unverified",
+      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md",
+      "observed_sha256": "e688a7135a2a75c568224af6a89a9d5c5dedf34b0b33c5148e6993fd84b0f606",
+      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -114,16 +114,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/README.md",
-      "observed_sha256": "4331bfb691aa89fd55f25c938e14536a91550ba77bb2834b67a77eca1aba0b30",
+      "path": "02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.Rmd",
+      "observed_sha256": "521c10ddeaf51ba63811763d512e0fd3e87c7e5eaac39dcc20373be95072bb87",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "ed46c5e519097b47c25e829759f44116bacc6a584ee24b2ed962f1038b9a844d",
-      "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
+      "path": "03_Group_Work/README.md",
+      "observed_sha256": "4331bfb691aa89fd55f25c938e14536a91550ba77bb2834b67a77eca1aba0b30",
+      "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -135,8 +135,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "45f50658bd6b0a0352c8f9460552a57d9d7cfe408b99003ef8affbb7290b6030",
+      "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "ed46c5e519097b47c25e829759f44116bacc6a584ee24b2ed962f1038b9a844d",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -149,8 +149,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "c8b474c0dfc08e1825a4bcbe33e57f7c937f0cfd1b4a438d0b64a7bb422b4e4d",
+      "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "45f50658bd6b0a0352c8f9460552a57d9d7cfe408b99003ef8affbb7290b6030",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -163,17 +163,24 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
-      "observed_sha256": "fb1ee8469896053e2d2df26863d144bbfcc36b61040679e1e3d0830dbcd87472",
-      "observed_role": "independent study-guide workflow and validation; provenance unverified",
+      "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "c8b474c0dfc08e1825a4bcbe33e57f7c937f0cfd1b4a438d0b64a7bb422b4e4d",
+      "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md",
       "observed_sha256": "3893d605919cdf867beb818812edd0c053147641a39f7d399c731b19016292c4",
       "observed_role": "independent study-guide workflow and validation; provenance unverified",
       "source_relationship": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
+      "observed_sha256": "fb1ee8469896053e2d2df26863d144bbfcc36b61040679e1e3d0830dbcd87472",
+      "observed_role": "independent study-guide workflow and validation; provenance unverified",
+      "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
@@ -191,8 +198,8 @@
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
-      "path": "06_RESOURCES/BIOSTAT_PLOT_PANELS.md",
-      "observed_sha256": "cde841d60c94eb25b6d5c05ebb79093097555ebed353c37a8c65434109207d53",
+      "path": "06_RESOURCES/Bash/bash_functions.sh",
+      "observed_sha256": "a28b33108adf6276678c6642016d566cbda4f9f0de65df9966a44240aee2f252",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
@@ -226,8 +233,8 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
-      "path": "06_RESOURCES/Bash/bash_functions.sh",
-      "observed_sha256": "a28b33108adf6276678c6642016d566cbda4f9f0de65df9966a44240aee2f252",
+      "path": "06_RESOURCES/BIOSTAT_PLOT_PANELS.md",
+      "observed_sha256": "cde841d60c94eb25b6d5c05ebb79093097555ebed353c37a8c65434109207d53",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
@@ -235,6 +242,13 @@
     {
       "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
       "observed_sha256": "241fd8b998cf91b4224058f76ea248d74ed1e6b2315ad9a06c278d58383f105a",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/compile_manuscript.sh",
+      "observed_sha256": "e37a10ca18a136e1d3aa0b5415327156c92fb8bcf977f8c365c05cf8c99b3e09",
       "observed_role": "template or bibliography example; rights unverified",
       "source_relationship": null,
       "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
@@ -289,13 +303,6 @@
       "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
     },
     {
-      "path": "06_RESOURCES/LaTeX/compile_manuscript.sh",
-      "observed_sha256": "e37a10ca18a136e1d3aa0b5415327156c92fb8bcf977f8c365c05cf8c99b3e09",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
       "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_METHODS.md",
       "observed_sha256": "7ab62eb86b4f17b58c76a0b714501dbd443332490bbb887fb1bbd2c7958d7b73",
       "observed_role": "independently authored public biomedical coding reference matrix; human rights review pending",
@@ -310,11 +317,39 @@
       "next_action": "Verify reference descriptions and author provenance"
     },
     {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CORPUS_2026_CANDIDATES.csv",
+      "observed_sha256": "6c8e37192d0efd4d48bdd0e6543f709871f67ccb456ce0a3a94de1304ae1529a",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CORPUS_INGESTION_ROADMAP.md",
+      "observed_sha256": "f39213457f955be6534fd4c9aab4a149cfab140e1cc117795022e6c05785163f",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md",
+      "observed_sha256": "08e112531cf2d5b3e1427a63d265ee9711a8701e69b833cbd8d1f9c03f06b7ec",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
       "path": "06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md",
       "observed_sha256": "1aa2fa64ab75d41feb9f52683367b6abad4f0edbc8e09aeef70d4c8d0246cc8c",
       "observed_role": "independently authored public biomedical interoperability and metadata literature reference; human rights review pending",
       "source_relationship": null,
       "next_action": "Verify public standards scope, linked source versions and authorship"
+    },
+    {
+      "path": "06_RESOURCES/Literature/NEXT_UNITS_EVIDENCE_TO_CODE_GUIDES.md",
+      "observed_sha256": "93cf7d9f8b32e4536a63d981bbdb405ce44c2174c596cbb51dedeca74f977a2b",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
@@ -345,6 +380,34 @@
       "next_action": "Review independent authorship, public references and rights status"
     },
     {
+      "path": "06_RESOURCES/Literature/UNIT_06_INFERENCE_TEACHING_GUIDE.md",
+      "observed_sha256": "527c1ff949aae2405728a756fd7141de306af7e16dcbb109df9a87cced4ba6a0",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_07_REGRESSION_TEACHING_GUIDE.md",
+      "observed_sha256": "007516e009b515f2f75a1a37a4f89b3beaa88799d2f79abe7de701901c485da5",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md",
+      "observed_sha256": "a012256edf9f5824a9916cdea9dc64b6f15d0d0335b5a44dad4461ea171de36f",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_08_VERIFIED_METHODS_MATRIX.md",
+      "observed_sha256": "0d81cba63717a6806478888a9bfcea4443e83b2de5e8e96fac009fb614639789",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
       "path": "06_RESOURCES/Literature/VALIDATED_CODE_CORPUS.md",
       "observed_role": "concurrent public reference document; rights evidence unverified",
       "source_relationship": null,
@@ -373,20 +436,6 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
-      "path": "06_RESOURCES/Presentation/LINK_AUDIT.md",
-      "observed_sha256": "ab3b3a2f0553679d412d213e2bce2aa11138e7149021edf25cb28f3099364902",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/README.md",
-      "observed_sha256": "3599c3e836cd711b8606a6b245a01ddb0c84a9d10366867417ec41a0e631720a",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
       "path": "06_RESOURCES/Presentation/build_reading_editions.py",
       "observed_sha256": "7f906262d086f5b384d730dbac0fd4f324a8eca59a581ebc50014f46e9aa0099",
       "observed_role": "resource or utility; contributor provenance unverified",
@@ -401,8 +450,22 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
+      "path": "06_RESOURCES/Presentation/LINK_AUDIT.md",
+      "observed_sha256": "ab3b3a2f0553679d412d213e2bce2aa11138e7149021edf25cb28f3099364902",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
       "path": "06_RESOURCES/Presentation/reading.css",
       "observed_sha256": "08106a8e45ecd83b6c5d4b98eb758a06c4a623e70af0489dbcd5c0c48850fdc0",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/README.md",
+      "observed_sha256": "3599c3e836cd711b8606a6b245a01ddb0c84a9d10366867417ec41a0e631720a",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
@@ -415,18 +478,25 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
-      "path": "06_RESOURCES/R/README.md",
-      "observed_sha256": "018396a2cf08dfc2795e3bc3a4c2afe3fbd194cd5f4d365afb8f67432a729a9d",
-      "observed_role": "resource or utility; contributor provenance unverified",
+      "path": "06_RESOURCES/R/examples/unit_06_inference.R",
+      "observed_sha256": "b8f292efec760f1c87779d19be83021127ef864e5356d4a8a56e04f79ffa9456",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
-      "path": "06_RESOURCES/R/Week_3_Reusable_Functions.R",
-      "observed_sha256": "d7e64202b251d02acc4adea07104da1214d2f02baa5214a77bf02229378f088d",
-      "observed_role": "resource or utility; contributor provenance unverified",
+      "path": "06_RESOURCES/R/examples/unit_07_regression.R",
+      "observed_sha256": "4de2ac61f7733789ee8c2eeaebf4e3eb821274a9e961eaca1f28bcc6e95db192",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/R/examples/unit_08_classification.R",
+      "observed_sha256": "4891f49475736ca3cb91abbe103fa5c88c386171da3cd8759d1df2b7bf480fc0",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/R/hse_biostat_panels.R",
@@ -478,6 +548,20 @@
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
+      "path": "06_RESOURCES/R/README.md",
+      "observed_sha256": "018396a2cf08dfc2795e3bc3a4c2afe3fbd194cd5f4d365afb8f67432a729a9d",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/Week_3_Reusable_Functions.R",
+      "observed_sha256": "d7e64202b251d02acc4adea07104da1214d2f02baa5214a77bf02229378f088d",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
       "path": "06_RESOURCES/READING_PLOTS.md",
       "observed_sha256": "ed91c207e0cefe20c521d438f08f4d683cb93361701ff0861a383599e176c2be",
       "observed_role": "resource or utility; contributor provenance unverified",
@@ -497,13 +581,6 @@
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/VISUALIZATION_GALLERY.md",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "a5204f31f8857178c7cc339f5864d584ee4b99ea2c321eac730f67e3986ab7b3"
     },
     {
       "path": "06_RESOURCES/tests/README.md",
@@ -562,6 +639,20 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
+      "path": "06_RESOURCES/tests/validate_biomedical_corpus.py",
+      "observed_sha256": "44a11481d32756b71c8388602addefcfb1c4408eac334aa6b795e5ee893688eb",
+      "observed_role": "repository validation utility; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/VISUALIZATION_GALLERY.md",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "a5204f31f8857178c7cc339f5864d584ee4b99ea2c321eac730f67e3986ab7b3"
+    },
+    {
       "path": "AGENTS.md",
       "observed_sha256": "ec1fdb67dc0cf283ee7f364f5600cc064155244bd9f772d596c814a8b887393c",
       "observed_role": "public repository publication policy; maintainer-approved scoped exception, rights unverified",
@@ -612,7 +703,7 @@
     },
     {
       "path": "scripts/build_provenance_inventory.py",
-      "observed_sha256": "8ee9ea06c65d3fd0f86e62d708201784b10a96b63197edbbd736735cca7e0f03",
+      "observed_sha256": "01a60e86e18a77789aaff76c2cdad9ffcb74b64631a9a961e48b784dcf40d197",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
