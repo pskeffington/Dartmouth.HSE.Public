@@ -1,4 +1,4 @@
-# Dartmouth Health Data Science — Public Learning Repository
+# Paul's Notes — Public Learning Repository
 
 **Original method notes · Course-dependent study references · Independent computing resources**
 
