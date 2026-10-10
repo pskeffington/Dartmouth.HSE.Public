@@ -6,7 +6,7 @@ This curated matrix connects openly available programming documentation, researc
 
 ## Biomedical research computing
 
-For survey methodology, Bioconductor, count-based RNA-seq methods, and observational-research reporting, use the [biomedical research computing matrix](BIOMEDICAL_CODING_METHODS.md). This companion covers domain-specific methods without copying classroom material.
+For survey methodology, Bioconductor, count-based RNA-seq methods, and observational-research reporting, use the [biomedical research computing matrix](BIOMEDICAL_CODING_METHODS.md). For naming conventions, scientific data dictionaries, longitudinal identifier rules, research-code testing, and future-course quality gates, use the [biomedical coding standards framework](BIOMEDICAL_CODING_STANDARDS.md). Both documents are original public-reference syntheses.
 
 ## Evidence and usage key
 

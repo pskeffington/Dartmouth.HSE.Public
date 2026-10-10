@@ -296,11 +296,18 @@
       "next_action": "Review original authorship and externally linked reference status"
     },
     {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_STANDARDS.md",
+      "observed_sha256": "938c285c49e6fe7d59363b864c4857b34ae377420949e9aaa26a3a71d6067979",
+      "observed_role": "independently authored public biomedical coding conventions and reference framework; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Verify reference descriptions and author provenance"
+    },
+    {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "8c520ca889066428c7401ddfa33fde52b1742bf1944c51cf9e554e9646d4328e",
+      "observed_sha256": "14228f82ce06f5fcbbbd8d784c95c014cb6d7f2d267b7ffad713eb2a8225448e",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review source descriptions and public-reference links"
+      "next_action": "Review public-reference authorship and link accuracy"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
@@ -416,10 +423,10 @@
     },
     {
       "path": "06_RESOURCES/README.md",
-      "observed_sha256": "cc8925eaf473c60f51c575628ada5220009702bce7e22e58f5b5a5de46ecb49b",
+      "observed_sha256": "8eb3a564c1c1ea2cf5ac7297ad40276d35d88ca88e6c890257a559006083a10e",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
-      "next_action": "Review source descriptions and public-reference links"
+      "next_action": "Review public-reference authorship and link accuracy"
     },
     {
       "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
