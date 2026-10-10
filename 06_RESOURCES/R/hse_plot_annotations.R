@@ -163,7 +163,8 @@ if (exists("hse_plot_gene_wilcox",mode="function") &&
     prior <- hse_plot_annotation(p)
     p <- hse_annotation(p,title=paste("Expression:",gene),x=group,y=scale,
       method=if(paired) "Wilcoxon signed rank" else "Wilcoxon rank sum",
-      n=if (!is.null(prior$n)) prior$n else sum(stats::complete.cases(\n        long_data[as.character(long_data$Gene)==gene,c(value,group)])),
+      n=if (!is.null(prior$n)) prior$n else sum(stats::complete.cases(
+        long_data[as.character(long_data$Gene)==gene,c(value,group)])),
       p=test$p.value,scale=scale,
       design=if(paired) "matched gene-expression observations" else
         "independent gene-expression observations",

@@ -98,14 +98,14 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          python3 -m py_compile scripts/check_public_originality.py scripts/build_provenance_inventory.py scripts/build_originality_triage.py 06_RESOURCES/Presentation/*.py
+          python3 -m py_compile scripts/*.py 06_RESOURCES/Presentation/*.py
       - name: Inventory tracked artifact provenance
         id: inventory
         if: always()
         continue-on-error: true
         shell: bash
         run: |
-          python3 scripts/build_provenance_inventory.py --output provenance-inventory.json
+          python3 scripts/build_provenance_inventory.py --check --output provenance-inventory.json
       - name: Build unresolved originality review queue
         id: triage
         if: always()

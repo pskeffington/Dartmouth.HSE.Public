@@ -11,6 +11,13 @@ d <- data.frame(id = rep(1:4, each = 2),
 summary <- hse_describe(d, "value", "group")
 stopifnot(nrow(summary) == 2L, all(summary$n == 4L))
 stopifnot(inherits(hse_wilcox_independent(d, "value", "group"), "htest"))
+# Formula dispatch is independent by default; verify against vector dispatch.
+independent <- hse_wilcox_independent(d, "value", "group")
+expected <- stats::wilcox.test(d$value[d$group == "A"],
+                              d$value[d$group == "B"], exact = FALSE)
+stopifnot(isTRUE(all.equal(independent$p.value, expected$p.value)),
+          isTRUE(all.equal(unname(independent$statistic),
+                           unname(expected$statistic))))
 stopifnot(inherits(hse_wilcox_paired(d, "value", "group", "id"), "htest"))
 stopifnot(is.list(hse_cor(data.frame(x=1:5, y=5:1), "x", "y")))
 stopifnot(inherits(try(hse_check_cols(d, "unknown"), silent = TRUE), "try-error"))

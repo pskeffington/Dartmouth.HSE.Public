@@ -21,6 +21,8 @@ CATEGORIES = {
 def inventory(root: Path) -> dict:
     register_path = root / "PROVENANCE_RECORDS.json"
     records = {}
+    if register_path.is_symlink() or not register_path.resolve().is_relative_to(root.resolve()):
+        raise ValueError("Unsafe provenance register path")
     if register_path.is_file():
         for record in json.loads(register_path.read_text(encoding="utf-8"))["entries"]:
             path = record["path"]
@@ -37,6 +39,9 @@ def inventory(root: Path) -> dict:
             continue
         rel = raw.decode("utf-8", errors="surrogateescape")
         p = root / rel
+        if p.is_symlink() or not p.resolve().is_relative_to(root.resolve()):
+            entries.append({"path": rel, "status": "unsafe", "review": "required"})
+            continue
         if not p.is_file():
             entries.append({"path": rel, "status": "missing", "review": "required"})
             continue
@@ -81,6 +86,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     ap.add_argument("--output", type=Path, default=None)
+    ap.add_argument("--check", action="store_true", help="Fail on missing, unsafe, unrecorded, stale, or obsolete paths")
     args = ap.parse_args()
     result = inventory(args.root.resolve())
     rendered = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
@@ -88,6 +94,18 @@ def main() -> int:
         args.output.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
+    if args.check:
+        coverage = result["record_coverage"]
+        invalid = coverage["obsolete_record_paths"] or coverage["unrecorded_paths"]
+        for entry in result["entries"]:
+            self_omission = (entry["path"] == "PROVENANCE_RECORDS.json" and
+                             entry.get("provenance_record") is not None and
+                             entry["provenance_record"].get("observed_sha256") is None)
+            if entry.get("status") in {"missing", "unsafe"} or (
+                entry.get("snapshot_evidence") != "current" and not self_omission
+            ):
+                invalid = True
+        return 1 if invalid else 0
     return 0
 
 if __name__ == "__main__":
