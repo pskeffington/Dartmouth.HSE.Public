@@ -13,3 +13,5 @@ Use these concise conceptual references for definitions, syntax, small original 
 | 5 | [Machine learning literature review](../06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) | Complete Week 5 teaching lesson pending publication |
 
 Read the Markdown edition on GitHub; its header links to the editable `.Rmd` source. These are independent topic guides, not institution-authored lectures. The [Week 2 reference](Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md) and [Week 3 reference](Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md) provide additional entry points.
+
+For new topic files, follow the existing `Week_<number>_<topic>_Lecture_Notes` stem and keep the `.Rmd` source and `.md` reading edition paired. A rename must update incoming links and the reading-edition builder together; regenerate and check navigation before publication. The additional reference pages use the `Lecture_Reference` suffix.
