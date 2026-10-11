@@ -76,7 +76,7 @@ def scan(root: Path) -> dict:
             continue
         suffix = path.suffix.lower()
         if suffix in RESTRICTED_EXT or RESTRICTED_NAME.search(rel):
-            findings.append({"path": rel, "level": "block", "reason": "restricted-format or instructor/course-material filename; manual clearance required"})
+            findings.append({"path": rel, "level": "review", "reason": "format or source-name indicator; origin and rights review required"})
         elif suffix in REVIEW_EXT:
             findings.append({"path": rel, "level": "review", "reason": "binary/media file requires provenance and rights review"})
         elif suffix in DATA_EXT:

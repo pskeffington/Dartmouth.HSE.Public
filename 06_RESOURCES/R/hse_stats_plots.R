@@ -210,7 +210,7 @@ hse_hist <- function(data, value, bins = 30L, title = NULL) {
 # A fixed seed controls jitter reproducibility where the installed ggplot2
 # supports position_jitter(seed=...). Jitter is display-only.
 hse_box <- function(data, value, group, y_label = value,
-                    title = NULL, show_points = TRUE) {
+                    title = NULL, show_points = TRUE, fill_scale = NULL) {
   hse_check_cols(data, c(value, group))
   hse_numeric(data[[value]], value)
   hse_require_plot()
@@ -218,9 +218,10 @@ hse_box <- function(data, value, group, y_label = value,
   p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$group, y = .data$value)) +
     ggplot2::geom_boxplot(width = .55, outlier.shape = if (show_points) NA else 19,
                           na.rm = TRUE)
+  if (!is.null(fill_scale)) p <- p + ggplot2::aes(fill = .data$group) + fill_scale
   if (show_points) p <- p + ggplot2::geom_point(
     position = ggplot2::position_jitter(width = .12, height = 0, seed = 711),
-    alpha = .32, size = 1)
+    alpha = .32, size = 1, na.rm = TRUE)
   p + ggplot2::labs(title = title %||% paste(value, "by", group),
                     x = group, y = y_label) + hse_theme()
 }

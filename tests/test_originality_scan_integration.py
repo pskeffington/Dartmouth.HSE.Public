@@ -41,9 +41,9 @@ class ScanIntegrationTests(unittest.TestCase):
         self.tracked("03_Group_Work/concepts.md", "Understand numeric columns.")
         self.assertEqual(screen.scan(self.root)["status"], "SCREEN_CLEAR")
 
-    def test_restricted_named_file_blocks(self) -> None:
+    def test_source_name_requires_origin_review(self) -> None:
         self.tracked("05_Assignments/instructor_slides.pptx", "placeholder")
-        self.assertEqual(screen.scan(self.root)["status"], "BLOCK")
+        self.assertEqual(screen.scan(self.root)["status"], "REVIEW")
 
     def test_missing_tracked_file_requires_review(self) -> None:
         self.tracked("notes.md", "original commentary")

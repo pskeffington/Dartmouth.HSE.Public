@@ -4,6 +4,8 @@ The examples use 48 independently simulated adult participants from `make_teachi
 
 Reusable methods, functions, teaching references and templates for health data science. All code is educational, **not clinical decision software**.
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — the complete 12-chapter reading experience.
+
 ## Start with the short sheets
 
 - [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.
@@ -16,6 +18,7 @@ Reusable methods, functions, teaching references and templates for health data s
 
 | Need | Guide | Code |
 | --- | --- | --- |
+| Scientific palettes and worked figures | [Visualization gallery](VISUALIZATION_GALLERY.md) | [Palette helpers](R/hse_scientific_palette.R) |
 | Complete descriptive statistics, IQR and narrative | [Summary statistics](SUMMARY_STATISTICS.md) | [R statistics](R/hse_stats_plots.R) |
 | One-call regression and Wilcoxon plots | [Statistical graphics](ONE_CALL_PLOTS.md) | [R plot functions](R/hse_one_call_plots.R) |
 | Faceted panels and clinical biostatistics figures | [Biostatistics panels](BIOSTAT_PLOT_PANELS.md) | [R panel functions](R/hse_biostat_panels.R) |

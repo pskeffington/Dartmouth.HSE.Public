@@ -6,7 +6,6 @@ configuration and source fingerprints remain in the untracked Git directory.
 """
 from collections import defaultdict
 import importlib.util
-import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -16,6 +15,9 @@ import tempfile
 SPEC = importlib.util.spec_from_file_location('private_compare', Path(__file__).with_name('compare_private_sources.py'))
 comparison = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(comparison)
+ORIGIN_SPEC = importlib.util.spec_from_file_location('source_origin', Path(__file__).with_name('source_origin.py'))
+origin = importlib.util.module_from_spec(ORIGIN_SPEC)
+ORIGIN_SPEC.loader.exec_module(origin)
 ZERO = '0' * 40
 
 
@@ -27,6 +29,9 @@ def load_corpus(root, directories):
     hashes = set()
     names = set()
     index = set()
+    spans = []
+    if not directories:
+        raise ValueError("A protected-source inventory is required")
     for directory in directories:
         directory = Path(directory).resolve()
         if not directory.is_dir() or directory.is_relative_to(root):
@@ -40,13 +45,63 @@ def load_corpus(root, directories):
             names.add(path.name.casefold())
             hashes.add(comparison.digest(path))
             if path.suffix.lower() in comparison.TEXT_EXT | {'.pdf'} and path.stat().st_size <= 2_000_000:
-                index.update(comparison.windows(comparison.extract(path)))
-    return hashes, names, index
+                text = comparison.extract(path)
+                index.update(origin.window_fingerprints(text, comparison.windows))
+                spans.extend(origin.segments(text))
+    return {"hashes": hashes, "names": names, "windows": index, "segments": spans,
+            "source_dirs": [str(Path(p).resolve()) for p in directories]}
 
 
-def check_push(root, directories, updates, remote_name):
+def check_push(root, directories, updates, remote_name, reviews=None, original_work=None):
     root = root.resolve()
-    hashes, names, index = load_corpus(root, directories)
+    if reviews is None:
+        git_dir = Path(git(root, 'rev-parse', '--absolute-git-dir').decode().strip())
+        review_file = git_dir / 'source-rights-reviews.json'
+        if review_file.is_symlink():
+            raise ValueError('Unsafe local review register')
+        reviews = json.loads(review_file.read_text()).get('entries', {}) if review_file.exists() else {}
+    if not isinstance(reviews, dict):
+        raise ValueError('Invalid local review register')
+    if original_work is None:
+        git_dir = Path(git(root, 'rev-parse', '--absolute-git-dir').decode().strip())
+        manifest_file = git_dir / 'original-work-manifest.json'
+        if manifest_file.is_symlink():
+            raise ValueError('Unsafe original-work manifest')
+        original_work = json.loads(manifest_file.read_text()) if manifest_file.exists() else {}
+    cached_only = False
+    try:
+        corpus = load_corpus(root, directories)
+    except ValueError:
+        if not directories or not any(not Path(p).is_dir() for p in directories):
+            raise
+        if any(Path(p).resolve().is_relative_to(root) for p in directories):
+            raise
+        # The live source comparison exemption requires a separate human origin
+        # review AND the previously installed private signature inventory. A
+        # missing inventory is never evidence of independence.
+        git_dir = Path(git(root, 'rev-parse', '--absolute-git-dir').decode().strip())
+        inventory_file = git_dir / 'source-protection-inventory.json'
+        if inventory_file.is_symlink():
+            raise ValueError('Unsafe private signature inventory')
+        saved = json.loads(inventory_file.read_text())
+        if (saved.get('schema') != 'protected-signatures-v1' or not saved.get('hashes')
+                or saved.get('source_dirs') != [str(Path(p).resolve()) for p in directories]):
+            raise ValueError('No validated protected signature inventory')
+        corpus = {k: set(saved[k]) for k in ('hashes', 'names', 'windows')}
+        corpus['segments'] = [set(span) for span in saved['segments']]
+        corpus['source_dirs'] = saved['source_dirs']
+        cached_only = True
+    # Already-uploaded byte-identical paths may retain unresolved reviews. This
+    # does not clear them, and cannot exempt substantive protected-source hits.
+    known = git(root, 'for-each-ref', '--format=%(objectname)', f'refs/remotes/{remote_name}/').decode().splitlines()
+    inherited = set()
+    for sha in set(known):
+        for record in git(root, 'ls-tree', '-rz', sha).split(b'\0'):
+            if record:
+                header, name = record.split(b'\t', 1)
+                mode, kind, oid = header.decode().split()
+                if mode in {'100644', '100755'} and kind == 'blob':
+                    inherited.add((oid, name.decode('utf-8', 'surrogateescape')))
     findings = []
     blobs = defaultdict(set)
     commits = set()
@@ -60,15 +115,13 @@ def check_push(root, directories, updates, remote_name):
         target = git(root, 'rev-parse', f'{local_sha}^{{commit}}').decode().strip()
         # Always inspect the proposed final tree, even if the working tree is clean.
         commits.add(target)
+        # Inspect only history newly introduced to this remote, not ancestors
+        # already uploaded on another branch. The final tree is always checked
+        # above, so protected bytes cannot inherit a baseline exemption.
+        args = [target, *('^' + sha for sha in known)]
         if remote_sha != ZERO:
             base = git(root, 'rev-parse', f'{remote_sha}^{{commit}}').decode().strip()
-            args = [target, '^' + base]
-        else:
-            # Existing remote ancestry is already uploaded; inspect all newly
-            # introduced commits plus the final tree. An unknown remote forces
-            # a full history inspection rather than trusting unrelated refs.
-            known = git(root, 'for-each-ref', '--format=%(objectname)', f'refs/remotes/{remote_name}/').decode().splitlines()
-            args = [target, *('^' + sha for sha in known)]
+            args.append('^' + base)
         commits.update(git(root, 'rev-list', *args).decode().splitlines())
     for commit in commits:
         for record in git(root, 'ls-tree', '-rz', commit).split(b'\0'):
@@ -83,11 +136,7 @@ def check_push(root, directories, updates, remote_name):
             blobs[sha].add(path)
     for sha, paths in blobs.items():
         data = git(root, 'cat-file', 'blob', sha)
-        if hashlib.sha256(data).hexdigest() in hashes:
-            findings.extend({'path': p, 'reason': 'identical protected source bytes'} for p in sorted(paths))
-        for p in sorted(paths):
-            if Path(p).name.casefold() in names:
-                findings.append({'path': p, 'reason': 'protected source filename'})
+        text = ''
         if len(data) <= 2_000_000:
             if data.startswith(b'%PDF-'):
                 with tempfile.TemporaryDirectory() as folder:
@@ -96,10 +145,16 @@ def check_push(root, directories, updates, remote_name):
                     text = comparison.extract(pdf)
             elif b'\0' not in data[:8192]:
                 text = data.decode('utf-8', 'replace')
-            else:
-                continue
-            if comparison.windows(text) & index:
-                findings.extend({'path': p, 'reason': 'shared protected-source token sequence'} for p in sorted(paths))
+        for path in sorted(paths):
+            classification, reason = origin.classify(data, path, corpus, comparison.windows, text, reviews, original_work)
+            if cached_only and (sha, path) not in inherited and classification != origin.PROTECTED:
+                r = origin.verified_review(data, path, reviews)
+                if not (r and r['origin'] == 'independent' and r.get('reviewer_kind') == 'human'
+                        and r.get('corpus_independent_review') is True):
+                    classification, reason = origin.REVIEW, 'live source comparison required for this origin'
+            if classification == origin.PROTECTED or (classification == origin.REVIEW and
+                                                       (sha, path) not in inherited):
+                findings.append({'path': path, 'reason': classification + ': ' + reason})
     return sorted({(f['path'], f['reason']) for f in findings})
 
 
@@ -117,7 +172,7 @@ def main():
         for path, reason in result[:25]:
             print(f'  {path}: {reason}', file=sys.stderr)
         return 1
-    print('Private-source upload guard: proposed commits pass bounded checks.', file=sys.stderr)
+    print('Private-source upload guard: proposed commits pass content-origin checks; inherited reviews remain unresolved.', file=sys.stderr)
     return 0
 
 

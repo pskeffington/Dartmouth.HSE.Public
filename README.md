@@ -4,12 +4,15 @@
 
 For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — one continuous guide from people and datasets through biology, all 60 genes and synthetic research practice.
+
 ## Start here
 
 | What you want to study | Where to start |
 | --- | --- |
+| Scientific figure styles and worked examples | [Visualization gallery](06_RESOURCES/VISUALIZATION_GALLERY.md) |
 | Concepts and topic notes | [Study guides](02_Lecture_Notes/README.md) |
-| Complete weekly lessons | [Weeks 1–4 teaching guides](03_Group_Work/README.md) |
+| Introduction to Data Science (Weeks 1–5) | [Course learning hub](03_Group_Work/README.md) |
 | R functions, summaries, and plots | [R resources](06_RESOURCES/R/README.md) and [function sheet](06_RESOURCES/R/EASY_FUNCTION_SHEET.md) |
 | Bash, files, and scripting | [Bash resources](06_RESOURCES/Bash/README.md) and [command sheet](06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) |
 | APA 7 manuscripts and references | [LaTeX examples](06_RESOURCES/LaTeX/README.md) |
@@ -18,7 +21,7 @@ For students beginning biomedical data science, the complete lessons connect pro
 
 Read the Markdown editions directly in GitHub. Their linked `.Rmd` files are editable sources. The [resource index](06_RESOURCES/README.md) includes tools, references, installation requirements, and reproducibility guidance.
 
-## Weeks 1–4: concept and topic study guides
+## Introduction to Data Science — Weeks 1–5
 
 Week numbers organize the topics. The teaching guides include runnable synthetic examples, expected results, practice, and self-assessment.
 
@@ -28,6 +31,7 @@ Week numbers organize the topics. The teaching guides include runnable synthetic
 | 2 | [Data wrangling and visualization](02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md) | [Participant blood-cell data and repeated visits](03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md) |
 | 3 | [Visualization and analytical reasoning](02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.md) | [Health-data joins, models, and figure panels](03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md) |
 | 4 | [Bash and shell workflows](02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md) | [Scientific metadata and Bash-to-R workflow](03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md) |
+| 5 | [Machine learning literature and method foundations](06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) | Complete Week 5 guide pending originality review and publication |
 
 ## Technical prerequisites
 
