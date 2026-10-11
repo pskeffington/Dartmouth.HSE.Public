@@ -2,7 +2,7 @@
 
 [Scholarly validation protocol](SCHOLARLY_VALIDATION_PROTOCOL.md) · [Week 5 machine-learning review](WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) · [Gene companion](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
 
-**Review date:** 2026-10-10 (America/New_York). **Scope:** Twenty-one publication-level checks against publicly accessible publisher and PubMed/PMC records, in two batches. **Important:** These checks do not establish repository-wide or full-text methods verification, retraction-free status at future dates, or independent numerical replication.
+**Review date:** 2026-10-10 (America/New_York). **Scope:** Twenty-five publication-level checks against publicly accessible publisher and PubMed/PMC records, in two batches. **Important:** These checks do not establish repository-wide or full-text methods verification, retraction-free status at future dates, or independent numerical replication.
 
 | Evidence ID | DOI | Primary source | Publication facts checked | Narrow claim checked | Status | Remaining work |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -31,6 +31,11 @@
 | SOURCE-020 | [10.1056/NEJMoa2305488](https://doi.org/10.1056/NEJMoa2305488) | Slamon et al., *NEJM* (2024), NATALEE trial | [PubMed 38507751](https://pubmed.ncbi.nlm.nih.gov/38507751/), DOI, phase 3 randomized design and enrolled stage II–III HR-positive/HER2-negative population checked | A prespecified interim analysis evaluated invasive disease-free survival with ribociclib plus endocrine therapy versus endocrine therapy alone | PUBLISHER_AND_PUBMED_CHECKED | Do not extrapolate trial efficacy to CDK4/CDK6 expression as an individual RNA-based drug-selection assay |
 | SOURCE-021 | [10.1038/s41588-021-00911-1](https://doi.org/10.1038/s41588-021-00911-1) | Wu et al., *Nature Genetics* (2021), single-cell/spatial atlas | [PubMed 34493872](https://pubmed.ncbi.nlm.nih.gov/34493872/), DOI, journal and abstract matched | Single-cell/spatial analysis describes tumor ecosystems and immune/stromal heterogeneity | PUBMED_ABSTRACT_CHECKED | Ecotype descriptions are cohort-level research constructs, not clinically validated individual diagnoses |
 
+| SOURCE-022 | [10.1016/j.modpat.2026.101072](https://doi.org/10.1016/j.modpat.2026.101072) | Oshi et al., *Modern Pathology* (2026), CDH1 and ILCness | [PubMed PMID 42641685](https://pubmed.ncbi.nlm.nih.gov/42641685/); year, DOI, authors and abstract checked | The ILCness transcriptional score describes lobular-like expression as a continuum across tumor types and is not equivalent to CDH1 mutation status | PUBMED_ABSTRACT_CHECKED | Compare training cohort, independent external datasets, fixed PCA recipe and outcome estimates; do not replace pathological diagnosis |
+| SOURCE-023 | [10.32604/or.2026.074965](https://doi.org/10.32604/or.2026.074965) | Manousakis et al., *Oncology Research* (2026), CDKN1A/p21 after oxidative damage | [PubMed PMID 42065068](https://pubmed.ncbi.nlm.nih.gov/42065068/) and [PMC13126419](https://pmc.ncbi.nlm.nih.gov/articles/PMC13126419/); DOI, full-text availability and abstract checked | Three-dimensional breast cancer stem-cell models and chromatin studies examined p21 regulation under oxidative stress | PUBMED_AND_PMC_RECORD_CHECKED | Full-text availability does not mean all methods or supplementary figures were independently appraised; no clinical intervention effect established |
+| SOURCE-024 | [10.1186/s13062-026-00869-2](https://doi.org/10.1186/s13062-026-00869-2) | Scimeca et al., *Biology Direct* (2026), SERPINH1/HSP47 | [PubMed PMID 42464413](https://pubmed.ncbi.nlm.nih.gov/42464413/); DOI, publication date and abstract checked | Multimodal human-tissue study associates SERPINH1 with collagen and ECM-remodeling genes including COL1A1 | PUBMED_ABSTRACT_CHECKED | Primary emphasis is SERPINH1; a COL1A1 association does not establish a stand-alone validated COL1A1 prognostic assay |
+| SOURCE-025 | [10.3389/fonc.2026.1899923](https://doi.org/10.3389/fonc.2026.1899923) | Chen et al., *Frontiers in Oncology* (2026), lncTRDMT1-5/MSRB3/CDC20 | [PubMed PMID 42620215](https://pubmed.ncbi.nlm.nih.gov/42620215/); abstract reviewed against SOURCE-019 | Cell perturbation results describe p53 inhibition and increased CDC20, while abstract conclusion describes increased p53 protein expression | PUBMED_ABSTRACT_CHECKED — INTERPRETIVE_CONFLICT | **Hold directional p53 mechanism:** require figures, Western blots, methods, supplemental evidence and author correction review; do not promote to fully supported causal direction |
+
 ## Release interpretation
 
 - **PUBMED_ABSTRACT_CHECKED** confirms that title, DOI, PMID and a narrow abstract-level claim were compared to the PubMed record; it does not imply full-text methods review, verification of supplements, retraction screening or reproduction.
@@ -39,9 +44,9 @@
 - **PUBLISHER_AND_PMC_RECORD_CHECKED** confirms that a manuscript is publicly accessible; it does not imply methods or supplements were systematically appraised.
 - Existing gene-card `ABSTRACT_ONLY` labeling remains unchanged. Do not automatically upgrade individual cards based on this bibliography review.
 
-## Outstanding CI provenance blocker
+## Latest CI checkpoint
 
-The public originality workflow's provenance inventory check failed on the prior tested commit, even while scholarly inventory and scientific visualization checks passed. Investigate changed/unrecorded path records and stale SHA-256 snapshots using `python3 scripts/build_provenance_inventory.py --check --output provenance-inventory.json`; reconcile the actual files and documented authoring evidence. Do not bypass, disable or downgrade the protected-source guard to achieve a green status.
+At commit `ba29e8e1`, the scholarly inventory, originality screening (including provenance inventory), and scientific visualization checks all succeeded. The earlier stale fingerprint blocker was reconciled. Any later documentation edit requires its own updated provenance digest and a fresh CI result; prior green runs do not certify future commits. Rights status remains UNVERIFIED, independently of SHA-256 status.
 
 ## Priority queue
 
