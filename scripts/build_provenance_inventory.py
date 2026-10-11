@@ -7,6 +7,7 @@ import collections
 import hashlib
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 CATEGORIES = {
@@ -105,6 +106,24 @@ def main() -> int:
                 entry.get("snapshot_evidence") != "current" and not self_omission
             ):
                 invalid = True
+        if invalid:
+            for p in coverage["unrecorded_paths"]:
+                print(f"PROVENANCE_UNRECORDED: {p}", file=sys.stderr)
+            for p in coverage["obsolete_record_paths"]:
+                print(f"PROVENANCE_OBSOLETE: {p}", file=sys.stderr)
+            for entry in result["entries"]:
+                if entry.get("status") in {"missing", "unsafe"}:
+                    print(f"PROVENANCE_UNSAFE: {entry['path']} ({entry['status']})", file=sys.stderr)
+                elif (entry.get("snapshot_evidence") != "current" and
+                      not (entry["path"] == "PROVENANCE_RECORDS.json" and
+                           entry.get("provenance_record") is not None and
+                           entry["provenance_record"].get("observed_sha256") is None) and
+                      entry["path"] not in coverage["unrecorded_paths"]):
+                    print(f"PROVENANCE_DIGEST_REVIEW: {entry['path']} ({entry.get('snapshot_evidence')})",
+                          file=sys.stderr)
+            print("Provenance is not copyright clearance. Supply accurate per-file origin, "
+                  "rights and content-identity evidence before attempting release.",
+                  file=sys.stderr)
         return 1 if invalid else 0
     return 0
 

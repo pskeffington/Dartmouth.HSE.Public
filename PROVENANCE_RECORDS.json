@@ -346,7 +346,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "063abd950df52e1ee3fb75d2967d03303d6bea23d93bd33f1bbb1d323f72e91e",
+      "observed_sha256": "56d8ce98e521759bffe01a6b8fa4ab55c2a0d8362caeb6672bb8ab8f0e946518",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -633,7 +633,7 @@
     },
     {
       "path": "scripts/build_provenance_inventory.py",
-      "observed_sha256": "8ee9ea06c65d3fd0f86e62d708201784b10a96b63197edbbd736735cca7e0f03",
+      "observed_sha256": "01a60e86e18a77789aaff76c2cdad9ffcb74b64631a9a961e48b784dcf40d197",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
@@ -1358,6 +1358,97 @@
       "source_relationship": null,
       "next_action": "Content-bound authoring record and normal guarded publication checks",
       "observed_sha256": "0a572e35d788f84202379cd37659d1bf215482587767a4bfdff5e1efe48bfe5b"
+    },
+    {
+      "path": ".github/workflows/biomedical-companion-validation.yml",
+      "observed_sha256": "569b227c958a1687d2e304541d7f562feb30bd2b3d4e9e1bfe702a92cf4a1e99",
+      "observed_role": "repository CI automation; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CORPUS_2026_CANDIDATES.csv",
+      "observed_sha256": "6c8e37192d0efd4d48bdd0e6543f709871f67ccb456ce0a3a94de1304ae1529a",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CORPUS_INGESTION_ROADMAP.md",
+      "observed_sha256": "f39213457f955be6534fd4c9aab4a149cfab140e1cc117795022e6c05785163f",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md",
+      "observed_sha256": "1b0515a770552438a583cefc31a83024a6c205fd5842ab19640fe93d3a601d08",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/NEXT_UNITS_EVIDENCE_TO_CODE_GUIDES.md",
+      "observed_sha256": "1f27d72722e700d912cc2e2a1b6c97011f803b53f129bf838f842f00657c0ea6",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_06_INFERENCE_TEACHING_GUIDE.md",
+      "observed_sha256": "bd48bd55c23e44c9a9d5f34b4728a8db6472fb5b0f20566db3ffc05a77f283f9",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_07_REGRESSION_TEACHING_GUIDE.md",
+      "observed_sha256": "77fccccce35099873ef7cf76941624d5574ce624aad7199820aff99fc179f7c4",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md",
+      "observed_sha256": "8f7ba4175076de2e607a6854ef5e0a2b9d3ab6d22c664c5b30a3f234a29a63eb",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/Literature/UNIT_08_VERIFIED_METHODS_MATRIX.md",
+      "observed_sha256": "0d81cba63717a6806478888a9bfcea4443e83b2de5e8e96fac009fb614639789",
+      "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/R/examples/unit_06_inference.R",
+      "observed_sha256": "b8f292efec760f1c87779d19be83021127ef864e5356d4a8a56e04f79ffa9456",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/R/examples/unit_07_regression.R",
+      "observed_sha256": "4de2ac61f7733789ee8c2eeaebf4e3eb821274a9e961eaca1f28bcc6e95db192",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/R/examples/unit_08_classification.R",
+      "observed_sha256": "4891f49475736ca3cb91abbe103fa5c88c386171da3cd8759d1df2b7bf480fc0",
+      "observed_role": "independent synthetic R educational example; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
+    },
+    {
+      "path": "06_RESOURCES/tests/validate_biomedical_corpus.py",
+      "observed_sha256": "44a11481d32756b71c8388602addefcfb1c4408eac334aa6b795e5ee893688eb",
+      "observed_role": "repository validation utility; AI-assisted drafting, rights unverified",
+      "source_relationship": null,
+      "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     }
   ]
 }

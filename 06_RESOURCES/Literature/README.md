@@ -76,3 +76,5 @@ The [gated program study-companion roadmap](PROGRAM_COMPANION_ROADMAP.md) indexe
 This matrix is intended as a navigational learning resource. Source links and package interfaces can change; check upstream release notes before adopting examples in production. The citations establish sources for general coding and research practices only. They are not evidence that any particular biomedical analysis, dataset, course objective or public lesson has been scientifically validated. No protected classroom source material or private comparison reports are included.
 
 Project-specific research literature matrices and protected teaching-source comparisons remain private.
+
+The [draft Units 6–8 companion](NEXT_UNITS_EVIDENCE_TO_CODE_GUIDES.md) connects inference, regression and classification to synthetic base-R examples. Its [validation evidence](BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md) records execution results and unresolved scientific and bibliography rights reviews.
