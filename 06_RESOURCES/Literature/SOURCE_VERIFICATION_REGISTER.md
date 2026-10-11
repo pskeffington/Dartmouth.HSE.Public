@@ -81,6 +81,23 @@
 
 The 58 distinct publications in this register are **not** necessarily the same 58 DOI strings counted by the broader Markdown inventory. The 60-gene matrix has 51 unique DOI identifiers, all now matched by normalized, case-insensitive DOI to this register. Repository-wide DOI inventory also includes methodological publications and identifiers used as examples, and requires its own comparison before declaring full citation coverage. Nothing here upgrades `ABSTRACT_ONLY` gene-card statuses or constitutes a full-text claim audit.
 
+## Focused full-text claim appraisal — 2026-10-10 review
+
+This section evaluates **specific, traceable assertions** rather than upgrading whole articles. The source-review rows above remain publication-metadata and abstract reviews unless explicitly indicated here. These reviews did not independently reproduce the analyses, audit every supplementary figure, or examine raw experimental data.
+
+| Claim ID | Location in companion | Primary evidence and methods examined | Finding | Decision and next gate |
+| --- | --- | --- | --- | --- |
+| CLAIM-CDC20-P53-01 | [CDC20 evidence account](../Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md#cdc20) | [Chen et al., *Frontiers in Oncology* (2026)](https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2026.1899923/full), section 3.4 (western blot and Figure 4C), Discussion (p53), abstract conclusion | Section 3.4 reports lncTRDMT1–5 knockdown **increased p53 protein**, while **decreasing AURKA and CDC20** in MCF-7 and MDA-MB-231 cells; overexpression reportedly reversed these patterns. The Discussion repeatedly states high lncTRDMT1–5 is associated with **p53 suppression**. The abstract conclusion instead says overexpression **increases** p53 expression. | **TEXT_CONTRADICTION_LOCATED; CLAIM_CONDITIONAL.** Permit only an attributed, model-specific description of the Results direction with an explicit abstract-contradiction note. Do not infer p53 activation from total protein or assert a verified causal clinical mechanism. Confirm figure labels, effect sizes, cell-line TP53 status, original blot quality, supplements and any correction notice. |
+| CLAIM-MALAT1-META-01 | [MALAT1 evidence account](../Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md#malat1) | [Arun et al. (2016), *Genes & Development*](https://pubmed.ncbi.nlm.nih.gov/26701265/) and [Kim et al. (2018), *Nature Genetics*](https://pmc.ncbi.nlm.nih.gov/articles/PMC6265076/); 2018 genetic rescue and intervention-design discussion; [2019 scholarly analysis of conflicting results](https://pmc.ncbi.nlm.nih.gov/articles/PMC6546402/) | The 2016 report observed **less** metastasis after Malat1 loss or antisense knockdown in MMTV-PyMT models. The 2018 report observed **more** metastasis after targeted inactivation and demonstrated reversal by genetic add-back. Its manuscript identifies differences in genetic targeting and adjacent-locus effects as candidate explanations. The subsequent analysis notes promoter/TSS targeting differences but does not conclusively settle them. | **DIRECTIONAL_CONFLICT_UNRESOLVED.** Preserve both results and their distinct interventions; no single gene-level direction, treatment inference or pan-breast-cancer biomarker conclusion. Next compare original figures, rescue controls, off-target effects, tumor-model backgrounds, sample sizes and reanalysis data. |
+
+### Scholarly interpretation guardrails
+
+- A **full-text claim-level check** confirms that a particular statement appears in a specific result/discussion/figure context, not that the experimental measurement or causal interpretation was independently validated.
+- **Protein abundance**, **transcript abundance**, **protein activity**, **mutation status** and **clinical response** are separate measurements; comparisons require explicit bridges.
+- Where a paper contains inconsistent abstracts and Results, do not silently select the more convenient interpretation. Document both and assign a gated decision.
+- The 2019 MALAT1 discussion is a scholarly commentary/analysis, not a substitute for side-by-side independent replication.
+- This document is independently written and links to public articles; it does not reproduce copyrighted figures, classroom slides, proprietary data or protected course material.
+
 ## Release interpretation
 
 - **PUBMED_ABSTRACT_CHECKED** confirms that title, DOI, PMID and a narrow abstract-level claim were compared to the PubMed record; it does not imply full-text methods review, verification of supplements, retraction screening or reproduction.
