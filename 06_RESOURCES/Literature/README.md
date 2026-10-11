@@ -1,5 +1,7 @@
 # Coding practices and methods — public literature matrix
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md) connects these methods to synthetic genomics interpretation. Continue to [the research walkthrough](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question).
+
 [Resource index](../README.md) · [R reference](../R/README.md) · [Bash review](../Bash/BASH_LITERATURE_REVIEW.md) · [Repository home](../../README.md)
 
 This curated matrix connects openly available programming documentation, research-software guidance, and reproducibility resources to independently authored health-data science exercises. It is a **narrative teaching bibliography**, not a systematic literature review or validation of a clinical model. All descriptions below are original summaries of general public guidance. Consult the linked primary sources for exact syntax and version-specific behavior.

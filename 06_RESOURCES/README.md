@@ -4,6 +4,8 @@ The examples use 48 independently simulated adult participants from `make_teachi
 
 Reusable methods, functions, teaching references and templates for health data science. All code is educational, **not clinical decision software**.
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — the complete 12-chapter reading experience.
+
 ## Start with the short sheets
 
 - [Easy R functions](R/EASY_FUNCTION_SHEET.md): inspect data, summarize values and reuse three common graphs.

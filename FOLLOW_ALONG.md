@@ -1,5 +1,7 @@
 # Follow along with Paul's Notes
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) connects these methods to synthetic genomics interpretation. Continue to [the research walkthrough](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question).
+
 [Paul's Notes](README.md) · [Weekly lessons](03_Group_Work/README.md) · [Topic companions](02_Lecture_Notes/README.md)
 
 These public lessons use independently constructed examples and synthetic inputs. You can read them on GitHub without installing R. For Weeks 1–3, use an R session; Week 4 uses a Bash shell and launches Rscript.

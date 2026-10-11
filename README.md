@@ -4,6 +4,8 @@
 
 For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — one continuous guide from people and datasets through biology, all 60 genes and synthetic research practice.
+
 ## Start here
 
 | What you want to study | Where to start |
