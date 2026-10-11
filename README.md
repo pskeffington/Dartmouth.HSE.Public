@@ -1,6 +1,6 @@
 # Paul's Notes
 
-**A free, public study guide for health data science, research methods, and practical computing.** Independently maintained by Paul, this project covers R, Bash, reproducible research, and academic writing; **it is not an official Dartmouth or Geisel site.**
+**A free, public study guide for health data science, research methods, and practical computing.** Independently authored and maintained by [Paul Skeffington](https://www.skeffington.us/), this project covers R, Bash, reproducible research, and academic writing; **it is not an official Dartmouth or Geisel site.**
 
 For students beginning biomedical data science, the complete lessons connect programming to synthetic expression, participant measurements, epidemiologic tables, and scientific sample metadata. Each week includes its inputs, expected results, interpretation, debugging, practice, and mastery checks.
 
@@ -17,6 +17,8 @@ For students beginning biomedical data science, the complete lessons connect pro
 | Bash, files, and scripting | [Bash resources](06_RESOURCES/Bash/README.md) and [command sheet](06_RESOURCES/Bash/EASY_COMMAND_SHEET.md) |
 | APA 7 manuscripts and references | [LaTeX examples](06_RESOURCES/LaTeX/README.md) |
 | Reading and explaining figures | [Plot-reading guide](06_RESOURCES/READING_PLOTS.md) |
+| Research references and methods | [Literature index](06_RESOURCES/Literature/README.md) |
+| Planning later study topics | [Program companion roadmap](06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md) |
 | A guided study session | [Follow-along guide](FOLLOW_ALONG.md) |
 
 Read the Markdown editions directly in GitHub. Their linked `.Rmd` files are editable sources. The [resource index](06_RESOURCES/README.md) includes tools, references, installation requirements, and reproducibility guidance.
