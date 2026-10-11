@@ -1,0 +1,45 @@
+name: Scholarly reference inventory
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - 'scripts/audit_scholarly_references.py'
+      - 'tests/test_scholarly_references.py'
+      - '.github/workflows/scholarly-reference-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - 'scripts/audit_scholarly_references.py'
+      - 'tests/test_scholarly_references.py'
+      - '.github/workflows/scholarly-reference-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-reference-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Python syntax
+        run: python -m py_compile scripts/audit_scholarly_references.py
+      - name: Exercise synthetic identifier and evidence fixtures
+        run: python -m unittest discover -s tests -p test_scholarly_references.py -v
+      - name: Produce evidence inventory
+        run: python scripts/audit_scholarly_references.py --output scholarly-reference-inventory.json
+      - name: Structural checks for gene evidence cards
+        run: python scripts/audit_scholarly_references.py --strict --output scholarly-reference-inventory.json
+      - name: Attach inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scholarly-reference-inventory
+          path: scholarly-reference-inventory.json
+          if-no-files-found: warn
+          retention-days: 14

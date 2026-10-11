@@ -346,7 +346,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "063abd950df52e1ee3fb75d2967d03303d6bea23d93bd33f1bbb1d323f72e91e",
+      "observed_sha256": "f7103201beb05e65f56fc06a64c1e9f61e85fb145df1b1ee6e68e87b1321f240",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -377,7 +377,7 @@
       "observed_role": "concurrent public reference document; rights evidence unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "9b2067b49e7723c6eb4c9710315536c1a6071db2107a41f612222cd87d547813"
+      "observed_sha256": "112b88bb95c0ac031e1e1fa48f10e82c7f3b7665bd5fa2809769eefeda280c3a"
     },
     {
       "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
@@ -1358,6 +1358,41 @@
       "source_relationship": null,
       "next_action": "Content-bound authoring record and normal guarded publication checks",
       "observed_sha256": "0a572e35d788f84202379cd37659d1bf215482587767a4bfdff5e1efe48bfe5b"
+    },
+    {
+      "path": ".github/workflows/scholarly-reference-audit.yml",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "5fd36fd07b1e9bd5d189f7402794cb2fa1c3773721d67f91273a99208c103e37"
+    },
+    {
+      "path": "06_RESOURCES/Literature/SCHOLARLY_VALIDATION_PROTOCOL.md",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "a00d06b1b0c7238a973d832121fb0cb90c941cc765d6e7df31159ccf15160d75"
+    },
+    {
+      "path": "06_RESOURCES/Literature/SOURCE_VERIFICATION_REGISTER.md",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "9426938b925712ca5c233de7178cf27f11d715dbf148383044d4d58d176cc2c9"
+    },
+    {
+      "path": "scripts/audit_scholarly_references.py",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "5c698dfa43c3f896bd6489b464099bac4eea9a45cbdc53238c386643e0264252"
+    },
+    {
+      "path": "tests/test_scholarly_references.py",
+      "observed_sha256": "ddb72f6ddf858f1d1c0b5c30bcd0492d1ea8f765ae408c3a1f049f9dfef7effb",
+      "observed_role": "independently authored public software or reference documentation; rights unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring evidence and normal guarded publication checks"
     }
   ]
 }
