@@ -2,7 +2,7 @@
 
 [Scholarly validation protocol](SCHOLARLY_VALIDATION_PROTOCOL.md) · [Week 5 machine-learning review](WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) · [Gene companion](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
 
-**Review date:** 2026-10-10 (America/New_York). **Scope:** Twenty-five publication-level checks against publicly accessible publisher and PubMed/PMC records, in two batches. **Important:** These checks do not establish repository-wide or full-text methods verification, retraction-free status at future dates, or independent numerical replication.
+**Review date:** 2026-10-10 (America/New_York). **Scope:** Twenty-four distinct publication-level checks (25 evidence rows; SOURCE-025 revisits SOURCE-019) against publicly accessible publisher and PubMed/PMC records, in two batches. **Important:** These checks do not establish repository-wide or full-text methods verification, retraction-free status at future dates, or independent numerical replication.
 
 | Evidence ID | DOI | Primary source | Publication facts checked | Narrow claim checked | Status | Remaining work |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -36,7 +36,7 @@
 | SOURCE-024 | [10.1186/s13062-026-00869-2](https://doi.org/10.1186/s13062-026-00869-2) | Scimeca et al., *Biology Direct* (2026), SERPINH1/HSP47 | [PubMed PMID 42464413](https://pubmed.ncbi.nlm.nih.gov/42464413/); DOI, publication date and abstract checked | Multimodal human-tissue study associates SERPINH1 with collagen and ECM-remodeling genes including COL1A1 | PUBMED_ABSTRACT_CHECKED | Primary emphasis is SERPINH1; a COL1A1 association does not establish a stand-alone validated COL1A1 prognostic assay |
 | SOURCE-025 | [10.3389/fonc.2026.1899923](https://doi.org/10.3389/fonc.2026.1899923) | Chen et al., *Frontiers in Oncology* (2026), lncTRDMT1-5/MSRB3/CDC20 | [PubMed PMID 42620215](https://pubmed.ncbi.nlm.nih.gov/42620215/); abstract reviewed against SOURCE-019 | Cell perturbation results describe p53 inhibition and increased CDC20, while abstract conclusion describes increased p53 protein expression | PUBMED_ABSTRACT_CHECKED — INTERPRETIVE_CONFLICT | **Hold directional p53 mechanism:** require figures, Western blots, methods, supplemental evidence and author correction review; do not promote to fully supported causal direction |
 
-## Release interpretation
+**Duplicate-source accounting:** SOURCE-019 and SOURCE-025 refer to the same DOI. SOURCE-025 is a deeper follow-up review, not an additional unique publication. Unique-publication coverage must be deduplicated by normalized DOI.\n\n## Release interpretation
 
 - **PUBMED_ABSTRACT_CHECKED** confirms that title, DOI, PMID and a narrow abstract-level claim were compared to the PubMed record; it does not imply full-text methods review, verification of supplements, retraction screening or reproduction.
 - **PUBLISHER_RECORD_CHECKED** confirms identification and narrow claims visible in the publisher's accessible record, not full review or independent replication.
