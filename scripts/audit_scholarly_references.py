@@ -38,7 +38,7 @@ def audit(root):
         dois = sorted(set(m.rstrip(".,;:`") for m in DOI.findall(txt)))
         pmids = sorted(set(PMID_URL.findall(txt)))
         linked_dois = sorted(set(m.rstrip(".,;:`") for m in DOI_URL.findall(txt)))
-        publisher_dois = set(re.findall(r"https?://[^\\s)\\]]+/doi/(10\\.\\d{4,9}/[^\\s)\\]]+)", txt, re.I))
+        publisher_dois = set(re.findall(r"https?://[^\s)\]]+/doi/(10\.\d{4,9}/[^\s)\]]+)", txt, re.I))
         statuses = [s for s in STATUS if s in txt]
         records.append({"path": rel, "doi_count": len(dois), "pmid_count": len(pmids),
                         "dois": dois, "pmids": pmids,
