@@ -6,6 +6,10 @@
 
 This curated matrix connects openly available programming documentation, research-software guidance, and reproducibility resources to independently authored health-data science exercises. It is a **narrative teaching bibliography**, not a systematic literature review or validation of a clinical model. All descriptions below are original summaries of general public guidance. Consult the linked primary sources for exact syntax and version-specific behavior.
 
+## Scholarly evidence status
+
+[Scholarly verification protocol](SCHOLARLY_VALIDATION_PROTOCOL.md) · [Initial independently checked source register](SOURCE_VERIFICATION_REGISTER.md). These records distinguish publisher metadata checks from claim-level methods appraisal and reproduction; the repository is not certified as wholly validated.
+
 ## Week 5 machine learning literature
 
 [Week 5 independent biomedical machine-learning literature review](WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md) collects primary ML manuals, prediction-reporting guidance, model-bias assessment, leakage controls, evaluation concepts and gated follow-on code validation. It is a focused public bibliography, not a verified institutional syllabus.
