@@ -35,19 +35,20 @@ def audit(root):
     for path in markdown_files(root):
         rel = path.relative_to(root).as_posix()
         txt = path.read_text(encoding="utf-8")
-        dois = sorted(set(m.rstrip(".,;:") for m in DOI.findall(txt)))
+        dois = sorted(set(m.rstrip(".,;:`") for m in DOI.findall(txt)))
         pmids = sorted(set(PMID_URL.findall(txt)))
-        linked_dois = sorted(set(m.rstrip(".,;:") for m in DOI_URL.findall(txt)))
+        linked_dois = sorted(set(m.rstrip(".,;:`") for m in DOI_URL.findall(txt)))
+        publisher_dois = set(re.findall(r"https?://[^\\s)\\]]+/doi/(10\\.\\d{4,9}/[^\\s)\\]]+)", txt, re.I))
         statuses = [s for s in STATUS if s in txt]
         records.append({"path": rel, "doi_count": len(dois), "pmid_count": len(pmids),
                         "dois": dois, "pmids": pmids,
                         "review_labels": statuses, "linked_dois": linked_dois})
         for doi in dois:
-            if doi not in linked_dois:
+            if doi not in linked_dois and doi not in publisher_dois:
                 findings.append({"path": rel, "severity": "review",
                                  "rule": "DOI_NOT_LINKED",
                                  "detail": doi + " has no matching doi.org link in this file"})
-        if rel.startswith("06_RESOURCES/Genomics/GENE_CARDS/"):
+        if rel.startswith("06_RESOURCES/Genomics/GENE_CARDS/") and path.name != "README.md":
             if not dois or not pmids:
                 findings.append({"path": rel, "severity": "error",
                                  "rule": "GENE_CARD_REFERENCE_MISSING",
