@@ -38,7 +38,7 @@
     },
     {
       "path": "02_Lecture_Notes/README.md",
-      "observed_sha256": "72b9dea79efe52781ae0783fa9630892144916c66a96c50074f6ace3542feaf8",
+      "observed_sha256": "dcad696c199c9da33f6393e8e08d248bcb49411f6a44430d88d48d757871a352",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -619,7 +619,7 @@
     },
     {
       "path": "README.md",
-      "observed_sha256": "ba2897081ab5b65587972bdf458b55234ffbfca794dfd17fcf3d09cdca2b76db",
+      "observed_sha256": "1e0612224c68721ee393db256e2118da1ae4d486f03af736f7e72f7428f03ac9",
       "observed_role": "repository governance or maintenance; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
