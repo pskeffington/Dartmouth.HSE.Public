@@ -270,3 +270,21 @@ Use a new seed and an independently invented participant/visit table. These crit
 | Separate paired changes from independent observations | A complete-pair table, difference calculation, and missing-follow-up explanation | Reconcile the pair count, compute changes within participants, and explain why repeated rows are not additional independent people |
 
 **Mastery decision:** meet every criterion on fresh synthetic inputs, rerun in a clean session, and explain results without relying on the lesson's fixed numeric answers. Retain the seed, dictionary, code, checks, figures, and a brief limitations note. Rework any unmet criterion before advancing.
+
+
+### Fresh paired-observation checkpoint
+
+Predict how many complete pairs remain in this newly invented participant table and the mean within-participant change. Values are synthetic assay units and do not establish a treatment effect.
+
+```r
+mastery_visits <- data.frame(id = c("fresh01", "fresh02", "fresh03"),
+                            before = c(4, 7, NA_real_), after = c(5, 9, 8))
+stopifnot(!anyDuplicated(mastery_visits$id))
+mastery_pairs <- mastery_visits[complete.cases(mastery_visits), ]
+mastery_change <- mastery_pairs$after - mastery_pairs$before
+print(c(pairs = nrow(mastery_pairs), mean_change = mean(mastery_change)))
+stopifnot(nrow(mastery_pairs) == 2, identical(mastery_change, c(1, 2)),
+          mean(mastery_change) == 1.5)
+```
+
+**Expected checkpoint:** 2 complete pairs; changes 1 and 2 assay units; mean change 1.5 units. Explain why subtracting two means computed on different participant sets gives a different answer. Diagnose a duplicated participant identifier before reshaping and show how a unique-key check detects it. Make a new table with a different missing visit, predict which pairs remain, and repeat the reasoning. Review [the repeated-measurement topic guide](../02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.md).

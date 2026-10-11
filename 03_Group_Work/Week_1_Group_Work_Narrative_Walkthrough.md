@@ -248,3 +248,20 @@ Assess your own new synthetic specimen example after completing the lesson. Thes
 | Interpret a distribution | Two labeled histograms and a measured-count summary with units | Explain how breaks affect the display, distinguish specimens from gene–sample cells, and make no population or clinical claim from the synthetic values |
 
 **Mastery decision:** meet every row using fresh invented inputs and a clean-session rerun, with your own script and explanation rather than copied outputs. Keep predictions, observed checks, and any corrections. If a criterion fails, revisit that topic and demonstrate it again before progressing.
+
+
+### Fresh specimen checkpoint
+
+Predict the container length, measured count, missing count and measured mean for these newly invented assay counts before executing the check. Counts are arbitrary synthetic assay units, not patient measurements.
+
+```r
+mastery_counts <- c(7, NA_real_, 11, 18)
+mastery_check <- c(total = length(mastery_counts),
+                   measured = sum(!is.na(mastery_counts)),
+                   missing = sum(is.na(mastery_counts)),
+                   mean = mean(mastery_counts, na.rm = TRUE))
+print(mastery_check)
+stopifnot(identical(unname(mastery_check), c(4, 3, 1, 12)))
+```
+
+**Expected checkpoint:** total 4, measured 3, missing 1, mean 12 assay units. Explain why a mean computed without `na.rm` is unknown rather than zero. Diagnose an attempted summary that replaces the missing value with zero: which denominator and mean does it change? Then invent different values and missingness, predict the new result independently, and rerun the same checks. Use the [R topic guide](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) when reviewing types or extraction.

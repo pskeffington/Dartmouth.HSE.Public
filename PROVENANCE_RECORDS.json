@@ -122,56 +122,56 @@
     },
     {
       "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "2a69af29ac345d5c294c637608bf8aab23d0cc7a8222f415b51a12c4600b360f",
+      "observed_sha256": "c3de0aa4161f93028a43c762f305d2ac9ac103cfcd9d68b0ab30319925a67e2f",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.md",
-      "observed_sha256": "ecf501423a56ca29f0849c6cca0c3a810b7011db37d55e5d418560f4589afb7b",
+      "observed_sha256": "a787a4f65a03d9612939faf120feb1492f5e22e6c683495f1e2bf0ff2d291b99",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "1d1ebb0d96530239c4fe6ae31464605748e2eddd3a6a8850f4028955f3f6b585",
+      "observed_sha256": "bd65dbf70a12b0448a942751a9b6fb83a1c8c9b153ebff6bf531b32bbe6586d6",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.md",
-      "observed_sha256": "7b594404fed478f18af8709d47b2f4e55aed99f79fd17686c24ccd616352e9df",
+      "observed_sha256": "aca8834dfaf31c2cd223bfe841327019994a9797481b77b216bda3983fba95b0",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "d09c37d10397a014713b54b160fd0deb5ca12186c03a71777aa13f687128b891",
+      "observed_sha256": "4f46602b4ee3201b41f11b0d71cd99fc95c4d5847bb57c8b283fe4184d871531",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.md",
-      "observed_sha256": "739304861f9391c7734adcefa35481c547eb53fab1c711a48bdb03b63fddf6a8",
+      "observed_sha256": "367b605d860e22a712f7bea8505aa607160abbefc32089fd5b8a2278fe18a75c",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
       "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
-      "observed_sha256": "c7a8103d7a1dd39b39c475813919b456c56495efcf0bad63dc681abc0ab0c291",
+      "observed_sha256": "436a1c171f29e35487dc3a60497a0bbf2c66b06bc941406d58f6006b4e9bf9c1",
       "observed_role": "independent study-guide workflow and validation; provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
       "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md",
-      "observed_sha256": "b3b065c02a581ced4d0c38ca33e891d0b8932d0e27bb72eb4bab68a1cba63baa",
+      "observed_sha256": "7a38b083fdb95fedebe52a47e4421fb137b313fcbe0c9b6f9a96ec1899d628b9",
       "observed_role": "independent study-guide workflow and validation; provenance unverified",
       "source_relationship": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
       "next_action": "Contributor authorship and any adapted-source review"

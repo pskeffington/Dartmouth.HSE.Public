@@ -390,3 +390,22 @@ Work in a disposable practice directory with new invented specimen records. Thes
 | Reproduce and explain the workflow | Fresh-workspace rerun, logs, data dictionary, and short methods note | Recover the expected structures and counts, identify which commands can replace files, and demonstrate safe failure with a recorded status |
 
 **Mastery decision:** satisfy every row on fresh invented inputs, including the failure trials, before calling the workflow reproducible. Keep commands, outputs, status checks, and your explanation; revise and rerun any unmet criterion. Never substitute private coursework or protected data for these public synthetic exercises.
+
+
+### Fresh TSV checkpoint
+
+Predict the number and identifiers of accepted rows before running this separate synthetic fixture. The directory and records are created only for this exercise; no course or research data are used.
+
+```bash
+mastery_dir=$(mktemp -d)
+printf 'id\tquality\nS01\tpass\nS02\tfail\nS03\tpass\n' > "$mastery_dir/fresh records.tsv"
+mastery_ids=$(awk -F '\t' 'NR > 1 && $2 == "pass" { print $1 }' "$mastery_dir/fresh records.tsv")
+mastery_count=$(printf '%s\n' "$mastery_ids" | awk 'NF { count++ } END { print count+0 }')
+printf '%s\n' "$mastery_ids"
+printf 'Accepted rows: %s\n' "$mastery_count"
+test "$mastery_count" -eq 2
+rm "$mastery_dir/fresh records.tsv"
+rmdir "$mastery_dir"
+```
+
+**Expected checkpoint:** identifiers `S01` and `S03`, followed by `Accepted rows: 2`. Explain why the header is not an observation and why the path with a space needs quoting. Diagnose an incorrectly chosen field separator and inspect its exit status before trusting its output. Invent a new fixture with zero accepted rows and verify that an empty selection is reported deliberately. Review [the Bash topic guide](../02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.md).
