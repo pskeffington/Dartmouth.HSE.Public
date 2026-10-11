@@ -71,6 +71,14 @@ jobs:
               for item in report["retained_unresolved_reviews"]:
                   out.write(f"- Retained review: `{item['path']}` — {item['reason']}\n")
           PYTHON
+      - name: Validate and reproduce the 60-gene companion
+        id: companion
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 scripts/build_gene_companion.py --check
+          python3 scripts/validate_gene_companion.py
       - name: Run originality-regression tests
         id: regression
         if: always()
@@ -136,6 +144,7 @@ jobs:
           NAV_OUTCOME: ${{ steps.navigation.outcome }}
           COMPILE_OUTCOME: ${{ steps.compilation.outcome }}
           INVENTORY_OUTCOME: ${{ steps.inventory.outcome }}
+          COMPANION_OUTCOME: ${{ steps.companion.outcome }}
           TRIAGE_OUTCOME: ${{ steps.triage.outcome }}
         run: |
           failed=0
@@ -143,9 +152,9 @@ jobs:
             echo "Full strict screening remains unresolved; the change has no new or modified findings."
             SCREEN_OUTCOME=success
           fi
-          checks=(SCREEN TEST EDITION NAV COMPILE INVENTORY TRIAGE)
+          checks=(SCREEN TEST EDITION NAV COMPILE INVENTORY TRIAGE COMPANION)
           outcomes=("$SCREEN_OUTCOME" "$TEST_OUTCOME" "$EDITION_OUTCOME"
-                    "$NAV_OUTCOME" "$COMPILE_OUTCOME" "$INVENTORY_OUTCOME" "$TRIAGE_OUTCOME")
+                    "$NAV_OUTCOME" "$COMPILE_OUTCOME" "$INVENTORY_OUTCOME" "$TRIAGE_OUTCOME" "$COMPANION_OUTCOME")
           for i in "${!checks[@]}"; do
             if [ "${outcomes[i]}" != "success" ]; then
               echo "::error::${checks[i]} gate did not pass (outcome: ${outcomes[i]})"

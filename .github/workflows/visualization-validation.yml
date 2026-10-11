@@ -36,6 +36,8 @@ jobs:
       - name: Execute the public gallery and weekly examples
         shell: bash
         run: |
+          mkdir -p "$RUNNER_TEMP/pauls-companion"
+          Rscript --vanilla 06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R "$RUNNER_TEMP/pauls-companion"
           python3 scripts/validate_visualization_gallery.py --output-dir "$RUNNER_TEMP/pauls-gallery"
           python3 scripts/validate_weekly_r.py --include-companions --output-dir "$RUNNER_TEMP/pauls-weekly-r"
           python3 scripts/validate_weekly_bash.py --include-companion --output-dir "$RUNNER_TEMP/pauls-weekly-bash"

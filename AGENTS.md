@@ -20,6 +20,13 @@ folder. These rules apply to every rights holder, including external authors.
   generated figures with auditable origin evidence; or external material with
   verified license/permission covering redistribution. Allow normal reviewed
   publication after technical checks and any required rights review.
+- **ORIGINAL_WORK:** routine publication of original UTF-8 documentation,
+  scientific software and synthetic examples supported by a content-bound
+  automated authoring manifest and protected-source comparisons. No separate
+  per-file human rights approval is required for this pathway. Academic subject,
+  teaching purpose, and folder/filename do not disqualify independently authored
+  work. Missing evidence, contradictory inputs, copying, unresolved similarity,
+  binary rights, and uncertain licensing cannot use this pathway.
 - **PROTECTED_SOURCE:** original restricted lectures, slides, assignments,
   datasets, answer keys or figures; exact protected bytes or substantive copied
   expression detected against the private inventory. Block publication. Renaming,
@@ -34,7 +41,31 @@ A passing scanner or low similarity score does not establish originality or
 copyright clearance. Automated similarity is a conservative signal, not a legal
 finding, and cannot recognize every paraphrase, transformed image or data subset.
 
-## Auditable origin review
+## Routine original-work publication
+
+Use `scripts/record_original_work.py` to batch-record public paths in the local
+`.git/original-work-manifest.json`. It computes candidate digests, source category,
+contributor identity, recording date, and a digest of the documented authoring
+evidence. Supply a local JSON authoring record with `method` and `inputs`:
+describe how the work was independently constructed and identify the actual
+own-work inputs, public references used only for concepts, or synthetic generator.
+A bare assertion of originality is insufficient. Reuse, private reference inputs,
+uncertain permission, and conflicting rights decisions require the review pathway.
+
+Record or refresh a batch after editing; this is automated evidence capture,
+not a repeated human approval. The manifest binds each version to path and bytes
+and retains previous versions for newly introduced history. The recording command
+and pre-push guard run protected comparisons; manifest metadata cannot cancel
+exact copying, normalized copying, or unresolved similarity. The normal inventory,
+originality, documentation and CI gates still run. Media and standalone data may
+also need separate public-scanner review. See [the contributor workflow](CONTRIBUTING.md).
+
+Keep the manifest and authoring records outside tracked public files; they can
+describe private authoring context and are not copyright certificates. An absent
+or stale manifest leaves unknown content in REVIEW_REQUIRED, rather than silently
+approving it. Never infer independence from a missing protected-source inventory.
+
+## Rights and uncertain-origin review
 
 Independent material does not need classroom-source derivation merely because it
 is educational or biomedical. An origin review must identify the actual authoring
@@ -44,17 +75,15 @@ review date, evidence and input scope in the checkout-local
 `.git/source-rights-reviews.json` register. Licensed reuse also needs license,
 license reference and permission scope. Uncertain similarity or binary rights
 requires a separate `rights_review` by a human. A modified file or rename needs
-new path/content-bound evidence. Never copy private comparisons or reference
+new path/content-bound evidence; routine original text can instead refresh its
+automated manifest. Never copy private comparisons or reference
 fingerprints into tracked provenance entries.
 
-Pure independent public-reference documentation can use the normal reviewed PR
-workflow without classroom-source comparison when the complete change has an
-auditable origin review and uses no private corpus. This now includes independently
-authored educational explanations, original utilities and synthetic examples;
-folder names alone do not disqualify them. Mixed or source-dependent changes must
-use the installed local guard and authorized source inventory. If eligibility is
-uncertain, use the guarded workflow. This is not permission to copy protected
-material or bypass hooks on a Git push.
+Original documentation, biomedical research software and independent teaching
+materials are eligible for the normal guarded PR workflow. They need documented
+authoring evidence and risk checks, not classroom-source derivation or repetitive
+manual rights approval. Mixed or source-dependent changes require the rights
+workflow and authorized source inventory. This never permits bypassing hooks.
 
 ## Source-dependent publication guard
 

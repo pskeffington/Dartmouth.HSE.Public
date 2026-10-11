@@ -1,5 +1,7 @@
 # R functions and examples
 
+[Breast Cancer Research Guide — People, Data, Biology and 60 Genes](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md) connects these methods to synthetic genomics interpretation. Continue to [the research walkthrough](../Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question).
+
 [Resource index](../README.md) · [Repository home](../../README.md)
 
 Start with the [easy function sheet](EASY_FUNCTION_SHEET.md). Its synthetic biomedical examples show how to inspect a table, summarize a column and draw three common graphs.
