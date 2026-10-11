@@ -4,14 +4,14 @@
 
 **Corpus ingestion:** [Targeted biomedical literature roadmap](BIOMEDICAL_CORPUS_INGESTION_ROADMAP.md) · [Structured candidate inventory](BIOMEDICAL_CORPUS_2026_CANDIDATES.csv). These are intake candidates, not reproduced studies.
 
-**Validation evidence:** [2026-10-10 GitHub R run, numerical outputs and release blockers](BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md). Synthetic examples passed; originality and provenance release gates remain blocked.
+**Validation evidence:** [2026-10-10 GitHub R run, numerical outputs and release blockers](BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md). Synthetic examples passed; see the dated local rerun below. Bibliography rights and scientific review remain required.
 
 ## Common unit contract
 Each unit includes (1) independently phrased measurable learning objectives, (2) research question and evidence matrix with DOI, date, study type and limitations, (3) methods reconstruction distinguishing reported from inferred steps, (4) synthetic runnable example, (5) annotated rationale for every transformation and model, (6) expected outputs and failure modes, (7) checks for leakage, missingness, units and uncertainty, (8) exercises and rubric, (9) reproducibility manifest and (10) rights/provenance review.
 
 ## Unit 6 — Inference, estimation and uncertainty
 
-**Full teaching edition:** [Unit 6 — Estimation, uncertainty and biomedical interpretation](UNIT_06_INFERENCE_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_06_inference.R). **Status:** authored; independent runtime verification pending.
+**Full teaching edition:** [Unit 6 — Estimation, uncertainty and biomedical interpretation](UNIT_06_INFERENCE_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_06_inference.R). **Status:** authored; local clean-session execution passed on 2026-10-11.
 **Objectives:** identify estimand and sampling unit; distinguish SD, SE and confidence interval; compare parametric and nonparametric procedures; report effect sizes and assumptions; interpret uncertainty without treating a p-value as probability of the null.
 
 **Methods:** define cohort, denominator, outcome, grouping variable, missingness rule, estimand, confidence interval and sensitivity analysis before testing.
@@ -35,7 +35,7 @@ print(t.test(biomarker_mg_l ~ treatment_group, data = study_data))
 
 ## Unit 7 — Regression and diagnostics
 
-**Full teaching edition:** [Unit 7 — Biomedical regression, diagnostics and interpretation](UNIT_07_REGRESSION_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_07_regression.R). **Status:** independently authored draft; local runtime verification pending.
+**Full teaching edition:** [Unit 7 — Biomedical regression, diagnostics and interpretation](UNIT_07_REGRESSION_TEACHING_GUIDE.md) · [Base R executable example](../R/examples/unit_07_regression.R). **Status:** independently authored draft; local clean-session execution passed on 2026-10-11.
 **Objectives:** specify outcome and predictors; distinguish linear and logistic links; interpret coefficient units; diagnose collinearity, influential observations and misspecification; avoid causal claims from association.
 
 **Methods:** define a synthetic cohort with age, treatment and outcome; fit `lm()` and `glm(family = binomial())`; inspect residuals, separation and confidence intervals; compare prespecified alternatives. Split at patient level before any learned preprocessing.
@@ -44,10 +44,10 @@ print(t.test(biomarker_mg_l ~ treatment_group, data = study_data))
 
 ## Unit 8 — Biomedical classification and evaluation
 
-**Full teaching edition:** [Unit 8 — Classification, calibration and evaluation](UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md) · [Original base R analysis](../R/examples/unit_08_classification.R). **Status:** literature methods extracted; code committed; R execution pending.
-**Objectives:** define target and index time; prevent temporal and patient leakage; use stratified patient-level splits; distinguish discrimination from calibration; evaluate prevalence dependence and subgroup performance.
+**Full teaching edition:** [Unit 8 — Classification, calibration and evaluation](UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md) · [Original base R analysis](../R/examples/unit_08_classification.R). **Status:** literature methods extracted; code committed; local clean-session R execution passed on 2026-10-11.
+**Objectives:** define target and index time; prevent temporal and patient leakage; distinguish random patient-level splitting from stratified splitting; distinguish discrimination from calibration; evaluate prevalence dependence and subgroup performance.
 
-**Methods:** create synthetic longitudinal records; freeze holdout patient IDs; fit baseline logistic regression; evaluate sensitivity, specificity, predictive values, Brier score and calibration on untouched holdout; state threshold selection procedure.
+**Methods:** create one synthetic baseline record per patient; freeze holdout patient IDs; fit baseline logistic regression; evaluate sensitivity, specificity, predictive values, Brier score and calibration on untouched holdout; state threshold selection procedure.
 
 **Mastery:** detect a leaked future variable, explain why accuracy alone is insufficient, and provide an auditable evaluation table.
 

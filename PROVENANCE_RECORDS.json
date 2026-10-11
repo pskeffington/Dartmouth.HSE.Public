@@ -346,7 +346,7 @@
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "063abd950df52e1ee3fb75d2967d03303d6bea23d93bd33f1bbb1d323f72e91e",
+      "observed_sha256": "56d8ce98e521759bffe01a6b8fa4ab55c2a0d8362caeb6672bb8ab8f0e946518",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -1382,35 +1382,35 @@
     },
     {
       "path": "06_RESOURCES/Literature/BIOMEDICAL_VALIDATION_EVIDENCE_2026_10_10.md",
-      "observed_sha256": "08e112531cf2d5b3e1427a63d265ee9711a8701e69b833cbd8d1f9c03f06b7ec",
+      "observed_sha256": "1b0515a770552438a583cefc31a83024a6c205fd5842ab19640fe93d3a601d08",
       "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
       "source_relationship": null,
       "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/Literature/NEXT_UNITS_EVIDENCE_TO_CODE_GUIDES.md",
-      "observed_sha256": "93cf7d9f8b32e4536a63d981bbdb405ce44c2174c596cbb51dedeca74f977a2b",
+      "observed_sha256": "1f27d72722e700d912cc2e2a1b6c97011f803b53f129bf838f842f00657c0ea6",
       "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
       "source_relationship": null,
       "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/Literature/UNIT_06_INFERENCE_TEACHING_GUIDE.md",
-      "observed_sha256": "527c1ff949aae2405728a756fd7141de306af7e16dcbb109df9a87cced4ba6a0",
+      "observed_sha256": "bd48bd55c23e44c9a9d5f34b4728a8db6472fb5b0f20566db3ffc05a77f283f9",
       "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
       "source_relationship": null,
       "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/Literature/UNIT_07_REGRESSION_TEACHING_GUIDE.md",
-      "observed_sha256": "007516e009b515f2f75a1a37a4f89b3beaa88799d2f79abe7de701901c485da5",
+      "observed_sha256": "77fccccce35099873ef7cf76941624d5574ce624aad7199820aff99fc179f7c4",
       "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
       "source_relationship": null,
       "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"
     },
     {
       "path": "06_RESOURCES/Literature/UNIT_08_CLASSIFICATION_TEACHING_GUIDE.md",
-      "observed_sha256": "a012256edf9f5824a9916cdea9dc64b6f15d0d0335b5a44dad4461ea171de36f",
+      "observed_sha256": "8f7ba4175076de2e607a6854ef5e0a2b9d3ab6d22c664c5b30a3f234a29a63eb",
       "observed_role": "independent research teaching or evidence index; AI-assisted drafting, rights unverified",
       "source_relationship": null,
       "next_action": "Confirm contributor authorship, source independence, external reference licenses, and human rights review; clearance pending"

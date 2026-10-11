@@ -45,7 +45,7 @@ Upon completing this module, independently:
 Rscript 06_RESOURCES/R/examples/unit_08_classification.R
 ```
 
-**Dependencies:** base R only. **Expected structure:** 450 train observations, 150 holdout; finite AUC and Brier; confusion-matrix totals sum to 150; summary table of nonempty probability bins, including bin n, mean risk and event fraction; R session information. Exact scores should be captured only after a successful clean R execution.
+**Dependencies:** base R only. **Expected structure:** 450 train observations, 150 holdout; finite AUC and Brier; confusion-matrix totals sum to 150; summary table of nonempty probability bins, including bin n, mean risk and event fraction; R session information. The dated validation evidence records a successful local clean-session run and its scores.
 
 ## Practice / error-driven learning
 
@@ -65,6 +65,6 @@ A learner passes when they reproduce a patient-disjoint split, identify outcome 
 - Independently authored original prose/code: **DRAFT**
 - Primary publisher/PubMed literature identity: **PARTIALLY VERIFIED**
 - Method extraction: **ABSTRACT/PUBLISHER-LEVEL**, no published experiment reproduced
-- Clean-session R execution: **NOT_RUN**
+- Clean-session R execution: **PASS**, local R 4.4.3 on 2026-10-11 (synthetic contracts only)
 - Figures, testing and accessibility: **PENDING**
 - Scientific review, originality guard and release: **PENDING**

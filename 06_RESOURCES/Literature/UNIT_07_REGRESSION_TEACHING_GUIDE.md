@@ -54,7 +54,7 @@ Rscript 06_RESOURCES/R/examples/unit_07_regression.R
 5. Fit `lm` and `glm(family=binomial)` on training records only.
 6. Orient every prediction onto its correct scale: mg/L for `lm`, probability for `glm`.
 7. On held-out observations compute MAE, RMSE, Brier score and overall observed event rate.
-8. Inspect training residuals, `hatvalues`, `cooks.distance`, predictor correlation and finite coefficients.
+8. Check `hatvalues`, `cooks.distance` and finite coefficients. Inspect residual plots and predictor correlation as additional exercises; the script does not produce those plots.
 9. Print session information for reproduction.
 
 **Scientific interpretation:** regression coefficients are conditional associations; a formula and a train/test split cannot establish causal identifiability, fairness, generalizability or safe use. Synthetic events and biomarker values are not evidence about patients.
@@ -78,8 +78,8 @@ A satisfactory submission identifies outcome scales, units, population and obser
 | --- | --- | --- |
 | P0–P1 independent scope and measurable objectives | DRAFT | Review against public-domain competencies |
 | P2 literature | PARTIAL | Verify more current empirical studies and extracted execution details |
-| P3–P4 guide and working example | DRAFT | Run script and capture output |
-| P5 execution and numerical verification | NOT_RUN | Independent R clean-session execution |
+| P3–P4 guide and working example | DRAFT | Synthetic output captured; human educational review pending |
+| P5 execution and numerical verification | PASS (synthetic contracts) | Local clean-session R 4.4.3 run on 2026-10-11; broader scientific review pending |
 | P6 scientific/accessibility | REVIEW_REQUIRED | Statistical and human review |
 | P7 originality/provenance | REVIEW_REQUIRED | Private-source guard remains for source-derived work |
 | P8 publishing/navigation | DRAFT_PR | Merge only after approvals |

@@ -60,3 +60,33 @@ The last bin contains only one observation. Its empirical event fraction is effe
 | Draft PR publication | BLOCKED |
 
 This report describes outcomes from GitHub logs, not separate local execution. Do not merge PR #30 based solely on the biomedical job success.
+
+## Local follow-up — 2026-10-11
+
+The historical CI failures above remain a record of that earlier commit. After merging current `main`, `python3 scripts/build_provenance_inventory.py --check --output /tmp/pr30-provenance.json` passed. This establishes consistent inventory metadata, not rights clearance.
+
+These commands each exited 0 in separate clean base-R sessions on R 4.4.3, macOS arm64:
+
+```bash
+Rscript --vanilla 06_RESOURCES/R/examples/unit_06_inference.R
+Rscript --vanilla 06_RESOURCES/R/examples/unit_07_regression.R
+Rscript --vanilla 06_RESOURCES/R/examples/unit_08_classification.R
+python3 06_RESOURCES/tests/validate_biomedical_corpus.py
+```
+
+The rounded numerical outputs match the captured values above: Unit 6 difference 1.8917 mg/L and interval [0.5529, 3.2304]; Unit 7 MAE 1.8851 mg/L, RMSE 2.2659 mg/L and Brier 0.1830; Unit 8 AUC 0.7326 and Brier 0.1688. The calibration bin with one observation remains unsuitable for stable inference. The corpus validator reported 8 records, 0 schema errors and 8 review notices. No source paper was reproduced.
+
+Dated source checks against public primary metadata:
+
+| Candidate | Identity observation on 2026-10-11 | Remaining limitation |
+| --- | --- | --- |
+| TRIPODAI2024 | [BMJ article](https://www.bmj.com/content/385/bmj-2023-078378), Collins and colleagues, 2024 | Reporting guidance does not certify model validity |
+| TRIPODLLM2025 | [Nature Medicine](https://www.nature.com/articles/s41591-024-03425-5), Gallifant and colleagues, published 2025-01-08 | Guidance is versioned; full methods appraisal pending |
+| STARD2025 | [Nature Medicine](https://doi.org/10.1038/s41591-025-03953-8), 2025; [author correction](https://doi.org/10.1038/s41591-026-04570-9) | Corrected text must be assessed before detailed use |
+| STREIBER2025 | [PubMed 41043836](https://pubmed.ncbi.nlm.nih.gov/41043836/), Streiber and colleagues, 2025-10-02; DOI matches | Article/code licensing and full extraction pending |
+| SHIFT2025 | [PubMed 40876698](https://pubmed.ncbi.nlm.nih.gov/40876698/) and Crossref agree on DOI, authors, journal and 2025 identity | Abstract-level observation; no methods reproduction |
+| EVIDENCE2026 | Publisher destination returned HTTP 403 during this check | REVIEW_REQUIRED; do not rely on an inaccessible primary record |
+| EXTERNAL2025 | [PubMed 40845608](https://pubmed.ncbi.nlm.nih.gov/40845608/) and Crossref agree on DOI, authors, journal and 2025 identity | Full text and applicability review pending |
+| TRIPODTOOL2026 | [Springer Nature](https://link.springer.com/article/10.1186/s12911-026-03866-7), Musa, published 2026-09-23 | Publisher labels an early citable version subject to replacement; no independent validation |
+
+The CSV remains `DISCOVERED`; identity observations do not clear rights, support every teaching claim, or establish reproduction. Required release work: content-bound human rights review for the new standalone CSV, scientific/educational appraisal of Units 6–8, and green required CI on the final candidate.

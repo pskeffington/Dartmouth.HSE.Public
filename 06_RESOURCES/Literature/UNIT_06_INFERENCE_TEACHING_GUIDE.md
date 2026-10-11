@@ -1,6 +1,6 @@
 # Unit 6 — Estimation, uncertainty, and biomedical interpretation
 
-> **Paul's Notes | independent study companion.** Not an institutional lesson, course requirement, or clinical analysis. All example patient data are synthetic. Last research scan: 2026-10-10. Code execution in an independent R environment remains pending.
+> **Paul's Notes | independent study companion.** Not an institutional lesson, course requirement, or clinical analysis. All example patient data are synthetic. Last research scan: 2026-10-10. Base R clean-session execution passed locally on 2026-10-11; scientific review remains pending.
 
 ## Learning objectives and prerequisites
 
@@ -40,7 +40,7 @@ From repository root:
 Rscript 06_RESOURCES/R/examples/unit_06_inference.R
 ```
 
-This file uses **base R only**, prints a data-contract summary and group estimates, then computes both manually and with `t.test` a two-sided Welch mean difference and its 95% interval. The output is deterministic because the seed is fixed. The code deliberately stops on duplicate patient IDs, invalid units, missing values, unexpected groups and numerical disagreement.
+This file uses **base R only**, prints a data-contract summary and group estimates, then computes both manually and with `t.test` a two-sided Welch mean difference and its 95% interval. The output is deterministic because the seed is fixed. The code deliberately stops on duplicate patient IDs, nonfinite measurements, missing values, unexpected groups and numerical disagreement.
 
 **Why each step matters:**
 1. `set.seed(711)` makes synthetic generation reproducible, not intrinsically realistic.
@@ -76,8 +76,8 @@ Avoid these errors: "95% probability the true value lies in this interval"; "p=0
 - P1 measurable original objectives: DRAFT.
 - P2 recent citation discovery: PARTIAL (2024–2026 sources found, no complete appraisal).
 - P3 independent prose and example code: DRAFT.
-- P4 execution and expected outputs: NOT_RUN.
-- P5 clean-session testing: NOT_RUN.
+- P4 execution and expected outputs: PASS for the synthetic script; see the dated validation evidence.
+- P5 clean-session testing: PASS on local R 4.4.3 (2026-10-11); numerical assertions passed.
 - P6 scientific/accessibility review: REVIEW_REQUIRED.
 - P7 rights/provenance: REVIEW_REQUIRED.
 - P8 publication/navigation: PENDING (draft PR).
