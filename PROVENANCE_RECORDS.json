@@ -339,14 +339,14 @@
     },
     {
       "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
-      "observed_sha256": "fbb98522de7030610f3b474fc25ae1b6dc999aa75a0dc1ec12dc76eed90d29e4",
+      "observed_sha256": "8ad630a964a59fa5d6d2de70104b0afcd43472ab1e046f2cf5d27cef9dd475d8",
       "observed_role": "independently authored public-reference and study-guide resource roadmap; course equivalence unverified",
       "source_relationship": null,
       "next_action": "Verify independent authorship and catalog alignment without private source materials"
     },
     {
       "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "063abd950df52e1ee3fb75d2967d03303d6bea23d93bd33f1bbb1d323f72e91e",
+      "observed_sha256": "bb5efe291dbc1050bc83742d0d2140e445b176adf9f36e3641f749912430a50f",
       "observed_role": "independent public-resource index; link and authorship review pending",
       "source_relationship": null,
       "next_action": "Review public resource navigation and independent references"
@@ -1358,6 +1358,13 @@
       "source_relationship": null,
       "next_action": "Content-bound authoring record and normal guarded publication checks",
       "observed_sha256": "0a572e35d788f84202379cd37659d1bf215482587767a4bfdff5e1efe48bfe5b"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOSTATISTICS_REFERENCE_MATRIX.md",
+      "observed_sha256": "0e14a256cefe834cde724e4bcbdeb2cafeacdea4214bdcb8aba48c4833e7be89",
+      "observed_role": "independently authored public software or reference documentation; rights unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring evidence and normal guarded publication checks"
     }
   ]
 }

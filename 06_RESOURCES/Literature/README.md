@@ -20,6 +20,10 @@ For laboratory-unit semantics, clinical terminology, FHIR/OMOP mapping, gene ide
 
 The [gated program study-companion roadmap](PROGRAM_COMPANION_ROADMAP.md) indexes existing teaching resources, preliminary future-domain tracks, prerequisite dependencies, publication gates and acceptance evidence. It does not reproduce any protected syllabus or claim an official course sequence.
 
+## Provisional biostatistics reference inventory
+
+The [biostatistics P0–P2 evidence matrix](BIOSTATISTICS_REFERENCE_MATRIX.md) inventories independent public statistical references, candidate prerequisites and scientific limitations for future work. It is **not** a course teaching guide or a verified HSE 712 syllabus alignment; later source-dependent instructional changes require the separate local publishing guard.
+
 ## Evidence and usage key
 
 - **Specification/manual:** authoritative source for documented behavior, but not necessarily a recommendation for every project.
