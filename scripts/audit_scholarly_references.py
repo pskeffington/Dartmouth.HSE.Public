@@ -83,6 +83,8 @@ def main():
         dest = Path(args.output)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(payload, encoding="utf-8")
+    for finding in result["findings"]:
+        print("{}: {}: {}: {}".format(finding["severity"].upper(), finding["path"], finding["rule"], finding["detail"]), file=sys.stderr)
     print("Scholarly inventory: {documents} documents, {unique_dois} unique DOI strings; "
           "{errors} structural errors; {review} manual review flags".format(**result["counts"]),
           file=sys.stderr)
