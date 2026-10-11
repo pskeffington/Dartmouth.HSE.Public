@@ -1364,14 +1364,14 @@
       "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "4d6fa92f3d8662fbceab7eee8c7fb07de3fd17b6b81065619230602e62c4f6eb"
+      "observed_sha256": "5fd36fd07b1e9bd5d189f7402794cb2fa1c3773721d67f91273a99208c103e37"
     },
     {
       "path": "06_RESOURCES/Literature/SCHOLARLY_VALIDATION_PROTOCOL.md",
       "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "8f5b806e475c321d105b62adce08616f2a236eb83b4476dc9c7a785e3c0729a1"
+      "observed_sha256": "a00d06b1b0c7238a973d832121fb0cb90c941cc765d6e7df31159ccf15160d75"
     },
     {
       "path": "06_RESOURCES/Literature/SOURCE_VERIFICATION_REGISTER.md",
@@ -1385,7 +1385,14 @@
       "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "7261c9255ac6bd2ca365a1ee25f0d7b60ed2b9822f8e7511f7cf131d86644100"
+      "observed_sha256": "5c698dfa43c3f896bd6489b464099bac4eea9a45cbdc53238c386643e0264252"
+    },
+    {
+      "path": "tests/test_scholarly_references.py",
+      "observed_sha256": "ddb72f6ddf858f1d1c0b5c30bcd0492d1ea8f765ae408c3a1f049f9dfef7effb",
+      "observed_role": "independently authored public software or reference documentation; rights unverified",
+      "source_relationship": null,
+      "next_action": "Content-bound authoring evidence and normal guarded publication checks"
     }
   ]
 }

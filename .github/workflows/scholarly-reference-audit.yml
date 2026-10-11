@@ -5,12 +5,14 @@ on:
     paths:
       - '**/*.md'
       - 'scripts/audit_scholarly_references.py'
+      - 'tests/test_scholarly_references.py'
       - '.github/workflows/scholarly-reference-audit.yml'
   push:
     branches: [main]
     paths:
       - '**/*.md'
       - 'scripts/audit_scholarly_references.py'
+      - 'tests/test_scholarly_references.py'
       - '.github/workflows/scholarly-reference-audit.yml'
   workflow_dispatch:
 
@@ -27,6 +29,8 @@ jobs:
           python-version: '3.11'
       - name: Check Python syntax
         run: python -m py_compile scripts/audit_scholarly_references.py
+      - name: Exercise synthetic identifier and evidence fixtures
+        run: python -m unittest discover -s tests -p test_scholarly_references.py -v
       - name: Produce evidence inventory
         run: python scripts/audit_scholarly_references.py --output scholarly-reference-inventory.json
       - name: Structural checks for gene evidence cards
