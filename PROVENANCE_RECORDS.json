@@ -902,7 +902,7 @@
       "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "87ca21ea87c6692a43769e6856936f55cecfdf2941fe3eb7065d81e86c9085aa"
+      "observed_sha256": "fa2ba13dcbf310d4f955ea41db96bf097d3c32fd698268ffc8abc678c7c5685b"
     },
     {
       "path": "06_RESOURCES/Literature/VALIDATED_CODE_CORPUS.md",
