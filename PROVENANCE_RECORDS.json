@@ -16,13 +16,6 @@
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
-      "path": ".github/workflows/scholarly-reference-audit.yml",
-      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "4d6fa92f3d8662fbceab7eee8c7fb07de3fd17b6b81065619230602e62c4f6eb"
-    },
-    {
       "path": ".github/workflows/visualization-validation.yml",
       "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
       "source_relationship": null,
@@ -51,6 +44,13 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
+      "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
+      "observed_sha256": "490db1ae6c29480713b991ccb9612cb94bfa92fadee0d26cc5961c0c7bf5e08e",
+      "observed_role": "course-adjacent commentary; originality unverified",
+      "source_relationship": null,
+      "next_action": "Authorized source comparison and contributor provenance"
+    },
+    {
       "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md",
       "observed_sha256": "83f40a34cd4f79532e795e73878ed232c948c3e7d362466afb3b58ff8319ae77",
       "observed_role": "course-adjacent commentary; originality unverified",
@@ -58,8 +58,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.Rmd",
-      "observed_sha256": "490db1ae6c29480713b991ccb9612cb94bfa92fadee0d26cc5961c0c7bf5e08e",
+      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
+      "observed_sha256": "e274d8913c501cd9456d707b986f52fc4c8ce0b1ab5dac536f24873eca861bc2",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -72,16 +72,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Notes.Rmd",
-      "observed_sha256": "e274d8913c501cd9456d707b986f52fc4c8ce0b1ab5dac536f24873eca861bc2",
-      "observed_role": "course-adjacent commentary; originality unverified",
+      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md",
+      "observed_sha256": "2de9c02ca4b654b3e6704dbcdcc7a8a281321f4badf4d976bfa433fe9e0daa7e",
+      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_2_Data_Wrangling_and_Visualization_Lecture_Reference.md",
-      "observed_sha256": "2de9c02ca4b654b3e6704dbcdcc7a8a281321f4badf4d976bfa433fe9e0daa7e",
-      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
+      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
+      "observed_sha256": "295b5336575bdcaaa4c30b35c9b834bb46c4963399045f44eab7d8d284697caa",
+      "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -93,16 +93,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Notes.Rmd",
-      "observed_sha256": "295b5336575bdcaaa4c30b35c9b834bb46c4963399045f44eab7d8d284697caa",
-      "observed_role": "course-adjacent commentary; originality unverified",
+      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md",
+      "observed_sha256": "e688a7135a2a75c568224af6a89a9d5c5dedf34b0b33c5148e6993fd84b0f606",
+      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_3_Data_Visualization_and_Analytics_Lecture_Reference.md",
-      "observed_sha256": "e688a7135a2a75c568224af6a89a9d5c5dedf34b0b33c5148e6993fd84b0f606",
-      "observed_role": "compatibility landing page linking to consolidated study guides; rights unverified",
+      "path": "02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.Rmd",
+      "observed_sha256": "521c10ddeaf51ba63811763d512e0fd3e87c7e5eaac39dcc20373be95072bb87",
+      "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -114,16 +114,16 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "02_Lecture_Notes/Week_4_Introduction_to_Bash_Lecture_Notes.Rmd",
-      "observed_sha256": "521c10ddeaf51ba63811763d512e0fd3e87c7e5eaac39dcc20373be95072bb87",
+      "path": "03_Group_Work/README.md",
+      "observed_sha256": "4331bfb691aa89fd55f25c938e14536a91550ba77bb2834b67a77eca1aba0b30",
       "observed_role": "course-adjacent commentary; originality unverified",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/README.md",
-      "observed_sha256": "4331bfb691aa89fd55f25c938e14536a91550ba77bb2834b67a77eca1aba0b30",
-      "observed_role": "course-adjacent commentary; originality unverified",
+      "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "ed46c5e519097b47c25e829759f44116bacc6a584ee24b2ed962f1038b9a844d",
+      "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
     },
@@ -135,8 +135,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_1_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "ed46c5e519097b47c25e829759f44116bacc6a584ee24b2ed962f1038b9a844d",
+      "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "45f50658bd6b0a0352c8f9460552a57d9d7cfe408b99003ef8affbb7290b6030",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -149,8 +149,8 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_2_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "45f50658bd6b0a0352c8f9460552a57d9d7cfe408b99003ef8affbb7290b6030",
+      "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
+      "observed_sha256": "c8b474c0dfc08e1825a4bcbe33e57f7c937f0cfd1b4a438d0b64a7bb422b4e4d",
       "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
       "source_relationship": null,
       "next_action": "Authorized source comparison and contributor provenance"
@@ -163,24 +163,17 @@
       "next_action": "Authorized source comparison and contributor provenance"
     },
     {
-      "path": "03_Group_Work/Week_3_Group_Work_Narrative_Walkthrough.Rmd",
-      "observed_sha256": "c8b474c0dfc08e1825a4bcbe33e57f7c937f0cfd1b4a438d0b64a7bb422b4e4d",
-      "observed_role": "independently developed synthetic teaching guide; automated runtime checks, human rights review pending",
+      "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
+      "observed_sha256": "fb1ee8469896053e2d2df26863d144bbfcc36b61040679e1e3d0830dbcd87472",
+      "observed_role": "independent study-guide workflow and validation; provenance unverified",
       "source_relationship": null,
-      "next_action": "Authorized source comparison and contributor provenance"
+      "next_action": "Contributor authorship and any adapted-source review"
     },
     {
       "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.md",
       "observed_sha256": "3893d605919cdf867beb818812edd0c053147641a39f7d399c731b19016292c4",
       "observed_role": "independent study-guide workflow and validation; provenance unverified",
       "source_relationship": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "03_Group_Work/Week_4_Bash_and_Reproducible_Workflows_Study_Guide.Rmd",
-      "observed_sha256": "fb1ee8469896053e2d2df26863d144bbfcc36b61040679e1e3d0830dbcd87472",
-      "observed_role": "independent study-guide workflow and validation; provenance unverified",
-      "source_relationship": null,
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
@@ -198,8 +191,8 @@
       "next_action": "Contributor authorship and any adapted-source review"
     },
     {
-      "path": "06_RESOURCES/Bash/bash_functions.sh",
-      "observed_sha256": "a28b33108adf6276678c6642016d566cbda4f9f0de65df9966a44240aee2f252",
+      "path": "06_RESOURCES/BIOSTAT_PLOT_PANELS.md",
+      "observed_sha256": "cde841d60c94eb25b6d5c05ebb79093097555ebed353c37a8c65434109207d53",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
@@ -233,18 +226,11 @@
       "next_action": "Contributor authorship and adapted-source/license review"
     },
     {
-      "path": "06_RESOURCES/BIOSTAT_PLOT_PANELS.md",
-      "observed_sha256": "cde841d60c94eb25b6d5c05ebb79093097555ebed353c37a8c65434109207d53",
+      "path": "06_RESOURCES/Bash/bash_functions.sh",
+      "observed_sha256": "a28b33108adf6276678c6642016d566cbda4f9f0de65df9966a44240aee2f252",
       "observed_role": "resource or utility; contributor provenance unverified",
       "source_relationship": null,
       "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md",
-      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
-      "source_relationship": null,
-      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "ed7da09fe73e4c440bfe237e4ae70b74e156a03169aa1437bef384f202ef12fb"
     },
     {
       "path": "06_RESOURCES/Genomics/BREAST_CANCER_TCGA_BRCA_NARRATIVE.md",
@@ -261,18 +247,543 @@
       "observed_sha256": "43bddd4fd7498aef91b67bcdf78e3c417d8ba525d30e7bbfb3f252f39c9592b7"
     },
     {
-      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
+      "path": "06_RESOURCES/Genomics/README.md",
+      "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
+      "observed_sha256": "4b92d3563ba5dfca718ead2c38e98ec380ec1c285216014073eb6beaa97ad67f"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
+      "observed_sha256": "241fd8b998cf91b4224058f76ea248d74ed1e6b2315ad9a06c278d58383f105a",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.pdf",
+      "observed_sha256": "18ab38b366fd2fa13e9b1636d4b2881896fa9fd3b11633ced3447bb0c9e13273",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.tex",
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.tex",
+      "observed_sha256": "227c7198bffbce2dc96d588e9a51bf79c72fc85787fbfdba91d23870fc7ea247",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.pdf",
+      "observed_sha256": "612d0876e69b9ca55770a5c158c787ad53797fffc4166963e45f93e7d56ece4d",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.tex",
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.tex",
+      "observed_sha256": "53745a5a2e6db1d09dc1fe7303cca9faca1c34720f48f9bc10ea2450b84f0bd2",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_Entry_Types.bib",
+      "observed_sha256": "7e8c230e5923df3187f804366e2850a6f66f7d88264ff8e58c830f8dea605ed3",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/Example_References.bib",
+      "observed_sha256": "330ffa6eb8ebb7fb613206014ccf4b66af9506c33c14f0539f59eedfe78862a1",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/README.md",
+      "observed_sha256": "aa4426ea8f061f1e390ce03ff7c702ebbeddb0233918fecbd8c742ae737cd8b3",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/LaTeX/compile_manuscript.sh",
+      "observed_sha256": "e37a10ca18a136e1d3aa0b5415327156c92fb8bcf977f8c365c05cf8c99b3e09",
+      "observed_role": "template or bibliography example; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_METHODS.md",
+      "observed_sha256": "7ab62eb86b4f17b58c76a0b714501dbd443332490bbb887fb1bbd2c7958d7b73",
+      "observed_role": "independently authored public biomedical coding reference matrix; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Review original authorship and externally linked reference status"
+    },
+    {
+      "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_STANDARDS.md",
+      "observed_sha256": "938c285c49e6fe7d59363b864c4857b34ae377420949e9aaa26a3a71d6067979",
+      "observed_role": "independently authored public biomedical coding conventions and reference framework; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Verify reference descriptions and author provenance"
+    },
+    {
+      "path": "06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md",
+      "observed_sha256": "1aa2fa64ab75d41feb9f52683367b6abad4f0edbc8e09aeef70d4c8d0246cc8c",
+      "observed_role": "independently authored public biomedical interoperability and metadata literature reference; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Verify public standards scope, linked source versions and authorship"
+    },
+    {
+      "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
+      "observed_sha256": "fbb98522de7030610f3b474fc25ae1b6dc999aa75a0dc1ec12dc76eed90d29e4",
+      "observed_role": "independently authored public-reference and study-guide resource roadmap; course equivalence unverified",
+      "source_relationship": null,
+      "next_action": "Verify independent authorship and catalog alignment without private source materials"
+    },
+    {
+      "path": "06_RESOURCES/Literature/README.md",
+      "observed_sha256": "f7103201beb05e65f56fc06a64c1e9f61e85fb145df1b1ee6e68e87b1321f240",
+      "observed_role": "independent public-resource index; link and authorship review pending",
+      "source_relationship": null,
+      "next_action": "Review public resource navigation and independent references"
+    },
+    {
+      "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
+      "observed_sha256": "d034a26c405193c53b92d7385d7272a5696423ba295c0ff01051847379b07c94",
+      "observed_role": "independent public research code quality literature and review matrix; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Review cited public-source applicability and author provenance"
+    },
+    {
+      "path": "06_RESOURCES/Literature/RESEARCH_PROJECT_INTAKE.md",
+      "observed_sha256": "0008231b23de8b56752cc619c4d768fa390dc8746affa4eb14ca9f11e3f955f4",
+      "observed_role": "independent public-reference research project intake and scientific-code planning framework; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Review independent authorship, public references and rights status"
+    },
+    {
+      "path": "06_RESOURCES/Literature/VALIDATED_CODE_CORPUS.md",
+      "observed_role": "concurrent public reference document; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "d998e8e3e6e801cc53753aed0740ca70f7cd34fce81827784cdc1cc974de2ad0"
+    },
+    {
+      "path": "06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md",
+      "observed_role": "concurrent public reference document; rights evidence unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "112b88bb95c0ac031e1e1fa48f10e82c7f3b7665bd5fa2809769eefeda280c3a"
+    },
+    {
+      "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
+      "observed_sha256": "6eb3c6a3a85a577dd25cda1d23fd8b4c03f65e6bc44f556be276f1de1c1dfc4a",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/PLOT_ANNOTATIONS.md",
+      "observed_sha256": "c619f2ca2a1389aa61feb7088bb22c43c764d2fb543536f1d8e6f3b4af0ca972",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/LINK_AUDIT.md",
+      "observed_sha256": "ab3b3a2f0553679d412d213e2bce2aa11138e7149021edf25cb28f3099364902",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/README.md",
+      "observed_sha256": "3599c3e836cd711b8606a6b245a01ddb0c84a9d10366867417ec41a0e631720a",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/build_reading_editions.py",
+      "observed_sha256": "7f906262d086f5b384d730dbac0fd4f324a8eca59a581ebc50014f46e9aa0099",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/check_navigation.py",
+      "observed_sha256": "60b98b056e2602191b1c572553c00df65601f205b1af96c7848ac17e9c1e2107",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/Presentation/reading.css",
+      "observed_sha256": "08106a8e45ecd83b6c5d4b98eb758a06c4a623e70af0489dbcd5c0c48850fdc0",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/EASY_FUNCTION_SHEET.md",
+      "observed_sha256": "3b2a610e8e67ac4b9d14afdd04bb256c554d6d09ad4f9e7d6dda7a0d1f4eb163",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/README.md",
+      "observed_sha256": "524e53a794492c9d33cd4488bb03b7330cde8e10c7b81bae4cb71cb9e3a69c6a",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/Week_3_Reusable_Functions.R",
+      "observed_sha256": "d7e64202b251d02acc4adea07104da1214d2f02baa5214a77bf02229378f088d",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_biostat_panels.R",
+      "observed_sha256": "030e50922f2f4ea7ea928d6035e2eb0ad7fa7b57f8e86684b9b6ef8ca02623c7",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_gene_visuals.R",
+      "observed_sha256": "a34476db9fed0d30107ee9764c2f8f9f10f6d83178e8d6e97199908da2ab1c18",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_one_call_plots.R",
+      "observed_sha256": "2130ac5c83d4bab8618efbbb3e28c099eb3b88a80b1146526b257c385351571c",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_plot_annotations.R",
+      "observed_sha256": "b6dbc75ac5330497984c11227c35dc50d078a6b44a66e9945a45cc771a764d77",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_scientific_palette.R",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "b4e59a337a62f684471ff5a7832d1c525f4d4a64712bf85db641be422be002aa"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_stats_plots.R",
+      "observed_sha256": "26f2552c86f1e84324e18b3cc9e1ea66b49f733dd020cbd6b1575622f0c0612f",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/R/hse_teaching_data.R",
+      "observed_sha256": "97c1a0a2b33a50b1c8633b9673a752fc40a590cf0d36b62f8e4d208548294686",
+      "observed_role": "synthetic biomedical practice-data generator; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "06_RESOURCES/READING_PLOTS.md",
+      "observed_sha256": "ed91c207e0cefe20c521d438f08f4d683cb93361701ff0861a383599e176c2be",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/README.md",
+      "observed_sha256": "1959cc8a3d4ddad323fbee51cadac9f252b78cc8662f2564406702533469a27a",
+      "observed_role": "independent public-resource index; link and authorship review pending",
+      "source_relationship": null,
+      "next_action": "Review public resource navigation and independent references"
+    },
+    {
+      "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
+      "observed_sha256": "1af6bedd4f8bffb0fde7995f5e03b21337105551fd55e8849eb5556075571952",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/VISUALIZATION_GALLERY.md",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "98b277c422f6742fdd1bcd3e8eebfbbc66da4cee89b34c6dfd53b50d16ec8f55"
+    },
+    {
+      "path": "06_RESOURCES/tests/README.md",
+      "observed_sha256": "81b78eda99dfe565548564a1b67e91ce36682bf8b94f81d29914e4b9f6aae04a",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_biostat_panels.R",
+      "observed_sha256": "2ec5c8618b512928f8093b4367a218f274098d0f3d8f58b6b3e3a3e972e8774b",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_gene_visuals.R",
+      "observed_sha256": "86bfb2e3e8a63047eef895d86c5dc23b39654df319bbecb3e2f3b8d6ccf83ad0",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_one_call_plots.R",
+      "observed_sha256": "f62637deebc8d9f09c498f0844d13736a26a7bcf4e9ef256ade24007c5400f72",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_plot_annotations.R",
+      "observed_sha256": "7ff3ed0cc30288e655bdf027d543a74e32bf5a5d0fb6c64171805ba58ebe3e9c",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_scientific_palette.R",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "c3f290cd0c4d8ee52dd85033bcf63be9b4ab83356321515da3c6d64c460b6b8f"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_stats_plots.R",
+      "observed_sha256": "ad8a5c029c537621c36ad7a11eebb9a5ffc99821138a329279ff81a502d3a3e0",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "06_RESOURCES/tests/test_hse_summary_report.R",
+      "observed_sha256": "135438dffc15bed58944a78f68d807af777e547670b278ff7ff83208e3699c0f",
+      "observed_role": "resource or utility; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review"
+    },
+    {
+      "path": "AGENTS.md",
+      "observed_sha256": "ec1fdb67dc0cf283ee7f364f5600cc064155244bd9f772d596c814a8b887393c",
+      "observed_role": "public repository publication policy; maintainer-approved scoped exception, rights unverified",
+      "source_relationship": null,
+      "next_action": "Review public-reference authorship and upstream license/attribution as applicable"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "observed_role": "original-work publication workflow documentation or software; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
+      "observed_sha256": "907e9e54d5b15a59da384a24ab695a82e33c8dc61643d351b58acb7a5e30aab3"
+    },
+    {
+      "path": "FOLLOW_ALONG.md",
+      "observed_sha256": "6a7d3a1f374ada82ab7d8f3bbf3dbf5457365a58f93615df7736a9ddb4909594",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "LICENSE",
+      "observed_sha256": "58cab416b5009f2b231e713278df6689e995e9f81d1a395277f47660e1f01d35",
+      "observed_role": "standard MIT license text with contributor notice",
+      "source_relationship": "https://opensource.org/license/mit",
+      "next_action": "Confirm scope of contributor rights; license text is not ownership evidence"
+    },
+    {
+      "path": "PROVENANCE_RECORDS.json",
+      "observed_sha256": null,
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "README.md",
+      "observed_sha256": "ba2897081ab5b65587972bdf458b55234ffbfca794dfd17fcf3d09cdca2b76db",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/build_originality_triage.py",
+      "observed_sha256": "46c422f76d218600eda7b7e66dd75f84e4e37d92f957fce16e7d1d25c37e3ba7",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/build_provenance_inventory.py",
+      "observed_sha256": "8ee9ea06c65d3fd0f86e62d708201784b10a96b63197edbbd736735cca7e0f03",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/check_originality_change.py",
+      "observed_role": "repository maintenance or regression validation; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review",
+      "observed_sha256": "85e73aa47e5c2c63feb60efa481789742befdacd24dfaf11c494495cd6af9d5a"
+    },
+    {
+      "path": "scripts/check_public_originality.py",
+      "observed_sha256": "2f45c8f813092088d80d32b046cb0127886d928e5be2d76fad45470e4d984a9d",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/check_source_upload.py",
+      "observed_sha256": "ac9f29d868ae87f92c8ec5cefd81b7b9e22193fd2230c4eb595cfdcbd2ccef8b",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/compare_private_sources.py",
+      "observed_sha256": "9d818986d0d43899a728b06e6fa5dc4b5a1631a042b326fff37f949de0d22275",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/install_source_upload_guard.py",
+      "observed_sha256": "2270670e0a4cd50db58e220c082310b276902ba0153330fd51aa0bf9cfd7b3a8",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/record_original_work.py",
+      "observed_role": "original-work publication workflow documentation or software; rights unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
+      "observed_sha256": "1ba83d07ed1f97f88e23f866df8a4715aae5a06f114e844cf2e6653c6264d5a1"
+    },
+    {
+      "path": "scripts/source_origin.py",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "1997f9476d876856930846f27addd3c839af495f3612e914943fff15e8475937"
+    },
+    {
+      "path": "scripts/validate_visualization_gallery.py",
+      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and adapted-source/license review",
+      "observed_sha256": "773d349aa5af2932a665f4de1296f85c4f3f53bb5eeb9119f1866cd4bb5429bc"
+    },
+    {
+      "path": "scripts/validate_weekly_bash.py",
+      "observed_sha256": "e6075a2011f689c58e4f25c68bf3fd8d7049c56cfda33961850448cc95d8c446",
+      "observed_role": "independent study-guide workflow and validation; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "scripts/validate_weekly_r.py",
+      "observed_role": "repository maintenance or regression validation; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review",
+      "observed_sha256": "6c40efefe8acc2f40c8ee5286b6cfe3b4cf1e95477ad50002734218924c21f69"
+    },
+    {
+      "path": "tests/test_originality_inventory.py",
+      "observed_sha256": "bea737eabc43e403b2c287654e39185cabe1c7fcabe0924fed4d163d5d730cff",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_originality_private_comparison.py",
+      "observed_sha256": "8593284b2292c42f468efacca1f7c41c86b36dcda0b05c2d412c7ebbf0d27210",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_originality_scan_integration.py",
+      "observed_sha256": "7d01a5c2b37dc5ed8a034da9fa8174c775ae21369c0f435af74d686683b04082",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_originality_screen.py",
+      "observed_sha256": "ea3c1e1edcf771f129f8237e39fd0579d0cf4902f75fd3931ecbc2a8fd8c6bfb",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_originality_triage.py",
+      "observed_sha256": "a9c2179f200160541daff16430a59fc0e9a2250cd5bfcfe5ccf9f951347dc010",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_originality_upload_guard.py",
+      "observed_sha256": "aabb006b9d7738e56d06cb2c8cb0b8b956bea9519e226c508f4de5750fae518b",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_reading_source_manifest.py",
+      "observed_sha256": "905bf4e386f5e1a9b9822a0b6522926caa0b1f6fedfc947a1443173bb72c50d8",
+      "observed_role": "repository governance or maintenance; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_repository_hygiene.py",
+      "observed_role": "repository maintenance regression tests; contributor provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review",
+      "observed_sha256": "be22db6052dc180126b3f21405f555647c7fbaaff7bcb4f99798a4d7783f5bdc"
+    },
+    {
+      "path": "tests/test_weekly_bash.py",
+      "observed_sha256": "e080a4a1ea3f1525bd88ac45e154200f1207be8c2d818f44da925d9e19a4e476",
+      "observed_role": "independent study-guide workflow and validation; provenance unverified",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review"
+    },
+    {
+      "path": "tests/test_weekly_presentation.py",
+      "observed_role": "repository maintenance or regression validation; human rights review pending",
+      "source_relationship": null,
+      "next_action": "Contributor authorship and any adapted-source review",
+      "observed_sha256": "7d082a0ef630234e666992446c44cbd864b233c1c32bd53cdce6f7a3dd0799e1"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
-      "observed_sha256": "522aeefa4b68d8a194d70faab0db32d7afb7c2f946ef7fe769065f0e37ef758a"
-    },
-    {
-      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R",
-      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "72af738eb4f37aa1c9f20c1640de2cbf3b5ffb99aebbb45ceebde86bda61debe"
+      "observed_sha256": "ed7da09fe73e4c440bfe237e4ae70b74e156a03169aa1437bef384f202ef12fb"
     },
     {
       "path": "06_RESOURCES/Genomics/FIGURES/README.md",
@@ -280,6 +791,13 @@
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
       "observed_sha256": "03d3292a3c0c5303a1b7d5ad121f691770b1067b175f207845e4de2a474a3b49"
+    },
+    {
+      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R",
+      "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
+      "source_relationship": null,
+      "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
+      "observed_sha256": "522aeefa4b68d8a194d70faab0db32d7afb7c2f946ef7fe769065f0e37ef758a"
     },
     {
       "path": "06_RESOURCES/Genomics/GENE_ATLAS_INDEX.md",
@@ -737,25 +1255,11 @@
       "observed_sha256": "8566e2dc1277ce6887d3927a46515fef75077774fcfa88383b679f85f09cd357"
     },
     {
-      "path": "06_RESOURCES/Genomics/README.md",
-      "observed_role": "public-concept teaching documentation; content-bound original-work evidence recorded locally",
-      "source_relationship": null,
-      "next_action": "Maintain annotation and citation snapshots; refresh private original-work evidence after edits",
-      "observed_sha256": "4b92d3563ba5dfca718ead2c38e98ec380ec1c285216014073eb6beaa97ad67f"
-    },
-    {
       "path": "06_RESOURCES/Genomics/REFERENCES/ANNOTATION_SOURCE_REGISTER.md",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
       "observed_sha256": "5f746b1f667afd1fb64c2d6287cf6718be23b9b6c1862ac6b39addc92c797cd8"
-    },
-    {
-      "path": "06_RESOURCES/Genomics/REFERENCES/COMPANION_VALIDATION_REVIEW_2026-10-10.md",
-      "observed_role": "independently authored public teaching validation report; automated authoring evidence recorded locally",
-      "source_relationship": null,
-      "next_action": "Normal guarded publication checks; not blanket rights clearance",
-      "observed_sha256": "e2f82ac49cb54affdf74b90d4adf1fa4d27cbed7d54ae0d3427ec6abc1b24a38"
     },
     {
       "path": "06_RESOURCES/Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md",
@@ -772,300 +1276,6 @@
       "observed_sha256": "5110f6aec3b356e86078936344ba503e5a05be626c125c015b8837971b69a5af"
     },
     {
-      "path": "06_RESOURCES/Genomics/REFERENCES/UNIFIED_GUIDE_EDITORIAL_REVIEW_2026-10-10.md",
-      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "0a572e35d788f84202379cd37659d1bf215482587767a4bfdff5e1efe48bfe5b"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Bibliography_Guide.md",
-      "observed_sha256": "241fd8b998cf91b4224058f76ea248d74ed1e6b2315ad9a06c278d58383f105a",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/compile_manuscript.sh",
-      "observed_sha256": "e37a10ca18a136e1d3aa0b5415327156c92fb8bcf977f8c365c05cf8c99b3e09",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.pdf",
-      "observed_sha256": "18ab38b366fd2fa13e9b1636d4b2881896fa9fd3b11633ced3447bb0c9e13273",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.tex",
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_APA_7_Manuscript.tex",
-      "observed_sha256": "227c7198bffbce2dc96d588e9a51bf79c72fc85787fbfdba91d23870fc7ea247",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.pdf",
-      "observed_sha256": "612d0876e69b9ca55770a5c158c787ad53797fffc4166963e45f93e7d56ece4d",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.tex",
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_APA_7_Reference_Catalogue.tex",
-      "observed_sha256": "53745a5a2e6db1d09dc1fe7303cca9faca1c34720f48f9bc10ea2450b84f0bd2",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_Entry_Types.bib",
-      "observed_sha256": "7e8c230e5923df3187f804366e2850a6f66f7d88264ff8e58c830f8dea605ed3",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/Example_References.bib",
-      "observed_sha256": "330ffa6eb8ebb7fb613206014ccf4b66af9506c33c14f0539f59eedfe78862a1",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/LaTeX/README.md",
-      "observed_sha256": "aa4426ea8f061f1e390ce03ff7c702ebbeddb0233918fecbd8c742ae737cd8b3",
-      "observed_role": "template or bibliography example; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor provenance; third-party/font/package terms; generated-output review"
-    },
-    {
-      "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_METHODS.md",
-      "observed_sha256": "7ab62eb86b4f17b58c76a0b714501dbd443332490bbb887fb1bbd2c7958d7b73",
-      "observed_role": "independently authored public biomedical coding reference matrix; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Review original authorship and externally linked reference status"
-    },
-    {
-      "path": "06_RESOURCES/Literature/BIOMEDICAL_CODING_STANDARDS.md",
-      "observed_sha256": "938c285c49e6fe7d59363b864c4857b34ae377420949e9aaa26a3a71d6067979",
-      "observed_role": "independently authored public biomedical coding conventions and reference framework; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Verify reference descriptions and author provenance"
-    },
-    {
-      "path": "06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md",
-      "observed_sha256": "1aa2fa64ab75d41feb9f52683367b6abad4f0edbc8e09aeef70d4c8d0246cc8c",
-      "observed_role": "independently authored public biomedical interoperability and metadata literature reference; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Verify public standards scope, linked source versions and authorship"
-    },
-    {
-      "path": "06_RESOURCES/Literature/PROGRAM_COMPANION_ROADMAP.md",
-      "observed_sha256": "fbb98522de7030610f3b474fc25ae1b6dc999aa75a0dc1ec12dc76eed90d29e4",
-      "observed_role": "independently authored public-reference and study-guide resource roadmap; course equivalence unverified",
-      "source_relationship": null,
-      "next_action": "Verify independent authorship and catalog alignment without private source materials"
-    },
-    {
-      "path": "06_RESOURCES/Literature/README.md",
-      "observed_sha256": "f7103201beb05e65f56fc06a64c1e9f61e85fb145df1b1ee6e68e87b1321f240",
-      "observed_role": "independent public-resource index; link and authorship review pending",
-      "source_relationship": null,
-      "next_action": "Review public resource navigation and independent references"
-    },
-    {
-      "path": "06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md",
-      "observed_sha256": "d034a26c405193c53b92d7385d7272a5696423ba295c0ff01051847379b07c94",
-      "observed_role": "independent public research code quality literature and review matrix; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Review cited public-source applicability and author provenance"
-    },
-    {
-      "path": "06_RESOURCES/Literature/RESEARCH_PROJECT_INTAKE.md",
-      "observed_sha256": "0008231b23de8b56752cc619c4d768fa390dc8746affa4eb14ca9f11e3f955f4",
-      "observed_role": "independent public-reference research project intake and scientific-code planning framework; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Review independent authorship, public references and rights status"
-    },
-    {
-      "path": "06_RESOURCES/Literature/SCHOLARLY_VALIDATION_PROTOCOL.md",
-      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "8f5b806e475c321d105b62adce08616f2a236eb83b4476dc9c7a785e3c0729a1"
-    },
-    {
-      "path": "06_RESOURCES/Literature/SOURCE_VERIFICATION_REGISTER.md",
-      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "9426938b925712ca5c233de7178cf27f11d715dbf148383044d4d58d176cc2c9"
-    },
-    {
-      "path": "06_RESOURCES/Literature/VALIDATED_CODE_CORPUS.md",
-      "observed_role": "concurrent public reference document; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "d998e8e3e6e801cc53753aed0740ca70f7cd34fce81827784cdc1cc974de2ad0"
-    },
-    {
-      "path": "06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md",
-      "observed_role": "concurrent public reference document; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "112b88bb95c0ac031e1e1fa48f10e82c7f3b7665bd5fa2809769eefeda280c3a"
-    },
-    {
-      "path": "06_RESOURCES/ONE_CALL_PLOTS.md",
-      "observed_sha256": "6eb3c6a3a85a577dd25cda1d23fd8b4c03f65e6bc44f556be276f1de1c1dfc4a",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/PLOT_ANNOTATIONS.md",
-      "observed_sha256": "c619f2ca2a1389aa61feb7088bb22c43c764d2fb543536f1d8e6f3b4af0ca972",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/build_reading_editions.py",
-      "observed_sha256": "7f906262d086f5b384d730dbac0fd4f324a8eca59a581ebc50014f46e9aa0099",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/check_navigation.py",
-      "observed_sha256": "60b98b056e2602191b1c572553c00df65601f205b1af96c7848ac17e9c1e2107",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/LINK_AUDIT.md",
-      "observed_sha256": "ab3b3a2f0553679d412d213e2bce2aa11138e7149021edf25cb28f3099364902",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/reading.css",
-      "observed_sha256": "08106a8e45ecd83b6c5d4b98eb758a06c4a623e70af0489dbcd5c0c48850fdc0",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/Presentation/README.md",
-      "observed_sha256": "3599c3e836cd711b8606a6b245a01ddb0c84a9d10366867417ec41a0e631720a",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/EASY_FUNCTION_SHEET.md",
-      "observed_sha256": "3b2a610e8e67ac4b9d14afdd04bb256c554d6d09ad4f9e7d6dda7a0d1f4eb163",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_biostat_panels.R",
-      "observed_sha256": "030e50922f2f4ea7ea928d6035e2eb0ad7fa7b57f8e86684b9b6ef8ca02623c7",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_gene_visuals.R",
-      "observed_sha256": "a34476db9fed0d30107ee9764c2f8f9f10f6d83178e8d6e97199908da2ab1c18",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_one_call_plots.R",
-      "observed_sha256": "2130ac5c83d4bab8618efbbb3e28c099eb3b88a80b1146526b257c385351571c",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_plot_annotations.R",
-      "observed_sha256": "b6dbc75ac5330497984c11227c35dc50d078a6b44a66e9945a45cc771a764d77",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_scientific_palette.R",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "b4e59a337a62f684471ff5a7832d1c525f4d4a64712bf85db641be422be002aa"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_stats_plots.R",
-      "observed_sha256": "26f2552c86f1e84324e18b3cc9e1ea66b49f733dd020cbd6b1575622f0c0612f",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/hse_teaching_data.R",
-      "observed_sha256": "97c1a0a2b33a50b1c8633b9673a752fc40a590cf0d36b62f8e4d208548294686",
-      "observed_role": "synthetic biomedical practice-data generator; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "06_RESOURCES/R/README.md",
-      "observed_sha256": "524e53a794492c9d33cd4488bb03b7330cde8e10c7b81bae4cb71cb9e3a69c6a",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/R/Week_3_Reusable_Functions.R",
-      "observed_sha256": "d7e64202b251d02acc4adea07104da1214d2f02baa5214a77bf02229378f088d",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/READING_PLOTS.md",
-      "observed_sha256": "ed91c207e0cefe20c521d438f08f4d683cb93361701ff0861a383599e176c2be",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/README.md",
-      "observed_sha256": "1959cc8a3d4ddad323fbee51cadac9f252b78cc8662f2564406702533469a27a",
-      "observed_role": "independent public-resource index; link and authorship review pending",
-      "source_relationship": null,
-      "next_action": "Review public resource navigation and independent references"
-    },
-    {
-      "path": "06_RESOURCES/SUMMARY_STATISTICS.md",
-      "observed_sha256": "1af6bedd4f8bffb0fde7995f5e03b21337105551fd55e8849eb5556075571952",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/README.md",
-      "observed_sha256": "81b78eda99dfe565548564a1b67e91ce36682bf8b94f81d29914e4b9f6aae04a",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
       "path": "06_RESOURCES/tests/test_gene_companion_heatmap.R",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
@@ -1073,172 +1283,11 @@
       "observed_sha256": "d53821cb1d5d393230c8de89d658686cce415c3abb5ad24d5869e6351473e0a2"
     },
     {
-      "path": "06_RESOURCES/tests/test_gene_companion_walkthrough.R",
-      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "d20b7335d5cb4e65acedc7a66f06f12afcd4951a9ced5b55584cbf40e3359ceb"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_biostat_panels.R",
-      "observed_sha256": "2ec5c8618b512928f8093b4367a218f274098d0f3d8f58b6b3e3a3e972e8774b",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_gene_visuals.R",
-      "observed_sha256": "86bfb2e3e8a63047eef895d86c5dc23b39654df319bbecb3e2f3b8d6ccf83ad0",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_one_call_plots.R",
-      "observed_sha256": "f62637deebc8d9f09c498f0844d13736a26a7bcf4e9ef256ade24007c5400f72",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_plot_annotations.R",
-      "observed_sha256": "7ff3ed0cc30288e655bdf027d543a74e32bf5a5d0fb6c64171805ba58ebe3e9c",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_scientific_palette.R",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "c3f290cd0c4d8ee52dd85033bcf63be9b4ab83356321515da3c6d64c460b6b8f"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_stats_plots.R",
-      "observed_sha256": "ad8a5c029c537621c36ad7a11eebb9a5ffc99821138a329279ff81a502d3a3e0",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/tests/test_hse_summary_report.R",
-      "observed_sha256": "135438dffc15bed58944a78f68d807af777e547670b278ff7ff83208e3699c0f",
-      "observed_role": "resource or utility; contributor provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review"
-    },
-    {
-      "path": "06_RESOURCES/VISUALIZATION_GALLERY.md",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "98b277c422f6742fdd1bcd3e8eebfbbc66da4cee89b34c6dfd53b50d16ec8f55"
-    },
-    {
-      "path": "AGENTS.md",
-      "observed_sha256": "ec1fdb67dc0cf283ee7f364f5600cc064155244bd9f772d596c814a8b887393c",
-      "observed_role": "public repository publication policy; maintainer-approved scoped exception, rights unverified",
-      "source_relationship": null,
-      "next_action": "Review public-reference authorship and upstream license/attribution as applicable"
-    },
-    {
-      "path": "CONTRIBUTING.md",
-      "observed_role": "original-work publication workflow documentation or software; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
-      "observed_sha256": "907e9e54d5b15a59da384a24ab695a82e33c8dc61643d351b58acb7a5e30aab3"
-    },
-    {
-      "path": "FOLLOW_ALONG.md",
-      "observed_sha256": "6a7d3a1f374ada82ab7d8f3bbf3dbf5457365a58f93615df7736a9ddb4909594",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "LICENSE",
-      "observed_sha256": "58cab416b5009f2b231e713278df6689e995e9f81d1a395277f47660e1f01d35",
-      "observed_role": "standard MIT license text with contributor notice",
-      "source_relationship": "https://opensource.org/license/mit",
-      "next_action": "Confirm scope of contributor rights; license text is not ownership evidence"
-    },
-    {
-      "path": "PROVENANCE_RECORDS.json",
-      "observed_sha256": null,
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "README.md",
-      "observed_sha256": "ba2897081ab5b65587972bdf458b55234ffbfca794dfd17fcf3d09cdca2b76db",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/audit_scholarly_references.py",
-      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and source/license review",
-      "observed_sha256": "7261c9255ac6bd2ca365a1ee25f0d7b60ed2b9822f8e7511f7cf131d86644100"
-    },
-    {
       "path": "scripts/build_gene_companion.py",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
       "observed_sha256": "95cdb2e7395bd4cea8399c4a1349fe317791bbb9948f72a60b9c527b7dcf9cea"
-    },
-    {
-      "path": "scripts/build_originality_triage.py",
-      "observed_sha256": "46c422f76d218600eda7b7e66dd75f84e4e37d92f957fce16e7d1d25c37e3ba7",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/build_provenance_inventory.py",
-      "observed_sha256": "8ee9ea06c65d3fd0f86e62d708201784b10a96b63197edbbd736735cca7e0f03",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/check_originality_change.py",
-      "observed_role": "repository maintenance or regression validation; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review",
-      "observed_sha256": "85e73aa47e5c2c63feb60efa481789742befdacd24dfaf11c494495cd6af9d5a"
-    },
-    {
-      "path": "scripts/check_public_originality.py",
-      "observed_sha256": "2f45c8f813092088d80d32b046cb0127886d928e5be2d76fad45470e4d984a9d",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/check_source_upload.py",
-      "observed_sha256": "ac9f29d868ae87f92c8ec5cefd81b7b9e22193fd2230c4eb595cfdcbd2ccef8b",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/compare_private_sources.py",
-      "observed_sha256": "9d818986d0d43899a728b06e6fa5dc4b5a1631a042b326fff37f949de0d22275",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/gene_companion_chapters.py",
-      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981"
     },
     {
       "path": "scripts/gene_companion_content.py",
@@ -1255,60 +1304,11 @@
       "observed_sha256": "fc0c2dca4e1742f849fe8115104c5555c6d3403131b1be2a5bb807cd3842f7f4"
     },
     {
-      "path": "scripts/gene_companion_figures.py",
-      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Content-bound authoring record and normal guarded publication checks",
-      "observed_sha256": "aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9"
-    },
-    {
-      "path": "scripts/install_source_upload_guard.py",
-      "observed_sha256": "2270670e0a4cd50db58e220c082310b276902ba0153330fd51aa0bf9cfd7b3a8",
-      "observed_role": "repository governance or maintenance; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/record_original_work.py",
-      "observed_role": "original-work publication workflow documentation or software; rights unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authoring inputs and adapted-source/license evidence",
-      "observed_sha256": "1ba83d07ed1f97f88e23f866df8a4715aae5a06f114e844cf2e6653c6264d5a1"
-    },
-    {
-      "path": "scripts/source_origin.py",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "1997f9476d876856930846f27addd3c839af495f3612e914943fff15e8475937"
-    },
-    {
       "path": "scripts/validate_gene_companion.py",
       "observed_role": "independently authored public gene teaching content or synthetic validation software; automated authoring evidence recorded locally",
       "source_relationship": null,
       "next_action": "Normal original-work authoring registration, protected-source comparison and publication checks; not blanket rights clearance",
       "observed_sha256": "ce454e09a90f5a53c89a3b081b3576623752484865a34046f619aa35e21dfdba"
-    },
-    {
-      "path": "scripts/validate_visualization_gallery.py",
-      "observed_role": "independently implemented visualization or content-origin validation; human rights clearance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and adapted-source/license review",
-      "observed_sha256": "773d349aa5af2932a665f4de1296f85c4f3f53bb5eeb9119f1866cd4bb5429bc"
-    },
-    {
-      "path": "scripts/validate_weekly_bash.py",
-      "observed_sha256": "e6075a2011f689c58e4f25c68bf3fd8d7049c56cfda33961850448cc95d8c446",
-      "observed_role": "independent study-guide workflow and validation; provenance unverified",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
-    },
-    {
-      "path": "scripts/validate_weekly_r.py",
-      "observed_role": "repository maintenance or regression validation; human rights review pending",
-      "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review",
-      "observed_sha256": "6c40efefe8acc2f40c8ee5286b6cfe3b4cf1e95477ad50002734218924c21f69"
     },
     {
       "path": "tests/test_gene_companion.py",
@@ -1318,74 +1318,74 @@
       "observed_sha256": "8464cbab0d9d00816489de7915463a310fc7fac61e5fce371579621bf75606bf"
     },
     {
-      "path": "tests/test_originality_inventory.py",
-      "observed_sha256": "bea737eabc43e403b2c287654e39185cabe1c7fcabe0924fed4d163d5d730cff",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "06_RESOURCES/Genomics/REFERENCES/COMPANION_VALIDATION_REVIEW_2026-10-10.md",
+      "observed_role": "independently authored public teaching validation report; automated authoring evidence recorded locally",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Normal guarded publication checks; not blanket rights clearance",
+      "observed_sha256": "e2f82ac49cb54affdf74b90d4adf1fa4d27cbed7d54ae0d3427ec6abc1b24a38"
     },
     {
-      "path": "tests/test_originality_private_comparison.py",
-      "observed_sha256": "8593284b2292c42f468efacca1f7c41c86b36dcda0b05c2d412c7ebbf0d27210",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "72af738eb4f37aa1c9f20c1640de2cbf3b5ffb99aebbb45ceebde86bda61debe"
     },
     {
-      "path": "tests/test_originality_scan_integration.py",
-      "observed_sha256": "7d01a5c2b37dc5ed8a034da9fa8174c775ae21369c0f435af74d686683b04082",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "06_RESOURCES/tests/test_gene_companion_walkthrough.R",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "d20b7335d5cb4e65acedc7a66f06f12afcd4951a9ced5b55584cbf40e3359ceb"
     },
     {
-      "path": "tests/test_originality_screen.py",
-      "observed_sha256": "ea3c1e1edcf771f129f8237e39fd0579d0cf4902f75fd3931ecbc2a8fd8c6bfb",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "scripts/gene_companion_chapters.py",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "50fa88682a12f4e4f8f2f8840d03567179e10da2b1d9a54c12bab22675e78981"
     },
     {
-      "path": "tests/test_originality_triage.py",
-      "observed_sha256": "a9c2179f200160541daff16430a59fc0e9a2250cd5bfcfe5ccf9f951347dc010",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "scripts/gene_companion_figures.py",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "aeadb51d0a581cf112c59549d676b09d0531fffcf4559c4d96e1c04bbba594e9"
     },
     {
-      "path": "tests/test_originality_upload_guard.py",
-      "observed_sha256": "aabb006b9d7738e56d06cb2c8cb0b8b956bea9519e226c508f4de5750fae518b",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": "06_RESOURCES/Genomics/REFERENCES/UNIFIED_GUIDE_EDITORIAL_REVIEW_2026-10-10.md",
+      "observed_role": "independently authored public editorial guide or synthetic software; human rights clearance unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Content-bound authoring record and normal guarded publication checks",
+      "observed_sha256": "0a572e35d788f84202379cd37659d1bf215482587767a4bfdff5e1efe48bfe5b"
     },
     {
-      "path": "tests/test_reading_source_manifest.py",
-      "observed_sha256": "905bf4e386f5e1a9b9822a0b6522926caa0b1f6fedfc947a1443173bb72c50d8",
-      "observed_role": "repository governance or maintenance; provenance unverified",
+      "path": ".github/workflows/scholarly-reference-audit.yml",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "4d6fa92f3d8662fbceab7eee8c7fb07de3fd17b6b81065619230602e62c4f6eb"
     },
     {
-      "path": "tests/test_repository_hygiene.py",
-      "observed_role": "repository maintenance regression tests; contributor provenance unverified",
+      "path": "06_RESOURCES/Literature/SCHOLARLY_VALIDATION_PROTOCOL.md",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review",
-      "observed_sha256": "be22db6052dc180126b3f21405f555647c7fbaaff7bcb4f99798a4d7783f5bdc"
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "8f5b806e475c321d105b62adce08616f2a236eb83b4476dc9c7a785e3c0729a1"
     },
     {
-      "path": "tests/test_weekly_bash.py",
-      "observed_sha256": "e080a4a1ea3f1525bd88ac45e154200f1207be8c2d818f44da925d9e19a4e476",
-      "observed_role": "independent study-guide workflow and validation; provenance unverified",
+      "path": "06_RESOURCES/Literature/SOURCE_VERIFICATION_REGISTER.md",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review"
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "9426938b925712ca5c233de7178cf27f11d715dbf148383044d4d58d176cc2c9"
     },
     {
-      "path": "tests/test_weekly_presentation.py",
-      "observed_role": "repository maintenance or regression validation; human rights review pending",
+      "path": "scripts/audit_scholarly_references.py",
+      "observed_role": "independently authored scholarly-audit documentation or maintenance; rights evidence unverified",
       "source_relationship": null,
-      "next_action": "Contributor authorship and any adapted-source review",
-      "observed_sha256": "7d082a0ef630234e666992446c44cbd864b233c1c32bd53cdce6f7a3dd0799e1"
+      "next_action": "Contributor authorship and source/license review",
+      "observed_sha256": "7261c9255ac6bd2ca365a1ee25f0d7b60ed2b9822f8e7511f7cf131d86644100"
     }
   ]
 }
