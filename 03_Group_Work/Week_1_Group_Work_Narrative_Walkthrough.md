@@ -24,6 +24,7 @@ Learn R by building a small synthetic expression study. A sample is a collected 
 - [Independent practice](#independent-practice)
 - [Ready to move on](#ready-to-move-on)
 - [Further learning](#further-learning)
+- [Weekly Learning Objectives & Mastery Assessment](#weekly-learning-objectives--mastery-assessment)
 
 ## Learning objectives
 
@@ -233,3 +234,34 @@ Keep a runnable script and a short data dictionary. Restart R and rerun everythi
 [Next: Week 2](Week_2_Group_Work_Narrative_Walkthrough.md) · [Weekly index](README.md) · [R function sheet](../06_RESOURCES/R/EASY_FUNCTION_SHEET.md) · [Paul's Notes](../README.md)
 
 References: [R extraction](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extract.html), [data import/export manual](https://cran.r-project.org/doc/manuals/r-release/R-data.html), and installed help `?factor`, `?hist`, `?getwd`.
+
+## Weekly Learning Objectives & Mastery Assessment
+
+Assess your own new synthetic specimen example after completing the lesson. These criteria describe this independent study guide; they are not institutional marking criteria.
+
+| Measurable objective | Evidence of competency | Independent mastery criterion |
+| --- | --- | --- |
+| Choose and inspect R containers | A script using a vector, list, matrix, factor, and data frame; recorded type, class, and dimensions | Explain each choice and predict the result of one coercion before running it |
+| Select observations without losing structure or missingness | Positional, named, and logical selections with printed identifiers and measured/missing counts | Reconcile selected IDs against the input and preserve table dimensions when selecting one column |
+| Implement checked computation | One function plus a conditional and loop; valid and invalid input trials | Predict each return or error, reject invalid values, and handle an all-missing input deliberately |
+| Recover a tabular export | CSV round trip, data dictionary, and explicit reconstruction of category levels | Verify identifiers and numeric values; explain which factor metadata the CSV does not retain |
+| Interpret a distribution | Two labeled histograms and a measured-count summary with units | Explain how breaks affect the display, distinguish specimens from gene–sample cells, and make no population or clinical claim from the synthetic values |
+
+**Mastery decision:** meet every row using fresh invented inputs and a clean-session rerun, with your own script and explanation rather than copied outputs. Keep predictions, observed checks, and any corrections. If a criterion fails, revisit that topic and demonstrate it again before progressing.
+
+
+### Fresh specimen checkpoint
+
+Predict the container length, measured count, missing count and measured mean for these newly invented assay counts before executing the check. Counts are arbitrary synthetic assay units, not patient measurements.
+
+```r
+mastery_counts <- c(7, NA_real_, 11, 18)
+mastery_check <- c(total = length(mastery_counts),
+                   measured = sum(!is.na(mastery_counts)),
+                   missing = sum(is.na(mastery_counts)),
+                   mean = mean(mastery_counts, na.rm = TRUE))
+print(mastery_check)
+stopifnot(identical(unname(mastery_check), c(4, 3, 1, 12)))
+```
+
+**Expected checkpoint:** total 4, measured 3, missing 1, mean 12 assay units. Explain why a mean computed without `na.rm` is unknown rather than zero. Diagnose an attempted summary that replaces the missing value with zero: which denominator and mean does it change? Then invent different values and missingness, predict the new result independently, and rerun the same checks. Use the [R topic guide](../02_Lecture_Notes/Week_1_Introduction_to_R_Lecture_Notes.md) when reviewing types or extraction.
